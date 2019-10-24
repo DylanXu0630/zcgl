@@ -14,7 +14,7 @@ layui.use(['table', 'form'], function () {
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
-        , url: IPzd + '/dic/usage' //数据接口
+        , url: IPzd + '/dic/usage?asc=1' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
