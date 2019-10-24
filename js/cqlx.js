@@ -7,33 +7,30 @@ layui.use('element', function () {
 layui.use(['table', 'form'], function () {
     var table = layui.table;
     var form = layui.form;
-    var aasc = 1;
-    var limit =20;
-    var page = 1
     form.render();
     //第一个实例
 
-    // http://192.168.1.21:14000/estate/dic/pronature?asc=0&limit=10&page=1
     table.render({
         elem: '#tableList'
         , id: 'idTest'
-        , data: {}
         , toolbar: '#toolbarDemo'
-        , url: 'http://192.168.1.21:14000/estate/dic/protype?asc=' + aasc + '&limit=' + limit + '&page' + page//数据接口
+        , url: IPzd+'/dic/protype?asc=1'//数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
                 "msg": res.message, //解析提示文本
-                "count": res.data.length, //解析数据长度
-                "data": res.data //解析数据列表
+                "count": res.data.total, //解析数据长度
+                "data": res.data.records //解析数据列表
             };
         }
         , page: true //开启分页
         , cols: [[ //表头
-            , { field: 'name', title: '产权性质', width: 200 }
-            , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200 }
+            , { field: 'name', title: '产权性质',width:1200}
+            , { fixed: 'right', title: '操作', toolbar: '#barDemo' }
         ]]
+        
     });
+    // table.reload;
 
     //监听行工具事件
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
@@ -42,7 +39,7 @@ layui.use(['table', 'form'], function () {
         if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
-                    url: 'http://192.168.1.21:14000/estate/dic/protype/' + obj.data.id, //数据接口
+                    url: IPzd+'/dic/protype/' + obj.data.id, //数据接口
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -108,7 +105,7 @@ layui.use(['table', 'form'], function () {
                     }
 
                     $.ajax({
-                        url: 'http://192.168.1.21:14000/estate/dic/protype', //数据接口
+                        url: IPzd+'/dic/protype', //数据接口
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -184,7 +181,7 @@ layui.use(['table', 'form'], function () {
                 }
 
                 $.ajax({
-                    url: 'http://192.168.1.21:14000/estate/dic/protype', //数据接口
+                    url: IPzd+'/dic/protype', //数据接口
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     data: JSON.stringify(data),    //参数值
@@ -231,7 +228,7 @@ function getSex(sex) {
 
 function getOneUser() {
     $.ajax({
-        url: 'http://192.168.1.21:14000/estate/dic/protype', //数据接口
+        url: IPzd+'/dic/protype', //数据接口
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         data: JSON.stringify(data),    //参数值
