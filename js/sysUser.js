@@ -71,6 +71,7 @@ layui.use(['table', 'form'], function () {
                         }
 
                     },
+
                     complete: function () {
                         //请求完成的处理
                     },
