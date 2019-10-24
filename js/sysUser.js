@@ -81,6 +81,7 @@ layui.use(['table', 'form'], function () {
                 });
                 layer.close(index);
                 //向服务端发送删除指令
+
             });
         } else if (layEvent === 'edit') {
             /*编辑操作;*/
