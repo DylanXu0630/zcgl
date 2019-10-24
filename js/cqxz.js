@@ -13,13 +13,13 @@ layui.use(['table', 'form'], function () {
         elem: '#tableList'
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
-        , url: 'http://192.168.1.21:14000/estate/dic/pronature' //数据接口
+        , url: IPzd+'/dic/pronature?asc=1'//数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
                 "msg": res.message, //解析提示文本
-                "count":res.data.length , //解析数据长度
-                "data": res.data //解析数据列表
+                "count":res.data.total , //解析数据长度
+                "data": res.data.records //解析数据列表
             };
         }
         , page: true //开启分页
@@ -36,7 +36,7 @@ layui.use(['table', 'form'], function () {
         if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
-                    url: 'http://192.168.1.21:14000/estate/dic/pronature/'+ obj.data.id, //数据接口
+                    url: IPzd+'/dic/pronature/'+ obj.data.id, //数据接口
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -102,7 +102,7 @@ layui.use(['table', 'form'], function () {
                     }
 
                     $.ajax({
-                        url: 'http://192.168.1.21:14000/estate/dic/pronature', //数据接口
+                        url: IPzd+'/dic/pronature', //数据接口
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -178,7 +178,7 @@ layui.use(['table', 'form'], function () {
                 }
 
                 $.ajax({
-                    url: 'http://192.168.1.21:14000/estate/dic/pronature', //数据接口
+                    url: IPzd+'/dic/pronature', //数据接口
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     data: JSON.stringify(data),    //参数值
@@ -225,7 +225,7 @@ function getSex(sex) {
 
 function getOneUser() {
     $.ajax({
-        url: 'http://192.168.1.21:14000/estate/dic/pronature', //数据接口
+        url: IPzd+'/dic/pronature', //数据接口
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         data: JSON.stringify(data),    //参数值
