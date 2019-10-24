@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>企业状态管理</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/page.css">
+</head>
+<body>
+<div class="pageDiv">
+    <div class="title">
+
+        <div class="site-title">
+            <fieldset>
+                <legend><a name="use"><h2>企业信息管理</h2></a></legend>
+            </fieldset>
+        </div>
+    </div>
+    <div class="layui-fluid tjsx">
+        <div class="layui-card">
+            <div class="layui-card-header">条件筛选</div>
+            <div class="layui-card-body-tj" style="padding: 15px;">
+                <div class="layui-form-item">
+                    <form class="layui-form" action="">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">状态名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="LAY-user-front-search">
+                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header">企业信息列表</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+                <table class="layui-hide" id="tableList" lay-filter="test"></table>
+            </div>
+            <div>
+                <table border="1px" id="tab">
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="jszc">技术支持：蓝深远望科技股份有限公司</div>
+</div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script src="../public/js/jquery.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../public/js/public.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/qyxxgl.js"></script>
+
+
+<script>
+
+</script>
+
+
+</body>
+</html>

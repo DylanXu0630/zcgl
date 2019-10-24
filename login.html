@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<div>
+    <div class="login-Top">
+        <span style="font-weight: bold;font-size: 35px;position: relative;bottom: -17px;">蠡园开发区资产管理系统</span>
+    </div>
+    <div class="login-mid">
+        <div class="login-div">
+            <h3 style="font-weight: bold;margin-bottom: 20px;color: #fff9ec">用户登录</h3>
+            <div>
+                <input type="text" name="title" required lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+            </div>
+            <div style="margin-top: 20px">
+                <input type="password" name="password" required lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+            </div>
+            <div style="margin-top: 20px">
+                <button type="button" class="layui-btn layui-btn-normal" style="width: 100%;">登录</button>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;padding: 43px 0;position: fixed;bottom: 0;width: 100%;" class="login-bot">
+       <span style="margin-left: 135px;">技术支持:蓝深远望科技股份有限公司</span>
+    </div>
+</div>
+<script src="public/js/jquery.js"></script>
+<script src="layui/layui.js"></script>
+<script src="public/js/public.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

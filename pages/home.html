@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/all.css">
+</head>
+
+<body>
+    <!--<div class="layui-card">-->
+    <!--<div class="layui-card-header">-->
+    <!--系统介绍-->
+    <!--<i class="layui-icon layui-icon-tips" lay-tips="" lay-offset="5"></i>-->
+    <!--</div>-->
+    <!--<div class="layui-card-body layui-text layadmin-text">-->
+    <!--<h3>系统目标</h3>-->
+    <!--为完善园区公共服务体系，加强和改善产业资产管理，实现资产管理的数字化、信息化，提升管理效率，实现资产收益最大化，以信息化平台为依托，开发一套集高性能、高可用、可扩展、可伸缩、安全于一身的园区资产管理系统。-->
+    <!--<h3>系统面向的用户群</h3>-->
+    <!--资产管理办公室管理人员：对合同、数据报表进行统计，审核，与管理中心做对接。</br>-->
+    <!--资产管理办公室领导：查看合同、各类报表，审核。</br>-->
+    <!--管理中心管理人员：合同，报表管理。</br>-->
+    <!--管理中心管理领导：查看合同、报表并审核。</br>-->
+    <!--管委会领导，相关部门领导：查看各类报表。</br>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="pageDiv">
+        <div id="homeAll" style="overflow: hidden;overflow-y: auto">
+            <div class="layui-row layui-col-space20" style="padding-top:20px">
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                    <div class="layui-card">
+                        <div class="layui-card-header">待办事项</div>
+                        <div class="layui-card-body dbsx">
+                            <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim=""
+                                lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 280px!important;">
+                                <div carousel-item="">
+                                    <ul class="layui-row layui-col-space10 layui-this">
+                                        <li class="layui-col-xs6">
+                                            <h3>待审核合同</h3>
+                                            <a href="jggl.html" class="layadmin-backlog-body">协商出租合同 <span
+                                                    style="float: right;color: #FF5722;font-weight: bold;">12</span></a>
+                                            <a href="jggl.html" class="layadmin-backlog-body">一事一议合同 <span
+                                                    style="float: right;color: #FF5722;font-weight: bold;">10</span></a>
+                                            <a href="jggl.html" class="layadmin-backlog-body">挂靠合同<span
+                                                    style="float: right;color: #FF5722;font-weight: bold;">2</span></a>
+                                            <a href="jggl.html" class="layadmin-backlog-body">资产出售合同合同<span
+                                                    style="float: right;color: #FF5722;font-weight: bold;">8</span></a>
+                                        </li>
+                                        <li class="layui-col-xs6">
+                                            <h3>待审核预警</h3>
+                                            <a href="htdqyj.html" class="layadmin-backlog-body">合同到期预警<span
+                                                    style="float: right;color: #FF5722;font-weight: bold;">121</span></a>
+                                            <a href="zjjqyj.html" class="layadmin-backlog-body">租金交期预警<span
+                                                    style="float: right;color: #FF5722;font-weight: bold;">102</span></a>
+                                            <a href="bzjyj.html" class="layadmin-backlog-body">保证金预警<span
+                                                    style="float: right;color: #FF5722;font-weight: bold;">82</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="layui-carousel-ind">
+                                    <ul>
+                                        <li class="layui-this"></li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                                <button class="layui-icon layui-carousel-arrow" lay-type="sub"></button>
+                                <button class="layui-icon layui-carousel-arrow" lay-type="add"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                    <div class="layui-card" style="height: 100%;">
+                        <div class="layui-card-header">园区资产储备</div>
+                        <div class="layui-card-body" style="height: 280px">
+                            <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim=""
+                                lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 100% !important;">
+                                <div id="yqzccb" style="width: 100%;height:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                    <div class="layui-card" style="height: 100%;">
+                        <div class="layui-card-header">使用情况</div>
+                        <div class="layui-card-body" style="height: 280px">
+                            <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim=""
+                                lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 100% !important;">
+                                <div id="syqk" style="width: 100%;height:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md8">
+                    <div class="layui-card" style="height: 100%;">
+                        <div class="layui-card-header">园区资金收入</div>
+                        <div class="layui-card-body" style="height: 337px">
+                            <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim=""
+                                lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 100% !important;">
+                                <div id="main" style="width: 100%;height:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                    <div class="layui-card" style="height: 100%;">
+                        <div class="layui-card-header">园区资产储备</div>
+                        <div class="layui-card-body" style="height: 337px">
+                            <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim=""
+                                lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 100% !important;">
+                                <div id="zzgl" style="width: 100%;height:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+    <script src="../public/js/jquery.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script src="../public/js/public.js"></script>
+    <script src="../public/js/echarts-gl.min.js"></script>
+    <!--园区资产储备情况-->
+    <script type="text/javascript">
+
+
+        layui.use('element', function () {
+            var element = layui.element;
+
+            //…
+        });
+
+        $(function () {
+            $("#homeAll").css("height", $("body").height())
+        })
+        $(window).resize(function () {
+            myChart.resize();
+            myChart2.resize();
+            myChart3.resize();
+            myChart4.resize();
+    })
+
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('yqzccb'));
+
+        // 指定图表的配置项和数据
+        option = {
+            backgroundColor: '#2c333b',
+
+            title: {
+                text: '园区资产储备',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#FFFFFF'
+                }
+            },
+
+            tooltip: {
+                trigger: 'item',
+            },
+
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            series: [
+                {
+                    //name:'访问来源',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '50%'],
+                    data: [
+                        { value: 335, name: '写字楼' },
+                        { value: 310, name: '厂房' },
+                        { value: 274, name: '其他' },
+                    ].sort(function (a, b) {
+                        return a.value - b.value;
+                    }),
+                    roseType: 'radius',
+                    label: {
+                        normal: {
+                            textStyle: {
+                                color: '#ffffff'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: '#FFFFFF'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#009688',
+                            shadowBlur: 200,
+                            shadowColor: '#009688'
+                        }
+                    },
+
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function (idx) {
+                        return Math.random() * 200;
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+
+        var myChart2 = echarts.init(document.getElementById('syqk'));
+        // 指定图表的配置项和数据
+        option2 = {
+            backgroundColor: '#2c333b',
+
+            title: {
+                text: '使用情况',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#FFFFFF'
+                }
+            },
+
+            tooltip: {
+                trigger: 'item',
+            },
+
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            series: [
+                {
+                    //name:'访问来源',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '50%'],
+                    data: [
+                        { value: 335, name: '已出售' },
+                        { value: 310, name: '空闲' },
+                        { value: 310, name: '自用' },
+                        { value: 274, name: '已出租' },
+                    ].sort(function (a, b) {
+                        return a.value - b.value;
+                    }),
+                    roseType: 'radius',
+                    label: {
+                        normal: {
+                            textStyle: {
+                                color: '#ffffff'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: '#FFFFFF'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#008996',
+                            shadowBlur: 200,
+                            shadowColor: '#008996'
+                        }
+                    },
+
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function (idx) {
+                        return Math.random() * 200;
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+
+
+
+        var myChart3 = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        option3 = {
+            title: {
+                text: '单位:万元',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#009688'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            legend: {
+                data: ['单位：万元'],
+                color: "#009688"
+            },
+            xAxis: {
+                type: 'category',
+                data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                color: "#009688"
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '收入',
+                data: [500, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80, 70],
+                color: "#009688",
+                type: 'bar'
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+
+        var myChart4 = echarts.init(document.getElementById('zzgl'));
+        // 指定图表的配置项和数据
+        option4 = {
+            title: {
+                text: '单位：㎡',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#009688'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            legend: {
+
+                data: ['单位：㎡'],
+                color: "#009688"
+            },
+            xAxis: {
+                type: 'value'
+
+            },
+            yAxis: {
+                type: 'category',
+                data: ['土地', '房产'],
+                color: "#009688"
+            },
+            series: [{
+                name: '面积',
+                data: [24562, 50000,],
+                color: "#009688",
+                type: 'bar'
+            }],
+            // featureTitle:{
+            //     markUndo :  
+
+            // }
+
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart4.setOption(option4);
+
+
+
+    </script>
+    </div>
+</body>
+
+</html>

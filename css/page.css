@@ -1,0 +1,159 @@
+html, body {
+    height: 100%
+}
+
+body {
+    padding: 10px 18px;
+    background: #f2f2f2;
+    overflow: hidden;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+h3 {
+    font-weight: bold !important;
+    margin: 7px 0;
+}
+
+fieldset {
+    border-bottom: 0;
+    border-color: #00e2cd;
+}
+
+.show {
+    width: 98%;
+    margin: 0 auto;
+}
+
+.layui-card-header {
+    font-weight: bold;
+}
+
+.layui-card-body {
+    overflow: hidden;
+}
+
+/*滚动条样式*/
+.layui-table-body::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 10px;
+}
+
+.layui-table-body::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgb(2, 208, 188);
+}
+
+.layui-table-body::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.layui-card {
+    box-shadow: 0 0 20px rgba(115, 105, 215, 0.075);
+    border-radius: 3px;
+    border: 1px solid #dbdbdb;
+}
+
+.layui-card-body-tj {
+    position: relative;
+    padding: 10px 15px;
+    line-height: 24px;
+}
+
+/*滚动条样式*/
+#homeAll::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 10px;
+}
+
+#homeAll::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgb(2, 208, 188);
+}
+
+#homeAll::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.addDig {
+    width: 96%;
+    height: 93%;
+    background: #ffffff;
+    margin: 0 auto;
+    margin-top: 1%;
+    border-radius: 3px;
+    padding: 10px 10px;
+    overflow: auto;
+}
+
+/*滚动条样式*/
+.addDig::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 10px;
+}
+
+.addDig::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgb(2, 208, 188);
+}
+
+.addDig::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.pageDiv {
+    overflow: auto;
+}
+
+.layui-card-body.dbsx {
+    min-height: 260px !important;
+}
+
+/*滚动条样式*/
+.pageDiv::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 0; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 0;
+}
+
+.pageDiv::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgb(2, 208, 188);
+}
+
+.pageDiv::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.layui-fluid.tjsx {
+    margin-top: 20px;
+}
+
+.layui-fluid {
+    margin-bottom: 20px;
+}
+
+.jszc {
+    text-align: center;
+    color: #3333338c;
+    margin-bottom: 30px;
+}
+
+.dialogDiv {
+    float: left;
+    width: 49%;
+    margin: 10px 0;
+}

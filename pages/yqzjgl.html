@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>园区租金管理</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/page.css">
+</head>
+<body>
+<div class="pageDiv">
+    <div class="title">
+        <div class="site-title">
+            <fieldset>
+                <legend><a name="use"><h2>园区租金管理</h2></a></legend>
+            </fieldset>
+        </div>
+    </div>
+    <div class="layui-fluid tjsx">
+        <div class="layui-card">
+            <div class="layui-card-header">条件筛选</div>
+            <div class="layui-card-body-tj" style="padding: 15px;">
+                <div class="layui-form-item">
+                    <form class="layui-form" action="">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">管理中心</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">房屋所有权</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">管理单位</label>
+                            <div class="layui-input-block">
+                                <select name="ht" lay-verify="" lay-search>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="1">单位一</option>
+                                    <option value="2">单位二</option>
+                                    <option value="3">单位三</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">园区/楼宇</label>
+                            <div class="layui-input-block">
+                                <select name="ht" lay-verify="" lay-search>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="1">楼宇一</option>
+                                    <option value="2">楼宇二</option>
+                                    <option value="3">楼宇三</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">楼号</label>
+                            <div class="layui-input-block">
+                                <select name="ht" lay-verify="" lay-search>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="1">一楼</option>
+                                    <option value="2">二楼</option>
+                                    <option value="3">三楼</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">楼层</label>
+                            <div class="layui-input-block">
+                                <select name="ht" lay-verify="" lay-search>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="1">一层</option>
+                                    <option value="2">二层</option>
+                                    <option value="3">三层</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">房号</label>
+                            <div class="layui-input-block">
+                                <select name="ht" lay-verify="" lay-search>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="1">101</option>
+                                    <option value="2">102</option>
+                                    <option value="3">103</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">承租单位</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">签约日期</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input" id="test1" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">合同状态</label>
+                            <div class="layui-input-block">
+                                <select name="ht" lay-verify="" lay-search>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="1">状态一</option>
+                                    <option value="2">状态二</option>
+                                    <option value="3">状态三</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">签约方式</label>
+                            <div class="layui-input-block">
+                                <select name="zf" lay-verify="" lay-search>
+                                    <option value="" disabled selected hidden>请选择签约方式</option>
+                                    <option value="1">面签</option>
+                                    <option value="2">网上签约</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">支付方式</label>
+                            <div class="layui-input-block">
+                                <select name="zf" lay-verify="" lay-search>
+                                    <option value="" disabled selected hidden>请选择支付方式</option>
+                                    <option value="1">微信</option>
+                                    <option value="2">支付宝</option>
+                                    <option value="3">银行转账</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">是否欠款</label>
+                            <div class="layui-input-block">
+                                <select name="dw" lay-verify="" lay-search>
+                                    <option value="" disabled selected hidden>请选择是否欠款</option>
+                                    <option value="1">是</option>
+                                    <option value="2">否</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="LAY-user-front-search">
+                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header">园区租金列表</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+                <table class="layui-table" lay-data="{width:1599, url:'../json/yqzj.json', page: true, limit: 6, limits:[6]}">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'xlh', width:120,fixed:'left'}" rowspan="2">序号</th>
+                        <th lay-data="{field:'qyrq', width:120,fixed:'left'}" rowspan="2">签约日期</th>
+                        <th lay-data="{field:'fwsyq', width:120,fixed:'left'}" rowspan="2">房屋所有权</th>
+                        <th lay-data="{field:'glzx', width:120}" rowspan="2">管理单位</th>
+                        <th lay-data="{field:'yq', width:120}" rowspan="2">园区/楼宇</th>
+                        <th lay-data="{align: 'center'}" colspan="3">房屋座落</th>
+                        <th lay-data="{field:'czdw', width:120}" rowspan="2">承租单位</th>
+                        <th lay-data="{align:'fymj',align: 'center'}" colspan="2">房源面积</th>
+                        <th lay-data="{field:'htmj', width:120}" rowspan="2">合同面积</th>
+                        <th lay-data="{field:'htzt', width:120}" rowspan="2">合同状态</th>
+                        <th lay-data="{field:'qyfs', width:120}" rowspan="2">签约方式</th>
+                        <th lay-data="{field:'yzj', width:120}" rowspan="2">月租金</th>
+                        <th lay-data="{field:'cznx', width:120}" rowspan="2">承租年限（月）</th>
+                        <th lay-data="{field:'htksrq', width:120}" rowspan="2">合同开始日期</th>
+                        <th lay-data="{field:'htjsrq', width:120}" rowspan="2">合同结束日期</th>
+                        <th lay-data="{field:'zffs', width:120}" rowspan="2">支付方式</th>
+                        <th lay-data="{field:'qk', width:120}" rowspan="2">欠款</th>
+                        <th lay-data="{width:120,align: 'center'}" colspan="13">应收</th>
+                        <th lay-data="{width:120,align: 'center'}" colspan="13">倒账款</th>
+                        <th lay-data="{fixed: 'right', width: 160, align: 'center', toolbar: '#barDemo'}" rowspan="2">操作</th>
+                    </tr>
+                    <tr>
+                        <th lay-data="{field:'l', width:120}">楼号</th>
+                        <th lay-data="{field:'z', width:120}">幢号</th>
+                        <th lay-data="{field:'h', width:200}">房号</th>
+                        <th lay-data="{field:'yz', width:120}">有证</th>
+                        <th lay-data="{field:'wz', width:120}">无证</th>
+                        <th lay-data="{field:'y1', width:120}">1月</th>
+                        <th lay-data="{field:'y2', width:120}">2月</th>
+                        <th lay-data="{field:'y3', width:120}">3月</th>
+                        <th lay-data="{field:'y4', width:120}">4月</th>
+                        <th lay-data="{field:'y5', width:120}">5月</th>
+                        <th lay-data="{field:'y6', width:120}">6月</th>
+                        <th lay-data="{field:'y7', width:120}">7月</th>
+                        <th lay-data="{field:'y8', width:120}">8月</th>
+                        <th lay-data="{field:'y9', width:120}">9月</th>
+                        <th lay-data="{field:'y10', width:120}">10月</th>
+                        <th lay-data="{field:'y11', width:120}">11月</th>
+                        <th lay-data="{field:'y12', width:120}">12月</th>
+                        <th lay-data="{field:'yxj', width:120}">小计</th>
+                        <th lay-data="{field:'s1', width:120}">1月</th>
+                        <th lay-data="{field:'s2', width:120}">2月</th>
+                        <th lay-data="{field:'s3', width:120}">3月</th>
+                        <th lay-data="{field:'s4', width:120}">4月</th>
+                        <th lay-data="{field:'s5', width:120}">5月</th>
+                        <th lay-data="{field:'s6', width:120}">6月</th>
+                        <th lay-data="{field:'s7', width:120}">7月</th>
+                        <th lay-data="{field:'s8', width:120}">8月</th>
+                        <th lay-data="{field:'s9', width:120}">9月</th>
+                        <th lay-data="{field:'s10', width:120}">10月</th>
+                        <th lay-data="{field:'s11', width:120}">11月</th>
+                        <th lay-data="{field:'s12', width:120}">12月</th>
+                        <th lay-data="{field:'sxj', width:120}">小计</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="jszc">技术支持：蓝深远望科技股份有限公司</div>
+</div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="../public/js/jquery.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../public/js/public.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/yqzjgl.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+body {
+    padding: 0;
+    margin: 0;
+    line-height: 27px;
+    font-family: Roboto, 'Segoe UI',Arial,'Microsoft Yahei',sans-serif;
+    font-size: 15px;
+    padding: 50px 70px;
+}
+
+.htall {
+
+}
+
+.bbh {
+    text-align: right;
+    /*padding: 10px 10px 0 0;*/
+}
+
+h2 {
+    text-align: center;
+}
+
+.htSpan {
+    border-bottom: 1px solid #333333;
+    text-align: center;
+    min-width: 70px;
+    display: initial;
+}
+
+.qtbz {
+    min-height: 100px;
+    width: 99%;
+    margin: 0 auto;
+    border: 0;
+    resize: none;
+}
+.title{
+    font-weight: bold;
+}
