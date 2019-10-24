@@ -35,7 +35,7 @@ layui.use(['table', 'form'], function () {
             , {field: 'phone', title: '联系方式'}
             , {field: 'email', title: '邮件'}
             // , { field: 'sm', title: '说明' }
-            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180}
+            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 220}
         ]]
     });
 
