@@ -13,6 +13,7 @@ layui.use(['table', 'form'], function () {
         elem: '#tableList'
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
+
         // , url: '../json/sysUser.json'
         , url: IPzd + '/assets/house?asc=1' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
@@ -48,7 +49,6 @@ layui.use(['table', 'form'], function () {
             , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 220 }
         ]]
     });
-
 
     //监听行工具事件
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
@@ -106,7 +106,7 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房屋产权id</label>\n' +
+                    '    <label class="layui-form-label">房屋产权ID</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入"  autocomplete="off" class="layui-input houseId">\n' +
                     '    </div>\n' +
@@ -114,19 +114,19 @@ layui.use(['table', 'form'], function () {
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋所有人</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input shareType">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fkOwnId">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">共有情况</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input manageUnit">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input shareType">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">管理单位</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input manageUnit">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -138,19 +138,19 @@ layui.use(['table', 'form'], function () {
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">楼号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input houseNum">\n' +
+                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input houseNum">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">楼层</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input houseLevel">\n' +
+                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input houseLevel">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input houseRoom">\n' +
+                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input houseRoom">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -162,37 +162,37 @@ layui.use(['table', 'form'], function () {
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋性质</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input hourseType">\n' +
+                    '      <input type="text" name="title" required  placeholder="请输入" autocomplete="off" class="layui-input hourseType">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">计划用途</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input housePlanUse">\n' +
+                    '      <input type="text" name="title" required   placeholder="请输入" autocomplete="off" class="layui-input housePlanUse">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">总层数</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input totalLevel">\n' +
+                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input totalLevel">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">建筑面积</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input buildArea">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input buildArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">套内面积</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input realArea">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input realArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">其他面积</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input otherArea">\n' +
+                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input otherArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
@@ -216,7 +216,7 @@ layui.use(['table', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">备注</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入"  autocomplete="off" class="layui-input remark">\n' +
+                    '      <input type="text" name="title" required    placeholder="请输入"  autocomplete="off" class="layui-input remark">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -284,7 +284,7 @@ layui.use(['table', 'form'], function () {
                                 layer.msg("修改成功")
                                 var demoReload = $('#demoReload');
                                 //执行重载
-                                table.reload('idT   est', {
+                                table.reload('idTest', {
                                     page: {
                                         curr: 1 //重新从第 1 页开始
                                     }
@@ -316,117 +316,117 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房屋产权id</label>\n' +
+                    '    <label class="layui-form-label">房屋产权ID</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入"  autocomplete="off" class="layui-input houseId">\n' +
+                    '      <input type="text" name="title" required     class="layui-disabled layui-input houseId">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋所有人</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input shareType">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input fkOwnId">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">共有情况</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input manageUnit">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input shareType">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">管理单位</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input manageUnit">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">所在园区</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input parkId">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input parkId">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">楼号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input houseNum">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input houseNum">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">楼层</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input houseLevel">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input houseLevel">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input houseRoom">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input houseRoom">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">登记时间</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入"  autocomplete="off" class="layui-input registerTime">\n' +
+                    '      <input type="text" name="title" required     class="layui-disabled layui-input registerTime">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋性质</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input hourseType">\n' +
+                    '      <input type="text" name="title" required   class="layui-disabled layui-input hourseType">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">计划用途</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input housePlanUse">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input housePlanUse">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">总层数</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input totalLevel">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input totalLevel">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">建筑面积</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input buildArea">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input buildArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">套内面积</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input realArea">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input realArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">其他面积</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input otherArea">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input otherArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landNum">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input landNum">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地获得方式</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landGetMethod">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input landGetMethod">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地使用年限</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landUseYear">\n' +
+                    '      <input type="text" name="title" required    class="layui-disabled layui-input landUseYear">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">备注</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入"  autocomplete="off" class="layui-input remark">\n' +
+                    '      <input type="text" name="title" required      class="layui-disabled layui-input remark">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -472,7 +472,9 @@ layui.use(['table', 'form'], function () {
         * 传入标题和内容
         * 生成弹窗
         * */
+       
         var openMes = {
+            
             title: '房屋产证添加',
             leixing: '添加',
             maxmin: true,
@@ -481,7 +483,7 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" lay-filter="look" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">房屋产权id</label>\n' +
+                '    <label class="layui-form-label">房屋产权ID</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入"  autocomplete="off" class="layui-input houseId">\n' +
                 '    </div>\n' +
@@ -489,19 +491,27 @@ layui.use(['table', 'form'], function () {
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">房屋所有人</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input shareType">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fkOwnId">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">共有情况</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input manageUnit">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入"  class="layui-disabled layui-input shareType">\n' +
                 '    </div>\n' +
                 '</div>\n' +
+                // '<div class="layui-form-item">\n' +
+                // '    <label class="layui-form-label">共有情况</label>\n' +
+                // '    <div class="layui-input-block">\n' +
+                // '        <select name="roleId" lay-verify="required" class ="shareType" id="add_role_name">\n' +
+                // '            <option value="">请选择共有情况</option>\n' +
+                // '        </select>\n' +
+                // '    </div>\n' +
+                // '</div>\n' +
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">管理单位</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input manageUnit">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '  <div class="dialogDiv">\n' +
@@ -597,7 +607,9 @@ layui.use(['table', 'form'], function () {
                 '</form></div>' +
                 '</div>' +
                 '</div>',
-            add: function () {
+                
+            add: function () {  
+                
                 var data = {
                     "houseId":$(".houseId").val(),
                     "fkOwnId": $(".fkOwnId").val(),
@@ -658,6 +670,8 @@ layui.use(['table', 'form'], function () {
         }
         /*调用弹窗方法*/
         layerOpen(openMes);
+        // getgyqk(add_role_name);
+
     })
 })
 
@@ -703,3 +717,24 @@ function getOneUser() {
     });
 }
 
+
+// function getgyqk(iD) {
+//     $.ajax({
+
+//         url: IPzd+"/dic/share?asc=1",
+//         type: "GET",
+//         dataType: "json",
+//         success: function (result) {
+//             var list = result.extend.roleList;    //返回的数据
+//             var role = document.getElementById(iD);        //add_role_name给select定义的id
+//             for (var i = 0; i < list.length; i++) {
+//                 var option = document.createElement("option");   // 创建添加option属性
+//                 option.setAttribute("value", list[i].roleId);    // 给option的value添加值
+//                 option.innerText = list[i].roleName;             // 打印option对应的纯文本 （超级管理员、管理员）
+//                 role.appendChild(option);                        // 给select 添加option子标签
+//             }
+
+//             form.render("select");                                // 刷性select，显示出数据
+//         }
+//     });
+}

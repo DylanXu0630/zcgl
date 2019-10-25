@@ -14,7 +14,7 @@ layui.use(['table', 'form'], function () {
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
-        , url: IPdz + '/user?asc=1' //数据接口
+        , url: IPzd + '/dic/co?asc=1' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
@@ -25,17 +25,10 @@ layui.use(['table', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'username', title: '账户名', width: 200}
-            , {field: 'nickname', title: '姓名', width: 200}
-            , {
-                field: 'sex', title: '性别', width: 80, templet: function (d) {
-                    return getSex(d.sex)
-                }
-            }
-            , {field: 'phone', title: '联系方式'}
-            , {field: 'email', title: '邮件'}
-            // , { field: 'sm', title: '说明' }
-            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 220}
+            { field: 'id', title: 'ID', width: 200 }
+            , { field: 'name', title: '产权单位', width: 200 }
+            , { field: 'shortname', title: '产权单位简称' }
+            , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200 }
         ]]
     });
 
@@ -46,7 +39,7 @@ layui.use(['table', 'form'], function () {
         if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
-                    url: IPdz + '/user/' + obj.data.id,    //请求的url地址
+                    url: IPzd + '/dic/co/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -95,35 +88,33 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">账户名</label>\n' +
+                    '    <label class="layui-form-label">产权单位</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">姓名：</label>\n' +
+                    '    <label class="layui-form-label">简称</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input shortname">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
-                    $(".email").val(obj.data.email)
-                    $(".location").val(obj.data.location)
-                    $(".nickname").val(obj.data.nickname)
+                    $(".name").val(obj.data.name)
+                    $(".shortname").val(obj.data.shortname)
                 },
                 put: function () {
                     var data = {
                         "id": obj.data.id,
-                        "createdBy": "1",
-                        "email": $(".email").val(),
-                        "location": $(".location").val(),
+                        "name": $(".name").val(),
+                        "shortname": $(".shortname").val(),
                     }
 
                     $.ajax({
-                        url: IPdz + '/user',    //请求的url地址
+                        url: IPzd + '/dic/co',    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -160,40 +151,7 @@ layui.use(['table', 'form'], function () {
             }
 
             layerOpen(openMes);
-        } else if (layEvent == 'detail') {
-            /*查看操作*/
-            var openMes = {
-                title: '查看系统用户',
-                leixing: '查看',
-                maxmin: true,
-                id: obj.data.id,
-                content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
-                    '<div class="addDig">' +
-                    '<div><form class="layui-form" action="">\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">账户名</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username" readonly>\n' +
-                    '    </div>\n' +
-                    '</div>\n' +
-                    '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">姓名：</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname" readonly>\n' +
-                    '    </div>\n' +
-                    '</div>\n' +
-                    '</form></div>' +
-                    '</div>' +
-                    '</div>',
-                look: function () {
-                    $(".email").val(obj.data.email)
-                    $(".location").val(obj.data.location)
-                    $(".nickname").val(obj.data.nickname)
-                }
-            }
-
-            layerOpen(openMes);
-        }
+        } 
     });
 
     var reload = table.reload({
@@ -218,15 +176,15 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">账户名</label>\n' +
+                '    <label class="layui-form-label">产权单位</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input name">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">姓名：</label>\n' +
+                '    <label class="layui-form-label">简称</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input shortname">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
@@ -234,13 +192,13 @@ layui.use(['table', 'form'], function () {
                 '</div>',
             add: function () {
                 var data = {
-                    "createdBy": "1",
-                    "email": $(".email").val(),
-                    "location": $(".location").val(),
+                    "name": $(".name").val(),
+                    "shortname": $(".shortname").val(),
                 }
 
+
                 $.ajax({
-                    url: IPdz + '/user',    //请求的url地址
+                    url: IPzd + '/dic/co',    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     data: JSON.stringify(data),    //参数值
@@ -287,7 +245,7 @@ function getSex(sex) {
 
 function getOneUser() {
     $.ajax({
-        url: IPdz + '/user',    //请求的url地址
+        url: IPzd + '/dic/co',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         data: JSON.stringify(data),    //参数值

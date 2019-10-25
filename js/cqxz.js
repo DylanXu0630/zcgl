@@ -24,7 +24,8 @@ layui.use(['table', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            , {field: 'name', title: '产权性质', width: 200}
+            { field: 'id', title: 'ID', width: 200 }
+            , {field: 'name', title: '产权性质'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
     });
