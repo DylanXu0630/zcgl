@@ -3,8 +3,9 @@ layui.use('element', function () {
     var element = layui.element;
 });
 
-layui.use(['table', 'laydate'], function () {
+layui.use(['table', 'laydate', 'form'], function () {
     var table = layui.table
+    var form = layui.form
 
     //第一个实例
     table.render({
@@ -56,9 +57,8 @@ layui.use(['table', 'laydate'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">土地权利人</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="fkOwnId">\n' +
+                '      <select class="co">\n' +
                 '    <option value="">请选择</option>\n' +
-                '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
@@ -82,9 +82,8 @@ layui.use(['table', 'laydate'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">地类</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="useType">\n' +
+                '      <select class="usage">\n' +
                 '    <option value="">请选择</option>\n' +
-                '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' + '  <div class="dialogDiv">\n' +
@@ -96,9 +95,8 @@ layui.use(['table', 'laydate'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">使用权类型</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="useRight">\n' +
+                '      <select class="protype">\n' +
                 '    <option value="">请选择</option>\n' +
-                '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' + '  <div class="dialogDiv">\n' +
@@ -195,6 +193,11 @@ layui.use(['table', 'laydate'], function () {
                 elem: '#date'
             });
         });
+
+        getcqdw()
+        getytqk()
+        getcqlx()
+        form.render();
     })
 
 
