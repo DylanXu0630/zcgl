@@ -138,6 +138,11 @@ fieldset {
     background: rgba(0, 0, 0, 0.1);
 }
 
+.addDig::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 0; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 0;
+}
+
 .layui-fluid.tjsx {
     margin-top: 20px;
 }

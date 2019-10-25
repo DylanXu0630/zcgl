@@ -83,7 +83,7 @@ function sjc(str) {
 /*获取产权单位*/
 function getcqdw() {
     $.ajax({
-        url: IPzd + '/dic/co?asc=1&page=1&limit=10',    //请求的url地址
+        url: IPzd + '/dic/co1',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -96,7 +96,7 @@ function getcqdw() {
             $(".co").children().remove()
             var options = $("<option value=''>请选择</option>").appendTo(".co")
             if (req.status == "200") {
-                $(req.data.records).each(function (i, o) {
+                $(req.data).each(function (i, o) {
                     var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".co")
                 })
 
@@ -118,7 +118,7 @@ function getcqdw() {
 /*获取产权性质*/
 function getcqxz() {
     $.ajax({
-        url: IPzd + '/dic/pronature?asc=1&page=1&limit=10',    //请求的url地址
+        url: IPzd + '/dic/pronature1',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -131,7 +131,7 @@ function getcqxz() {
             $(".pronature").children().remove()
             var options = $("<option value=''>请选择</option>").appendTo(".pronature")
             if (req.status == "200") {
-                $(req.data.records).each(function (i, o) {
+                $(req.data).each(function (i, o) {
                     var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".pronature")
                 })
             } else {
@@ -151,7 +151,7 @@ function getcqxz() {
 /*获取产权类型*/
 function getcqlx() {
     $.ajax({
-        url: IPzd + '/dic/protype?asc=1&page=1&limit=10',    //请求的url地址
+        url: IPzd + '/dic/protype1',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -164,7 +164,7 @@ function getcqlx() {
             $(".protype").children().remove()
             var options = $("<option value=''>请选择</option>").appendTo(".protype")
             if (req.status == "200") {
-                $(req.data.records).each(function (i, o) {
+                $(req.data).each(function (i, o) {
                     var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".protype")
                 })
             } else {
@@ -184,7 +184,7 @@ function getcqlx() {
 /*获取共有*/
 function getgyqk() {
     $.ajax({
-        url: IPzd + '/dic/share?asc=1&page=1&limit=10',    //请求的url地址
+        url: IPzd + '/dic/share1',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -197,7 +197,7 @@ function getgyqk() {
             $(".share").children().remove()
             var options = $("<option value=''>请选择</option>").appendTo(".share")
             if (req.status == "200") {
-                $(req.data.records).each(function (i, o) {
+                $(req.data).each(function (i, o) {
                     var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".share")
                 })
 
@@ -219,7 +219,7 @@ function getgyqk() {
 /*获取用途*/
 function getytqk() {
     $.ajax({
-        url: IPzd + '/dic/usage?asc=1&page=1&limit=10',    //请求的url地址
+        url: IPzd + '/dic/usage1',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -232,7 +232,7 @@ function getytqk() {
             $(".usage").children().remove()
             var options = $("<option value=''>请选择</option>").appendTo(".usage")
             if (req.status == "200") {
-                $(req.data.records).each(function (i, o) {
+                $(req.data).each(function (i, o) {
                     var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".usage")
                 })
             } else {
