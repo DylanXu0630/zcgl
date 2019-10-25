@@ -6,7 +6,7 @@ layui.use('element', function () {
 layui.use(['table', 'laydate', 'form'], function () {
     var table = layui.table
     var form = layui.form
-
+    form.render();
     //第一个实例
     table.render({
         elem: '#tableList'
@@ -95,7 +95,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">使用权类型</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="protype">\n' +
+                '      <select class="pronature">\n' +
                 '    <option value="">请选择</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
@@ -136,15 +136,15 @@ layui.use(['table', 'laydate', 'form'], function () {
                     "assetsQueue": $(".symj").val(),
                     "createdBy": 0,
                     // "endTime": sjc($("#date").val() + " 23:59:59"),
-                    "fkOwnId": 0,
+                    "fkOwnId": $(".co").val(),
                     "landNum": $(".dh").val(),
                     "money": $(".qdjz").val(),
                     "picNum": $(".th").val(),
                     "remark": $(".bz").val(),
                     "selfQueue": $(".dzmj").val(),
                     "shareQueue": $(".ftmj").val(),
-                    "useRight": 0,
-                    "useType": 0
+                    "useRight": $(".pronature").val(),
+                    "useType": $(".usage").val()
                 }
 
                 $.ajax({
@@ -194,9 +194,6 @@ layui.use(['table', 'laydate', 'form'], function () {
             });
         });
 
-        getcqdw()
-        getytqk()
-        getcqlx()
         form.render();
     })
 
@@ -258,9 +255,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地权利人</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="dl">\n' +
+                    '      <select class="co">\n' +
                     '    <option value="">请选择</option>\n' +
-                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
@@ -284,9 +280,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地类</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="dl">\n' +
+                    '      <select class="usage">\n' +
                     '    <option value="">请选择</option>\n' +
-                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
@@ -298,9 +293,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">使用权类型</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="dl">\n' +
+                    '      <select class="pronature">\n' +
                     '    <option value="">请选择</option>\n' +
-                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
@@ -335,18 +329,22 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '</div>' +
                     '</div>',
                 look: function () {
+                    getcqdw()
+                    getytqk()
+                    getcqxz()
                     $(".zl").val(obj.data.assetsLocation),
                         $(".symj").val(obj.data.assetsQueue),
                         // "endTime": sjc($("#date").val() + " 23:59:59"),
-                        $(".tdqlr").val(obj.data.fkOwnId),
+                        $(".co").val(obj.data.fkOwnId),
                         $(".dh").val(obj.data.landNum),
                         $(".qdjz").val(obj.data.money),
                         $(".th").val(obj.data.picNum),
                         $(".bz").val(obj.data.remark),
                         $(".dzmj").val(obj.data.selfQueue),
                         $(".ftmj").val(obj.data.shareQueue),
-                        $(".syqlx").val(obj.data.useRight),
-                        $(".dl").val(obj.data.useType)
+                        $(".pronature").val(obj.data.useRight),
+                        $(".usage").val(obj.data.useType)
+
                 },
                 put: function () {
                     var data = {
@@ -355,15 +353,15 @@ layui.use(['table', 'laydate', 'form'], function () {
                         "assetsQueue": $(".symj").val(),
                         "createdBy": 0,
                         // "endTime": sjc($("#date").val() + " 23:59:59"),
-                        "fkOwnId": 0,
+                        "fkOwnId": $(".co").val(),
                         "landNum": $(".dh").val(),
                         "money": $(".qdjz").val(),
                         "picNum": $(".th").val(),
                         "remark": $(".bz").val(),
                         "selfQueue": $(".dzmj").val(),
                         "shareQueue": $(".ftmj").val(),
-                        "useRight": 0,
-                        "useType": 0
+                        "useRight": $(".pronature").val(),
+                        "useType": $(".usage").val()
                     }
 
                     $.ajax({
@@ -425,9 +423,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地权利人</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="dl" disabled="disabled">\n' +
+                    '      <select class="co" disabled="disabled">\n' +
                     '    <option value="">请选择</option>\n' +
-                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
@@ -451,9 +448,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地类</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="dl">\n' +
+                    '      <select class="usage" disabled="disabled">\n' +
                     '    <option value="">请选择</option>\n' +
-                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
@@ -465,9 +461,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">使用权类型</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="dl">\n' +
+                    '      <select class="pronature" disabled="disabled">\n' +
                     '    <option value="">请选择</option>\n' +
-                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
@@ -502,18 +497,20 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '</div>' +
                     '</div>',
                 look: function () {
-                    $(".zl").val(obj.data.assetsLocation),
-                        $(".symj").val(obj.data.assetsQueue),
+                    getcqdw()
+                    getytqk()
+                    getcqxz()
+                    $(".symj").val(obj.data.assetsQueue),
                         // "endTime": sjc($("#date").val() + " 23:59:59"),
-                        $(".tdqlr").val(obj.data.fkOwnId),
+                        $(".co").val(obj.data.fkOwnId),
                         $(".dh").val(obj.data.landNum),
                         $(".qdjz").val(obj.data.money),
                         $(".th").val(obj.data.picNum),
                         $(".bz").val(obj.data.remark),
                         $(".dzmj").val(obj.data.selfQueue),
                         $(".ftmj").val(obj.data.shareQueue),
-                        $(".syqlx").val(obj.data.useRight),
-                        $(".dl").val(obj.data.useType)
+                        $(".pronature").val(obj.data.useRight),
+                        $(".usage").val(obj.data.useType)
                 }
             }
             layerOpen(openMes);

@@ -34,8 +34,8 @@ function layerOpen(openMes) {
 
             layui.use('form', function () {
                 var form = layui.form;
-                //自定义验证规则
                 form.render();
+                form.render('select')
             });
         },
         end: function () {
