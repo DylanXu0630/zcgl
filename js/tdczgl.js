@@ -2,44 +2,43 @@
 layui.use('element', function () {
     var element = layui.element;
 });
-layui.use('table', function () {
-    var table = layui.table;
+
+layui.use(['table', 'laydate'], function () {
+    var table = layui.table
 
     //第一个实例
     table.render({
         elem: '#tableList'
         , toolbar: '#toolbarDemo'
-        , url: '../json/czgl.json' //数据接口
-        //, url: 'http://172.1.1.95:8080/cert' //数据接口
+        // , url: '../json/czgl.json' //数据接口
+        , url: IPzd + '/assets/land?asc=1' //数据接口
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'xlh', title: '序号', width: 160}
-            , {field: 'tdsyqr', title: '土地使用权人', width: 260}
-            , {field: 'zl', title: '座落', width: 160}
-            , {field: 'dh', title: '地号', width: 160}
-            , {field: 'th', title: '图号', width: 160}
-            , {field: 'dl', title: '地类（用途）', width: 160}
-            , {field: 'qdjz', title: '取得价值', width: 160}
-            , {field: 'syqlx', title: '使用权类型', width: 160}
-            , {field: 'zzrq', title: '终止日期', width: 160}
-            , {field: 'syqmj', title: '使用权面积', width: 160}
-            , {field: 'dzmj', title: '独占面积', width: 160}
-            , {field: 'ftmj', title: '分摊面积', width: 160}
-            , {field: 'bz', title: '备注', width: 160}
+            {field: 'fkOwnId', title: '土地使用权人', width: 260}
+            , {field: 'assetsLocation', title: '座落', width: 160}
+            , {field: 'landNum', title: '地号', width: 160}
+            , {field: 'picNum', title: '图号', width: 160}
+            , {field: 'useType', title: '地类（用途）', width: 160}
+            , {field: 'money', title: '取得价值', width: 160}
+            , {field: 'useRight', title: '使用权类型', width: 160}
+            , {field: 'endTime', title: '终止日期', width: 160}
+            , {field: 'assetsQueue', title: '使用权面积', width: 160}
+            , {field: 'selfQueue', title: '独占面积', width: 160}
+            , {field: 'shareQueue', title: '分摊面积', width: 160}
+            , {field: 'remark', title: '备注', width: 160}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
-        , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+        , parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
             return {
-                "code": res.code, //解析接口状态
-                "msg": res.message, //解析提示文本
-                "count": res.total, //解析数据长度
-                "data": res.data //解析数据列表
+                "code": 0, //解析接口状态
+                "msg": res.msg, //解析提示文本
+                "count": res.data.total, //解析数据长度
+                "data": res.data.records //解析数据列表
             };
         }
     });
-})
 
-$(function () {
+
     /*添加点击事件*/
     $("body").on("click", ".layui-btn.layui-btn-sm", function () {
         /*生成一个对象
@@ -48,84 +47,477 @@ $(function () {
         * */
         var openMes = {
             title: '产权单位添加',
-
+            leixing: '添加',
+            maxmin: true,
+            btn: ['确定', '取消'],
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">土地权利人</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" autocomplete="off" class="layui-input">\n' +
+                '      <select class="fkOwnId">\n' +
+                '    <option value="">请选择</option>\n' +
+                '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
+                '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">坐落</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
                 '    </div>\n' +
-                '  </div>\n' + 
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">地号</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
                 '    </div>\n' +
-                '  </div>\n' +'  <div class="dialogDiv">\n' +
+                '  </div>\n' + '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">图号</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">地类</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <select class="useType">\n' +
+                '    <option value="">请选择</option>\n' +
+                '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
+                '     </select>\n' +
                 '    </div>\n' +
-                '  </div>\n' +'  <div class="dialogDiv">\n' +
+                '  </div>\n' + '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">取得价值</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz">\n' +
                 '    </div>\n' +
-                '  </div>\n' +    
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">使用权类型</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <select class="useRight">\n' +
+                '    <option value="">请选择</option>\n' +
+                '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
+                '     </select>\n' +
                 '    </div>\n' +
-                '  </div>\n' +'  <div class="dialogDiv">\n' +
+                '  </div>\n' + '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">终止日期</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
-                '  </div>\n' +   
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">使用权面积</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input symj">\n' +
                 '    </div>\n' +
-                '  </div>\n' +'  <div class="dialogDiv">\n' +
+                '  </div>\n' + '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">独占面积</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dzmj">\n' +
                 '    </div>\n' +
-                '  </div>\n' +  
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">分摊面积</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ftmj">\n' +
                 '    </div>\n' +
-                '  </div>\n' +'  <div class="dialogDiv">\n' +
+                '  </div>\n' + '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">备注</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input bz">\n' +
                 '    </div>\n' +
-                '  </div>\n' +  
+                '  </div>\n' +
                 '</form></div>' +
                 '</div>' +
                 '</div>',
+            add: function () {
+                var data = {
+                    "assetsLocation": $(".zl").val(),
+                    "assetsQueue": $(".symj").val(),
+                    "createdBy": 0,
+                    // "endTime": sjc($("#date").val() + " 23:59:59"),
+                    "fkOwnId": 0,
+                    "landNum": $(".dh").val(),
+                    "money": $(".qdjz").val(),
+                    "picNum": $(".th").val(),
+                    "remark": $(".bz").val(),
+                    "selfQueue": $(".dzmj").val(),
+                    "shareQueue": $(".ftmj").val(),
+                    "useRight": 0,
+                    "useType": 0
+                }
+
+                $.ajax({
+                    url: IPzd + '/assets/land',    //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    data: JSON.stringify(data),    //参数值
+                    type: "POST",   //请求方式
+                    contentType: "application/json;charset=UTF-8",
+                    // headers: {"token": sessionStorage.token},
+                    beforeSend: function () {
+                        //请求前的处理
+                    },
+                    success: function (req) {
+                        if (req.status == "200") {
+                            layer.close(indexDig);
+                            layer.msg("添加成功")
+                            var demoReload = $('#demoReload');
+                            //执行重载
+                            table.reload('tableList', {
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                            });
+                        } else {
+                            layer.msg("添加失败")
+                        }
+
+                    },
+                    complete: function () {
+                        //请求完成的处理
+                    },
+                    error: function () {
+                        //请求出错处理
+                    }
+                });
+            },
         }
         /*调用弹窗方法*/
         layerOpen(openMes);
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //自定义验证规则
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#date'
+            });
+        });
     })
+
+
+    table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        var data = obj.data //获得当前行数据
+            , layEvent = obj.event; //获得 lay-event 对应的值
+        if (layEvent === 'del') {
+            layer.confirm('真的删除行么', function (index) {
+                $.ajax({
+                    url: IPzd + '/assets/land/' + obj.data.id,    //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    type: "DELETE",   //请求方式
+                    contentType: "application/json;charset=UTF-8",
+                    // headers: {"token": sessionStorage.token},
+                    beforeSend: function () {
+                        //请求前的处理
+                    },
+                    success: function (req) {
+                        if (req.status == "200") {
+                            layer.close(indexDig);
+                            layer.msg("删除成功")
+                            var demoReload = $('#demoReload');
+                            //执行重载
+                            table.reload('tableList', {
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                            });
+                        } else {
+                            layer.msg("删除失败")
+                        }
+
+                    },
+
+                    complete: function () {
+                        //请求完成的处理
+                    },
+                    error: function () {
+                        //请求出错处理
+                    }
+                });
+                layer.close(index);
+                //向服务端发送删除指令
+
+            });
+        } else if (layEvent === 'edit') {
+            /*编辑操作;*/
+            var openMes = {
+                title: '编辑系统用户',
+                leixing: '编辑',
+                maxmin: true,
+                btn: ['确定', '取消'],
+                id: obj.data.id,
+                content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
+                    '<div class="addDig">' +
+                    '<div><form class="layui-form" action="">\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">土地权利人</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="dl">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">坐落</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">地号</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">图号</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">地类</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="dl">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">取得价值</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">使用权类型</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="dl">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">终止日期</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">使用权面积</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input symj">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">独占面积</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dzmj">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">分摊面积</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ftmj">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">备注</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input bz">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '</form></div>' +
+                    '</div>' +
+                    '</div>',
+                look: function () {
+                    $(".zl").val(obj.data.assetsLocation),
+                        $(".symj").val(obj.data.assetsQueue),
+                        // "endTime": sjc($("#date").val() + " 23:59:59"),
+                        $(".tdqlr").val(obj.data.fkOwnId),
+                        $(".dh").val(obj.data.landNum),
+                        $(".qdjz").val(obj.data.money),
+                        $(".th").val(obj.data.picNum),
+                        $(".bz").val(obj.data.remark),
+                        $(".dzmj").val(obj.data.selfQueue),
+                        $(".ftmj").val(obj.data.shareQueue),
+                        $(".syqlx").val(obj.data.useRight),
+                        $(".dl").val(obj.data.useType)
+                },
+                put: function () {
+                    var data = {
+                        "id": obj.data.id,
+                        "assetsLocation": $(".zl").val(),
+                        "assetsQueue": $(".symj").val(),
+                        "createdBy": 0,
+                        // "endTime": sjc($("#date").val() + " 23:59:59"),
+                        "fkOwnId": 0,
+                        "landNum": $(".dh").val(),
+                        "money": $(".qdjz").val(),
+                        "picNum": $(".th").val(),
+                        "remark": $(".bz").val(),
+                        "selfQueue": $(".dzmj").val(),
+                        "shareQueue": $(".ftmj").val(),
+                        "useRight": 0,
+                        "useType": 0
+                    }
+
+                    $.ajax({
+                        url: IPzd + '/assets/land',    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        data: JSON.stringify(data),    //参数值
+                        type: "PUT",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            if (req.status == "200") {
+                                layer.close(indexDig);
+                                layer.msg("修改成功")
+                                var demoReload = $('#demoReload');
+                                //执行重载
+                                table.reload('tableList', {
+                                    page: {
+                                        curr: 1 //重新从第 1 页开始
+                                    }
+                                });
+                            } else {
+                                layer.msg("修改失败")
+                            }
+
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
+                },
+            }
+
+            layerOpen(openMes);
+            layui.use('laydate', function () {
+                var laydate = layui.laydate;
+                //自定义验证规则
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#date'
+                });
+            });
+        } else if (layEvent == 'detail') {
+            /*查看操作*/
+            var openMes = {
+                title: '查看系统用户',
+                leixing: '查看',
+                maxmin: true,
+                id: obj.data.id,
+                content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
+                    '<div class="addDig">' +
+                    '<div><form class="layui-form" action="">\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">土地权利人</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="dl" disabled="disabled">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">坐落</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">地号</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">图号</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">地类</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="dl">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">取得价值</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">使用权类型</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="dl">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '    <option value="你最喜欢的老师">你最喜欢的老师</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">终止日期</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">使用权面积</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input symj" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">独占面积</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dzmj" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">分摊面积</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ftmj" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">备注</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input bz" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '</form></div>' +
+                    '</div>' +
+                    '</div>',
+                look: function () {
+                    $(".zl").val(obj.data.assetsLocation),
+                        $(".symj").val(obj.data.assetsQueue),
+                        // "endTime": sjc($("#date").val() + " 23:59:59"),
+                        $(".tdqlr").val(obj.data.fkOwnId),
+                        $(".dh").val(obj.data.landNum),
+                        $(".qdjz").val(obj.data.money),
+                        $(".th").val(obj.data.picNum),
+                        $(".bz").val(obj.data.remark),
+                        $(".dzmj").val(obj.data.selfQueue),
+                        $(".ftmj").val(obj.data.shareQueue),
+                        $(".syqlx").val(obj.data.useRight),
+                        $(".dl").val(obj.data.useType)
+                }
+            }
+            layerOpen(openMes);
+        }
+    });
 })
+
+
 
 
