@@ -117,18 +117,22 @@ layui.use(['table', 'form'], function () {
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fkOwnId">\n' +
                     '    </div>\n' +
                     '</div>\n' +
-                    '  <div class="dialogDiv">\n' +
+                    '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">共有情况</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input shareType">\n' +
+                    '      <select class="share">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '     </select>\n' +
                     '    </div>\n' +
-                    '</div>\n' +
+                    '  </div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">管理单位</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input manageUnit">\n' +
+                    '      <select class="co">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '     </select>\n' +
                     '    </div>\n' +
-                    '</div>\n' +
+                    '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">所在园区</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -165,12 +169,14 @@ layui.use(['table', 'form'], function () {
                     '      <input type="text" name="title" required  placeholder="请输入" autocomplete="off" class="layui-input hourseType">\n' +
                     '    </div>\n' +
                     '</div>\n' +
-                    '  <div class="dialogDiv">\n' +
+                    '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">计划用途</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required   placeholder="请输入" autocomplete="off" class="layui-input housePlanUse">\n' +
+                    '      <select class="usage ">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '     </select>\n' +
                     '    </div>\n' +
-                    '</div>\n' +
+                    '  </div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">总层数</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -301,7 +307,24 @@ layui.use(['table', 'form'], function () {
                             //请求出错处理
                         }
                     });
+
+                    /*调用弹窗方法*/
+                    layerOpen(openMes);
+                    layui.use('laydate', function () {
+                        var laydate = layui.laydate;
+                        //自定义验证规则
+                        //执行一个laydate实例
+                        laydate.render({
+                            elem: '#date'
+                        });
+                    });
+                    getgyqk()
+                    getytqk()
+                    getcqdw()
+                    form.render();
+
                 },
+
             }
 
             layerOpen(openMes);
@@ -366,7 +389,7 @@ layui.use(['table', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">登记时间</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required     class=" layui-input registerTime" readonly>\n' +
+                    '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
@@ -501,7 +524,7 @@ layui.use(['table', 'form'], function () {
                 '    <option value="">请选择</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
-                '  </div>\n' + 
+                '  </div>\n' +
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">管理单位</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -509,7 +532,7 @@ layui.use(['table', 'form'], function () {
                 '    <option value="">请选择</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
-                '  </div>\n' + 
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">所在园区</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -677,10 +700,9 @@ layui.use(['table', 'form'], function () {
                 elem: '#date'
             });
         });
+        getgyqk()
         getytqk()
         getcqdw()
-        getytqk()
-        getcqlx()
         form.render();
 
     })
