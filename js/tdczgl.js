@@ -193,6 +193,9 @@ layui.use(['table', 'laydate', 'form'], function () {
                 elem: '#date'
             });
         });
+        getcqdw()
+        getytqk()
+        getcqxz()
 
         form.render();
     })
