@@ -318,7 +318,7 @@ layui.use(['table', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋产权ID</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required   class=" layui-input houseId" readonly>\n'  +
+                    '      <input type="text" name="title" required   class=" layui-input houseId" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
@@ -472,9 +472,9 @@ layui.use(['table', 'form'], function () {
         * 传入标题和内容
         * 生成弹窗
         * */
-       
+
         var openMes = {
-            
+
             title: '房屋产证添加',
             leixing: '添加',
             maxmin: true,
@@ -494,26 +494,22 @@ layui.use(['table', 'form'], function () {
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fkOwnId">\n' +
                 '    </div>\n' +
                 '</div>\n' +
-                '  <div class="dialogDiv">\n' +
+                '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">共有情况</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input shareType">\n' +
+                '      <select class="share">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
                 '    </div>\n' +
-                '</div>\n' +
-                // '<div class="layui-form-item">\n' +
-                // '    <label class="layui-form-label">共有情况</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '        <select name="roleId" lay-verify="required" class ="shareType" id="add_role_name">\n' +
-                // '            <option value="">请选择共有情况</option>\n' +
-                // '        </select>\n' +
-                // '    </div>\n' +
-                // '</div>\n' +
+                '  </div>\n' + 
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">管理单位</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input manageUnit">\n' +
+                '      <select class="co">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
                 '    </div>\n' +
-                '</div>\n' +
+                '  </div>\n' + 
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">所在园区</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -541,7 +537,7 @@ layui.use(['table', 'form'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">登记时间</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入"  autocomplete="off" class="layui-input registerTime">\n' +
+                '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
@@ -550,12 +546,14 @@ layui.use(['table', 'form'], function () {
                 '      <input type="text" name="title" required  placeholder="请输入" autocomplete="off" class="layui-input hourseType">\n' +
                 '    </div>\n' +
                 '</div>\n' +
-                '  <div class="dialogDiv">\n' +
+                '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">计划用途</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required   placeholder="请输入" autocomplete="off" class="layui-input housePlanUse">\n' +
+                '      <select class="usage ">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
                 '    </div>\n' +
-                '</div>\n' +
+                '  </div>\n' +
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">总层数</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -607,21 +605,21 @@ layui.use(['table', 'form'], function () {
                 '</form></div>' +
                 '</div>' +
                 '</div>',
-                
-            add: function () {  
-                
+
+            add: function () {
+
                 var data = {
-                    "houseId":$(".houseId").val(),
+                    "houseId": $(".houseId").val(),
                     "fkOwnId": $(".fkOwnId").val(),
-                    "shareType": $(".shareType").val(),
-                    "manageUnit": $(".manageUnit").val(),
+                    "shareType": 0,
+                    "manageUnit": 0,
                     "parkId": $(".parkId").val(),
                     "houseNum": $(".houseNum").val(),
                     "houseLevel": $(".houseLevel").val(),
                     "houseRoom": $(".houseRoom").val(),
-                    // "registerTime":  $(".registerTime").val(),
+                    // "registerTime": sjc($("#date").val() + " 23:59:59"),
                     "hourseType": $('hourseType').val(),
-                    "housePlanUse": $(".housePlanUse").val(),
+                    "housePlanUse": 0,
                     "totalLevel": $(".totalLevel").val(),
                     "buildArea": $(".buildArea").val(),
                     "realArea": $(".realArea").val(),
@@ -668,9 +666,22 @@ layui.use(['table', 'form'], function () {
                 });
             },
         }
+
         /*调用弹窗方法*/
         layerOpen(openMes);
-        // getgyqk(add_role_name);
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //自定义验证规则
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#date'
+            });
+        });
+        getytqk()
+        getcqdw()
+        getytqk()
+        getcqlx()
+        form.render();
 
     })
 })
@@ -717,24 +728,3 @@ function getOneUser() {
     });
 }
 
-
-// function getgyqk(iD) {
-//     $.ajax({
-
-//         url: IPzd+"/dic/share?asc=1",
-//         type: "GET",
-//         dataType: "json",
-//         success: function (result) {
-//             var list = result.extend.roleList;    //返回的数据
-//             var role = document.getElementById(iD);        //add_role_name给select定义的id
-//             for (var i = 0; i < list.length; i++) {
-//                 var option = document.createElement("option");   // 创建添加option属性
-//                 option.setAttribute("value", list[i].roleId);    // 给option的value添加值
-//                 option.innerText = list[i].roleName;             // 打印option对应的纯文本 （超级管理员、管理员）
-//                 role.appendChild(option);                        // 给select 添加option子标签
-//             }
-
-//             form.render("select");                                // 刷性select，显示出数据
-//         }
-//     });
-// }
