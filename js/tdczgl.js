@@ -12,7 +12,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         elem: '#tableList'
         , toolbar: '#toolbarDemo'
         // , url: '../json/czgl.json' //数据接口
-        , url: IPzd + '/assets/land?asc=1' //数据接口
+        , url: IPzd + '/assets/land?asc=0' //数据接口
         , page: true //开启分页
         , cols: [[ //表头
             {field: 'fkOwnId', title: '土地使用权人', width: 260}
@@ -162,13 +162,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                         if (req.status == "200") {
                             layer.close(indexDig);
                             layer.msg("添加成功")
-                            var demoReload = $('#demoReload');
                             //执行重载
-                            table.reload('tableList', {
-                                page: {
-                                    curr: 1 //重新从第 1 页开始
-                                }
-                            });
+                            table.reload('tableList');
                         } else {
                             layer.msg("添加失败")
                         }

@@ -14,7 +14,7 @@ layui.use(['table', 'form'], function () {
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
-        , url: IPdz + '/user?asc=1' //数据接口
+        , url: IPdz + '/user?asc=0' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
@@ -59,13 +59,8 @@ layui.use(['table', 'form'], function () {
                         if (req.status == "200") {
                             layer.close(indexDig);
                             layer.msg("删除成功")
-                            var demoReload = $('#demoReload');
                             //执行重载
-                            table.reload('idTest', {
-                                page: {
-                                    curr: 1 //重新从第 1 页开始
-                                }
-                            });
+                            table.reload('idTest');
                         } else {
                             layer.msg("删除失败")
                         }
@@ -261,12 +256,6 @@ layui.use(['table', 'form'], function () {
             layerOpen(openMes);
         }
     });
-
-    var reload = table.reload({
-        page: {
-            curr: 1 //重新从第 1 页开始
-        }
-    }); //只重载数据
 
 
     /*添加点击事件*/
