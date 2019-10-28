@@ -34,7 +34,8 @@ function layerOpen(openMes) {
 
             layui.use('form', function () {
                 var form = layui.form;
-                form.render();
+                //自定义验证规则
+                form.render();2
                 form.render('select')
             });
         },
@@ -137,7 +138,38 @@ function getcqxz() {
             } else {
                 layer.msg("产权性质失败")
             }
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
 
+/*获取产权类型*/
+function getcqlx() {
+    $.ajax({
+        url: IPzd + '/dic/protype1',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".protype").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".protype")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".protype")
+                })
+            } else {
+                layer.msg("产权类型失败")
+            }
         },
         complete: function () {
             //请求完成的处理
@@ -216,6 +248,41 @@ function getgyqk() {
 }
 
 
+/*获取共有*/
+function getgyqk() {
+    $.ajax({
+        url: IPzd + '/dic/share1',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".share").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".share")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".share")
+                })
+
+            } else {
+                layer.msg("产权类型失败")
+            }
+
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+
+
 /*获取用途*/
 function getytqk() {
     $.ajax({
@@ -249,3 +316,35 @@ function getytqk() {
     });
 }
 
+/*获取用途*/
+function getytqk() {
+    $.ajax({
+        url: IPzd + '/dic/usage1',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".usage").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".usage")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".usage")
+                })
+            } else {
+                layer.msg("产权类型失败")
+            }
+
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
