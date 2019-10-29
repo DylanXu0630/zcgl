@@ -14,7 +14,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         elem: '#tableList'
         , toolbar: '#toolbarDemo'
         // , url: '../json/czgl.json' //数据接口
-        , url: IPzd + '/assets/land/all?asc=1' //数据接口
+        , url: IPzd + '/assets/land/all?asc=0' //数据接口
         , method: "POST"
         , contentType: "application/json"
         , where: {

@@ -365,7 +365,7 @@ function getzf(num){
 }
 
 function zDate(str) {
-    var str = '2015年08月11日';
+    var str = str;
     var year = str.split('')[0]+str.split('')[1]+str.split('')[2]+str.split('')[3];
     var month = str.split('')[5]+str.split('')[6];
     var day = str.split('')[08]+str.split('')[9];
