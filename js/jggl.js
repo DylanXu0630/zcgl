@@ -26,7 +26,7 @@ layui.use(['table', 'form'], function () {
         , page: true //开启分页
         , cols: [[ //表头
             { field: 'id', title: 'ID', width: 200 }
-            ,{ field: 'name', title: '产权类型'}
+            ,{ field: 'name', title: '管理机构名称'}
             , { fixed: 'right', title: '操作', toolbar: '#barDemo',width:200 }
         ]]
         
@@ -78,7 +78,7 @@ layui.use(['table', 'form'], function () {
         } else if (layEvent === 'edit') {
             /*编辑操作;*/
             var openMes = {
-                title: '编辑产权性质',
+                title: '编辑管理机构',
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -87,7 +87,7 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">账户名</label>\n' +
+                    '    <label class="layui-form-label">管理单位</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
