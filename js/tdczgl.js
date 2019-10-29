@@ -7,7 +7,7 @@ layui.use(['table', 'laydate', 'form'], function () {
     var table = layui.table
     var form = layui.form
     var laydate = layui.laydate;
-    getcqdw()
+    sgetcqdw()
     form.render();
     //第一个实例
     table.render({
@@ -18,9 +18,9 @@ layui.use(['table', 'laydate', 'form'], function () {
         , method: "POST"
         , contentType: "application/json"
         , where: {
-            "landNum": $(".dh").val(),
-            "location": $(".zl").val(),
-            "ownId": $(".co").val()
+            "landNum": "",
+            "location": "",
+            "ownId": ""
         }
         , page: true //开启分页
         , cols: [[ //表头
@@ -50,17 +50,36 @@ layui.use(['table', 'laydate', 'form'], function () {
         }
     });
 
-    
-    
+
     /*搜索*/
-    $("#sousuo").on("click",function () {
-        table.reload({
-            where: {
-                "landNum": $(".dh").val(),
-                "location": $(".zl").val(),
-                "ownId": $(".co").val()
-            }
+    $("#sousuo").on("click", function () {
+        form.on('submit(search)', function(data){
+            var ownId = $(".s-co").val()
+            var location = $(".s-zl").val()
+            var landNum = $(".s-dh").val()
+
+            var formData = data.field;
+            var name = formData.name,
+                url=formData.url,
+                icon=formData.icon,
+                parent_id=formData.parent_id;
+            //执行重载
+            table.reload('tableList', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                , where: {//这里传参  向后台
+                    "landNum": landNum,
+                    "location": location,
+                    "ownId": ownId
+                },
+                url: IPzd + '/assets/land/all?asc=0' //数据接口
+                , method: 'post'
+            });
+            return false;//false：阻止表单跳转  true：表单跳转
         });
+
+
     })
 
     /*添加点击事件*/
