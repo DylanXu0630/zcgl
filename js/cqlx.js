@@ -26,7 +26,7 @@ layui.use(['table', 'form'], function () {
         , page: true //开启分页
         , cols: [[ //表头
             { field: 'id', title: 'ID', width: 200 }
-            ,{ field: 'name', title: '产权性质'}
+            ,{ field: 'name', title: '产权类型'}
             , { fixed: 'right', title: '操作', toolbar: '#barDemo',width:200 }
         ]]
         
@@ -168,7 +168,7 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">产权性质:</label>\n' +
+                '    <label class="layui-form-label">产权类型:</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname ">\n' +
                 '    </div>\n' +
