@@ -6,23 +6,34 @@ layui.use('element', function () {
 layui.use(['table', 'laydate', 'form'], function () {
     var table = layui.table
     var form = layui.form
+    var laydate = layui.laydate;
+    getcqdw()
     form.render();
     //第一个实例
     table.render({
         elem: '#tableList'
         , toolbar: '#toolbarDemo'
         // , url: '../json/czgl.json' //数据接口
-        , url: IPzd + '/assets/land?asc=0' //数据接口
+        , url: IPzd + '/assets/land/all?asc=1' //数据接口
+        , method: "POST"
+        , contentType: "application/json"
+        , where: {
+            "landNum": $(".dh").val(),
+            "location": $(".zl").val(),
+            "ownId": $(".co").val()
+        }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'fkOwnId', title: '土地使用权人', width: 260}
+            {field: 'owner', title: '土地使用权人', width: 260}
             , {field: 'assetsLocation', title: '座落', width: 160}
             , {field: 'landNum', title: '地号', width: 160}
             , {field: 'picNum', title: '图号', width: 160}
             , {field: 'useType', title: '地类（用途）', width: 160}
             , {field: 'money', title: '取得价值', width: 160}
             , {field: 'useRight', title: '使用权类型', width: 160}
-            , {field: 'endTime', title: '终止日期', width: 160}
+            , {
+                field: 'endTime', title: '终止日期', width: 160
+            }
             , {field: 'assetsQueue', title: '使用权面积', width: 160}
             , {field: 'selfQueue', title: '独占面积', width: 160}
             , {field: 'shareQueue', title: '分摊面积', width: 160}
@@ -39,6 +50,18 @@ layui.use(['table', 'laydate', 'form'], function () {
         }
     });
 
+    
+    
+    /*搜索*/
+    $("#sousuo").on("click",function () {
+        table.reload({
+            where: {
+                "landNum": $(".dh").val(),
+                "location": $(".zl").val(),
+                "ownId": $(".co").val()
+            }
+        });
+    })
 
     /*添加点击事件*/
     $("body").on("click", ".layui-btn.layui-btn-sm", function () {
@@ -135,7 +158,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     "assetsLocation": $(".zl").val(),
                     "assetsQueue": $(".symj").val(),
                     "createdBy": 0,
-                    // "endTime": sjc($("#date").val() + " 23:59:59"),
+                    "endTime": sjc($("#date").val() + " 23:59:59"),
                     "fkOwnId": $(".co").val(),
                     "landNum": $(".dh").val(),
                     "money": $(".qdjz").val(),
@@ -185,7 +208,8 @@ layui.use(['table', 'laydate', 'form'], function () {
             //自定义验证规则
             //执行一个laydate实例
             laydate.render({
-                elem: '#date'
+                elem: '#date',
+                format: 'yyyy年MM月dd日'
             });
         });
         getcqdw()
@@ -332,7 +356,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getcqxz()
                     $(".zl").val(obj.data.assetsLocation),
                         $(".symj").val(obj.data.assetsQueue),
-                        // "endTime": sjc($("#date").val() + " 23:59:59"),
+                        $("#date").val(obj.data.endTime),
                         $(".co").val(obj.data.fkOwnId),
                         $(".dh").val(obj.data.landNum),
                         $(".qdjz").val(obj.data.money),
@@ -342,7 +366,11 @@ layui.use(['table', 'laydate', 'form'], function () {
                         $(".ftmj").val(obj.data.shareQueue),
                         $(".pronature").val(obj.data.useRight),
                         $(".usage").val(obj.data.useType)
-
+                    laydate.render({
+                        elem: '#date',
+                        value: obj.data.endTime,
+                        format: 'yyyy年MM月dd日'
+                    });
                 },
                 put: function () {
                     var data = {
@@ -350,7 +378,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                         "assetsLocation": $(".zl").val(),
                         "assetsQueue": $(".symj").val(),
                         "createdBy": 0,
-                        // "endTime": sjc($("#date").val() + " 23:59:59"),
+                        "endTime": sjc($("#date").val() + " 23:59:59"),
                         "fkOwnId": $(".co").val(),
                         "landNum": $(".dh").val(),
                         "money": $(".qdjz").val(),
@@ -398,16 +426,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     });
                 },
             }
-
             layerOpen(openMes);
-            layui.use('laydate', function () {
-                var laydate = layui.laydate;
-                //自定义验证规则
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#date'
-                });
-            });
+
         } else if (layEvent == 'detail') {
             /*查看操作*/
             var openMes = {
@@ -499,7 +519,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getytqk()
                     getcqxz()
                     $(".symj").val(obj.data.assetsQueue),
-                        // "endTime": sjc($("#date").val() + " 23:59:59"),
+                        $("#date").val(obj.data.endTime),
                         $(".co").val(obj.data.fkOwnId),
                         $(".dh").val(obj.data.landNum),
                         $(".qdjz").val(obj.data.money),

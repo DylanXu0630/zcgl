@@ -35,7 +35,7 @@ function layerOpen(openMes) {
             layui.use('form', function () {
                 var form = layui.form;
                 //自定义验证规则
-                form.render();2
+                form.render();
                 form.render('select')
             });
         },
@@ -74,11 +74,6 @@ function layerOpen(openMes) {
 }
 
 
-function sjc(str) {
-    var date = new Date(str);
-    var time = date.getTime() / 1000;
-    return time
-}
 
 
 /*获取产权单位*/
@@ -347,4 +342,40 @@ function getytqk() {
             //请求出错处理
         }
     });
+}
+
+
+function getMyDate(str){
+    var oDate = new Date(str),
+        oYear = oDate.getFullYear(),
+        oMonth = oDate.getMonth()+1,
+        oDay = oDate.getDate(),
+        oHour = oDate.getHours(),
+        oMin = oDate.getMinutes(),
+        oSen = oDate.getSeconds(),
+        oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+    return oTime;
+};
+
+function getzf(num){
+    if(parseInt(num) < 10){
+        num = '0'+num;
+    }
+    return num;
+}
+
+function zDate(str) {
+    var str = '2015年08月11日';
+    var year = str.split('')[0]+str.split('')[1]+str.split('')[2]+str.split('')[3];
+    var month = str.split('')[5]+str.split('')[6];
+    var day = str.split('')[08]+str.split('')[9];
+    var dateStr = year+"-"+month+"-"+day
+    return dateStr
+}
+
+function sjc(str) {
+    var str = zDate(str)
+    var date = new Date(str);
+    var time = date.getTime();
+    return time
 }

@@ -10,7 +10,9 @@
 <div class="pageDiv">
     <div class="title">
         <div class="site-title">
-            <fieldset><legend><a name="use"><h2>土地产证管理</h2></a></legend></fieldset>
+            <fieldset>
+                <legend><a name="use"><h2>土地产证管理</h2></a></legend>
+            </fieldset>
         </div>
     </div>
     <div class="layui-fluid tjsx">
@@ -22,30 +24,26 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">使用权人</label>
                             <div class="layui-input-block">
-                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                                <select class="co">
+                                    <option value="">请选择</option>
+                                </select>
                             </div>
                         </div>
-
                         <div class="layui-inline">
                             <label class="layui-form-label">地号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input dh">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">座落</label>
                             <div class="layui-input-block">
-                                <select name="ht" lay-verify="" lay-search>
-                                    <option value="" disabled selected hidden></option>
-                                    <option value="1">地址一</option>
-                                    <option value="2">地址二</option>
-                                    <option value="3">地址三</option>
-                                </select>
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input zl">
                             </div>
                         </div>
 
                         <div class="layui-inline">
-                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="LAY-user-front-search">
+                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="LAY-user-front-search" id="sousuo">
                                 <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                             </button>
                         </div>
@@ -72,7 +70,8 @@
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>z
+</script>
+z
 <script src="../public/js/jquery.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../public/js/public.js"></script>
