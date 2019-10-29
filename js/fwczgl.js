@@ -53,9 +53,7 @@ layui.use(['table', 'form'], function () {
     //监听行工具事件
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
         var data = obj.data //获得当前行数据
-
             , layEvent = obj.event; //获得 lay-event 对应的值
-
         if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
@@ -81,9 +79,7 @@ layui.use(['table', 'form'], function () {
                         } else {
                             layer.msg("删除失败")
                         }
-
                     },
-
                     complete: function () {
                         //请求完成的处理
                     },
@@ -93,7 +89,6 @@ layui.use(['table', 'form'], function () {
                 });
                 layer.close(index);
                 //向服务端发送删除指令
-
             });
         } else if (layEvent === 'edit') {
             /*编辑操作;*/
@@ -130,7 +125,6 @@ layui.use(['table', 'form'], function () {
                     '    <label class="layui-form-label">管理单位</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="co manageUnit">\n' +
-
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
@@ -235,8 +229,8 @@ layui.use(['table', 'form'], function () {
                     form.render('select');
                     $(".houseId").val(obj.data.houseId)
                     $(".owner").val(obj.data.owner)
-                    
-                    $(".manageUnit").val(obj.data.manageUnit)
+                    $(".shareType").val(obj.data.shareTypeId)
+                    $(".manageUnit").val(obj.data.manageUnitId)
                     $(".parkId").val(obj.data.parkId)
                     $(".houseNum").val(obj.data.houseNum)
                     $(".houseLevel").val(obj.data.houseLevel)
@@ -267,7 +261,7 @@ layui.use(['table', 'form'], function () {
                         "houseRoom": $(".houseRoom").val(),
                         // "registerTime":  $(".registerTime").val(),
                         "hourseType": $('hourseType').val(),
-                        "housePlanUse": $(".housePlanUse").val(),
+                        "housePlanUse": 0,
                         "totalLevel": $(".totalLevel").val(),
                         "buildArea": $(".buildArea").val(),
                         "realArea": $(".realArea").val(),
@@ -322,8 +316,6 @@ layui.use(['table', 'form'], function () {
                             elem: '#date'
                         });
                     });
-
-
                 },
 
             }
@@ -637,16 +629,15 @@ layui.use(['table', 'form'], function () {
                 var data = {
                     "houseId": $(".houseId").val(),
                     "fkOwnId": $(".owner").val(),
-                    // "shareType": $(".shareType").val(),
-                    // "manageUnit": $(".manageUnit").val(),
-                    "shareType":$('.shareType').attr('value'),
+                    "shareType": $(".shareType").val(),
+                    "manageUnit": $(".manageUnit").val(),
                     "parkId": $(".parkId").val(),
                     "houseNum": $(".houseNum").val(),
                     "houseLevel": $(".houseLevel").val(),
                     "houseRoom": $(".houseRoom").val(),
-                    "registerTime": sjc($("#date").val() + " 23:59:59"),
+                    // "registerTime": sjc($("#date").val() + " 23:59:59"),
                     "hourseType": $('hourseType').val(),
-                    "housePlanUse": $(".manageUnit").find("option:manageUnit").text(),
+                    "housePlanUse": 0,
                     "totalLevel": $(".totalLevel").val(),
                     "buildArea": $(".buildArea").val(),
                     "realArea": $(".realArea").val(),
@@ -752,8 +743,6 @@ function getOneUser() {
         }
     });
 }
-
-
 function getMyDate(str) {
     var oDate = new Date(str),
         oYear = oDate.getFullYear(),
