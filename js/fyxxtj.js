@@ -54,7 +54,6 @@ layui.use('table', function () {
         }
     });
 
-
     /*添加点击事件*/
     $("body").on("click", ".layui-btn.layui-btn-sm", function () {
         /*生成一个对象
@@ -63,17 +62,14 @@ layui.use('table', function () {
         * */
         var openMes = {
             title: '产权单位添加',
+            leixing: '添加',
+            maxmin: true,
+            btn: ['确定', '取消'],
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">房产名称</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
-                '    </div>\n' +
-                '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">管理单位</label>\n' +
+                '    <label class="layui-form-label">房产证号码</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
@@ -100,18 +96,24 @@ layui.use('table', function () {
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">房产证号码</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
-                '    </div>\n' +
-                '  </div>\n' + '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">房产所有人</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
-                '    </div>\n' +
-                '  </div>\n' +
-                '  </div>\n' + '  ' +
+                // '  <div class="dialogDiv">\n' +
+                // '    <label class="layui-form-label">房产名称</label>\n' +
+                // '    <div class="layui-input-block">\n' +
+                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                // '    </div>\n' +
+                // '  </div>\n' +
+                // '  <div class="dialogDiv">\n' +
+                // '    <label class="layui-form-label">管理单位</label>\n' +
+                // '    <div class="layui-input-block">\n' +
+                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                // '    </div>\n' +
+                // '  </div>\n' +
+                // '  <div class="dialogDiv">\n' +
+                // '    <label class="layui-form-label">房产所有人</label>\n' +
+                // '    <div class="layui-input-block">\n' +
+                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                // '    </div>\n' +
+                // '  </div>\n' +
                 '   <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">房屋有证面积</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -130,12 +132,12 @@ layui.use('table', function () {
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-                '   <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">土地所有权人</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
-                '    </div>\n' +
-                '  </div>\n' +
+                // '   <div class="dialogDiv">\n' +
+                // '    <label class="layui-form-label">土地所有权人</label>\n' +
+                // '    <div class="layui-input-block">\n' +
+                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                // '    </div>\n' +
+                // '  </div>\n' +
                 '   <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">土地有证面积</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -149,16 +151,11 @@ layui.use('table', function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">出租</label>\n' +
+                '    <label class="layui-form-label">状态</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
-                '  </div>\n' + '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">出售</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
-                '  </div>\n' +
                 '   <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">房屋有证面积</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -172,11 +169,6 @@ layui.use('table', function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">土地使用年限</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
-                '    </div>\n' +
-                '  </div>\n' + '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">附记</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
