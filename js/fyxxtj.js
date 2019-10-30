@@ -278,7 +278,7 @@ layui.use(['table', 'form'], function () {
         } else if (layEvent === 'edit') {
             /*编辑操作;*/
             var openMes = {
-                title: '编辑房屋产证',
+                title: '编辑房源',
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -412,14 +412,15 @@ layui.use(['table', 'form'], function () {
                     '</div>' +
                     '</div>',
                 look: function () {
+                    getfczh()
                     $(".lc").val(obj.data.buildLevel)
                     $(".lh").val(obj.data.buildNo)
                     $(".fh").val(obj.data.buildRoom)
-                    $(".houseZh").val(obj.data.fkHouseAssetsId)
+                    $(".houseZh").val(obj.data.assetsId)
                     $(".fj").val(obj.data.remark)
                     $(".cszt").val(obj.data.rentCode)
                     $(".fymj").val(obj.data.resourceArea)
-                    $(".fymc").val(obj.data.resourceName)
+                    $(".fymc").val(obj.data.assetsName)
                     $(".czzt").val(obj.data.sellCode)
                 },
                 put: function () {
@@ -489,7 +490,7 @@ layui.use(['table', 'form'], function () {
         } else if (layEvent == 'detail') {
             /*查看操作*/
             var openMes = {
-                title: '查看房屋产证',
+                title: '查看房源',
                 leixing: '查看',
                 maxmin: true,
                 id: obj.data.id,

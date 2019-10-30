@@ -6,7 +6,7 @@ var IPdz = "http://192.168.1.21:18000/uum"
 var IPzd = "http://192.168.1.21:14000/estate"
 var login = "http://192.168.1.21:16401/auth"
 var indexDig
-
+var user = 0
 layui.use('element', function () {
     var element = layui.element;
 });
