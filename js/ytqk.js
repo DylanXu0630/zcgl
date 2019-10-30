@@ -14,7 +14,7 @@ layui.use(['table', 'form'], function () {
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
-        , url: IPzd + '/dic/usage?asc=1' //数据接口
+        , url: IPzd + '/dic/house/usage?asc=1' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
@@ -37,7 +37,7 @@ layui.use(['table', 'form'], function () {
         if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
-                    url: IPzd + '/dic/usage/' + obj.data.id,    //请求的url地址
+                    url: IPzd + '/dic/house/usage/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -103,7 +103,7 @@ layui.use(['table', 'form'], function () {
                     }
 
                     $.ajax({
-                        url: IPzd + '/dic/usage',    //请求的url地址
+                        url: IPzd + '/dic/house/usage',    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -178,7 +178,7 @@ layui.use(['table', 'form'], function () {
 
                 if ($(".name").val().length > 0) {
                     $.ajax({
-                        url: IPzd + '/dic/usage',    //请求的url地址
+                        url: IPzd + '/dic/house/usage',    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -228,7 +228,7 @@ function getSex(sex) {
 
 function getOneUser() {
     $.ajax({
-        url: IPdz + '/user',    //请求的url地址
+        url: IPdz + '/dic/house/usage',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         data: JSON.stringify(data),    //参数值

@@ -14,7 +14,9 @@ layui.use(['table', 'form'], function () {
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
-        , url: IPzd + '/dic/co?asc=1' //数据接口
+        // http://192.168.1.21:14000/estate/dic/assetsco?asc=1&limit=11&page=1
+
+        , url: IPzd + '/dic/assetsco?asc=1' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
@@ -25,8 +27,7 @@ layui.use(['table', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            { field: 'id', title: 'ID', width: 200 }
-            , { field: 'name', title: '产权单位', width: 200 }
+            { field: 'name', title: '产权单位', width: 200 }
             , { field: 'shortname', title: '产权单位简称' }
             , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200 }
         ]]
@@ -39,7 +40,7 @@ layui.use(['table', 'form'], function () {
         if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
-                    url: IPzd + '/dic/co/' + obj.data.id,    //请求的url地址
+                    url: IPzd + '/dic/assetsco/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -79,7 +80,7 @@ layui.use(['table', 'form'], function () {
         } else if (layEvent === 'edit') {
             /*编辑操作;*/
             var openMes = {
-                title: '编辑系统用户',
+                title: '编辑产权单位',
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -114,7 +115,7 @@ layui.use(['table', 'form'], function () {
                     }
 
                     $.ajax({
-                        url: IPzd + '/dic/co',    //请求的url地址
+                        url: IPzd + '/dic/assetsco',    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -168,7 +169,7 @@ layui.use(['table', 'form'], function () {
         * 生成弹窗
         * */
         var openMes = {
-            title: '系统用户添加',
+            title: '产权单位添加',
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
@@ -198,7 +199,7 @@ layui.use(['table', 'form'], function () {
 
 
                 $.ajax({
-                    url: IPzd + '/dic/co',    //请求的url地址
+                    url: IPzd + '/dic/assetsco',    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     data: JSON.stringify(data),    //参数值
@@ -245,7 +246,7 @@ function getSex(sex) {
 
 function getOneUser() {
     $.ajax({
-        url: IPzd + '/dic/co',    //请求的url地址
+        url: IPzd + '/dic/assetsco',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         data: JSON.stringify(data),    //参数值

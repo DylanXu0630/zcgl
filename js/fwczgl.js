@@ -29,12 +29,13 @@ layui.use(['table', 'laydate', 'form'], function () {
         , cols: [[ //表头
             { field: 'id', title: 'ID', width: 160 }
             , { field: 'houseId', title: '房权证证号', width: 200 }
+            , { field: 'assetsName', title: '产权名称', width: 160 }
             , { field: 'manageUnit', title: '房屋所有权人', width: 260 }
             , { field: 'shareType', title: '共有情况', width: 160 }
             , { field: 'owner', title: '管理单位', width: 160 }
             , { field: 'parkId', title: '园区/楼宇', width: 160 }
             , { field: 'houseNum', title: '楼号', width: 160 }
-            , { field: 'registerTime', title: '登记时间', width: 200, templet: "<div>{{layui.util.toDateString(d.ordertime, 'yyyy.MM.dd HH:mm:ss')}}</div>" }
+            , { field: 'registerTime', title: '登记时间', width: 200     }
             , { field: 'hourseType', title: '房屋性质', width: 160 }
             , { field: 'housePlanUse', title: '房产规划用途', width: 160 }
             , { field: 'totalLevel', title: '房屋总层数', width: 160 }
@@ -47,7 +48,46 @@ layui.use(['table', 'laydate', 'form'], function () {
             , { field: 'remark', title: '附记', width: 160 }
             , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 220 }
         ]]
+        , parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
+            return {
+                "code": 0, //解析接口状态
+                "msg": res.msg, //解析提示文本
+                "count": res.data.total, //解析数据长度
+                "data": res.data.records //解析数据列表
+            };
+        }
     });
+
+    /*搜索*/
+    $("#sousuo").on("click", function () {
+        form.on('submit(search)', function (data) {
+            var ownId = $(".s-co").val()
+            var location = $(".s-zl").val()
+            var landNum = $(".s-dh").val()
+            var formData = data.field;
+            var name = formData.name,
+                url = formData.url,
+                icon = formData.icon,
+                parent_id = formData.parent_id;
+            //执行重载
+            table.reload('tableList', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                , where: {//这里传参  向后台
+                    "landNum": landNum,
+                    "location": location,
+                    "ownId": ownId
+                },
+                url: IPzd + '/assets/land/all?asc=0' //数据接口
+                , method: 'post'
+            });
+            return false;//false：阻止表单跳转  true：表单跳转
+        });
+
+
+    })
+
 
     //监听行工具事件
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
@@ -107,6 +147,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">产权名称</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input assetsName">\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
+                    '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋所有人</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input owner">\n' +
@@ -152,7 +198,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房产规划用途</label>\n' +
+                    '    <label class="layui-form-label" style="width:84px;padding-left:11px">房产规划用途</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="usage ">\n' +
                     '     </select>\n' +
@@ -189,17 +235,18 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地获得方式</label>\n' +
+                    '    <label class="layui-form-label" style="width:84px;padding-left:11px">土地获得方式</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landGetMethod">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地使用年限</label>\n' +
+                    '    <label class="layui-form-label" style="width:84px;padding-left:11px">土地使用年限</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landUseYear">\n' +
                     '    </div>\n' +
                     '</div>\n' +
+                   
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">备注</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -214,6 +261,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getytqk()
                     getcqdw()
                     $(".houseId").val(obj.data.houseId)
+                    $(".assetsName").val(obj.data.assetsName)
                     $(".owner").val(obj.data.owner)
                     $(".shareType").val(obj.data.shareTypeId)
                     $(".manageUnit").val(obj.data.manageUnitId)
@@ -241,6 +289,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     var data = {
                         "id": obj.data.id,
                         "houseId": $(".houseId").val(),
+                        "assetsName":$(".assetsName").val(),
                         "owner": $(".owner").val(),
                         "shareType": $(".shareType").val(),
                         "manageUnit": $(".manageUnit").val(),
@@ -308,7 +357,7 @@ layui.use(['table', 'laydate', 'form'], function () {
 
             }
 
-                layerOpen(openMes);
+            layerOpen(openMes);
         } else if (layEvent == 'detail') {
             /*查看操作*/
             var openMes = {
@@ -323,6 +372,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    <label class="layui-form-label">房权证证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required   class=" layui-input houseId" readonly>\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">产权名称</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input assetsName">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
@@ -368,7 +423,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房产规划用途</label>\n' +
+                    '    <label class="layui-form-label" style="width:84px;padding-left:11px">房产规划用途</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required    class=" layui-input housePlanUse"  readonly >\n' +
                     '    </div>\n' +
@@ -404,13 +459,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地获得方式</label>\n' +
+                    '    <label class="layui-form-label" style="width:84px;padding-left:11px">土地获得方式</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required    class=" layui-input landGetMethod" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地使用年限</label>\n' +
+                    '    <label class="layui-form-label" style="width:84px;padding-left:11px">土地使用年限</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required    class=" layui-input landUseYear" readonly>\n' +
                     '    </div>\n' +
@@ -426,12 +481,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '</div>',
                 look: function () {
                     $(".houseId").val(obj.data.houseId)
+                    $(".assetsName").val(obj.data.assetsName)
                     $(".owner").val(obj.data.owner)
                     $(".shareType").val(obj.data.shareType)
                     $(".manageUnit").val(obj.data.manageUnit)
                     $(".parkId").val(obj.data.parkId)
                     $(".houseNum").val(obj.data.houseNum)
-                    $(".registerTime").val(getMyDate(obj.data.registerTime))
+                    $(".registerTime").val(obj.data.registerTime)
                     $(".hourseType").val(obj.data.hourseType)
                     $(".housePlanUse").val(obj.data.housePlanUse)
                     $(".totalLevel").val(obj.data.totalLevel)
@@ -444,7 +500,6 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".remark").val(obj.data.remark)
                 }
             }
-
             layerOpen(openMes);
         }
     });
@@ -478,7 +533,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入"  autocomplete="off" class="layui-input houseId">\n' +
                 '    </div>\n' +
                 '</div>\n' +
-
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">产权名称</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input assetsName">\n' +
+                '    </div>\n' +
+                '</div>\n' +    
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">房屋所有人</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -487,7 +547,6 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">共有情况</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -496,12 +555,15 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
+
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">管理单位</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input owner">\n' +
+                '      <select class="share  gldw">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
                 '    </div>\n' +
-                '</div>\n' +
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">所在园区</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -520,14 +582,18 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
                 '</div>\n' +
+
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">房屋性质</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  placeholder="请输入" autocomplete="off" class="layui-input hourseType">\n' +
+                '      <select class="share  pronature">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
                 '    </div>\n' +
-                '</div>\n' +
+                '  </div>\n' +
+
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">房产规划用途</label>\n' +
+                '    <label class="layui-form-label" style="width:84px;padding-left:11px">房产规划用途</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="usage housePlanUse">\n' +
                 '    <option value="">请选择</option>\n' +
@@ -540,7 +606,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input totalLevel">\n' +
                 '    </div>\n' +
                 '</div>\n' +
-                '  <div class="dialogDiv">\n' +
+                ' <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">建筑面积</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input buildArea">\n' +
@@ -565,16 +631,17 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '</div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">土地获得方式</label>\n' +
+                '    <label class="layui-form-label" style="width:84px;padding-left:11px">土地获得方式</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landGetMethod">\n' +
                 '    </div>\n' +
                 '</div>\n' +
+
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">土地使用年限</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landUseYear">\n' +
-                '    </div>\n' +
+                '   <label class="layui-form-label " style="width:84px;padding-left:11px">土地使用年限</label>\n' +
+                '   <div class="layui-input-block">\n' +
+                '       <input type="text"  name="date" class="layui-input" autocomplete="off" id="test6" placeholder=" - ">\n' +
+                '   </div>\n' +
                 '</div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">备注</label>\n' +
@@ -582,6 +649,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '      <input type="text" name="title" required    placeholder="请输入"  autocomplete="off" class="layui-input remark">\n' +
                 '    </div>\n' +
                 '</div>\n' +
+
                 '</form></div>' +
                 '</div>' +
                 '</div>',
@@ -590,6 +658,7 @@ layui.use(['table', 'laydate', 'form'], function () {
 
                 var data = {
                     "houseId": $(".houseId").val(),
+                    "assetsName":$(".assetsName").val(),
                     "fkOwnId": $(".owner").val(),
                     "shareType": $(".shareType").val(),
                     "manageUnit": $(".manageUnit").val(),
@@ -651,12 +720,20 @@ layui.use(['table', 'laydate', 'form'], function () {
             //自定义验证规则
             //执行一个laydate实例
             laydate.render({
-                elem: '#date'
+                elem: '#date',
             });
+            laydate.render({
+                elem:'#test6',
+                range: true 
+
+            })
         });
+        
         getgyqk()
         getytqk()
         getcqdw()
+        getgldw()
+        getcqxz()
         form.render();
 
     })
@@ -698,22 +775,4 @@ function getOneUser() {
             //请求出错处理
         }
     });
-}
-function getMyDate(str) {
-    var oDate = new Date(str),
-        oYear = oDate.getFullYear(),
-        oMonth = oDate.getMonth() + 1,
-        oDay = oDate.getDate(),
-        oHour = oDate.getHours(),
-        oMin = oDate.getMinutes(),
-        oSen = oDate.getSeconds(),
-        oTime = oYear + '-' + getzf(oMonth) + '-' + getzf(oDay) + ' ' + getzf(oHour) + ':' + getzf(oMin) + ':' + getzf(oSen);//最后拼接时间
-    return oTime;
-};
-
-function getzf(num) {
-    if (parseInt(num) < 10) {
-        num = '0' + num;
-    }
-    return num;
 }
