@@ -90,7 +90,7 @@ layui.use(['table', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">合同状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input name">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="合同状态是必填项" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -161,7 +161,7 @@ layui.use(['table', 'form'], function () {
         * 生成弹窗
         * */
         var openMes = {
-            title: '合同状态',
+            title: '添加合同状态',
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
@@ -171,7 +171,7 @@ layui.use(['table', 'form'], function () {
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">合同状态</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname ">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="合同状态是必填项" autocomplete="off" class="layui-input nickname ">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +

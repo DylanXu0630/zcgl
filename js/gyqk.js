@@ -14,7 +14,7 @@ layui.use(['table', 'form'], function () {
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
-        , url: IPzd + '/dic/share?asc=1' //数据接口
+        , url: IPzd + '/dic/house/share?asc=1' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
@@ -25,7 +25,7 @@ layui.use(['table', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'name', title: '名称'}
+            {field: 'name', title: '共有情况名称'}
             , {title: '操作', toolbar: '#barDemo', width: 200}
         ]]
     });
@@ -37,7 +37,7 @@ layui.use(['table', 'form'], function () {
         if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
-                    url: IPzd + '/dic/share/' + obj.data.id,    //请求的url地址
+                    url: IPzd + '/dic/house/share/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -84,9 +84,9 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">名称</label>\n' +
+                    '    <label class="layui-form-label">共有情况</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input name">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" required="共有情况是必填项"  autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -103,7 +103,7 @@ layui.use(['table', 'form'], function () {
                     }
 
                     $.ajax({
-                        url: IPzd + '/dic/share',    //请求的url地址
+                        url: IPzd + '/dic/house/share',    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -162,9 +162,9 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">名称</label>\n' +
+                '    <label class="layui-form-label">共有情况</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" lay-verify="title" placeholder="这是必填项，请输入" required="用户名是必填项" class="layui-input name">\n' +
+                '      <input type="text" name="title" lay-verify="title" placeholder="这是必填项，请输入" required="共有情况是必填项" class="layui-input name">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
@@ -178,7 +178,7 @@ layui.use(['table', 'form'], function () {
 
                 if ($(".name").val().length > 0) {
                     $.ajax({
-                        url: IPzd + '/dic/share',    //请求的url地址
+                        url: IPzd + '/dic/house/share',    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -228,7 +228,7 @@ function getSex(sex) {
 
 function getOneUser() {
     $.ajax({
-        url: IPdz + '/user',    //请求的url地址
+        url: IPdz + '/dic/house/share',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         data: JSON.stringify(data),    //参数值
