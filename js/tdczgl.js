@@ -24,7 +24,8 @@ layui.use(['table', 'laydate', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'owner', title: '土地使用权人', width: 260}
+            {field: 'assetsName', title: '土地产权名称', width: 260}
+            , {field: 'owner', title: '土地使用权人', width: 260}
             , {field: 'assetsLocation', title: '座落', width: 160}
             , {field: 'landNum', title: '地号', width: 160}
             , {field: 'picNum', title: '图号', width: 160}
@@ -35,7 +36,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 field: 'endTime', title: '终止日期', width: 160
             }
             , {field: 'assetsQueue', title: '使用权面积', width: 160}
-            , {field: 'selfQueue', title: '独占面积', width: 160}
+            , {field: 'selfQueue', title: '独用面积', width: 160}
             , {field: 'shareQueue', title: '分摊面积', width: 160}
             , {field: 'remark', title: '备注', width: 160}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
@@ -53,16 +54,16 @@ layui.use(['table', 'laydate', 'form'], function () {
 
     /*搜索*/
     $("#sousuo").on("click", function () {
-        form.on('submit(search)', function(data){
+        form.on('submit(search)', function (data) {
             var ownId = $(".s-co").val()
             var location = $(".s-zl").val()
             var landNum = $(".s-dh").val()
 
             var formData = data.field;
             var name = formData.name,
-                url=formData.url,
-                icon=formData.icon,
-                parent_id=formData.parent_id;
+                url = formData.url,
+                icon = formData.icon,
+                parent_id = formData.parent_id;
             //执行重载
             table.reload('tableList', {
                 page: {
@@ -96,6 +97,12 @@ layui.use(['table', 'laydate', 'form'], function () {
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">土地产权名称</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input cqmz">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">土地权利人</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -174,6 +181,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '</div>',
             add: function () {
                 var data = {
+                    "assetsName": $(".cqmz").val(),
                     "assetsLocation": $(".zl").val(),
                     "assetsQueue": $(".symj").val(),
                     "createdBy": 0,
@@ -294,6 +302,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">土地产权名称</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input cqmz">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地权利人</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="co">\n' +
@@ -373,7 +387,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getcqdw()
                     getytqk()
                     getcqxz()
-                    $(".zl").val(obj.data.assetsLocation),
+                    $(".cqmz").val(obj.data.assetsName),
+                        $(".zl").val(obj.data.assetsLocation),
                         $(".symj").val(obj.data.assetsQueue),
                         $("#date").val(obj.data.endTime),
                         $(".co").val(obj.data.fkOwnId),
@@ -394,6 +409,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 put: function () {
                     var data = {
                         "id": obj.data.id,
+                        "assetsName": $(".cqmz").val(),
                         "assetsLocation": $(".zl").val(),
                         "assetsQueue": $(".symj").val(),
                         "createdBy": 0,
@@ -457,6 +473,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">土地产权名称</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input cqmz" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地权利人</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -537,7 +559,9 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getcqdw()
                     getytqk()
                     getcqxz()
-                    $(".symj").val(obj.data.assetsQueue),
+                    $(".cqmz").val(obj.data.assetsName),
+                        $(".symj").val(obj.data.assetsQueue),
+                        $(".zl").val(obj.data.assetsLocation),
                         $("#date").val(obj.data.endTime),
                         $(".co").val(obj.data.fkOwnId),
                         $(".dh").val(obj.data.landNum),
