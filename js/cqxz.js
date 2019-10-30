@@ -13,7 +13,8 @@ layui.use(['table', 'form'], function () {
         elem: '#tableList'
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
-        , url: IPzd+'/dic/pronature?asc=1'//数据接口
+
+        , url: IPzd+'/dic/house/nature?asc=1'//数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
@@ -24,8 +25,7 @@ layui.use(['table', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            { field: 'id', title: 'ID', width: 200 }
-            , {field: 'name', title: '产权性质'}
+             {field: 'name', title: '产权性质'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
     });
@@ -37,7 +37,7 @@ layui.use(['table', 'form'], function () {
         if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
-                    url: IPzd+'/dic/pronature/'+ obj.data.id, //数据接口
+                    url: IPzd+'/dic/house/nature/'+ obj.data.id, //数据接口
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -84,9 +84,9 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">账户名</label>\n' +
+                    '    <label class="layui-form-label">产权性质</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input name">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="产权性质是必填项" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -103,7 +103,7 @@ layui.use(['table', 'form'], function () {
                     }
 
                     $.ajax({
-                        url: IPzd+'/dic/pronature', //数据接口
+                        url: IPzd+'/dic/house/nature', //数据接口
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -157,7 +157,7 @@ layui.use(['table', 'form'], function () {
         * 生成弹窗
         * */
         var openMes = {
-            title: '产权性质添加',
+            title: '添加产权性质',
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
@@ -165,9 +165,9 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">产权性质:</label>\n' +
+                '    <label class="layui-form-label">产权性质</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname ">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="产权性质是必填项" autocomplete="off" class="layui-input nickname ">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
@@ -179,7 +179,7 @@ layui.use(['table', 'form'], function () {
                 }
 
                 $.ajax({
-                    url: IPzd+'/dic/pronature', //数据接口
+                    url: IPzd+'/dic/house/nature', //数据接口
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     data: JSON.stringify(data),    //参数值
@@ -226,7 +226,7 @@ function getSex(sex) {
 
 function getOneUser() {
     $.ajax({
-        url: IPzd+'/dic/pronature', //数据接口
+        url: IPzd+'/dic/house/nature', //数据接口
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         data: JSON.stringify(data),    //参数值

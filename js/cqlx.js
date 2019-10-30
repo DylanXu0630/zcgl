@@ -89,9 +89,9 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地使用类型名称</label>\n' +
+                    '    <label class="layui-form-label"style="width:84px;padding-left:11px">土地使用类型</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input name">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="土地使用类型是必填项" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -170,9 +170,9 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">土地使用类型名称</label>\n' +
+                '    <label class="layui-form-label" style="width:84px;padding-left:11px">土地使用类型</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname ">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="土地使用类型是必填项"autocomplete="off" class="layui-input nickname ">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +

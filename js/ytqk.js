@@ -14,6 +14,7 @@ layui.use(['table', 'form'], function () {
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
+
         , url: IPzd + '/dic/house/usage?asc=1' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
@@ -84,9 +85,9 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">名称</label>\n' +
+                    '    <label class="layui-form-label">用途情况</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input name">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="用途情况是必填项"autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -162,9 +163,9 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">名称</label>\n' +
+                '    <label class="layui-form-label">用途情况</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" lay-verify="title" placeholder="这是必填项，请输入" required="用户名是必填项" class="layui-input name">\n' +
+                '      <input type="text" name="title" lay-verify="title" placeholder="这是必填项，请输入" required="用途情况是必填项" class="layui-input name">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +

@@ -14,6 +14,7 @@ layui.use(['table', 'form'], function () {
         elem: '#tableList'
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
+
         , url: IPzd+'/dic/agency?asc=1'//数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
@@ -77,7 +78,7 @@ layui.use(['table', 'form'], function () {
         } else if (layEvent === 'edit') {
             /*编辑操作;*/
             var openMes = {
-                title: '编辑机构名称',
+                title: '编辑机构',
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -88,7 +89,7 @@ layui.use(['table', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">机构名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input name">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="机构名称是必填项"  autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -159,7 +160,7 @@ layui.use(['table', 'form'], function () {
         * 生成弹窗
         * */
         var openMes = {
-            title: '机构添加',
+            title: '添加机构',
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
@@ -169,7 +170,7 @@ layui.use(['table', 'form'], function () {
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">机构名称</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname ">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="机构名称是必填项" autocomplete="off" class="layui-input nickname ">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
