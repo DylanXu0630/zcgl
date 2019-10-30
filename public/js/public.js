@@ -79,7 +79,7 @@ function layerOpen(openMes) {
 /*获取产权单位*/
 function getcqdw() {
     $.ajax({
-        url: IPzd + '/dic/co1',    //请求的url地址
+        url: IPzd + '/dic/assetsco/co1',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -114,7 +114,7 @@ function getcqdw() {
 /*获条件筛选取产权单位*/
 function sgetcqdw() {
     $.ajax({
-        url: IPzd + '/dic/co1',    //请求的url地址
+        url: IPzd + '/dic/assetsco/co1',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -146,10 +146,10 @@ function sgetcqdw() {
 }
 
 
-/*获取产权性质*/
-function getcqxz() {
+/*获取合同状态*/
+function gethtzt() {
     $.ajax({
-        url: IPzd + '/dic/pronature1',    //请求的url地址
+        url: IPzd + '/dic/deal/status/all',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -159,78 +159,15 @@ function getcqxz() {
             //请求前的处理
         },
         success: function (req) {
-            $(".pronature").children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo(".pronature")
+            $(".htzt").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".htzt")
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".pronature")
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".htzt")
                 })
-            } else {
-                layer.msg("产权性质失败")
-            }
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
-}
 
-/*获取产权类型*/
-function getcqlx() {
-    $.ajax({
-        url: IPzd + '/dic/protype1',    //请求的url地址
-        dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-        type: "GET",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            $(".protype").children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo(".protype")
-            if (req.status == "200") {
-                $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".protype")
-                })
             } else {
-                layer.msg("产权类型失败")
-            }
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
-}
-
-/*获取产权类型*/
-function getcqlx() {
-    $.ajax({
-        url: IPzd + '/dic/protype1',    //请求的url地址
-        dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-        type: "GET",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            $(".protype").children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo(".protype")
-            if (req.status == "200") {
-                $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".protype")
-                })
-            } else {
-                layer.msg("产权类型失败")
+                layer.msg("产权单位获取失败")
             }
 
         },
@@ -242,11 +179,10 @@ function getcqlx() {
         }
     });
 }
-
-/*获取共有*/
-function getgyqk() {
+/*获条件筛选取合同状态*/
+function sgethtzt() {
     $.ajax({
-        url: IPzd + '/dic/share1',    //请求的url地址
+        url: IPzd + '/dic/deal/status/all',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -256,15 +192,15 @@ function getgyqk() {
             //请求前的处理
         },
         success: function (req) {
-            $(".share").children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo(".share")
+            $(".s-htzt").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".s-htzt")
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".share")
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".s-htzt")
                 })
 
             } else {
-                layer.msg("产权类型失败")
+                layer.msg("产权单位获取失败")
             }
 
         },
@@ -278,10 +214,13 @@ function getgyqk() {
 }
 
 
-/*获取共有*/
-function getgyqk() {
+
+
+/*获取土地使用类型*/
+function gettdsylx() {
     $.ajax({
-        url: IPzd + '/dic/share1',    //请求的url地址
+
+        url: IPzd + '/dic/land/nature/all',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -291,15 +230,48 @@ function getgyqk() {
             //请求前的处理
         },
         success: function (req) {
-            $(".share").children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo(".share")
+            $(".tdsylx").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".tdsylx")
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".share")
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".tdsylx")
                 })
 
             } else {
-                layer.msg("产权类型失败")
+                layer.msg("产权单位获取失败")
+            }
+
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+/*获条件筛选取土地使用类型*/
+function sgettdsylx() {
+    $.ajax({
+        url: IPzd + '/dic/land/nature/all',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".s-tdsylx").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".s-tdsylx")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".s-tdsylx")
+                })
+
+            } else {
+                layer.msg("产权单位获取失败")
             }
 
         },
@@ -313,10 +285,12 @@ function getgyqk() {
 }
 
 
-/*获取用途*/
-function getytqk() {
+
+/*获取土地用途（地类）*/
+function gettdyt() {
     $.ajax({
-        url: IPzd + '/dic/usage1',    //请求的url地址
+
+        url: IPzd + '/dic/land/usage/all',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -326,14 +300,15 @@ function getytqk() {
             //请求前的处理
         },
         success: function (req) {
-            $(".usage").children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo(".usage")
+            $(".tdyt").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".tdyt")
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".usage")
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".tdyt")
                 })
+
             } else {
-                layer.msg("产权类型失败")
+                layer.msg("产权单位获取失败")
             }
 
         },
@@ -345,10 +320,10 @@ function getytqk() {
         }
     });
 }
-/*获取用途*/
-function getytqk() {
+/*获条件筛选取土地用途（地类）*/
+function sgettdyt() {
     $.ajax({
-        url: IPzd + '/dic/usage1',    //请求的url地址
+        url: IPzd + '/dic/land/usage/all',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -358,14 +333,15 @@ function getytqk() {
             //请求前的处理
         },
         success: function (req) {
-            $(".usage").children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo(".usage")
+            $(".s-tdyt").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".s-tdyt")
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".usage")
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".s-tdyt")
                 })
+
             } else {
-                layer.msg("产权类型失败")
+                layer.msg("产权单位获取失败")
             }
 
         },
@@ -377,12 +353,210 @@ function getytqk() {
         }
     });
 }
+
+/*获取房产性质*/
+function getfcxz() {
+    $.ajax({
+        url: IPzd + '/dic/house/nature/all',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".fcxz").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".fcxz")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".fcxz")
+                })
+            } else {
+                layer.msg("房产性质获取失败")
+            }
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+/*获取条件筛选取房产性质*/
+function sgetfcxz() {
+    $.ajax({
+        url: IPzd + '/dic/house/nature/all',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".s-fcxz").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".s-fcxz")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".s-fcxz")
+                })
+
+            } else {
+                layer.msg("房产性质获取失败")
+            }
+
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+
+/*获取房屋共有情况*/
+function getfwgyqk() {
+    $.ajax({
+        url: IPzd + '/dic/house/share/all',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".fwgyqk").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".fwgyqk")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".fwgyqk")
+                })
+            } else {
+                layer.msg("房屋共有情况获取失败")
+            }
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+/*获条件筛选取房屋共有情况*/
+function sgetfwgyqk() {
+    $.ajax({
+        url: IPzd + '/dic/house/share/all',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".s-fwgyqk").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".s-fwgyqk")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".s-fwgyqk")
+                })
+
+            } else {
+                layer.msg("房屋共有情况获取失败")
+            }
+
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+
+
+
+/*获取房屋规划用途*/
+function getfwghyt() {
+    $.ajax({
+        url: IPzd + '/dic/house/usage/all',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".fwghyt").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".fwghyt")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".fwghyt")
+                })
+            } else {
+                layer.msg("房屋规划用途获取失败")
+            }
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+/*获条件筛选取房屋规划用途*/
+function sgetfwghyt() {
+    $.ajax({
+        url: IPzd + '/dic/house/usage/all',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".s-fwghyt").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".s-fwghyt")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".s-fwghyt")
+                })
+
+            } else {
+                layer.msg("房屋规划用途获取失败")
+            }
+
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+
 
 
 /*获取管理单位*/
 function getgldw() {
     $.ajax({
-        url: IPzd + '/dic/agency1',    //请求的url地址
+        url: IPzd + '/dic/agency/all',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -399,7 +573,39 @@ function getgldw() {
                     var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".gldw")
                 })
             } else {
-                layer.msg("产权类型失败")
+                layer.msg("管理单位获取失败")
+            }
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+/*获条件筛选取管理单位*/
+function sgetgldw() {
+    $.ajax({
+        url: IPzd + '/dic/agency/all',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".s-gldwd").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".s-gldw")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".s-gldw")
+                })
+
+            } else {
+                layer.msg("管理单位获取失败")
             }
 
         },
@@ -412,6 +618,39 @@ function getgldw() {
     });
 }
 
+/*获取土地证号*/
+function getfkLandAssetsId() {
+    $.ajax({
+
+
+        url: IPzd + '/assets/land/simple',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".fkLandAssetsId").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".fkLandAssetsId")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.assetsName + "</option>").appendTo(".fkLandAssetsId")
+                })
+            } else {
+                layer.msg("管理单位获取失败")
+            }
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
 function getMyDate(str){
     var oDate = new Date(str),
         oYear = oDate.getFullYear(),
