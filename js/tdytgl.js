@@ -14,9 +14,7 @@ layui.use(['table', 'form'], function () {
         elem: '#tableList'
         , id: 'idTest'
         , toolbar: '#toolbarDemo'
-        // http://192.168.1.21:14000/estate/dic/land/nature?asc=1&limit=11&page=1
-
-        , url: IPzd+'/dic/land/nature?asc=1'//数据接口
+        , url: IPzd+'/dic/usage?asc=1'//数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
@@ -41,8 +39,7 @@ layui.use(['table', 'form'], function () {
         if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
-                    
-                    url: IPzd+'/dic/land/nature/' + obj.data.id, //数据接口
+                    url: IPzd+'/dic/usage/' + obj.data.id, //数据接口
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -108,7 +105,7 @@ layui.use(['table', 'form'], function () {
                     }
 
                     $.ajax({
-                        url: IPzd+'/dic/land/nature', //数据接口
+                        url: IPzd+'/dic/usage', //数据接口
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
@@ -184,7 +181,7 @@ layui.use(['table', 'form'], function () {
                 }
 
                 $.ajax({
-                    url: IPzd+'/dic/land/nature', //数据接口
+                    url: IPzd+'/dic/usage', //数据接口
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     data: JSON.stringify(data),    //参数值
@@ -227,7 +224,7 @@ layui.use(['table', 'form'], function () {
 
 function getOneUser() {
     $.ajax({
-        url: IPzd+'/dic/land/nature', //数据接口
+        url: IPzd+'/dic/usage', //数据接口
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         data: JSON.stringify(data),    //参数值
