@@ -34,103 +34,71 @@
                 <div class="layui-form-item">
                     <form class="layui-form" action="">
                         <div class="layui-inline">
-                            <label class="layui-form-label">房产名称</label>
+                            <label class="layui-form-label">房产</label>
                             <div class="layui-input-block">
-                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">管理单位</label>
-                            <div class="layui-input-block">
-                                <select name="ht" lay-verify="" lay-search>
-                                    <option value="" disabled selected hidden></option>
-                                    <option value="1">单位一</option>
-                                    <option value="2">单位二</option>
-                                    <option value="3">单位三</option>
+                                <select name="ht" lay-verify="" lay-search class="s-fc">
+                                    <option value="">请选择</option>
                                 </select>
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">园区/楼宇</label>
                             <div class="layui-input-block">
-                                <select name="ht" lay-verify="" lay-search>
+                                <select name="ht" lay-verify="" lay-search class="s-ly">
                                     <option value="" disabled selected hidden></option>
-                                    <option value="1">楼宇一</option>
-                                    <option value="2">楼宇二</option>
-                                    <option value="3">楼宇三</option>
                                 </select>
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">楼号</label>
                             <div class="layui-input-block">
-                                <select name="ht" lay-verify="" lay-search>
-                                    <option value="" disabled selected hidden></option>
-                                    <option value="1">一楼</option>
-                                    <option value="2">二楼</option>
-                                    <option value="3">三楼</option>
-                                </select>
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input s-lh">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">楼层</label>
                             <div class="layui-input-block">
-                                <select name="ht" lay-verify="" lay-search>
-                                    <option value="" disabled selected hidden></option>
-                                    <option value="1">一层</option>
-                                    <option value="2">二层</option>
-                                    <option value="3">三层</option>
-                                </select>
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input s-lc">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">房号</label>
                             <div class="layui-input-block">
-                                <select name="ht" lay-verify="" lay-search>
-                                    <option value="" disabled selected hidden></option>
-                                    <option value="1">101</option>
-                                    <option value="2">102</option>
-                                    <option value="3">103</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="layui-inline">
-                            <label class="layui-form-label">资产来源</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input s-fh">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">房产证号码</label>
+                            <label class="layui-form-label">是否出租</label>
                             <div class="layui-input-block">
-                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">土地证号码</label>
-                            <div class="layui-input-block">
-                                <select name="ht" lay-verify="" lay-search>
-                                    <option value="" disabled selected hidden></option>
-                                    <option value="1">111111111</option>
-                                    <option value="2">2222222</option>
-                                    <option value="3">三3333333层</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">是否闲置</label>
-                            <div class="layui-input-block">
-                                <select name="ht" lay-verify="" lay-search>
-                                    <option value="" disabled selected hidden></option>
+                                <select name="ht" lay-verify="" lay-search class="isCz">
+                                    <option value="">请选择</option>
                                     <option value="1">是</option>
-                                    <option value="2">否</option>
+                                    <option value="0">否</option>
                                 </select>
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="LAY-user-front-search">
+                            <label class="layui-form-label">是否出售</label>
+                            <div class="layui-input-block">
+                                <select name="ht" lay-verify="" lay-search class="isCs">
+                                    <option value="">请选择</option>
+                                    <option value="1">是</option>
+                                    <option value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">房源面积</label>
+                            <div class="layui-input-block" style="overflow: hidden">
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input minfymj"
+                                       style="float: left;width: 45%">
+                                <span style="float: left;margin: 0 10px;line-height: 38px;">至</span>
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input maxfymj"
+                                       style="float: left;width: 45%">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn" id="sousuo" lay-filter="search" lay-submit="">
                                 <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                             </button>
                         </div>

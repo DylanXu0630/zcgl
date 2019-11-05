@@ -131,7 +131,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">地类</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="usage">\n' +
+                '      <select class="tdyt">\n' +
                 '    <option value="">请选择</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
@@ -144,7 +144,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">使用权类型</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="pronature">\n' +
+                '      <select class="tdsylx">\n' +
                 '    <option value="">请选择</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
@@ -193,8 +193,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     "remark": $(".bz").val(),
                     "selfQueue": $(".dzmj").val(),
                     "shareQueue": $(".ftmj").val(),
-                    "useRight": $(".pronature").val(),
-                    "useType": $(".usage").val()
+                    "useRight": $(".tdyt").val(),
+                    "useType": $(".tdsylx").val()
                 }
 
                 $.ajax({
@@ -230,20 +230,16 @@ layui.use(['table', 'laydate', 'form'], function () {
         }
         /*调用弹窗方法*/
         layerOpen(openMes);
-        layui.use('laydate', function () {
-            var laydate = layui.laydate;
-            //自定义验证规则
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#date',
-                format: 'yyyy年MM月dd日'
-            });
+        //自定义验证规则
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#date',
+            format: 'yyyy年MM月dd日'
         });
         getcqdw()
-        getytqk()
-        getcqxz()
-
-        form.render();
+        gettdsylx()
+        gettdyt()
+        form.render('select')
     })
 
 
@@ -335,7 +331,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地类</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="usage">\n' +
+                    '      <select class="tdyt">\n' +
                     '    <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
@@ -348,7 +344,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">使用权类型</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="pronature">\n' +
+                    '      <select class="tdsylx">\n' +
                     '    <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
@@ -385,8 +381,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '</div>',
                 look: function () {
                     getcqdw()
-                    getytqk()
-                    getcqxz()
+                    gettdsylx()
+                    gettdyt()
                     $(".cqmz").val(obj.data.assetsName),
                         $(".zl").val(obj.data.assetsLocation),
                         $(".symj").val(obj.data.assetsQueue),
@@ -398,8 +394,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                         $(".bz").val(obj.data.remark),
                         $(".dzmj").val(obj.data.selfQueue),
                         $(".ftmj").val(obj.data.shareQueue),
-                        $(".pronature").val(obj.data.useRight),
-                        $(".usage").val(obj.data.useType)
+                        $(".tdyt").val(obj.data.useRight),
+                        $(".tdsylx").val(obj.data.useType)
                     laydate.render({
                         elem: '#date',
                         value: obj.data.endTime,
@@ -421,8 +417,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                         "remark": $(".bz").val(),
                         "selfQueue": $(".dzmj").val(),
                         "shareQueue": $(".ftmj").val(),
-                        "useRight": $(".pronature").val(),
-                        "useType": $(".usage").val()
+                        "useRight": $(".tdyt").val(),
+                        "useType": $(".tdsylx").val()
                     }
 
                     $.ajax({
@@ -507,7 +503,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地类</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="usage" disabled="disabled">\n' +
+                    '      <select class="tdyt" disabled="disabled">\n' +
                     '    <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
@@ -520,7 +516,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">使用权类型</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="pronature" disabled="disabled">\n' +
+                    '      <select class="tdsylx" disabled="disabled">\n' +
                     '    <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
@@ -557,8 +553,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '</div>',
                 look: function () {
                     getcqdw()
-                    getytqk()
-                    getcqxz()
+                    gettdsylx()
+                    gettdyt()
                     $(".cqmz").val(obj.data.assetsName),
                         $(".symj").val(obj.data.assetsQueue),
                         $(".zl").val(obj.data.assetsLocation),
@@ -570,14 +566,16 @@ layui.use(['table', 'laydate', 'form'], function () {
                         $(".bz").val(obj.data.remark),
                         $(".dzmj").val(obj.data.selfQueue),
                         $(".ftmj").val(obj.data.shareQueue),
-                        $(".pronature").val(obj.data.useRight),
-                        $(".usage").val(obj.data.useType)
+                        $(".tdyt").val(obj.data.useRight),
+                        $(".tdsylx").val(obj.data.useType)
                 }
             }
             layerOpen(openMes);
         }
     });
 })
+
+
 
 
 

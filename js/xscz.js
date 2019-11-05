@@ -12,7 +12,13 @@ layui.use(['laydate', 'table','form'], function () {
     table.render({
         elem: '#tableList'
         , toolbar: '#toolbarDemo'
-        , url: '../json/zctj.json' //数据接口
+        // , url: '../json/zctj.json' //数据接口
+        , url: IPzd + '/deal/all?asc=0' //数据接口
+        , method: "POST"
+        , contentType: "application/json"
+        , where: {
+
+        }
         , page: true //开启分页
         , cols: [[ //表头
             {field: 'htbh', title: '合同编号', sort: true, fixed: 'left', width: 200}
@@ -42,7 +48,14 @@ layui.use(['laydate', 'table','form'], function () {
             , {field: 'bz', title: '合同状态', sort: true, width: 200}
 
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 165}
-        ]]
+        ]], parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
+            return {
+                "code": 0, //解析接口状态
+                "msg": res.msg, //解析提示文本
+                "count": res.data.total, //解析数据长度
+                "data": res.data.records //解析数据列表
+            };
+        }
     });
 
     /*添加点击事件*/

@@ -2,9 +2,9 @@
 // var IPdz = "http://172.1.1.95:18000/uum"
 // var IPzd = "http://172.1.1.95:14000/estate"
 // var login = "http://172.1.1.95:16401/auth"
-var IPdz = "http://192.168.1.21:18000/uum"
-var IPzd = "http://192.168.1.21:14000/estate"
-var login = "http://192.168.1.21:16401/auth"
+var IPdz = "http://192.168.1.17:18000/uum"
+var IPzd = "http://192.168.1.17:14000/estate"
+var login = "http://192.168.1.17:16401/auth"
 var indexDig
 var user = 0
 layui.use('element', function () {
@@ -95,7 +95,6 @@ function getcqdw() {
                 $(req.data).each(function (i, o) {
                     var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".co")
                 })
-
             } else {
                 layer.msg("产权单位获取失败")
             }
@@ -289,7 +288,6 @@ function sgettdsylx() {
 /*获取土地用途（地类）*/
 function gettdyt() {
     $.ajax({
-
         url: IPzd + '/dic/land/usage/all',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
