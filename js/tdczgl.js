@@ -264,11 +264,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                             layer.msg("删除成功")
                             var demoReload = $('#demoReload');
                             //执行重载
-                            table.reload('tableList', {
-                                page: {
-                                    curr: 1 //重新从第 1 页开始
-                                }
-                            });
+                            table.reload('tableList');
                         } else {
                             layer.msg("删除失败")
                         }
