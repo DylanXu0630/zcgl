@@ -30,6 +30,7 @@ layui.use(['table', 'form'], function () {
             "sellStatus": ""
         }
         , cols: [[ //表头
+            {field: 'resourceName', title: '房源名称'},
             {field: 'assetsName', title: '房产名称'},
             {field: 'manageUnit', title: '管理单位'},
             {field: 'location', title: '地址'},
@@ -106,12 +107,12 @@ layui.use(['table', 'form'], function () {
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">园区/楼宇</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yqly">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">园区/楼宇</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yqly">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">楼号</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -246,6 +247,7 @@ layui.use(['table', 'form'], function () {
                     "originRentCharge": $(".ylzj").val(),
                     "realRentCharge": $(".sjzj").val(),
                     "guideRentCharge": $(".zdj").val(),
+                    "park": $(".yqly").val()
                 }
 
                 $.ajax({
@@ -342,6 +344,18 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">园区/楼宇</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yqly">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">楼号</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input lh">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">楼层</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input lc">\n' +
@@ -406,7 +420,7 @@ layui.use(['table', 'form'], function () {
                     '<div class="dialogTitle">房屋产证信息</div>' +
 
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房产证号码</label>\n' +
+                    '    <label class="layui-form-label">房产证</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="houseZh">\n' +
                     '         <option value="">请选择</option>\n' +
@@ -414,12 +428,7 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
 
-                    // '  <div class="dialogDiv">\n' +
-                    // '    <label class="layui-form-label">园区/楼宇</label>\n' +
-                    // '    <div class="layui-input-block">\n' +
-                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yqly">\n' +
-                    // '    </div>\n' +
-                    // '  </div>\n' +
+
                     // '  <div class="dialogDiv">\n' +
                     // '    <label class="layui-form-label">房产名称</label>\n' +
                     // '    <div class="layui-input-block">\n' +
@@ -480,16 +489,52 @@ layui.use(['table', 'form'], function () {
                     '</div>',
                 look: function () {
                     getfczh()
-                    $(".lc").val(obj.data.buildLevel)
-                    $(".lh").val(obj.data.buildNo)
-                    $(".fh").val(obj.data.buildRoom)
-                    $(".houseZh").val(obj.data.assetsId)
-                    $(".fj").val(obj.data.remark)
-                    $(".cszt").val(obj.data.rentCode)
-                    $(".fymj").val(obj.data.resourceArea)
-                    $(".fymc").val(obj.data.assetsName)
-                    $(".cszt").val(obj.data.sellCode)
-                    $(".czzt").val(obj.data.rentCode)
+                    $.ajax({
+                        url: IPzd + '/hresource/' + obj.data.id,    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        type: "GET",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            if (req.status == "200") {
+                                getfczh()
+                                $(".yqly").val(req.data.manageUnit)
+                                $(".gldw").val(req.data.manageUnit)
+                                $(".lc").val(req.data.buildLevel)
+                                $(".lh").val(req.data.buildNo)
+                                $(".fh").val(req.data.buildRoom)
+                                $(".houseZh").val(req.data.assetsId)
+                                $(".fj").val(req.data.remark)
+                                $(".cszt").val(req.data.rentCode)
+                                $(".fymj").val(req.data.resourceArea)
+                                $(".fymc").val(req.data.assetsName)
+                                $(".cszt").val(req.data.sellCode)
+                                $(".czzt").val(req.data.rentCode)
+                                $(".gldw").val(req.data.manageUnit)
+                                $(".dczl").val(req.data.landLocation)
+                                $(".tdyyz").val(req.data.landOwner)
+                                $(".dh").val(req.data.landNum)
+                                $(".zlc").val(req.data.totalLevel)
+                                $(".ylzj").val(req.data.originRentCharge)
+                                $(".zjd").val(req.data.guideRentCharge)
+                                $(".sjzj").val(req.data.realRentCharge)
+                                form.render('select')
+                            } else {
+                                layer.msg("获取失败")
+                            }
+
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
                 },
                 put: function () {
                     var data = {
@@ -562,6 +607,12 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">园区/楼宇</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yqly">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">楼号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input lh" readonly>\n' +
@@ -583,6 +634,24 @@ layui.use(['table', 'form'], function () {
                     '    <label class="layui-form-label">房源面积</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymj" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">原来租金(月)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ylzj">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">指导价(月)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zjd">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">实际租金(月)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjzj">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -619,12 +688,7 @@ layui.use(['table', 'form'], function () {
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input houseZh" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">园区/楼宇</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yqly">\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
+
                     '   <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房产总楼层</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -643,12 +707,7 @@ layui.use(['table', 'form'], function () {
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input gldw" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">管理单位</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input gldw">\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
+
                     '<div class="dialogTitle">土地产证信息</div>' +
 
                     '  <div class="dialogDiv">\n' +
@@ -669,11 +728,6 @@ layui.use(['table', 'form'], function () {
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dczl">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
-
-
-
-
-
 
 
                     // '   <div class="dialogDiv">\n' +
@@ -734,6 +788,9 @@ layui.use(['table', 'form'], function () {
                                 $(".tdyyz").val(req.data.landOwner)
                                 $(".dh").val(req.data.landNum)
                                 $(".zlc").val(req.data.totalLevel)
+                                $(".ylzj").val(req.data.originRentCharge)
+                                $(".zjd").val(req.data.guideRentCharge)
+                                $(".sjzj").val(req.data.realRentCharge)
                                 form.render('select')
                             } else {
                                 layer.msg("获取失败")

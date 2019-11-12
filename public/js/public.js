@@ -1,10 +1,10 @@
 /*定义接口域名*/
-// var IPdz = "http://172.18.136.17:18000/uum"
-// var IPzd = "http://172.18.136.17:14000/estate"
-// var login = "http://172.18.136.17:16401/auth"
-var IPdz = "http://192.168.1.17:18000/uum"
-var IPzd = "http://192.168.1.17:14000/estate"
-var login = "http://192.168.1.17:16401/auth"
+var IPdz = "http://172.1.1.151:18000/uum"
+var IPzd = "http://172.1.1.151:14000/estate"
+var login = "http://172.1.1.151:16401/auth"
+// var IPdz = "http://192.168.1.17:18000/uum"
+// var IPzd = "http://192.168.1.17:14000/estate"
+// var login = "http://192.168.1.17:16401/auth"
 var indexDig
 /*当前登录的用户ID*/
 var user = 0
