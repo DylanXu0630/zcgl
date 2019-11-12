@@ -411,58 +411,70 @@ layui.use(['table', 'laydate', 'form'], function () {
                     });
                 },
                 put: function () {
-                    var data = {
-                        "id": obj.data.id,
-                        "assetsName": $(".cqmz").val(),
-                        "assetsLocation": $(".zl").val(),
-                        "assetsQueue": $(".symj").val(),
-                        "createdBy": 0,
-                        "endTime": sjc($("#date").val() + " 23:59:59"),
-                        "fkOwnId": $(".co").val(),
-                        "landNum": $(".dh").val(),
-                        "money": $(".qdjz").val(),
-                        "picNum": $(".th").val(),
-                        "remark": $(".bz").val(),
-                        "selfQueue": $(".dzmj").val(),
-                        "shareQueue": $(".ftmj").val(),
-                        "useRight": $(".tdyt").val(),
-                        "useType": $(".tdsylx").val()
-                    }
+                    if ($(".cqmz").val() == "") {
+                        layer.msg("产权名称不能为空！")
+                    } else {
+                        if ($(".co").val() == "") {
+                            layer.msg("土地权利人不能空！")
+                        } else {
+                            if ($(".symj").val() !== "") {
+                                var data = {
+                                    "id": obj.data.id,
+                                    "assetsName": $(".cqmz").val(),
+                                    "assetsLocation": $(".zl").val(),
+                                    "assetsQueue": $(".symj").val(),
+                                    "createdBy": 0,
+                                    "endTime": sjc($("#date").val() + " 23:59:59"),
+                                    "fkOwnId": $(".co").val(),
+                                    "landNum": $(".dh").val(),
+                                    "money": $(".qdjz").val(),
+                                    "picNum": $(".th").val(),
+                                    "remark": $(".bz").val(),
+                                    "selfQueue": $(".dzmj").val(),
+                                    "shareQueue": $(".ftmj").val(),
+                                    "useRight": $(".tdyt").val(),
+                                    "useType": $(".tdsylx").val()
+                                }
+                                $.ajax({
+                                    url: IPzd + '/assets/land',    //请求的url地址
+                                    dataType: "json",   //返回格式为json
+                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                    data: JSON.stringify(data),    //参数值
+                                    type: "PUT",   //请求方式
+                                    contentType: "application/json;charset=UTF-8",
+                                    // headers: {"token": sessionStorage.token},
+                                    beforeSend: function () {
+                                        //请求前的处理
+                                    },
+                                    success: function (req) {
+                                        if (req.status == "200") {
+                                            layer.close(indexDig);
+                                            layer.msg("修改成功")
+                                            var demoReload = $('#demoReload');
+                                            //执行重载
+                                            table.reload('tableList', {
+                                                page: {
+                                                    curr: 1 //重新从第 1 页开始
+                                                }
+                                            });
+                                        } else {
+                                            layer.msg("修改失败")
+                                        }
 
-                    $.ajax({
-                        url: IPzd + '/assets/land',    //请求的url地址
-                        dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                        data: JSON.stringify(data),    //参数值
-                        type: "PUT",   //请求方式
-                        contentType: "application/json;charset=UTF-8",
-                        // headers: {"token": sessionStorage.token},
-                        beforeSend: function () {
-                            //请求前的处理
-                        },
-                        success: function (req) {
-                            if (req.status == "200") {
-                                layer.close(indexDig);
-                                layer.msg("修改成功")
-                                var demoReload = $('#demoReload');
-                                //执行重载
-                                table.reload('tableList', {
-                                    page: {
-                                        curr: 1 //重新从第 1 页开始
+                                    },
+                                    complete: function () {
+                                        //请求完成的处理
+                                    },
+                                    error: function () {
+                                        //请求出错处理
                                     }
                                 });
                             } else {
-                                layer.msg("修改失败")
-                            }
+                                layer.msg("请填写正确的使用权面积！")
 
-                        },
-                        complete: function () {
-                            //请求完成的处理
-                        },
-                        error: function () {
-                            //请求出错处理
+                            }
                         }
-                    });
+                    }
                 },
             }
             layerOpen(openMes);

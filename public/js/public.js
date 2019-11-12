@@ -6,6 +6,7 @@ var IPdz = "http://192.168.1.17:18000/uum"
 var IPzd = "http://192.168.1.17:14000/estate"
 var login = "http://192.168.1.17:16401/auth"
 var indexDig
+/*当前登录的用户ID*/
 var user = 0
 layui.use('element', function () {
     var element = layui.element;
@@ -649,7 +650,9 @@ function getfkLandAssetsId() {
         }
     });
 }
-
+/*获取年月日
+* YYYY-MM-DD hh:mm:ss
+* */
 function getMyDate(str) {
     var oDate = new Date(str),
         oYear = oDate.getFullYear(),
@@ -668,7 +671,7 @@ function getzf(num) {
     }
     return num;
 }
-
+/*YYYY年MM月DD日 转 YYYY-MM-DD*/
 function zDate(str) {
     var str = str;
     var year = str.split('')[0] + str.split('')[1] + str.split('')[2] + str.split('')[3];
@@ -677,7 +680,7 @@ function zDate(str) {
     var dateStr = year + "-" + month + "-" + day
     return dateStr
 }
-
+/*获取时间戳*/
 function sjc(str) {
     var str = zDate(str)
     var date = new Date(str);
@@ -685,7 +688,7 @@ function sjc(str) {
     return time
 }
 
-
+/*检验是否是数字并且保留小数点后两位*/
 function clearNoNum(obj) {
     obj.value = obj.value.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
     obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的

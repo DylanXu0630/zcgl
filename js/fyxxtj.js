@@ -32,9 +32,7 @@ layui.use(['table', 'form'], function () {
         , cols: [[ //表头
             {field: 'assetsName', title: '房产名称（产权名称）'},
             {field: 'manageUnit', title: '管理单位'},
-            {field: 'buildNo', title: '楼号'},
-            {field: 'buildLevel', title: '楼层'},
-            {field: 'buildRoom', title: '房号'},
+            {field: 'location', title: '地址'},
             {field: 'resourceArea', title: '房源面积'},
             {field: 'rentStatus', title: '出租状态'},
             {field: 'sellStatus', title: '出售状态'},
