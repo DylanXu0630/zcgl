@@ -9,10 +9,17 @@ layui.use(['table', 'laydate', 'form'], function () {
     var laydate = layui.laydate;
     sgetcqdw()
     form.render();
+    form.verify({
+        title: function (value) {
+            if (value.length < 5) {
+                return '标题至少得5个字符啊';
+            }
+        }
+    });
     //第一个实例
     table.render({
         elem: '#tableList'
-        , toolbar: '#toolbarDemo'
+        // , toolbar: '#toolbarDemo'
         // , url: '../json/czgl.json' //数据接口
         , url: IPzd + '/assets/land/all?asc=0' //数据接口
         , method: "POST"
@@ -24,21 +31,12 @@ layui.use(['table', 'laydate', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'assetsName', title: '土地产权名称', width: 260}
-            , {field: 'owner', title: '土地使用权人', width: 260}
-            , {field: 'assetsLocation', title: '座落', width: 160}
-            , {field: 'landNum', title: '地号', width: 160}
-            , {field: 'picNum', title: '图号', width: 160}
-            , {field: 'useType', title: '地类（用途）', width: 160}
-            , {field: 'money', title: '取得价值', width: 160}
-            , {field: 'useRight', title: '使用权类型', width: 160}
-            , {
-                field: 'endTime', title: '终止日期', width: 160
-            }
-            , {field: 'assetsQueue', title: '使用权面积', width: 160}
-            , {field: 'selfQueue', title: '独用面积', width: 160}
-            , {field: 'shareQueue', title: '分摊面积', width: 160}
-            , {field: 'remark', title: '备注', width: 160}
+            {field: 'assetsName', title: '土地证号'}
+            , {field: 'owner', title: '土地使用权人'}
+            , {field: 'assetsLocation', title: '座落'}
+            , {field: 'landNum', title: '地号'}
+            , {field: 'picNum', title: '图号'}
+            , {field: 'assetsQueue', title: '使用权面积(m²)'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
         , parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
@@ -98,13 +96,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">土地产权名称</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input cqmz">\n' +
+                '      <input type="text" name="title" required  lay-verify="title" placeholder="*为必填项" autocomplete="off" class="layui-input cqmz">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">土地权利人</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>土地权利人</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="co">\n' +
                 '    <option value="">请选择</option>\n' +
@@ -155,20 +153,20 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">使用权面积</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>使用权面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input symj">\n' +
+                '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input symj">\n' +
                 '    </div>\n' +
                 '  </div>\n' + '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">独占面积</label>\n' +
+                '    <label class="layui-form-label">独占面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dzmj">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="请输入" autocomplete="off" class="layui-input dzmj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">分摊面积</label>\n' +
+                '    <label class="layui-form-label">分摊面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ftmj">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="请输入" autocomplete="off" class="layui-input ftmj">\n' +
                 '    </div>\n' +
                 '  </div>\n' + '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">备注</label>\n' +
@@ -180,52 +178,66 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '</div>' +
                 '</div>',
             add: function () {
-                var data = {
-                    "assetsName": $(".cqmz").val(),
-                    "assetsLocation": $(".zl").val(),
-                    "assetsQueue": $(".symj").val(),
-                    "createdBy": 0,
-                    "endTime": sjc($("#date").val() + " 23:59:59"),
-                    "fkOwnId": $(".co").val(),
-                    "landNum": $(".dh").val(),
-                    "money": $(".qdjz").val(),
-                    "picNum": $(".th").val(),
-                    "remark": $(".bz").val(),
-                    "selfQueue": $(".dzmj").val(),
-                    "shareQueue": $(".ftmj").val(),
-                    "useRight": $(".tdyt").val(),
-                    "useType": $(".tdsylx").val()
-                }
 
-                $.ajax({
-                    url: IPzd + '/assets/land',    //请求的url地址
-                    dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                    data: JSON.stringify(data),    //参数值
-                    type: "POST",   //请求方式
-                    contentType: "application/json;charset=UTF-8",
-                    // headers: {"token": sessionStorage.token},
-                    beforeSend: function () {
-                        //请求前的处理
-                    },
-                    success: function (req) {
-                        if (req.status == "200") {
-                            layer.close(indexDig);
-                            layer.msg("添加成功")
-                            //执行重载
-                            table.reload('tableList');
+                if ($(".cqmz").val() == "") {
+                    layer.msg("产权名称不能为空！")
+                } else {
+                    if ($(".co").val() == "") {
+                        layer.msg("土地权利人不能空！")
+                    } else {
+                        if ($(".symj").val() !== "") {
+                            var data = {
+                                "assetsName": $(".cqmz").val(),
+                                "assetsLocation": $(".zl").val(),
+                                "assetsQueue": $(".symj").val(),
+                                "createdBy": 0,
+                                "endTime": sjc($("#date").val() + " 23:59:59"),
+                                "fkOwnId": $(".co").val(),
+                                "landNum": $(".dh").val(),
+                                "money": $(".qdjz").val(),
+                                "picNum": $(".th").val(),
+                                "remark": $(".bz").val(),
+                                "selfQueue": $(".dzmj").val(),
+                                "shareQueue": $(".ftmj").val(),
+                                "useRight": $(".tdyt").val(),
+                                "useType": $(".tdsylx").val()
+                            }
+
+                            $.ajax({
+                                url: IPzd + '/assets/land',    //请求的url地址
+                                dataType: "json",   //返回格式为json
+                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                data: JSON.stringify(data),    //参数值
+                                type: "POST",   //请求方式
+                                contentType: "application/json;charset=UTF-8",
+                                // headers: {"token": sessionStorage.token},
+                                beforeSend: function () {
+                                    //请求前的处理
+                                },
+                                success: function (req) {
+                                    if (req.status == "200") {
+                                        layer.close(indexDig);
+                                        layer.msg("添加成功")
+                                        //执行重载
+                                        table.reload('tableList');
+                                    } else {
+                                        layer.msg("添加失败")
+                                    }
+
+                                },
+                                complete: function () {
+                                    //请求完成的处理
+                                },
+                                error: function () {
+                                    //请求出错处理
+                                }
+                            });
                         } else {
-                            layer.msg("添加失败")
-                        }
+                            layer.msg("请填写正确的使用权面积！")
 
-                    },
-                    complete: function () {
-                        //请求完成的处理
-                    },
-                    error: function () {
-                        //请求出错处理
+                        }
                     }
-                });
+                }
             },
         }
         /*调用弹窗方法*/
@@ -294,13 +306,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地产权名称</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input cqmz">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input cqmz">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地权利人</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>土地权利人</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="co">\n' +
                     '    <option value="">请选择</option>\n' +
@@ -351,20 +363,20 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">使用权面积</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>使用权面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input symj">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input symj">\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">独占面积</label>\n' +
+                    '    <label class="layui-form-label">独占面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dzmj">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dzmj">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">分摊面积</label>\n' +
+                    '    <label class="layui-form-label">分摊面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ftmj">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ftmj">\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">备注</label>\n' +
@@ -466,9 +478,9 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地产权名称</label>\n' +
+                    '    <label class="layui-form-label">土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input cqmz" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input cqmz" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -551,19 +563,20 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getcqdw()
                     gettdsylx()
                     gettdyt()
-                    $(".cqmz").val(obj.data.assetsName),
-                        $(".symj").val(obj.data.assetsQueue),
-                        $(".zl").val(obj.data.assetsLocation),
-                        $("#date").val(obj.data.endTime),
-                        $(".co").val(obj.data.fkOwnId),
-                        $(".dh").val(obj.data.landNum),
-                        $(".qdjz").val(obj.data.money),
-                        $(".th").val(obj.data.picNum),
-                        $(".bz").val(obj.data.remark),
-                        $(".dzmj").val(obj.data.selfQueue),
-                        $(".ftmj").val(obj.data.shareQueue),
-                        $(".tdyt").val(obj.data.useRight),
-                        $(".tdsylx").val(obj.data.useType)
+                    $(".cqmz").val(obj.data.assetsName)
+                    $(".symj").val(obj.data.assetsQueue)
+                    $(".tdyt").val(obj.data.useRight)
+                    $(".tdsylx").val(obj.data.useType)
+                    $(".zl").val(obj.data.assetsLocation)
+                    $("#date").val(obj.data.endTime)
+                    $(".co").val(obj.data.fkOwnId)
+                    $(".dh").val(obj.data.landNum)
+                    $(".qdjz").val(obj.data.money)
+                    $(".th").val(obj.data.picNum)
+                    $(".bz").val(obj.data.remark)
+                    $(".dzmj").val(obj.data.selfQueue)
+                    $(".ftmj").val(obj.data.shareQueue)
+
                 }
             }
             layerOpen(openMes);

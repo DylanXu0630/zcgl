@@ -1,7 +1,7 @@
 /*定义接口域名*/
-// var IPdz = "http://172.1.1.151:18000/uum"
-// var IPzd = "http://172.1.1.151:14000/estate"
-// var login = "http://172.1.1.151:16401/auth"
+// var IPdz = "http://172.18.136.17:18000/uum"
+// var IPzd = "http://172.18.136.17:14000/estate"
+// var login = "http://172.18.136.17:16401/auth"
 var IPdz = "http://192.168.1.17:18000/uum"
 var IPzd = "http://192.168.1.17:14000/estate"
 var login = "http://192.168.1.17:16401/auth"
@@ -72,8 +72,6 @@ function layerOpen(openMes) {
         }
     });
 }
-
-
 
 
 /*获取产权单位*/
@@ -178,6 +176,7 @@ function gethtzt() {
         }
     });
 }
+
 /*获条件筛选取合同状态*/
 function sgethtzt() {
     $.ajax({
@@ -211,8 +210,6 @@ function sgethtzt() {
         }
     });
 }
-
-
 
 
 /*获取土地使用类型*/
@@ -249,6 +246,7 @@ function gettdsylx() {
         }
     });
 }
+
 /*获条件筛选取土地使用类型*/
 function sgettdsylx() {
     $.ajax({
@@ -284,7 +282,6 @@ function sgettdsylx() {
 }
 
 
-
 /*获取土地用途（地类）*/
 function gettdyt() {
     $.ajax({
@@ -318,6 +315,7 @@ function gettdyt() {
         }
     });
 }
+
 /*获条件筛选取土地用途（地类）*/
 function sgettdyt() {
     $.ajax({
@@ -383,6 +381,7 @@ function getfcxz() {
         }
     });
 }
+
 /*获取条件筛选取房产性质*/
 function sgetfcxz() {
     $.ajax({
@@ -448,6 +447,7 @@ function getfwgyqk() {
         }
     });
 }
+
 /*获条件筛选取房屋共有情况*/
 function sgetfwgyqk() {
     $.ajax({
@@ -483,7 +483,6 @@ function sgetfwgyqk() {
 }
 
 
-
 /*获取房屋规划用途*/
 function getfwghyt() {
     $.ajax({
@@ -515,6 +514,7 @@ function getfwghyt() {
         }
     });
 }
+
 /*获条件筛选取房屋规划用途*/
 function sgetfwghyt() {
     $.ajax({
@@ -550,7 +550,6 @@ function sgetfwghyt() {
 }
 
 
-
 /*获取管理单位*/
 function getgldw() {
     $.ajax({
@@ -582,6 +581,7 @@ function getgldw() {
         }
     });
 }
+
 /*获条件筛选取管理单位*/
 function sgetgldw() {
     $.ajax({
@@ -649,31 +649,32 @@ function getfkLandAssetsId() {
         }
     });
 }
-function getMyDate(str){
+
+function getMyDate(str) {
     var oDate = new Date(str),
         oYear = oDate.getFullYear(),
-        oMonth = oDate.getMonth()+1,
+        oMonth = oDate.getMonth() + 1,
         oDay = oDate.getDate(),
         oHour = oDate.getHours(),
         oMin = oDate.getMinutes(),
         oSen = oDate.getSeconds(),
-        oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+        oTime = oYear + '-' + getzf(oMonth) + '-' + getzf(oDay) + ' ' + getzf(oHour) + ':' + getzf(oMin) + ':' + getzf(oSen);//最后拼接时间
     return oTime;
 };
 
-function getzf(num){
-    if(parseInt(num) < 10){
-        num = '0'+num;
+function getzf(num) {
+    if (parseInt(num) < 10) {
+        num = '0' + num;
     }
     return num;
 }
 
 function zDate(str) {
     var str = str;
-    var year = str.split('')[0]+str.split('')[1]+str.split('')[2]+str.split('')[3];
-    var month = str.split('')[5]+str.split('')[6];
+    var year = str.split('')[0] + str.split('')[1] + str.split('')[2] + str.split('')[3];
+    var month = str.split('')[5] + str.split('')[6];
     var day = str.split('')[08]+str.split('')[9];
-    var dateStr = year+"-"+month+"-"+day
+    var dateStr = year + "-" + month + "-" + day
     return dateStr
 }
 
@@ -682,4 +683,15 @@ function sjc(str) {
     var date = new Date(str);
     var time = date.getTime();
     return time
+}
+
+
+function clearNoNum(obj) {
+    obj.value = obj.value.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+    obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
+    obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
+    if (obj.value.indexOf(".") < 0 && obj.value != "") {//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+        obj.value = parseFloat(obj.value);
+    }
 }

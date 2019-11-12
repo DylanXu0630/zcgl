@@ -11,7 +11,7 @@ layui.use(['laydate', 'table', 'form'], function () {
     //第一个实例
     table.render({
         elem: '#tableList'
-        , toolbar: '#toolbarDemo'
+        // , toolbar: '#toolbarDemo'
         // , url: '../json/zctj.json' //数据接口
         , url: IPzd + '/deal/all?asc=0' //数据接口
         , method: "POST"
@@ -113,7 +113,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     "endTime": sjc($("#date2").val() + " 23:59:59"),
                     "fkHouseResourceId": $(".houseFy").val(),
                     "fkRenterId": $(".yf").val(),
-                    "startTime": sjc($("#date").val() + " 23:59:59"),
+                    "startTime": sjc($("#date").val() + " 00:00:00"),
                 }
 
                 $.ajax({
@@ -292,7 +292,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         "endTime": sjc($("#date2").val() + " 23:59:59"),
                         "fkHouseResourceId": $(".houseFy").val(),
                         "fkRenterId": $(".yf").val(),
-                        "startTime": sjc($("#date").val() + " 23:59:59"),
+                        "startTime": sjc($("#date").val() + " 00:00:00"),
                     }
 
                     $.ajax({

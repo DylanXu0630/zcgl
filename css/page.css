@@ -162,3 +162,10 @@ fieldset {
     width: 49%;
     margin: 10px 0;
 }
+
+.inputBtx{
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+    vertical-align: sub;
+}

@@ -5,6 +5,38 @@
     <title>园区租金管理</title>
     <link rel="stylesheet" href="../layui/css/layui.css">
     <link rel="stylesheet" href="../css/page.css">
+    <style>
+        .addDig .layui-form-label {
+            width: 120px;
+            text-align: right;
+        }
+
+        .addDig .layui-input, .layui-anim.layui-anim-upbit {
+            width: 90%;
+        }
+
+        #zjTbale {
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        #zjTbale td:first-child {
+            width: 90px;
+            background-color: #f2f2f2;
+        }
+
+        .mouthTD {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            text-align: left;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #e6e6e6;
+            padding: 5px 10px;
+        }
+    </style>
 </head>
 <body>
 <div class="pageDiv">
@@ -154,70 +186,12 @@
             </div>
         </div>
     </div>
-    <div class="layui-fluid">
+    <div class="layui-fluid lbTable">
         <div class="layui-card">
             <div class="layui-card-header">园区租金列表</div>
             <div class="layui-card-body" style="padding: 15px;">
                 <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
-                <table class="layui-table" lay-data="{width:1599, url:'../json/yqzj.json', page: true, limit: 6, limits:[6]}">
-                    <thead>
-                    <tr>
-                        <th lay-data="{field:'xlh', width:120,fixed:'left'}" rowspan="2">序号</th>
-                        <th lay-data="{field:'qyrq', width:120,fixed:'left'}" rowspan="2">签约日期</th>
-                        <th lay-data="{field:'fwsyq', width:120,fixed:'left'}" rowspan="2">房屋所有权</th>
-                        <th lay-data="{field:'glzx', width:120}" rowspan="2">管理单位</th>
-                        <th lay-data="{field:'yq', width:120}" rowspan="2">园区/楼宇</th>
-                        <th lay-data="{align: 'center'}" colspan="3">房屋座落</th>
-                        <th lay-data="{field:'czdw', width:120}" rowspan="2">承租单位</th>
-                        <th lay-data="{align:'fymj',align: 'center'}" colspan="2">房源面积</th>
-                        <th lay-data="{field:'htmj', width:120}" rowspan="2">合同面积</th>
-                        <th lay-data="{field:'htzt', width:120}" rowspan="2">合同状态</th>
-                        <th lay-data="{field:'qyfs', width:120}" rowspan="2">签约方式</th>
-                        <th lay-data="{field:'yzj', width:120}" rowspan="2">月租金</th>
-                        <th lay-data="{field:'cznx', width:120}" rowspan="2">承租年限（月）</th>
-                        <th lay-data="{field:'htksrq', width:120}" rowspan="2">合同开始日期</th>
-                        <th lay-data="{field:'htjsrq', width:120}" rowspan="2">合同结束日期</th>
-                        <th lay-data="{field:'zffs', width:120}" rowspan="2">支付方式</th>
-                        <th lay-data="{field:'qk', width:120}" rowspan="2">欠款</th>
-                        <th lay-data="{width:120,align: 'center'}" colspan="13">应收</th>
-                        <th lay-data="{width:120,align: 'center'}" colspan="13">倒账款</th>
-                        <th lay-data="{fixed: 'right', width: 160, align: 'center', toolbar: '#barDemo'}" rowspan="2">操作</th>
-                    </tr>
-                    <tr>
-                        <th lay-data="{field:'l', width:120}">楼号</th>
-                        <th lay-data="{field:'z', width:120}">幢号</th>
-                        <th lay-data="{field:'h', width:200}">房号</th>
-                        <th lay-data="{field:'yz', width:120}">有证</th>
-                        <th lay-data="{field:'wz', width:120}">无证</th>
-                        <th lay-data="{field:'y1', width:120}">1月</th>
-                        <th lay-data="{field:'y2', width:120}">2月</th>
-                        <th lay-data="{field:'y3', width:120}">3月</th>
-                        <th lay-data="{field:'y4', width:120}">4月</th>
-                        <th lay-data="{field:'y5', width:120}">5月</th>
-                        <th lay-data="{field:'y6', width:120}">6月</th>
-                        <th lay-data="{field:'y7', width:120}">7月</th>
-                        <th lay-data="{field:'y8', width:120}">8月</th>
-                        <th lay-data="{field:'y9', width:120}">9月</th>
-                        <th lay-data="{field:'y10', width:120}">10月</th>
-                        <th lay-data="{field:'y11', width:120}">11月</th>
-                        <th lay-data="{field:'y12', width:120}">12月</th>
-                        <th lay-data="{field:'yxj', width:120}">小计</th>
-                        <th lay-data="{field:'s1', width:120}">1月</th>
-                        <th lay-data="{field:'s2', width:120}">2月</th>
-                        <th lay-data="{field:'s3', width:120}">3月</th>
-                        <th lay-data="{field:'s4', width:120}">4月</th>
-                        <th lay-data="{field:'s5', width:120}">5月</th>
-                        <th lay-data="{field:'s6', width:120}">6月</th>
-                        <th lay-data="{field:'s7', width:120}">7月</th>
-                        <th lay-data="{field:'s8', width:120}">8月</th>
-                        <th lay-data="{field:'s9', width:120}">9月</th>
-                        <th lay-data="{field:'s10', width:120}">10月</th>
-                        <th lay-data="{field:'s11', width:120}">11月</th>
-                        <th lay-data="{field:'s12', width:120}">12月</th>
-                        <th lay-data="{field:'sxj', width:120}">小计</th>
-                    </tr>
-                    </thead>
-                </table>
+                <table class="layui-hide" id="tableList" lay-filter="test"></table>
             </div>
         </div>
     </div>
@@ -225,8 +199,9 @@
 </div>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
+    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
 </script>
 
 <script src="../public/js/jquery.js"></script>

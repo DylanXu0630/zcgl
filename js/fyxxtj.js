@@ -7,11 +7,12 @@ layui.use(['table', 'form'], function () {
     var form = layui.form;
 
     sgetfczh()
+    sgetgldw()
     form.render()
     //第一个实例
     table.render({
         elem: '#tableList'
-        , toolbar: '#toolbarDemo'
+        // , toolbar: '#toolbarDemo'
         //, url: '../json/fyxxtj.json' //数据接口
         , url: IPzd + '/hresource/all?asc=0' //数据接口
         , method: "POST"
@@ -23,14 +24,14 @@ layui.use(['table', 'form'], function () {
             "buildLevel": "",
             "buildNo": "",
             "buildRoom": "",
-            "parkId": "",
+            "maxArea": "",
+            "minArea": "",
             "rentStatus": "",
             "sellStatus": ""
         }
         , cols: [[ //表头
             {field: 'assetsName', title: '房产名称（产权名称）'},
             {field: 'manageUnit', title: '管理单位'},
-            {field: 'park', title: '园区/楼宇'},
             {field: 'buildNo', title: '楼号'},
             {field: 'buildLevel', title: '楼层'},
             {field: 'buildRoom', title: '房号'},
@@ -59,14 +60,15 @@ layui.use(['table', 'form'], function () {
                     curr: 1 //重新从第 1 页开始
                 }
                 , where: {//这里传参  向后台
-                    "agencyId": "",
+                    "agencyId": $(".s-gldw").val(),
                     "assetsId": $(".s-fc").val(),
                     "buildLevel": $(".s-lc").val(),
                     "buildNo": $(".s-lh").val(),
                     "buildRoom": $(".s-fh").val(),
-                    "parkId": "",
+                    "maxArea": $(".maxfymj").val(),
+                    "minArea": $(".minfymj").val(),
                     "rentStatus": $(".isCz").val(),
-                    "sellStatus": $(".isCz").val()
+                    "sellStatus": $(".isCs").val()
                 },
                 url: IPzd + '/hresource/all?asc=0' //数据接口
                 , method: 'post'
