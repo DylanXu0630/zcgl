@@ -107,7 +107,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                             layer.close(indexDig);
                             layer.msg("删除成功")
                             //执行重载
-                            table.reload('idTest', {
+                            table.reload('tableList', {
                                 page: {
                                     curr: 1 //重新从第 1 页开始
                                 }

@@ -169,3 +169,8 @@ fieldset {
     font-size: 18px;
     vertical-align: sub;
 }
+.dialogTitle{
+    font-weight: bold;
+    width: max-content;
+    margin: 13px 10px;
+}
