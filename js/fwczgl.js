@@ -40,12 +40,11 @@ layui.use(['table', 'laydate', 'form'], function () {
             , {field: 'registerTime', title: '登记时间', width: 200}
             , {field: 'houseNature', title: '房屋性质', width: 160}
             , {field: 'houseUsage', title: '房产规划用途', width: 160}
-            , {field: 'totalLevel', title: '房屋总层数', width: 160}
+            , {field: 'totalLevel', title: '房屋总层数(层)', width: 160}
             , {field: 'buildArea', title: '建筑面积(㎡)', width: 160}
             , {field: 'realArea', title: '套内建筑面积(㎡)', width: 160}
             , {field: 'otherArea', title: '其他(㎡)', width: 160}
             , {field: 'landNum', title: '土地地号', width: 160}
-            , {field: 'remark', title: '附记', width: 160}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 220}
         ]]
         , parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
@@ -158,7 +157,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地证号</label>\n' +
+                    '    <label class="layui-form-label">土地产证</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="fkLandAssetsId">\n' +
                     '    <option value="">请选择</option>\n' +
@@ -205,7 +204,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  </div>\n' +
 
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label" style="width:84px;padding-left:11px">房产规划用途</label>\n' +
+                    '    <label class="layui-form-label">房产规划用途</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="fwghyt housePlanUse">\n' +
                     '    <option value="">请选择</option>\n' +
@@ -213,27 +212,27 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">总层数</label>\n' +
+                    '    <label class="layui-form-label">总层数(层)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input totalLevel">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input totalLevel">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     ' <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">建筑面积</label>\n' +
+                    '    <label class="layui-form-label">建筑面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input buildArea">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input buildArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">套内面积</label>\n' +
+                    '    <label class="layui-form-label">套内面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input realArea">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input realArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">其他面积</label>\n' +
+                    '    <label class="layui-form-label">其他面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input otherArea">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input otherArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -369,19 +368,10 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋所有人</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="co fkOwnId" disabled>\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input co fkOwnId" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
-                    '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地证号</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <select class="fkLandAssetsId" disabled>\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
+
 
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">共有情况</label>\n' +
@@ -406,12 +396,6 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input parkId" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
-                    '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">楼号</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input houseNum" readonly>\n' +
-                    '    </div>\n' +
-                    '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">登记时间</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -429,7 +413,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  </div>\n' +
 
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label" style="width:84px;padding-left:11px">房产规划用途</label>\n' +
+                    '    <label class="layui-form-label">房产规划用途</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="fwghyt housePlanUse" disabled>\n' +
                     '    <option value="">请选择</option>\n' +
@@ -437,29 +421,37 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">总层数</label>\n' +
+                    '    <label class="layui-form-label">总层数(层)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input totalLevel" readonly>\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input totalLevel" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     ' <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">建筑面积</label>\n' +
+                    '    <label class="layui-form-label">建筑面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input buildArea" readonly>\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input buildArea" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">套内面积</label>\n' +
+                    '    <label class="layui-form-label">套内面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input realArea" readonly>\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input realArea" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">其他面积</label>\n' +
+                    '    <label class="layui-form-label">其他面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input otherArea" readonly>\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input otherArea" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">土地产证</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="fkLandAssetsId" disabled>\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地号</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -473,9 +465,9 @@ layui.use(['table', 'laydate', 'form'], function () {
                     // '    </div>\n' +
                     // '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label " style="width:84px;padding-left:11px">土地使用年限</label>\n' +
+                    '    <label class="layui-form-label ">土地使用年限(年)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landUseYear" readonly>\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landUseYear" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -503,7 +495,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".fwgyqk.shareType").val(obj.data.houseShareId)
                     $(".fwghyt.housePlanUse").val(obj.data.houseUsageId)
                     $(".fkLandAssetsId").val(obj.data.landAssetsId)
-                    $(".co.fkOwnId").val(obj.data.fkOwnerId)
+                    $(".co.fkOwnId").val(obj.data.owner)
                     $(".houseId").val(obj.data.houseId)
                     $(".houseNum").val(obj.data.houseNum)
                     $(".otherArea").val(obj.data.otherArea)
@@ -563,7 +555,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">土地证号</label>\n' +
+                '    <label class="layui-form-label">土地产证</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="fkLandAssetsId">\n' +
                 '    <option value="">请选择</option>\n' +
@@ -610,7 +602,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '  </div>\n' +
 
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label" style="width:84px;padding-left:11px">房产规划用途</label>\n' +
+                '    <label class="layui-form-label">房产规划用途</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="fwghyt housePlanUse">\n' +
                 '    <option value="">请选择</option>\n' +
@@ -618,25 +610,25 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">总层数</label>\n' +
+                '    <label class="layui-form-label">总层数(层)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input totalLevel">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 ' <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">建筑面积</label>\n' +
+                '    <label class="layui-form-label">建筑面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input buildArea">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">套内面积</label>\n' +
+                '    <label class="layui-form-label">套内面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input realArea">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">其他面积</label>\n' +
+                '    <label class="layui-form-label">其他面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input otherArea">\n' +
                 '    </div>\n' +

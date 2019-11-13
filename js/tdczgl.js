@@ -110,7 +110,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">坐落</label>\n' +
+                '    <label class="layui-form-label">座落</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
                 '    </div>\n' +
@@ -134,7 +134,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' + '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">取得价值</label>\n' +
+                '    <label class="layui-form-label">取得价格(元)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz">\n' +
                 '    </div>\n' +
@@ -320,7 +320,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">坐落</label>\n' +
+                    '    <label class="layui-form-label">座落</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
                     '    </div>\n' +
@@ -344,7 +344,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">取得价值</label>\n' +
+                    '    <label class="layui-form-label">取得价值(元)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz">\n' +
                     '    </div>\n' +
@@ -498,13 +498,11 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地权利人</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="co" disabled="disabled">\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input co" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">坐落</label>\n' +
+                    '    <label class="layui-form-label">座落</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl" readonly>\n' +
                     '    </div>\n' +
@@ -528,7 +526,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">取得价值</label>\n' +
+                    '    <label class="layui-form-label">取得价值(元)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz" readonly>\n' +
                     '    </div>\n' +
@@ -547,18 +545,18 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">使用权面积</label>\n' +
+                    '    <label class="layui-form-label">使用权面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input symj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">独占面积</label>\n' +
+                    '    <label class="layui-form-label">独占面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dzmj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">分摊面积</label>\n' +
+                    '    <label class="layui-form-label">分摊面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ftmj" readonly>\n' +
                     '    </div>\n' +
@@ -581,7 +579,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".tdsylx").val(obj.data.useType)
                     $(".zl").val(obj.data.assetsLocation)
                     $("#date").val(obj.data.endTime)
-                    $(".co").val(obj.data.fkOwnId)
+                    $(".co").val(obj.data.owner)
                     $(".dh").val(obj.data.landNum)
                     $(".qdjz").val(obj.data.money)
                     $(".th").val(obj.data.picNum)
