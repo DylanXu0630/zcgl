@@ -79,28 +79,53 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '    <option value="">请选择</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
-                // '  </div>\n' + '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">单价</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input unitPrice">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">租金支付方式</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="zjzffs">\n' +
+                '        <option value="">请选择</option>\n' +
+                '        <option value="1">以十二个月为一周期支付</option>\n' +
+                '        <option value="2">以六个月为一周期支付</option>\n' +
+                '        <option value="4">以三个月为一周期支付</option>\n' +
+                '        <option value="12">以一个月为一周期支付</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '  </div>\n'+
+                 '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">保证金</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input unitPrice">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 // '  <div class="dialogDiv">\n' +
                 // '    <label class="layui-form-label">指导价</label>\n' +
                 // '    <div class="layui-input-block">\n' +
                 // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input guidePrice">\n' +
                 // '    </div>\n' +
                 // '  </div>\n' +
-                '  </div>\n' + '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">开始日期</label>\n' +
+                 '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">合同开始日期</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">终止日期</label>\n' +
+                '    <label class="layui-form-label">合同结束日期</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '       <input type="text" name="date" id="date2" autocomplete="off" class="layui-input httime">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">免租开始日期</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '       <input type="text" name="date" id="mdate" autocomplete="off" class="layui-input httime">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">免租结束日期</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '       <input type="text" name="date" id="mdate2" autocomplete="off" class="layui-input httime">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '</form></div>' +

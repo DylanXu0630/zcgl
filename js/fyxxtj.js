@@ -17,6 +17,7 @@ layui.use(['table', 'form'], function () {
         , url: IPzd + '/hresource/all?asc=0' //数据接口
         , method: "POST"
         , contentType: "application/json"
+        , async: true
         , page: true //开启分页
         , where: {//这里传参  向后台
             "agencyId": "",
@@ -83,7 +84,7 @@ layui.use(['table', 'form'], function () {
 
 
     /*添加点击事件*/
-    $("body").on("click", ".layui-btn.layui-btn-sm", function () {
+    $("body").on("click", ".layui-btn.layui-btn-sm.tj", function () {
         /*生成一个对象
         * 传入标题和内容
         * 生成弹窗
@@ -120,7 +121,8 @@ layui.use(['table', 'form'], function () {
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input lc">\n' +
                 '    </div>\n' +
-                '  </div>\n' + '  <div class="dialogDiv">\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">房号</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fh">\n' +
@@ -150,12 +152,14 @@ layui.use(['table', 'form'], function () {
                 '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjzj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">管理单位</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">管理单位</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="gldw manageUnit">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 // '  <div class="dialogDiv">\n' +
                 // '    <label class="layui-form-label">房产所有人</label>\n' +
                 // '    <div class="layui-input-block">\n' +
@@ -237,20 +241,20 @@ layui.use(['table', 'form'], function () {
                 '</div>' +
                 '</div>',
             add: function () {
-                
-                if ($(".fymc").val()==""){
+
+                if ($(".fymc").val() == "") {
                     layer.msg("房源名称不能为空！")
                 } else {
-                    if ($(".houseZh").val()==""){
+                    if ($(".houseZh").val() == "") {
                         layer.msg("房产不能为空！")
                     } else {
-                        if ($(".yqly").val()==""){
+                        if ($(".yqly").val() == "") {
                             layer.msg("园区不能为空！")
                         } else {
-                            if ($(".fymj").val()==""){
+                            if ($(".fymj").val() == "") {
                                 layer.msg("房源面积不能为空！")
                             } else {
-                                if ($(".zdj").val()==""){
+                                if ($(".zdj").val() == "") {
                                     layer.msg("指导价不能为空！")
                                 } else {
                                     var data = {
@@ -268,7 +272,8 @@ layui.use(['table', 'form'], function () {
                                         "originRentCharge": $(".ylzj").val(),
                                         "realRentCharge": $(".sjzj").val(),
                                         "guideRentCharge": $(".zdj").val(),
-                                        "park": $(".yqly").val()
+                                        "park": $(".yqly").val(),
+                                        "fkAgencyId": $(".gldw.manageUnit").val()
                                     }
 
                                     $.ajax({
@@ -305,14 +310,55 @@ layui.use(['table', 'form'], function () {
                         }
                     }
                 }
-                
+
 
             },
         }
         /*调用弹窗方法*/
         layerOpen(openMes);
+        getgldw()
         getfczh()
         form.render('select')
+    })
+
+    /*导入点击事件*/
+    $("body").on("click", ".layui-btn.layui-btn-sm.dr", function () {
+        if ($("#uploadFile").val() == "") {
+            layer.msg("导入前请先选择文件！")
+        } else {
+            var formData = new FormData();
+            formData.append("file", $("#uploadFile")[0].files[0]);
+
+            var reg = /^.*\.(?:xls|xlsx)$/i;//文件名可以带空格
+            if (!reg.test($("#uploadFile").val())) {//校验不通过
+                layer.msg("请选择excel格式的文件!")
+            } else {
+                $.ajax({
+                    url: IPzd + "/io/houseresource",
+                    type: 'POST',
+                    async: false,
+                    data: formData,
+                    // 告诉jQuery不要去处理发送的数据
+                    processData: false,
+                    // 告诉jQuery不要去设置Content-Type请求头
+                    contentType: false,
+                    beforeSend: function () {
+                        layer.msg("正在导入！")
+                    },
+                    success: function (responseStr) {
+                        var file = $("#uploadFile");
+                        $(file).val('');
+                        table.reload('tableList');
+                        layer.msg("导入成功！")
+                    }
+                });
+            }
+        }
+    })
+
+    /*模板下载点击事件*/
+    $("body").on("click", ".layui-btn.layui-btn-sm.mbxz", function () {
+        window.location.href = "../model/房源模板.xlsx"
     })
 
 
@@ -324,7 +370,7 @@ layui.use(['table', 'form'], function () {
                 $.ajax({
                     url: IPzd + '/hresource/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
                     contentType: "application/json;charset=UTF-8",
                     // headers: {"token": sessionStorage.token},
@@ -416,6 +462,14 @@ layui.use(['table', 'form'], function () {
                     '    <label class="layui-form-label">实际租金(月/元)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjzj">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">管理单位</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="gldw manageUnit">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -517,10 +571,11 @@ layui.use(['table', 'form'], function () {
                     '</div>',
                 look: function () {
                     getfczh()
+                    getgldw()
                     $.ajax({
                         url: IPzd + '/hresource/' + obj.data.id,    //请求的url地址
                         dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                         type: "GET",   //请求方式
                         contentType: "application/json;charset=UTF-8",
                         // headers: {"token": sessionStorage.token},
@@ -530,8 +585,8 @@ layui.use(['table', 'form'], function () {
                         success: function (req) {
                             if (req.status == "200") {
                                 getfczh()
-                                $(".yqly").val(req.data.manageUnit)
-                                $(".gldw").val(req.data.manageUnit)
+                                $(".yqly").val(req.data.park)
+                                // $(".gldw").val(req.data.manageUnit)
                                 $(".lc").val(req.data.buildLevel)
                                 $(".lh").val(req.data.buildNo)
                                 $(".fh").val(req.data.buildRoom)
@@ -542,7 +597,7 @@ layui.use(['table', 'form'], function () {
                                 $(".fymc").val(req.data.assetsName)
                                 $(".cszt").val(req.data.sellCode)
                                 $(".czzt").val(req.data.rentCode)
-                                $(".gldw").val(req.data.manageUnit)
+                                $(".gldw").val(req.data.agencyId)
                                 $(".dczl").val(req.data.landLocation)
                                 $(".tdyyz").val(req.data.landOwner)
                                 $(".dh").val(req.data.landNum)
@@ -581,11 +636,12 @@ layui.use(['table', 'form'], function () {
                         "originRentCharge": $(".ylzj").val(),
                         "realRentCharge": $(".sjzj").val(),
                         "guideRentCharge": $(".zdj").val(),
+                        "fkAgencyId": $(".gldw.manageUnit").val()
                     }
                     $.ajax({
                         url: IPzd + '/hresource',    //请求的url地址
                         dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
                         type: "PUT",   //请求方式
                         contentType: "application/json;charset=UTF-8",
@@ -683,6 +739,12 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">管理单位</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fygldw" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">出租状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input czzt" readonly>\n' +
@@ -703,7 +765,7 @@ layui.use(['table', 'form'], function () {
                     '<div class="dialogTitle">房屋产证信息</div>' +
 
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房产证号码</label>\n' +
+                    '    <label class="layui-form-label">房屋产权</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input houseZh" readonly>\n' +
                     '    </div>\n' +
@@ -715,12 +777,12 @@ layui.use(['table', 'form'], function () {
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zlc" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">管理单位</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input gldw" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
+                    // '  <div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">管理单位</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input gldw" readonly>\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房产拥有者</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -781,7 +843,7 @@ layui.use(['table', 'form'], function () {
                     $.ajax({
                         url: IPzd + '/hresource/' + obj.data.id,    //请求的url地址
                         dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                         type: "GET",   //请求方式
                         contentType: "application/json;charset=UTF-8",
                         // headers: {"token": sessionStorage.token},
@@ -790,7 +852,7 @@ layui.use(['table', 'form'], function () {
                         },
                         success: function (req) {
                             if (req.status == "200") {
-                                $(".yqly").val(req.data.manageUnit)
+                                $(".yqly").val(req.data.park)
                                 $(".gldw").val(req.data.manageUnit)
                                 $(".lc").val(req.data.buildLevel)
                                 $(".lh").val(req.data.buildNo)
@@ -802,7 +864,8 @@ layui.use(['table', 'form'], function () {
                                 $(".fymc").val(req.data.assetsName)
                                 $(".cszt").val(req.data.sellStatus)
                                 $(".czzt").val(req.data.rentStatus)
-                                $(".gldw").val(req.data.manageUnit)
+                                $(".fygldw").val(req.data.agency)
+                                $(".gldw").val(req.data.houseOwner)
                                 $(".dczl").val(req.data.landLocation)
                                 $(".tdyyz").val(req.data.landOwner)
                                 $(".dh").val(req.data.landNum)
@@ -867,7 +930,7 @@ function sgetfczh() {
     $.ajax({
         url: IPzd + '/assets/house/menu',    //请求的url地址
         dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
         contentType: "application/json;charset=UTF-8",
         // headers: {"token": sessionStorage.token},

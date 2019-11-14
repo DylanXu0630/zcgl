@@ -17,6 +17,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         , url: IPzd + '/assets/house/all?asc=0' //数据接口
         , method: "POST"
         , contentType: "application/json"
+        ,async: true
         , where: {
             "agencyId": "",
             "location": "",
@@ -94,7 +95,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 $.ajax({
                     url: IPzd + '/assets/house/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
                     contentType: "application/json;charset=UTF-8",
                     // headers: {"token": sessionStorage.token},
@@ -296,7 +297,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $.ajax({
                         url: IPzd + '/assets/house',    //请求的url地址
                         dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
                         type: "PUT",   //请求方式
                         contentType: "application/json;charset=UTF-8",
@@ -636,7 +637,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">备注</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required    placeholder="请输入"  autocomplete="off" class="layui-input remark">\n' +
+                '      <input type="text" name="title" required placeholder="请输入"  autocomplete="off" class="layui-input remark">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
@@ -665,7 +666,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 $.ajax({
                     url: IPzd + '/assets/house',    //请求的url地址
                     dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                     data: JSON.stringify(data),    //参数值
                     type: "POST",   //请求方式
                     contentType: "application/json;charset=UTF-8",
@@ -725,7 +726,7 @@ function getOneUser() {
     $.ajax({
         url: IPzd + '/assets/house',    //请求的url地址
         dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
         data: JSON.stringify(data),    //参数值
         type: "POST",   //请求方式
         contentType: "application/json;charset=UTF-8",

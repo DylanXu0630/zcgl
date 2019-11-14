@@ -24,6 +24,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         , url: IPzd + '/assets/land/all?asc=0' //数据接口
         , method: "POST"
         , contentType: "application/json"
+        , async: true
         , where: {
             "landNum": "",
             "location": "",
@@ -206,7 +207,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                             $.ajax({
                                 url: IPzd + '/assets/land',    //请求的url地址
                                 dataType: "json",   //返回格式为json
-                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                                 data: JSON.stringify(data),    //参数值
                                 type: "POST",   //请求方式
                                 contentType: "application/json;charset=UTF-8",
@@ -263,7 +264,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 $.ajax({
                     url: IPzd + '/assets/land/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
                     contentType: "application/json;charset=UTF-8",
                     // headers: {"token": sessionStorage.token},
@@ -438,7 +439,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                 $.ajax({
                                     url: IPzd + '/assets/land',    //请求的url地址
                                     dataType: "json",   //返回格式为json
-                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                    async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                                     data: JSON.stringify(data),    //参数值
                                     type: "PUT",   //请求方式
                                     contentType: "application/json;charset=UTF-8",

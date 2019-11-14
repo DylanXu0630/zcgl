@@ -16,6 +16,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         , url: IPzd + '/deal/all?asc=0' //数据接口
         , method: "POST"
         , contentType: "application/json"
+        ,async: true
         , where: {}
         , page: true //开启分页
         , cols: [[ //表头
@@ -119,7 +120,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 $.ajax({
                     url: IPzd + '/deal',    //请求的url地址
                     dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                     data: JSON.stringify(data),    //参数值
                     type: "POST",   //请求方式
                     contentType: "application/json;charset=UTF-8",
@@ -534,7 +535,7 @@ function getfy() {
     $.ajax({
         url: IPzd + '/hresource/simple',    //请求的url地址
         dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
         contentType: "application/json;charset=UTF-8",
         // headers: {"token": sessionStorage.token},
@@ -567,7 +568,7 @@ function getyf() {
     $.ajax({
         url: IPzd + '/renter/all',    //请求的url地址
         dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
         contentType: "application/json;charset=UTF-8",
         // headers: {"token": sessionStorage.token},
