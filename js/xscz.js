@@ -128,6 +128,18 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '       <input type="text" name="date" id="mdate2" autocomplete="off" class="layui-input httime">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">合同类型</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="zjzffs">\n' +
+                '        <option value="">请选择</option>\n' +
+                '        <option value="1">协商出租</option>\n' +
+                '        <option value="2">一事一议</option>\n' +
+                '        <option value="4">挂靠合同</option>\n' +
+                '        <option value="12">资产出售</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '  </div>\n'+
                 '</form></div>' +
                 '</div>' +
                 '</div>',
