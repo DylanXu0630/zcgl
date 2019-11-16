@@ -368,7 +368,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">面积</label>\n' +
+                    '    <label class="layui-form-label">面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input mj" readonly>\n' +
                     '    </div>\n' +
@@ -386,19 +386,19 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">租赁期限（天）</label>\n' +
+                    '    <label class="layui-form-label">租赁期限（月）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zpqxt" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">原价</label>\n' +
+                    '    <label class="layui-form-label">原价(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">实际价</label>\n' +
+                    '    <label class="layui-form-label">实际价(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjj" readonly>\n' +
                     '    </div>\n' +
@@ -410,7 +410,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     // '    </div>\n' +
                     // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">指导价</label>\n' +
+                    '    <label class="layui-form-label">指导价(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zdj" readonly>\n' +
                     '    </div>\n' +
@@ -469,7 +469,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".mj").val(req.data.detailDeal.resourceArea)
                                 $(".fyyc").val(req.data.detailDeal.houseUsage)
                                 $(".gldw").val(req.data.detailDeal.manageUnit)
-                                $(".zpqxt").val(req.data.detailDeal.rentDay)
+                                $(".zpqxt").val(req.data.detailDeal.rentMonth)
                                 $(".yj").val(req.data.detailDeal.originRentCharge)
                                 $(".zdj").val(req.data.detailDeal.guideRentCharge)
                                 $(".sjj").val(req.data.detailDeal.realRentCharge)

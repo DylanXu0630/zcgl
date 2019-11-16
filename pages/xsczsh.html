@@ -120,7 +120,6 @@
         <div class="layui-card">
             <div class="layui-card-header">协商出租合同审核列表</div>
             <div class="layui-card-body" style="padding: 15px;">
-                <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
                 <table class="layui-hide" id="tableList" lay-filter="test"></table>
             </div>
         </div>
@@ -130,12 +129,14 @@
 
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">审核</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="yes">通过</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="no">不通过</a>
 </script>
 <script src="../public/js/jquery.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../public/js/public.js"></script>
 <script src="../js/page.js"></script>
-<script src="../js/ysyysh.js"></script>
+<script src="../js/xsczsh.js"></script>
 </body>
 </html>
