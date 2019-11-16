@@ -451,7 +451,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 look: function () {
                     var year = getYear()
                     $.ajax({
-                        url: IPzd + '/rent/detail/' + obj.data.id + '/' + year,    //请求的url地址
+                        url: IPzd + '/rent/detail/' + obj.data.id ,    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         type: "GET",   //请求方式
@@ -480,7 +480,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".ysMoney").children().remove()
                                 $(".ssMoney").children().remove()
                                 $(".qkMoney").children().remove()
-                                var mouthTd = $("<td>月份</td>").appendTo(".tableMouth")
+                                var mouthTd = $("<td>时间</td>").appendTo(".tableMouth")
                                 var ysTd = $("<td>应收（元）</td>").appendTo(".ysMoney")
                                 var ssTd = $("<td>实收（元）</td>").appendTo(".ssMoney")
                                 var qfTd = $("<td>欠费（元）</td>").appendTo(".qkMoney")

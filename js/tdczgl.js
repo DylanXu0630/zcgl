@@ -103,7 +103,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>土地权利人</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>土地使用权人</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="co">\n' +
                 '    <option value="">请选择</option>\n' +
@@ -181,7 +181,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             add: function () {
 
                 if ($(".cqmz").val() == "") {
-                    layer.msg("产权名称不能为空！")
+                    layer.msg("土地证号不能为空！")
                 } else {
                     if ($(".co").val() == "") {
                         layer.msg("土地权利人不能空！")
@@ -313,7 +313,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>土地权利人</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>土地使用权人</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="co">\n' +
                     '    <option value="">请选择</option>\n' +
@@ -413,7 +413,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 },
                 put: function () {
                     if ($(".cqmz").val() == "") {
-                        layer.msg("产权名称不能为空！")
+                        layer.msg("土地证号不能为空！")
                     } else {
                         if ($(".co").val() == "") {
                             layer.msg("土地权利人不能空！")
@@ -497,7 +497,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地权利人</label>\n' +
+                    '    <label class="layui-form-label">土地使用权人</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input co" readonly>\n' +
                     '    </div>\n' +

@@ -650,6 +650,7 @@ function getfkLandAssetsId() {
         }
     });
 }
+
 /*获取年月日
 * YYYY-MM-DD hh:mm:ss
 * */
@@ -671,15 +672,25 @@ function getzf(num) {
     }
     return num;
 }
+
 /*YYYY年MM月DD日 转 YYYY-MM-DD*/
 function zDate(str) {
     var str = str;
     var year = str.split('')[0] + str.split('')[1] + str.split('')[2] + str.split('')[3];
-    var month = str.split('')[5] + str.split('')[6];
-    var day = str.split('')[08]+str.split('')[9];
+    var monthArr = [parseInt(str.split('')[5]), parseInt(str.split('')[6])];
+    if (isNaN(monthArr[1])) {
+        monthArr[1] = ""
+    }
+    var month = monthArr.join("")
+    var dayArr = [parseInt(str.split('')[8]), parseInt(str.split('')[9])];
+    if (isNaN(dayArr[1])) {
+        dayArr[1] = ""
+    }
+    var day = dayArr.join("")
     var dateStr = year + "-" + month + "-" + day
     return dateStr
 }
+
 /*获取时间戳*/
 function sjc(str) {
     var str = zDate(str)
@@ -696,5 +707,25 @@ function clearNoNum(obj) {
     obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
     if (obj.value.indexOf(".") < 0 && obj.value != "") {//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
         obj.value = parseFloat(obj.value);
+    }
+}
+
+/*检验是否是数字证书*/
+function checkNum(obj) {
+    obj.value = obj.value.replace(/[^\d]/g, "");
+}
+
+/*检验输入的月份*/
+function checkMouth(mon, num) {
+    var ys = mon % num
+    var zs = parseInt(mon / num)
+    if (parseInt(mon) >= parseInt(num)) {
+        if (ys !== 0) {
+            return false
+        } else {
+            return true
+        }
+    } else {
+        return false
     }
 }

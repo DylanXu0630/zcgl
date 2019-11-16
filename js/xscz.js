@@ -51,9 +51,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">合同名称</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>合同名称</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dealName">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为选填项" autocomplete="off" class="layui-input dealName">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 // '  <div class="dialogDiv">\n' +
@@ -65,7 +65,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 // '    </div>\n' +
                 // '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">房源</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="houseFy">\n' +
                 '    <option value="">请选择</option>\n' +
@@ -73,7 +73,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">承租人（乙方）</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>承租人（乙方）</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="yf">\n' +
                 '    <option value="">请选择</option>\n' +
@@ -81,21 +81,33 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">租金支付方式</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>租金支付方式</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="zjzffs">\n' +
+                '      <select class="zjzfType">\n' +
                 '        <option value="">请选择</option>\n' +
-                '        <option value="1">以十二个月为一周期支付</option>\n' +
-                '        <option value="2">以六个月为一周期支付</option>\n' +
-                '        <option value="4">以三个月为一周期支付</option>\n' +
-                '        <option value="12">以一个月为一周期支付</option>\n' +
+                '        <option value="12">以十二个月为一周期支付</option>\n' +
+                '        <option value="6">以六个月为一周期支付</option>\n' +
+                '        <option value="3">以三个月为一周期支付</option>\n' +
+                '        <option value="1">以一个月为一周期支付</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
-                '  </div>\n'+
-                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">保证金</label>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>合同类型</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input unitPrice">\n' +
+                '      <select class="htType">\n' +
+                '        <option value="">请选择</option>\n' +
+                '        <option value="1">协商出租</option>\n' +
+                '        <option value="2">一事一议</option>\n' +
+                '        <option value="3">挂靠合同</option>\n' +
+                '        <option value="4">资产出售</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 // '  <div class="dialogDiv">\n' +
@@ -104,84 +116,103 @@ layui.use(['laydate', 'table', 'form'], function () {
                 // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input guidePrice">\n' +
                 // '    </div>\n' +
                 // '  </div>\n' +
-                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">合同开始日期</label>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>合同开始日期</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">合同结束日期</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>租赁月份(月)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '       <input type="text" name="date" id="date2" autocomplete="off" class="layui-input httime">\n' +
+                '      <input type="text" name="title" required onkeyup="checkNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zsMouth">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">免租开始日期</label>\n' +
+                '    <label class="layui-form-label">免租月份(月)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '       <input type="text" name="date" id="mdate" autocomplete="off" class="layui-input httime">\n' +
+                '      <input type="text" name="title" required onkeyup="checkNum(this)" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input mzMouth">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">免租结束日期</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '       <input type="text" name="date" id="mdate2" autocomplete="off" class="layui-input httime">\n' +
-                '    </div>\n' +
-                '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">合同类型</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <select class="zjzffs">\n' +
-                '        <option value="">请选择</option>\n' +
-                '        <option value="1">协商出租</option>\n' +
-                '        <option value="2">一事一议</option>\n' +
-                '        <option value="4">挂靠合同</option>\n' +
-                '        <option value="12">资产出售</option>\n' +
-                '     </select>\n' +
-                '    </div>\n' +
-                '  </div>\n'+
                 '</form></div>' +
                 '</div>' +
                 '</div>',
             add: function () {
-                var data = {
-                    "createdBy": user,
-                    "dealName": $(".dealName").val(),
-                    "endTime": sjc($("#date2").val() + " 23:59:59"),
-                    "fkHouseResourceId": $(".houseFy").val(),
-                    "fkRenterId": $(".yf").val(),
-                    "startTime": sjc($("#date").val() + " 00:00:00"),
-                }
+                if ($(".dealName").val() !== "") {
+                    if ($(".houseFy").val() !== "") {
+                        if ($(".yf").val() !== "") {
+                            if ($(".bzj").val() !== "") {
+                                if ($("#date").val() !== "") {
+                                    if ($(".zsMouth").val() !== "") {
+                                        if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
+                                            if ($(".zsMouth").val() !== "") {
+                                                var data = {
+                                                    "createdBy": user,
+                                                    "dealName": $(".dealName").val(),
+                                                    "rentMonth": $(".zsMouth").val(),
+                                                    "fkHouseResourceId": $(".houseFy").val(),
+                                                    "fkRenterId": $(".yf").val(),
+                                                    "startTime": sjc($("#date").val() + " 00:00:00"),
+                                                    "payType": $(".zjzfType").val(),
+                                                    "deposit": $(".bzj").val(),
+                                                    "freeRentMonth": $(".mzMouth").val(),
+                                                    "dealType": $(".htType").val()
+                                                }
 
-                $.ajax({
-                    url: IPzd + '/deal',    //请求的url地址
-                    dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                    data: JSON.stringify(data),    //参数值
-                    type: "POST",   //请求方式
-                    contentType: "application/json;charset=UTF-8",
-                    // headers: {"token": sessionStorage.token},
-                    beforeSend: function () {
-                        //请求前的处理
-                    },
-                    success: function (req) {
-                        if (req.status == "200") {
-                            layer.close(indexDig);
-                            layer.msg("添加成功")
-                            //执行重载
-                            table.reload('tableList');
+                                                $.ajax({
+                                                    url: IPzd + '/deal',    //请求的url地址
+                                                    dataType: "json",   //返回格式为json
+                                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                    data: JSON.stringify(data),    //参数值
+                                                    type: "POST",   //请求方式
+                                                    contentType: "application/json;charset=UTF-8",
+                                                    // headers: {"token": sessionStorage.token},
+                                                    beforeSend: function () {
+                                                        //请求前的处理
+                                                    },
+                                                    success: function (req) {
+                                                        if (req.status == "200") {
+                                                            layer.close(indexDig);
+                                                            layer.msg("添加成功")
+                                                            //执行重载
+                                                            table.reload('tableList');
+                                                        } else {
+                                                            layer.msg(req.msg)
+                                                        }
+
+                                                    },
+                                                    complete: function () {
+                                                        //请求完成的处理
+                                                    },
+                                                    error: function () {
+                                                        //请求出错处理
+                                                    }
+                                                });
+                                            } else {
+                                                layer.msg("合同类型不能为空！")
+                                            }
+
+                                        } else {
+                                            layer.msg("租金支付方式与租赁月份为倍数关系且不能小于租金支付的月份！")
+                                        }
+                                    } else {
+                                        layer.msg("租赁月份不能为空！")
+                                    }
+                                } else {
+                                    layer.msg("合同开始日期不能为空！")
+                                }
+                            } else {
+                                layer.msg("保证金不能为空！")
+                            }
                         } else {
-                            layer.msg("添加失败")
+                            layer.msg("承租人不能为空！")
                         }
-
-                    },
-                    complete: function () {
-                        //请求完成的处理
-                    },
-                    error: function () {
-                        //请求出错处理
+                    } else {
+                        layer.msg("房源不能为空！")
                     }
-                });
+                } else {
+                    layer.msg("合同名称不能为空！")
+                }
             },
         }
         /*调用弹窗方法*/
@@ -250,9 +281,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">合同名称</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>合同名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dealName">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="*为选填项" autocomplete="off" class="layui-input dealName">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     // '  <div class="dialogDiv">\n' +
@@ -264,7 +295,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     // '    </div>\n' +
                     // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房源</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="houseFy">\n' +
                     '    <option value="">请选择</option>\n' +
@@ -272,34 +303,65 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">承租人（乙方）</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>承租人（乙方）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="yf">\n' +
                     '    <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
-                    // '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    // '    <label class="layui-form-label">单价</label>\n' +
-                    // '    <div class="layui-input-block">\n' +
-                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input unitPrice">\n' +
-                    // '    </div>\n' +
-                    // '  </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>租金支付方式</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="zjzfType">\n' +
+                    '        <option value="">请选择</option>\n' +
+                    '        <option value="12">以十二个月为一周期支付</option>\n' +
+                    '        <option value="6">以六个月为一周期支付</option>\n' +
+                    '        <option value="3">以三个月为一周期支付</option>\n' +
+                    '        <option value="1">以一个月为一周期支付</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>合同类型</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="htType">\n' +
+                    '        <option value="">请选择</option>\n' +
+                    '        <option value="1">协商出租</option>\n' +
+                    '        <option value="2">一事一议</option>\n' +
+                    '        <option value="3">挂靠合同</option>\n' +
+                    '        <option value="4">资产出售</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
                     // '  <div class="dialogDiv">\n' +
                     // '    <label class="layui-form-label">指导价</label>\n' +
                     // '    <div class="layui-input-block">\n' +
                     // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input guidePrice">\n' +
                     // '    </div>\n' +
                     // '  </div>\n' +
-                    '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">开始日期</label>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>合同开始日期</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">终止日期</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>租赁月份(月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '       <input type="text" name="date" id="date2" autocomplete="off" class="layui-input httime">\n' +
+                    '      <input type="text" name="title" required onkeyup="checkNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zsMouth">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">免租月份(月)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required onkeyup="checkNum(this)" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input mzMouth">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '</form></div>' +
@@ -309,11 +371,28 @@ layui.use(['laydate', 'table', 'form'], function () {
                     getfy()
                     getgldw()
                     getyf()
-                    $(".dealName").val(obj.data.dealName)
-                    $("#date2").val(obj.data.endTime)
-                    $(".houseFy").val(obj.data.resourceId)
-                    $(".yf").val(obj.data.renterId)
-                    $("#date").val(obj.data.startTime)
+                    $.ajax({
+                        url: IPzd + '/deal/detail/' + obj.data.id,    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        type: "GET",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            $(".dealName").val(req.data.dealName)
+                            $(".houseFy").val(req.data.resourceId)
+                            $(".yf").val(req.data.renterId)
+                            $(".zjzfType").val(req.data.payType)
+                            $(".htType").val(req.data.dealType)
+                            $(".bzj").val(req.data.deposit)
+                            $("#date").val(req.data.startTime)
+                            $(".zsMouth").val(req.data.rentMonth)
+                            $(".mzMouth").val(req.data.freeRentMonth)
+                        }
+                    })
                     lay('.httime').each(function () {
                         laydate.render({
                             elem: this,
@@ -322,49 +401,88 @@ layui.use(['laydate', 'table', 'form'], function () {
                     })
                 },
                 put: function () {
-                    var data = {
-                        "id": obj.data.id,
-                        "createdBy": user,
-                        "dealName": $(".dealName").val(),
-                        "endTime": sjc($("#date2").val() + " 23:59:59"),
-                        "fkHouseResourceId": $(".houseFy").val(),
-                        "fkRenterId": $(".yf").val(),
-                        "startTime": sjc($("#date").val() + " 00:00:00"),
+                    if ($(".dealName").val() !== "") {
+                        if ($(".houseFy").val() !== "") {
+                            if ($(".yf").val() !== "") {
+                                if ($(".bzj").val() !== "") {
+                                    if ($("#date").val() !== "") {
+                                        if ($(".zsMouth").val() !== "") {
+                                            if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
+                                                if ($(".zsMouth").val() !== "") {
+                                                    var data = {
+                                                        "id": obj.data.id,
+                                                        "createdBy": user,
+                                                        "dealName": $(".dealName").val(),
+                                                        "rentMonth": $(".zsMouth").val(),
+                                                        "fkHouseResourceId": $(".houseFy").val(),
+                                                        "fkRenterId": $(".yf").val(),
+                                                        "startTime": sjc($("#date").val() + " 00:00:00"),
+                                                        "payType": $(".zjzfType").val(),
+                                                        "deposit": $(".bzj").val(),
+                                                        "freeRentMonth": $(".mzMouth").val(),
+                                                        "dealType": $(".htType").val()
+                                                    }
+
+
+                                                    $.ajax({
+                                                        url: IPzd + '/deal',    //请求的url地址
+                                                        dataType: "json",   //返回格式为json
+                                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                        data: JSON.stringify(data),    //参数值
+                                                        type: "PUT",   //请求方式
+                                                        contentType: "application/json;charset=UTF-8",
+                                                        // headers: {"token": sessionStorage.token},
+                                                        beforeSend: function () {
+                                                            //请求前的处理
+                                                        },
+                                                        success: function (req) {
+                                                            if (req.status == "200") {
+                                                                layer.close(indexDig);
+                                                                layer.msg("修改成功")
+                                                                //执行重载
+                                                                table.reload('tableList', {
+                                                                    page: {
+                                                                        curr: 1 //重新从第 1 页开始
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                layer.msg("修改失败")
+                                                            }
+
+                                                        },
+                                                        complete: function () {
+                                                            //请求完成的处理
+                                                        },
+                                                        error: function () {
+                                                            //请求出错处理
+                                                        }
+                                                    });
+                                                } else {
+                                                    layer.msg("合同类型不能为空！")
+                                                }
+
+                                            } else {
+                                                layer.msg("租金支付方式与租赁月份为倍数关系且不能小于租金支付的月份！")
+                                            }
+                                        } else {
+                                            layer.msg("租赁月份不能为空！")
+                                        }
+                                    } else {
+                                        layer.msg("合同开始日期不能为空！")
+                                    }
+                                } else {
+                                    layer.msg("保证金不能为空！")
+                                }
+                            } else {
+                                layer.msg("承租人不能为空！")
+                            }
+                        } else {
+                            layer.msg("房源不能为空！")
+                        }
+                    } else {
+                        layer.msg("合同名称不能为空！")
                     }
 
-                    $.ajax({
-                        url: IPzd + '/deal',    //请求的url地址
-                        dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                        data: JSON.stringify(data),    //参数值
-                        type: "PUT",   //请求方式
-                        contentType: "application/json;charset=UTF-8",
-                        // headers: {"token": sessionStorage.token},
-                        beforeSend: function () {
-                            //请求前的处理
-                        },
-                        success: function (req) {
-                            if (req.status == "200") {
-                                layer.close(indexDig);
-                                layer.msg("修改成功")
-                                //执行重载
-                                table.reload('tableList', {
-                                    page: {
-                                        curr: 1 //重新从第 1 页开始
-                                    }
-                                });
-                            } else {
-                                layer.msg("修改失败")
-                            }
-
-                        },
-                        complete: function () {
-                            //请求完成的处理
-                        },
-                        error: function () {
-                            //请求出错处理
-                        }
-                    });
                 },
             }
             layerOpen(openMes);
@@ -379,6 +497,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
+                    '<div class="dialogTitle">合同基础信息</div>' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">合同名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -386,13 +505,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"> 管理单位 </label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input gldw" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">出租人（家方）</label>\n' +
+                    '    <label class="layui-form-label">出租人（甲方）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jf" readonly>\n' +
                     '    </div>\n' +
@@ -404,11 +517,33 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">面积</label>\n' +
+                    '    <label class="layui-form-label">开始日期</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">终止日期</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '       <input type="text" name="date" id="date2" autocomplete="off" class="layui-input httime" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+
+                    '<div class="dialogTitle">房源基础信息</div>' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"> 管理单位</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input gldw" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input mj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
+
+
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地址</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -428,13 +563,13 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">原价</label>\n' +
+                    '    <label class="layui-form-label">原价(元/m² *月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">实际价</label>\n' +
+                    '    <label class="layui-form-label">实际价(元/m² *月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjj" readonly>\n' +
                     '    </div>\n' +
@@ -446,24 +581,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     // '    </div>\n' +
                     // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">指导价</label>\n' +
+                    '    <label class="layui-form-label">指导价(元/m² *月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zdj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     // '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">开始日期</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">终止日期</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '       <input type="text" name="date" id="date2" autocomplete="off" class="layui-input httime" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',

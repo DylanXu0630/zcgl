@@ -198,7 +198,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋性质</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="fcxz  hourseType">\n' +
+                    '      <select class="fcxz hourseType">\n' +
                     '    <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
@@ -311,7 +311,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                 layer.msg("修改成功")
                                 var demoReload = $('#demoReload');
                                 //执行重载
-                                table.reload('idTest', {
+                                table.reload('tableList', {
                                     page: {
                                         curr: 1 //重新从第 1 页开始
                                     }
@@ -407,7 +407,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋性质</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="fcxz  hourseType" disabled>\n' +
+                    '      <select class="fcxz hourseType" disabled>\n' +
                     '    <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
@@ -596,7 +596,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">房屋性质</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="fcxz  hourseType">\n' +
+                '      <select class="fcxz hourseType">\n' +
                 '    <option value="">请选择</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
@@ -678,9 +678,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                         if (req.status == "200") {
                             layer.close(indexDig);
                             layer.msg("添加成功")
-                            var demoReload = $('#demoReload');
                             //执行重载
-                            table.reload('idTest', {
+                            table.reload('tableList', {
                                 page: {
                                     curr: 1 //重新从第 1 页开始
                                 }
@@ -722,39 +721,3 @@ layui.use(['table', 'laydate', 'form'], function () {
 })
 
 
-function getOneUser() {
-    $.ajax({
-        url: IPzd + '/assets/house',    //请求的url地址
-        dataType: "json",   //返回格式为json
-        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-        data: JSON.stringify(data),    //参数值
-        type: "POST",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            if (req.status == "200") {
-                layer.close(indexDig);
-                layer.msg("添加成功")
-                var demoReload = $('#demoReload');
-                //执行重载
-                table.reload('idTest', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                });
-            } else {
-                layer.msg("添加失败")
-            }
-
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
-}

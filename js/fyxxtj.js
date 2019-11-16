@@ -27,8 +27,8 @@ layui.use(['table', 'form'], function () {
             "buildRoom": "",
             "maxArea": "",
             "minArea": "",
-            "rentStatus": "",
-            "sellStatus": ""
+            "rentStatus": "-1",
+            "sellStatus": "-1"
         }
         , cols: [[ //表头
             {field: 'resourceName', title: '房源名称'},
@@ -135,19 +135,19 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">原来租金(月/元)</label>\n' +
+                '    <label class="layui-form-label">原来租金(元/m²/月)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ylzj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>指导价(月/元)</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>指导价(元/m²/月)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input zdj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">实际租金(月/元)</label>\n' +
+                '    <label class="layui-form-label">实际租金(元/m²/月)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjzj">\n' +
                 '    </div>\n' +
@@ -206,7 +206,7 @@ layui.use(['table', 'form'], function () {
                 '    <label class="layui-form-label">出租状态</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="czzt">\n' +
-                '         <option value="">请选择</option>\n' +
+                '         <option value="-1">请选择</option>\n' +
                 '         <option value="1">已出租</option>\n' +
                 '         <option value="0">未出租</option>\n' +
                 '     </select>\n' +
@@ -216,7 +216,7 @@ layui.use(['table', 'form'], function () {
                 '    <label class="layui-form-label">出售状态</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="cszt">\n' +
-                '         <option value="">请选择</option>\n' +
+                '         <option value="-1">请选择</option>\n' +
                 '         <option value="1">已出售</option>\n' +
                 '         <option value="0">未出售</option>\n' +
                 '     </select>\n' +
@@ -447,19 +447,19 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">原来租金(月/元)</label>\n' +
+                    '    <label class="layui-form-label">原来租金(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ylzj">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>指导价(月/元)</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>指导价(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input zdj">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">实际租金(月/元)</label>\n' +
+                    '    <label class="layui-form-label">实际租金(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjzj">\n' +
                     '    </div>\n' +
@@ -476,7 +476,7 @@ layui.use(['table', 'form'], function () {
                     '    <label class="layui-form-label">出租状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="czzt">\n' +
-                    '         <option value="">请选择</option>\n' +
+                    '         <option value="-1">请选择</option>\n' +
                     '         <option value="1">已出租</option>\n' +
                     '         <option value="0">未出租</option>\n' +
                     '     </select>\n' +
@@ -486,7 +486,7 @@ layui.use(['table', 'form'], function () {
                     '    <label class="layui-form-label">出售状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="cszt">\n' +
-                    '         <option value="">请选择</option>\n' +
+                    '         <option value="-1">请选择</option>\n' +
                     '         <option value="1">已出售</option>\n' +
                     '         <option value="0">未出售</option>\n' +
                     '     </select>\n' +
@@ -721,19 +721,19 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">原来租金(月/元)</label>\n' +
+                    '    <label class="layui-form-label">原来租金(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ylzj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">指导价(月/元)</label>\n' +
+                    '    <label class="layui-form-label">指导价(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zdj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">实际租金(月/元)</label>\n' +
+                    '    <label class="layui-form-label">实际租金(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjzj" readonly>\n' +
                     '    </div>\n' +
@@ -930,7 +930,7 @@ function sgetfczh() {
     $.ajax({
         url: IPzd + '/assets/house/menu',    //请求的url地址
         dataType: "json",   //返回格式为json
-        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
         contentType: "application/json;charset=UTF-8",
         // headers: {"token": sessionStorage.token},
