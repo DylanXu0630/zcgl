@@ -26,7 +26,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             , {field: 'startTime', title: '开始时间',}
             , {field: 'endTime', title: '结束时间',}
             , {
-                fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 165,
+                fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 220,
             }
         ]], parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
             return {
@@ -372,7 +372,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '</div>' +
                     '</div>',
                 look: function () {
-                    allgetfy()
+                    getfy()
                     getgldw()
                     getyf()
                     $.ajax({
@@ -650,6 +650,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                 }
             }
             layerOpen(openMes);
+        }else if (layEvent == 'dy'){
+            localStorage.htId = obj.data.id
+            window.open('../fwzpht.html')
         }
     });
 })
