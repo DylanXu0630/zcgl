@@ -32,7 +32,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'assetsName', title: '土地证号'}
+            {field: 'assetsName', title: '土地名称'}
             , {field: 'owner', title: '土地使用权人'}
             , {field: 'assetsLocation', title: '座落'}
             , {field: 'landNum', title: '地号'}
@@ -89,7 +89,8 @@ layui.use(['table', 'laydate', 'form'], function () {
         * 生成弹窗
         * */
         var openMes = {
-            title: '产权单位添加',
+            title: '土地产证添加',
+            area:['1300px','650px'],
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
@@ -97,7 +98,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>土地名称</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="title" placeholder="*为必填项" autocomplete="off" class="layui-input cqmz">\n' +
                 '    </div>\n' +
@@ -181,7 +182,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             add: function () {
 
                 if ($(".cqmz").val() == "") {
-                    layer.msg("土地证号不能为空！")
+                    layer.msg("土地名称不能为空！")
                 } else {
                     if ($(".co").val() == "") {
                         layer.msg("土地权利人不能空！")
@@ -298,7 +299,8 @@ layui.use(['table', 'laydate', 'form'], function () {
         } else if (layEvent === 'edit') {
             /*编辑操作;*/
             var openMes = {
-                title: '编辑系统用户',
+                title: '编辑土地产证',
+                area:['1300px','650px'],
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -307,7 +309,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>土地名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input cqmz">\n' +
                     '    </div>\n' +
@@ -413,7 +415,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 },
                 put: function () {
                     if ($(".cqmz").val() == "") {
-                        layer.msg("土地证号不能为空！")
+                        layer.msg("土地名称不能为空！")
                     } else {
                         if ($(".co").val() == "") {
                             layer.msg("土地权利人不能空！")
@@ -483,15 +485,16 @@ layui.use(['table', 'laydate', 'form'], function () {
         } else if (layEvent == 'detail') {
             /*查看操作*/
             var openMes = {
-                title: '查看系统用户',
+                title: '查看土地产证',
                 leixing: '查看',
+                area:['1300px','650px'],
                 maxmin: true,
                 id: obj.data.id,
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地证号</label>\n' +
+                    '    <label class="layui-form-label">土地名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input cqmz" readonly>\n' +
                     '    </div>\n' +

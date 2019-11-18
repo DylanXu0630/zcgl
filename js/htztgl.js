@@ -13,9 +13,7 @@ layui.use(['table', 'form'], function () {
     table.render({
         elem: '#tableList'
         , id: 'idTest'
-        , toolbar: '#toolbarDemo'
-
-        , url: IPzd+'/dic/deal/status?asc=1'//数据接口
+        , url: IPzd + '/dic/deal/status?asc=1'//数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
@@ -26,10 +24,10 @@ layui.use(['table', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            { field: 'name', title: '合同状态'}    
-            , { fixed: 'right', title: '操作', toolbar: '#barDemo',width:200 }
+            { field: 'name', title: '合同状态' }
+            , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200 }
         ]]
-        
+
     });
     // table.reload;
 
@@ -41,7 +39,7 @@ layui.use(['table', 'form'], function () {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
 
-                    url: IPzd+'/dic/deal/status/' + obj.data.id, //数据接口
+                    url: IPzd + '/dic/deal/status/' + obj.data.id, //数据接口
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -83,14 +81,15 @@ layui.use(['table', 'form'], function () {
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
+                area: ['500px', '250px'],
                 id: obj.data.id,
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
-                    '<div><form class="layui-form" lay-filter="look" action="">\n' +
-                    '  <div class="dialogDiv">\n' +
+                    '<div><form class="layui-form" action="">\n' +
+                    '<div class="dialogDiv"style="width:88%;margin-top:50px">\n' +
                     '    <label class="layui-form-label">合同状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="合同状态是必填项" autocomplete="off" class="layui-input name">\n' +
+                    '      <input type="text" name="title"  placeholder="必填项，请输入"  autocomplete="off" class="layui-input name ">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -105,41 +104,46 @@ layui.use(['table', 'form'], function () {
                         "id": obj.data.id,
                         "name": $(".name").val(),
                     }
+                    if ($(".name").val().length > 0) {
 
-                    $.ajax({
-                        url: IPzd+'/dic/deal/status', //数据接口
-                        dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                        data: JSON.stringify(data),    //参数值
-                        type: "PUT",   //请求方式
-                        contentType: "application/json;charset=UTF-8",
-                        // headers: {"token": sessionStorage.token},
-                        beforeSend: function () {
-                            //请求前的处理
-                        },
-                        success: function (req) {
-                            if (req.status == "200") {
-                                layer.close(indexDig);
-                                layer.msg("修改成功")
-                                var demoReload = $('#demoReload');
-                                //执行重载
-                                table.reload('idTest', {
-                                    page: {
-                                        curr: 1 //重新从第 1 页开始
-                                    }
-                                });
-                            } else {
-                                layer.msg("修改失败")
+                        $.ajax({
+                            url: IPzd + '/dic/deal/status', //数据接口
+                            dataType: "json",   //返回格式为json
+                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                            data: JSON.stringify(data),    //参数值
+                            type: "PUT",   //请求方式
+                            contentType: "application/json;charset=UTF-8",
+                            // headers: {"token": sessionStorage.token},
+                            beforeSend: function () {
+                                //请求前的处理
+                            },
+                            success: function (req) {
+                                if (req.status == "200") {
+                                    layer.close(indexDig);
+                                    layer.msg("修改成功")
+                                    var demoReload = $('#demoReload');
+                                    //执行重载
+                                    table.reload('idTest', {
+                                        page: {
+                                            curr: 1 //重新从第 1 页开始
+                                        }
+                                    });
+                                } else {
+                                    layer.msg("修改失败")
+                                }
+
+                            },
+                            complete: function () {
+                                //请求完成的处理
+                            },
+                            error: function () {
+                                //请求出错处理
                             }
+                        });
+                    } else {
+                        layer.msg("合同状态不能为空")
+                    }
 
-                        },
-                        complete: function () {
-                            //请求完成的处理
-                        },
-                        error: function () {
-                            //请求出错处理
-                        }
-                    });
                 },
             }
 
@@ -164,14 +168,15 @@ layui.use(['table', 'form'], function () {
             title: '添加合同状态',
             leixing: '添加',
             maxmin: true,
+            area: ['500px', '250px'],
             btn: ['确定', '取消'],
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
-                '<div class="dialogDiv">\n' +
+                '<div class="dialogDiv"style="width:88%;margin-top:50px">\n' +
                 '    <label class="layui-form-label">合同状态</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="合同状态是必填项" autocomplete="off" class="layui-input nickname ">\n' +
+                '      <input type="text" name="title"  placeholder="必填项，请输入"  autocomplete="off" class="layui-input name ">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
@@ -179,84 +184,51 @@ layui.use(['table', 'form'], function () {
                 '</div>',
             add: function () {
                 var data = {
-                    "name": $(".nickname").val(),
+                    "name": $(".name").val(),
                 }
 
-                $.ajax({
-                    url: IPzd+'/dic/deal/status', //数据接口
-                    dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                    data: JSON.stringify(data),    //参数值
-                    type: "POST",   //请求方式
-                    contentType: "application/json;charset=UTF-8",
-                    // headers: {"token": sessionStorage.token},
-                    beforeSend: function () {
-                        //请求前的处理
-                    },
-                    success: function (req) {
-                        if (req.status == "200") {
-                            layer.close(indexDig);
-                            layer.msg("添加成功")
-                            var demoReload = $('#demoReload');
-                            //执行重载
-                            table.reload('idTest', {
-                                page: {
-                                    curr: 1 //重新从第 1 页开始
-                                }
-                            });
-                        } else {
-                            layer.msg("添加失败")
-                        }
+                if ($(".name").val().length > 0) {
+                    $.ajax({
+                        url: IPzd + '/dic/deal/status', //数据接口
+                        dataType: "json",   //返回格式为json
+                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        data: JSON.stringify(data),    //参数值
+                        type: "POST",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            if (req.status == "200") {
+                                layer.close(indexDig);
+                                layer.msg("添加成功")
+                                var demoReload = $('#demoReload');
+                                //执行重载
+                                table.reload('idTest', {
+                                    page: {
+                                        curr: 1 //重新从第 1 页开始
+                                    }
+                                });
+                            } else {
+                                layer.msg("添加失败")
+                            }
 
-                    },
-                    complete: function () {
-                        //请求完成的处理
-                    },
-                    error: function () {
-                        //请求出错处理
-                    }
-                });
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
+                } else {
+                    layer.msg("合同状态不能为空")
+                }
+
             },
         }
         /*调用弹窗方法*/
         layerOpen(openMes);
     })
 })
-
-
-function getOneUser() {
-    $.ajax({
-        url: IPzd+'/dic/deal/status', //数据接口
-        dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-        data: JSON.stringify(data),    //参数值
-        type: "POST",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            if (req.status == "200") {
-                layer.close(indexDig);
-                layer.msg("添加成功")
-                var demoReload = $('#demoReload');
-                //执行重载
-                table.reload('idTest', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                });
-            } else {
-                layer.msg("添加失败")
-            }
-
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
-}

@@ -130,6 +130,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             /*编辑操作;*/
             var openMes = {
                 title: '编辑房屋产证',
+                area:['1300px','650px'],
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -389,6 +390,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             var openMes = {
                 title: '查看房屋产证',
                 leixing: '查看',
+                area:['1300px','650px'],
                 maxmin: true,
                 id: obj.data.id,
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
@@ -574,8 +576,8 @@ layui.use(['table', 'laydate', 'form'], function () {
         * */
 
         var openMes = {
-
             title: '房屋产证添加',
+            area:['1300px','650px'],
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],

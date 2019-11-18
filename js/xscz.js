@@ -44,6 +44,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         * */
         var openMes = {
             title: '添加合同',
+            area:['1300px','650px'],
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
@@ -273,6 +274,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             /*编辑操作;*/
             var openMes = {
                 title: '编辑',
+                area:['1300px','650px'],
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -491,6 +493,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             /*查看操作*/
             var openMes = {
                 title: '查看系统用户',
+                area:['1300px','650px'],
                 leixing: '查看',
                 maxmin: true,
                 id: obj.data.id,
@@ -563,7 +566,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">租赁期限（天）</label>\n' +
+                    '    <label class="layui-form-label">租赁期限（月）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zpqxt" readonly>\n' +
                     '    </div>\n' +
@@ -616,7 +619,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".mj").val(req.data.resourceArea)
                                 $(".fyyc").val(req.data.houseUsage)
                                 $(".gldw").val(req.data.manageUnit)
-                                $(".zpqxt").val(req.data.rentDay)
+                                $(".zpqxt").val(req.data.rentMonth)
                                 $(".yj").val(req.data.originRentCharge)
                                 $(".zdj").val(req.data.guideRentCharge)
                                 $(".sjj").val(req.data.realRentCharge)
