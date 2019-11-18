@@ -13,7 +13,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         elem: '#tableList'
         // , toolbar: '#toolbarDemo'
         // , url: '../json/zctj.json' //数据接口
-        , url: IPzd + '/deal/all?asc=0' //数据接口
+        , url: IPzd + '/deal/all/noreview?asc=0' //数据接口
         , method: "POST"
         , contentType: "application/json"
         , where: {}
@@ -114,8 +114,8 @@ layui.use(['laydate', 'table', 'form'], function () {
         } else if (layEvent == 'detail') {
             /*查看操作*/
             var openMes = {
-                title: '查看系统用户',
-                area:['1300px','650px'],
+                title: '查看合同详情',
+                area: ['1300px', '650px'],
                 leixing: '查看',
                 maxmin: true,
                 id: obj.data.id,
@@ -159,6 +159,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htzt" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">合同审核状态</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htshzt" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
 
                     '<div class="dialogTitle">房源基础信息</div>' +
                     '  <div class="dialogDiv">\n' +
@@ -188,7 +194,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">租赁期限（天）</label>\n' +
+                    '    <label class="layui-form-label">租赁期限（月）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zpqxt" readonly>\n' +
                     '    </div>\n' +
@@ -241,13 +247,14 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".mj").val(req.data.resourceArea)
                                 $(".fyyc").val(req.data.houseUsage)
                                 $(".gldw").val(req.data.manageUnit)
-                                $(".zpqxt").val(req.data.rentDay)
+                                $(".zpqxt").val(req.data.rentMonth)
                                 $(".yj").val(req.data.originRentCharge)
                                 $(".zdj").val(req.data.guideRentCharge)
                                 $(".sjj").val(req.data.realRentCharge)
                                 $("#date").val(req.data.startTime)
                                 $("#date2").val(req.data.endTime)
-                                $(".htzt").val(req.data.dealStatus)
+                                $(".htshzt").val(req.data.dealReviewStatus)
+                                $(".htzt").val(req.data.dealExistStatus)
                             } else {
                                 layer.msg("获取失败")
                             }
