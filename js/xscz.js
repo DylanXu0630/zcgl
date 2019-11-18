@@ -625,7 +625,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".sjj").val(req.data.realRentCharge)
                                 $("#date").val(req.data.startTime)
                                 $("#date2").val(req.data.endTime)
-                                $(".htzt").val(req.data.dealStatus)
+                                $(".htzt").val(req.data.dealReviewStatus)
                             } else {
                                 layer.msg("获取失败")
                             }
