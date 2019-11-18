@@ -434,6 +434,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '</form>' +
                     '<div>' +
                     '  <table id="zjTbale">' +
+                    '    <tr class="sm">' +
+                    '      ' +
+                    '    </tr>' +
                     '    <tr class="tableMouth">' +
                     '      ' +
                     '    </tr>' +
@@ -483,11 +486,13 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".ysMoney").children().remove()
                                 $(".ssMoney").children().remove()
                                 $(".qkMoney").children().remove()
+                                var smTd = $("<td>说明</td>").appendTo(".sm")
                                 var mouthTd = $("<td>时间</td>").appendTo(".tableMouth")
                                 var ysTd = $("<td>应收（元）</td>").appendTo(".ysMoney")
                                 var ssTd = $("<td>实收（元）</td>").appendTo(".ssMoney")
                                 var qfTd = $("<td>欠费（元）</td>").appendTo(".qkMoney")
                                 $(req.data.monthRentCharge).each(function (i, o) {
+                                    var mtd = $("<td class='mouthTD'>" + o.rentStatus + "</td>").appendTo(".sm")
                                     var mtd = $("<td class='mouthTD'>" + o.rentMonth + "</td>").appendTo(".tableMouth")
                                     var ytd = $("<td>" + o.mustCharge + "</td>").appendTo(".ysMoney")
                                     var std = $("<td>" + o.actualCharge + "</td>").appendTo(".ssMoney")
