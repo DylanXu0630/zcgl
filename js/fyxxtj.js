@@ -142,15 +142,15 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>指导价(元/m²/月)</label>\n' +
+                '    <label class="layui-form-label">指导价(元/m²/月)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input zdj">\n' +
+                '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zdj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">实际租金(元/m²/月)</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjzj">\n' +
+                '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjzj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '<div class="dialogDiv">\n' +
@@ -255,8 +255,8 @@ layui.use(['table', 'form'], function () {
                             if ($(".fymj").val() == "") {
                                 layer.msg("房源面积不能为空！")
                             } else {
-                                if ($(".zdj").val() == "") {
-                                    layer.msg("指导价不能为空！")
+                                if ($(".sjzj").val() == "") {
+                                    layer.msg("实际租金不能为空！")
                                 } else {
                                     if ($(".fymj").val()==""){
                                         layer.msg("房源面积不能为空！")
@@ -459,15 +459,15 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>指导价(元/m²/月)</label>\n' +
+                    '    <label class="layui-form-label">指导价(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input zdj">\n' +
+                    '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zdj">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">实际租金(元/m²/月)</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjzj">\n' +
+                    '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjzj">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '<div class="dialogDiv">\n' +
@@ -638,8 +638,8 @@ layui.use(['table', 'form'], function () {
                                 if ($(".fymj").val() == "") {
                                     layer.msg("房源面积不能为空！")
                                 } else {
-                                    if ($(".zdj").val() == "") {
-                                        layer.msg("指导价不能为空！")
+                                    if ($(".sjzj").val() == "") {
+                                        layer.msg("实际租金不能为空！")
                                     } else {
                                         if ($(".fymj").val()==""){
                                             layer.msg("房源面积不能为空！")

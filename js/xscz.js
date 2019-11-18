@@ -7,16 +7,44 @@ layui.use(['laydate', 'table', 'form'], function () {
     var laydate = layui.laydate;
     var form = layui.form;
 
-
+    lay('.httime').each(function () {
+        laydate.render({
+            elem: this,
+            format: 'yyyy年MM月dd日'
+        });
+    })
     //第一个实例
     table.render({
         elem: '#tableList'
         // , toolbar: '#toolbarDemo'
         // , url: '../json/zctj.json' //数据接口
-        , url: IPzd + '/deal/all?asc=0' //数据接口
+        , url: IPzd + '/deal/all' //数据接口
         , method: "POST"
         , contentType: "application/json"
-        , where: {}
+        , where: {
+            "asc":0,
+            "agencyId": "",
+            "dealExistStatusCode": "",
+            "dealName": "string",
+            "dealReviewStatusCode": "",
+            "dealTypeCode": "",
+            "endTime": "",
+            "houseUsageId": "",
+            "lessorId": "",
+            "maxGuideRentCharge": "",
+            "maxOriginRentCharge": "",
+            "maxRealRentCharge": "",
+            "maxRentMonth": "",
+            "maxResourceArea": "",
+            "minGuideRentCharge": "",
+            "minOriginRentCharge": "",
+            "minRealRentCharge": "",
+            "minRentMonth": "",
+            "minResourceArea": "",
+            "payTypeCode": "",
+            "renterId": "",
+            "startTime": ""
+        }
         , page: true //开启分页
         , cols: [[ //表头
             {field: 'dealSerial', title: '合同编号'}
@@ -37,6 +65,50 @@ layui.use(['laydate', 'table', 'form'], function () {
             };
         }
     });
+
+    /*搜索*/
+    $("#sousuo").on("click", function () {
+        form.on('submit(search)', function (data) {
+
+            //执行重载
+            table.reload('tableList', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                , where: {//这里传参  向后台
+                    "asc":0,
+                    "agencyId": $(".s-gldw").val(),
+                    "dealExistStatusCode": $(".s-hezt").val(),
+                    "dealName": $(".s-htmc").val(),
+                    "dealReviewStatusCode": $(".s-heshzt").val(),
+                    "dealTypeCode": $(".s-httype").val(),
+                    "endTime": $("#date2").val(),
+                    "houseUsageId": $(".s-fyyc").val(),
+                    "lessorId": $(".s-czr").val(),
+                    "maxGuideRentCharge": $(".maxzdj").val(),
+                    "maxOriginRentCharge": $(".maxyj").val(),
+                    "maxRealRentCharge": $(".maxfymj").val(),
+                    "maxRentMonth": $(".maxzly").val(),
+                    "maxResourceArea": $(".maxsjj").val(),
+                    "minGuideRentCharge": $(".minzdj").val(),
+                    "minOriginRentCharge": $(".minyj").val(),
+                    "minRealRentCharge": $(".minfymj").val(),
+                    "minRentMonth": $(".minzly").val(),
+                    "minResourceArea": $(".minzjj").val(),
+                    "payTypeCode": $(".s-htzftype").val(),
+                    "renterId": $(".s-czzr").val(),
+                    "startTime": $("#date").val()
+                },
+                url: IPzd + '/deal/all' //数据接口
+                , method: 'post'
+            });
+            return false;//false：阻止表单跳转  true：表单跳转
+        });
+
+
+    })
+
+
 
     /*添加点击事件*/
     $("body").on("click", ".layui-btn.layui-btn-sm", function () {
