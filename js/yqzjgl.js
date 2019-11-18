@@ -214,76 +214,53 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">合同名称</label>\n' +
+                    '    <label class="layui-form-label">缴费月份</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dealName">\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    // '  <div class="dialogDiv">\n' +
-                    // '    <label class="layui-form-label"> 管理单位（甲方）</label>\n' +
-                    // '    <div class="layui-input-block">\n' +
-                    // '      <select class="gldw">\n' +
-                    // '    <option value="">请选择</option>\n' +
-                    // '     </select>\n' +
-                    // '    </div>\n' +
-                    // '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房源</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <select class="houseFy">\n' +
-                    '    <option value="">请选择</option>\n' +
+                    '      <select class="jfyf">\n' +
+                    '        <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
+
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">承租人（乙方）</label>\n' +
+                    '    <label class="layui-form-label">实收(元)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="yf">\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
-                    '    </div>\n' +
-                    // '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    // '    <label class="layui-form-label">单价</label>\n' +
-                    // '    <div class="layui-input-block">\n' +
-                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input unitPrice">\n' +
-                    // '    </div>\n' +
-                    // '  </div>\n' +
-                    // '  <div class="dialogDiv">\n' +
-                    // '    <label class="layui-form-label">指导价</label>\n' +
-                    // '    <div class="layui-input-block">\n' +
-                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input guidePrice">\n' +
-                    // '    </div>\n' +
-                    // '  </div>\n' +
-                    '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">开始日期</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime">\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">终止日期</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '       <input type="text" name="date" id="date2" autocomplete="off" class="layui-input httime">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ss">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
-                    getfy()
-                    getgldw()
-                    getyf()
-                    $(".dealName").val(obj.data.dealName)
-                    $("#date2").val(obj.data.endTime)
-                    $(".houseFy").val(obj.data.resourceId)
-                    $(".yf").val(obj.data.renterId)
-                    $("#date").val(obj.data.startTime)
-                    lay('.httime').each(function () {
-                        laydate.render({
-                            elem: this,
-                            format: 'yyyy年MM月dd日'
-                        });
-                    })
+                    $.ajax({
+                        url: IPzd + '/rent/detail/' + obj.data.id ,    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                        type: "GET",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            $(".jfyf").children().remove()
+                            var options = $("<option value=''>请选择</option>").appendTo(".jfyf")
+                            if (req.status == "200") {
+                                $(req.data.monthRentCharge).each(function (i, o) {
+                                    var option = $("<option value='" + o.id + "'>" + o.rentMonth + "</option>").appendTo(".jfyf")
+                                })
+                                form.render('select')
+                            } else {
+                                layer.msg(req.msg)
+                            }
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
                 },
                 put: function () {
                     var data = {
@@ -449,7 +426,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '</div>' +
                     '</div>',
                 look: function () {
-                    var year = getYear()
                     $.ajax({
                         url: IPzd + '/rent/detail/' + obj.data.id ,    //请求的url地址
                         dataType: "json",   //返回格式为json
@@ -530,43 +506,11 @@ layui.use(['laydate', 'table', 'form'], function () {
 })
 
 
-/*获取房产证号*/
-function getfy() {
-    $.ajax({
-        url: IPzd + '/hresource/simple',    //请求的url地址
-        dataType: "json",   //返回格式为json
-        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-        type: "GET",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            $(".houseFy").children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
-            if (req.status == "200") {
-                $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.resourceName + "</option>").appendTo(".houseFy")
-                })
-            } else {
-                layer.msg("房源产证获取失败")
-            }
-
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
-}
 
 /*获取乙方*/
-function getyf() {
+function getJfyf(id) {
     $.ajax({
-        url: IPzd + '/renter/all',    //请求的url地址
+        url: IPzd + '/rent/detail/' + id ,    //请求的url地址
         dataType: "json",   //返回格式为json
         async: true,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -576,14 +520,14 @@ function getyf() {
             //请求前的处理
         },
         success: function (req) {
-            $(".yf").children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo(".yf")
+            $(".jfyf").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".jfyf")
             if (req.status == "200") {
-                $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".yf")
+                $(req.data.monthRentCharge).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.rentMonth + "</option>").appendTo(".jfyf")
                 })
             } else {
-                layer.msg("管理单位获取失败")
+                layer.msg(req.msg)
             }
         },
         complete: function () {
@@ -595,8 +539,3 @@ function getyf() {
     });
 }
 
-/*获取当前年*/
-function getYear() {
-    var data = new Date()
-    return data.getFullYear()
-}
