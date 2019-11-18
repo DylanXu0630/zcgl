@@ -563,7 +563,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">租赁期限（天）</label>\n' +
+                    '    <label class="layui-form-label">租赁期限（月）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zpqxt" readonly>\n' +
                     '    </div>\n' +
@@ -616,7 +616,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".mj").val(req.data.resourceArea)
                                 $(".fyyc").val(req.data.houseUsage)
                                 $(".gldw").val(req.data.manageUnit)
-                                $(".zpqxt").val(req.data.rentDay)
+                                $(".zpqxt").val(req.data.rentMonth)
                                 $(".yj").val(req.data.originRentCharge)
                                 $(".zdj").val(req.data.guideRentCharge)
                                 $(".sjj").val(req.data.realRentCharge)
