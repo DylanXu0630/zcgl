@@ -25,7 +25,9 @@ layui.use(['laydate', 'table', 'form'], function () {
             , {field: 'renter', title: '承租方',}
             , {field: 'startTime', title: '开始时间',}
             , {field: 'endTime', title: '结束时间',}
-            , {fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 165}
+            , {
+                fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 165,
+            }
         ]], parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
             return {
                 "code": 0, //解析接口状态
@@ -44,7 +46,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         * */
         var openMes = {
             title: '添加合同',
-            area:['1300px','650px'],
+            area: ['1300px', '650px'],
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
@@ -274,7 +276,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             /*编辑操作;*/
             var openMes = {
                 title: '编辑',
-                area:['1300px','650px'],
+                area: ['1300px', '650px'],
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -387,8 +389,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(".dealName").val(req.data.dealName)
                             $(".houseFy").val(req.data.resourceId)
                             $(".yf").val(req.data.renterId)
-                            $(".zjzfType").val(req.data.payType)
-                            $(".htType").val(req.data.dealType)
+                            $(".zjzfType").val(req.data.payTypeCode)
+                            $(".htType").val(req.data.dealTypeCode)
                             $(".bzj").val(req.data.deposit)
                             $("#date").val(req.data.startTime)
                             $(".zsMouth").val(req.data.rentMonth)
@@ -493,7 +495,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             /*查看操作*/
             var openMes = {
                 title: '查看系统用户',
-                area:['1300px','650px'],
+                area: ['1300px', '650px'],
                 leixing: '查看',
                 maxmin: true,
                 id: obj.data.id,
@@ -625,7 +627,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".sjj").val(req.data.realRentCharge)
                                 $("#date").val(req.data.startTime)
                                 $("#date2").val(req.data.endTime)
-                                $(".htzt").val(req.data.dealStatus)
+                                $(".htzt").val(req.data.dealReviewStatus)
                             } else {
                                 layer.msg("获取失败")
                             }
