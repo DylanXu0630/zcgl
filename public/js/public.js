@@ -24,7 +24,7 @@ function layerOpen(openMes) {
         title: openMes.title,
         content: openMes.content,
         btn: openMes.btn,
-        area: ['1184px', '660px'],
+        area: openMes.area,
         maxmin: true,
         success: function () {
 
