@@ -9,10 +9,10 @@ layui.use(['table', 'form'], function () {
     var form = layui.form;
     form.render();
     //第一个实例
+
     table.render({
         elem: '#tableList'
         , id: 'idTest'
-        , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
 
         , url: IPzd + '/dic/house/usage?asc=1' //数据接口
@@ -26,8 +26,8 @@ layui.use(['table', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'name', title: '名称'}
-            , {title: '操作', toolbar: '#barDemo', width: 200}
+            { field: 'name', title: '房屋用途情况名称' }
+            , { title: '操作', toolbar: '#barDemo', width: 200 }
         ]]
     });
 
@@ -80,14 +80,15 @@ layui.use(['table', 'form'], function () {
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
+                area: ['500px', '250px'],
                 id: obj.data.id,
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
-                    '  <div class="dialogDiv">\n' +
+                    '  <div class="dialogDiv"style="width:88%;margin-top:50px">\n' +
                     '    <label class="layui-form-label">用途情况</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="用途情况是必填项"autocomplete="off" class="layui-input name">\n' +
+                    '      <input type="text" name="title" placeholder="必填项，请输入" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -102,41 +103,45 @@ layui.use(['table', 'form'], function () {
                         "createdBy": "1",
                         "name": $(".name").val(),
                     }
+                    if ($(".name").val().length > 0) {
+                        $.ajax({
+                            url: IPzd + '/dic/house/usage',    //请求的url地址
+                            dataType: "json",   //返回格式为json
+                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                            data: JSON.stringify(data),    //参数值
+                            type: "PUT",   //请求方式
+                            contentType: "application/json;charset=UTF-8",
+                            // headers: {"token": sessionStorage.token},
+                            beforeSend: function () {
+                                //请求前的处理
+                            },
+                            success: function (req) {
+                                if (req.status == "200") {
+                                    layer.close(indexDig);
+                                    layer.msg("修改成功")
+                                    var demoReload = $('#demoReload');
+                                    //执行重载
+                                    table.reload('idTest', {
+                                        page: {
+                                            curr: 1 //重新从第 1 页开始
+                                        }
+                                    });
+                                } else {
+                                    layer.msg("修改失败")
+                                }
 
-                    $.ajax({
-                        url: IPzd + '/dic/house/usage',    //请求的url地址
-                        dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                        data: JSON.stringify(data),    //参数值
-                        type: "PUT",   //请求方式
-                        contentType: "application/json;charset=UTF-8",
-                        // headers: {"token": sessionStorage.token},
-                        beforeSend: function () {
-                            //请求前的处理
-                        },
-                        success: function (req) {
-                            if (req.status == "200") {
-                                layer.close(indexDig);
-                                layer.msg("修改成功")
-                                var demoReload = $('#demoReload');
-                                //执行重载
-                                table.reload('idTest', {
-                                    page: {
-                                        curr: 1 //重新从第 1 页开始
-                                    }
-                                });
-                            } else {
-                                layer.msg("修改失败")
+                            },
+                            complete: function () {
+                                //请求完成的处理
+                            },
+                            error: function () {
+                                //请求出错处理
                             }
+                        });
+                    } else {
+                        layer.msg("用途情况不能为空！")
 
-                        },
-                        complete: function () {
-                            //请求完成的处理
-                        },
-                        error: function () {
-                            //请求出错处理
-                        }
-                    });
+                    }
                 },
             }
 
@@ -159,13 +164,14 @@ layui.use(['table', 'form'], function () {
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
+            area: ['500px', '250px'],
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
-                '  <div class="dialogDiv">\n' +
+                '  <div class="dialogDiv"style="width:88%;margin-top:50px">\n' +
                 '    <label class="layui-form-label">用途情况</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" lay-verify="title" placeholder="这是必填项，请输入" required="用途情况是必填项" class="layui-input name">\n' +
+                '      <input type="text" name="title" placeholder="请输入"  class="layui-input name">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
@@ -213,7 +219,7 @@ layui.use(['table', 'form'], function () {
                         }
                     });
                 } else {
-                    layer.msg("必填项不能为空！")
+                    layer.msg("用途情况不能为空！")
                 }
             },
         }
@@ -221,45 +227,3 @@ layui.use(['table', 'form'], function () {
         layerOpen(openMes);
     })
 })
-
-function getSex(sex) {
-    if (sex == '1') return '男';
-    else if (sex == '0') return '女';
-}
-
-function getOneUser() {
-    $.ajax({
-        url: IPdz + '/dic/house/usage',    //请求的url地址
-        dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-        data: JSON.stringify(data),    //参数值
-        type: "POST",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            if (req.status == "200") {
-                layer.close(indexDig);
-                layer.msg("添加成功")
-                var demoReload = $('#demoReload');
-                //执行重载
-                table.reload('idTest', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                });
-            } else {
-                layer.msg("添加失败")
-            }
-
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
-}
