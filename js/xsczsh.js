@@ -115,6 +115,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             /*查看操作*/
             var openMes = {
                 title: '查看系统用户',
+                area:['1300px','650px'],
                 leixing: '查看',
                 maxmin: true,
                 id: obj.data.id,

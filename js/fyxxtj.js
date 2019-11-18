@@ -91,6 +91,7 @@ layui.use(['table', 'form'], function () {
         * */
         var openMes = {
             title: '房源信息添加',
+            area:['1300px','700px'],
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
@@ -129,9 +130,9 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">房源面积(m²)</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>房源面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymj">\n' +
+                '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input fymj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
@@ -257,54 +258,58 @@ layui.use(['table', 'form'], function () {
                                 if ($(".zdj").val() == "") {
                                     layer.msg("指导价不能为空！")
                                 } else {
-                                    var data = {
-                                        "buildLevel": $(".lc").val(),
-                                        "buildNo": $(".lh").val(),
-                                        "buildRoom": $(".fh").val(),
-                                        "createdBy": user,
-                                        "fkHouseAssetsId": $(".houseZh").val(),
-                                        "remark": $(".fj").val(),
-                                        "rentStatus": $(".cszt").val(),
-                                        "resourceArea": $(".fymj").val(),
-                                        "resourceName": $(".fymc").val(),
-                                        "sellStatus": $(".cszt").val(),
-                                        "rentStatus": $(".czzt").val(),
-                                        "originRentCharge": $(".ylzj").val(),
-                                        "realRentCharge": $(".sjzj").val(),
-                                        "guideRentCharge": $(".zdj").val(),
-                                        "park": $(".yqly").val(),
-                                        "fkAgencyId": $(".gldw.manageUnit").val()
-                                    }
-
-                                    $.ajax({
-                                        url: IPzd + '/hresource',    //请求的url地址
-                                        dataType: "json",   //返回格式为json
-                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                        data: JSON.stringify(data),    //参数值
-                                        type: "POST",   //请求方式
-                                        contentType: "application/json;charset=UTF-8",
-                                        // headers: {"token": sessionStorage.token},
-                                        beforeSend: function () {
-                                            //请求前的处理
-                                        },
-                                        success: function (req) {
-                                            if (req.status == "200") {
-                                                layer.close(indexDig);
-                                                layer.msg("添加成功")
-                                                //执行重载
-                                                table.reload('tableList');
-                                            } else {
-                                                layer.msg("添加失败")
-                                            }
-
-                                        },
-                                        complete: function () {
-                                            //请求完成的处理
-                                        },
-                                        error: function () {
-                                            //请求出错处理
+                                    if ($(".fymj").val()==""){
+                                        layer.msg("房源面积不能为空！")
+                                    }else{
+                                        var data = {
+                                            "buildLevel": $(".lc").val(),
+                                            "buildNo": $(".lh").val(),
+                                            "buildRoom": $(".fh").val(),
+                                            "createdBy": user,
+                                            "fkHouseAssetsId": $(".houseZh").val(),
+                                            "remark": $(".fj").val(),
+                                            "rentStatus": $(".cszt").val(),
+                                            "resourceArea": $(".fymj").val(),
+                                            "resourceName": $(".fymc").val(),
+                                            "sellStatus": $(".cszt").val(),
+                                            "rentStatus": $(".czzt").val(),
+                                            "originRentCharge": $(".ylzj").val(),
+                                            "realRentCharge": $(".sjzj").val(),
+                                            "guideRentCharge": $(".zdj").val(),
+                                            "park": $(".yqly").val(),
+                                            "fkAgencyId": $(".gldw.manageUnit").val()
                                         }
-                                    });
+
+                                        $.ajax({
+                                            url: IPzd + '/hresource',    //请求的url地址
+                                            dataType: "json",   //返回格式为json
+                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                            data: JSON.stringify(data),    //参数值
+                                            type: "POST",   //请求方式
+                                            contentType: "application/json;charset=UTF-8",
+                                            // headers: {"token": sessionStorage.token},
+                                            beforeSend: function () {
+                                                //请求前的处理
+                                            },
+                                            success: function (req) {
+                                                if (req.status == "200") {
+                                                    layer.close(indexDig);
+                                                    layer.msg("添加成功")
+                                                    //执行重载
+                                                    table.reload('tableList');
+                                                } else {
+                                                    layer.msg("添加失败")
+                                                }
+
+                                            },
+                                            complete: function () {
+                                                //请求完成的处理
+                                            },
+                                            error: function () {
+                                                //请求出错处理
+                                            }
+                                        });
+                                    }
                                 }
                             }
                         }
@@ -401,6 +406,7 @@ layui.use(['table', 'form'], function () {
             /*编辑操作;*/
             var openMes = {
                 title: '编辑房源',
+                area:['1300px','700px'],
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -441,9 +447,9 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房源面积(m²)</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>房源面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymj">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input fymj">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -620,53 +626,77 @@ layui.use(['table', 'form'], function () {
                     });
                 },
                 put: function () {
-                    var data = {
-                        "id": obj.data.id,
-                        "buildLevel": $(".lc").val(),
-                        "buildNo": $(".lh").val(),
-                        "buildRoom": $(".fh").val(),
-                        "createdBy": user,
-                        "fkHouseAssetsId": $(".houseZh").val(),
-                        "remark": $(".fj").val(),
-                        "rentStatus": $(".cszt").val(),
-                        "resourceArea": $(".fymj").val(),
-                        "resourceName": $(".fymc").val(),
-                        "sellStatus": $(".cszt").val(),
-                        "rentStatus": $(".czzt").val(),
-                        "originRentCharge": $(".ylzj").val(),
-                        "realRentCharge": $(".sjzj").val(),
-                        "guideRentCharge": $(".zdj").val(),
-                        "fkAgencyId": $(".gldw.manageUnit").val()
-                    }
-                    $.ajax({
-                        url: IPzd + '/hresource',    //请求的url地址
-                        dataType: "json",   //返回格式为json
-                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-                        data: JSON.stringify(data),    //参数值
-                        type: "PUT",   //请求方式
-                        contentType: "application/json;charset=UTF-8",
-                        // headers: {"token": sessionStorage.token},
-                        beforeSend: function () {
-                            //请求前的处理
-                        },
-                        success: function (req) {
-                            if (req.status == "200") {
-                                layer.close(indexDig);
-                                layer.msg("修改成功")
-                                //执行重载
-                                table.reload('tableList');
+                    if ($(".fymc").val() == "") {
+                        layer.msg("房源名称不能为空！")
+                    } else {
+                        if ($(".houseZh").val() == "") {
+                            layer.msg("房产不能为空！")
+                        } else {
+                            if ($(".yqly").val() == "") {
+                                layer.msg("园区不能为空！")
                             } else {
-                                layer.msg("修改失败")
-                            }
+                                if ($(".fymj").val() == "") {
+                                    layer.msg("房源面积不能为空！")
+                                } else {
+                                    if ($(".zdj").val() == "") {
+                                        layer.msg("指导价不能为空！")
+                                    } else {
+                                        if ($(".fymj").val()==""){
+                                            layer.msg("房源面积不能为空！")
+                                        }else{
+                                            var data = {
+                                                "id": obj.data.id,
+                                                "buildLevel": $(".lc").val(),
+                                                "buildNo": $(".lh").val(),
+                                                "buildRoom": $(".fh").val(),
+                                                "createdBy": user,
+                                                "fkHouseAssetsId": $(".houseZh").val(),
+                                                "remark": $(".fj").val(),
+                                                "rentStatus": $(".cszt").val(),
+                                                "resourceArea": $(".fymj").val(),
+                                                "resourceName": $(".fymc").val(),
+                                                "sellStatus": $(".cszt").val(),
+                                                "rentStatus": $(".czzt").val(),
+                                                "originRentCharge": $(".ylzj").val(),
+                                                "realRentCharge": $(".sjzj").val(),
+                                                "guideRentCharge": $(".zdj").val(),
+                                                "fkAgencyId": $(".gldw.manageUnit").val()
+                                            }
+                                            $.ajax({
+                                                url: IPzd + '/hresource',    //请求的url地址
+                                                dataType: "json",   //返回格式为json
+                                                async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                data: JSON.stringify(data),    //参数值
+                                                type: "PUT",   //请求方式
+                                                contentType: "application/json;charset=UTF-8",
+                                                // headers: {"token": sessionStorage.token},
+                                                beforeSend: function () {
+                                                    //请求前的处理
+                                                },
+                                                success: function (req) {
+                                                    if (req.status == "200") {
+                                                        layer.close(indexDig);
+                                                        layer.msg("修改成功")
+                                                        //执行重载
+                                                        table.reload('tableList');
+                                                    } else {
+                                                        layer.msg("修改失败")
+                                                    }
 
-                        },
-                        complete: function () {
-                            //请求完成的处理
-                        },
-                        error: function () {
-                            //请求出错处理
+                                                },
+                                                complete: function () {
+                                                    //请求完成的处理
+                                                },
+                                                error: function () {
+                                                    //请求出错处理
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    });
+                    }
                 },
 
             }
@@ -676,6 +706,7 @@ layui.use(['table', 'form'], function () {
             /*查看操作*/
             var openMes = {
                 title: '查看房源',
+                area:['1300px','700px'],
                 leixing: '查看',
                 maxmin: true,
                 id: obj.data.id,

@@ -44,6 +44,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         * */
         var openMes = {
             title: '添加合同',
+            area:['1300px','650px'],
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
@@ -273,6 +274,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             /*编辑操作;*/
             var openMes = {
                 title: '编辑',
+                area:['1300px','650px'],
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
@@ -491,6 +493,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             /*查看操作*/
             var openMes = {
                 title: '查看系统用户',
+                area:['1300px','650px'],
                 leixing: '查看',
                 maxmin: true,
                 id: obj.data.id,
