@@ -275,7 +275,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         } else if (layEvent === 'edit') {
             /*编辑操作;*/
             var openMes = {
-                title: '编辑',
+                title: '编辑合同',
                 area: ['1300px', '650px'],
                 leixing: '编辑',
                 maxmin: true,
@@ -372,7 +372,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '</div>' +
                     '</div>',
                 look: function () {
-                    getfy()
+                    allgetfy()
                     getgldw()
                     getyf()
                     $.ajax({
@@ -494,7 +494,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         } else if (layEvent == 'detail') {
             /*查看操作*/
             var openMes = {
-                title: '查看系统用户',
+                title: '查看合同详情',
                 area: ['1300px', '650px'],
                 leixing: '查看',
                 maxmin: true,
@@ -537,6 +537,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    <label class="layui-form-label">合同状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htzt" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">合同审核状态</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htshzt" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
 
@@ -627,7 +633,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".sjj").val(req.data.realRentCharge)
                                 $("#date").val(req.data.startTime)
                                 $("#date2").val(req.data.endTime)
-                                $(".htzt").val(req.data.dealReviewStatus)
+                                $(".htshzt").val(req.data.dealReviewStatus)
+                                $(".htzt").val(req.data.dealExistStatus)
                             } else {
                                 layer.msg("获取失败")
                             }
@@ -651,6 +658,38 @@ layui.use(['laydate', 'table', 'form'], function () {
 /*获取房产证号*/
 function getfy() {
     $.ajax({
+        url: IPzd + '/hresource/simple/norent',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".houseFy").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.resourceName + "</option>").appendTo(".houseFy")
+                })
+            } else {
+                layer.msg(req.msg)
+            }
+
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+
+function allgetfy() {
+    $.ajax({
         url: IPzd + '/hresource/simple',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
@@ -668,7 +707,7 @@ function getfy() {
                     var option = $("<option value='" + o.id + "'>" + o.resourceName + "</option>").appendTo(".houseFy")
                 })
             } else {
-                layer.msg("房源产证获取失败")
+                layer.msg(req.msg)
             }
 
         },
@@ -701,7 +740,7 @@ function getyf() {
                     var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".yf")
                 })
             } else {
-                layer.msg("管理单位获取失败")
+                layer.msg(req.msg)
             }
         },
         complete: function () {
@@ -712,4 +751,5 @@ function getyf() {
         }
     });
 }
+
 

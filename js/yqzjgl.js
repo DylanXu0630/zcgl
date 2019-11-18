@@ -338,7 +338,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         } else if (layEvent == 'detail') {
             /*查看操作*/
             var openMes = {
-                title: '查看系统用户',
+                title: '查看合同租金详情',
                 area:['1300px','700px'],
                 leixing: '查看',
                 maxmin: true,
@@ -392,6 +392,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    <label class="layui-form-label">租赁期限（月）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zpqxt" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">付款方式</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fkfs" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -481,6 +487,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".sjj").val(req.data.detailDeal.realRentCharge)
                                 $("#date").val(req.data.detailDeal.startTime)
                                 $("#date2").val(req.data.detailDeal.endTime)
+                                $(".fkfs").val(req.data.detailDeal.payType)
 
                                 $(".tableMouth").children().remove()
                                 $(".ysMoney").children().remove()
