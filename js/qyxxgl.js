@@ -13,9 +13,6 @@ layui.use(['table', 'form'], function () {
     table.render({
         elem: '#tableList'
         , id: 'idTest'
-        , toolbar: '#toolbarDemo'
-        // http://192.168.1.21:14000/estate/dic/land/nature?asc=1&limit=11&page=1
-
         , url: IPzd+'/renter?asc=1'//数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
@@ -84,14 +81,16 @@ layui.use(['table', 'form'], function () {
                 leixing: '编辑',
                 maxmin: true,
                 btn: ['确定', '取消'],
+                area: ['500px', '250px'],
+
                 id: obj.data.id,
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
-                    '  <div class="dialogDiv">\n' +
+                    '  <div class="dialogDiv"style="width:88%;margin-top:50px">\n' +
                     '    <label class="layui-form-label"style="width:84px;padding-left:11px">企业名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="企业名称是必填项" autocomplete="off" class="layui-input name">\n' +
+                    '      <input type="text" name="title" required  placeholder="必填项，请输入"autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -106,6 +105,7 @@ layui.use(['table', 'form'], function () {
                         "id": obj.data.id,
                         "name": $(".name").val(),
                     }
+                    if ($(".name").val().length > 0) {
 
                     $.ajax({
                         url: IPzd+'/renter', //数据接口
@@ -140,7 +140,10 @@ layui.use(['table', 'form'], function () {
                         error: function () {
                             //请求出错处理
                         }
-                    });
+                    });}else{
+                        layer.msg("企业名称不能为空！")
+
+                    }
                 },
             }
 
@@ -166,13 +169,15 @@ layui.use(['table', 'form'], function () {
             leixing: '添加',
             maxmin: true,
             btn: ['确定', '取消'],
+            area: ['500px', '250px'],
+
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
-                '<div class="dialogDiv">\n' +
+                '  <div class="dialogDiv"style="width:88%;margin-top:50px">\n' +
                 '    <label class="layui-form-label" style="width:84px;padding-left:11px">企业名称</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="这是必填项，请输入" required="企业名称是必填项"autocomplete="off" class="layui-input nickname ">\n' +
+                '      <input type="text" name="title" placeholder="必填项，请输入" autocomplete="off" class="layui-input name ">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
@@ -180,8 +185,9 @@ layui.use(['table', 'form'], function () {
                 '</div>',
             add: function () {
                 var data = {
-                    "name": $(".nickname").val(),
+                    "name": $(".name").val(),
                 }
+                if ($(".name").val().length > 0) {
 
                 $.ajax({
                     url: IPzd+'/renter', //数据接口
@@ -216,7 +222,9 @@ layui.use(['table', 'form'], function () {
                     error: function () {
                         //请求出错处理
                     }
-                });
+                });}else{
+                    layer.msg("企业名称不能为空！")
+                }
             },
         }
         /*调用弹窗方法*/
