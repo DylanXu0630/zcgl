@@ -23,7 +23,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         , contentType: "application/json"
         , where: {
             "asc": 0,
-            "day": 14,
+            "day": 15,
         }
         , page: true //开启分页
         , cols: [[ //表头

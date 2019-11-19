@@ -433,7 +433,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
+                    '  <div class="dialogDiv" style="display: none">\n' +
                     '    <label class="layui-form-label">所在园区</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input parkId" readonly>\n' +

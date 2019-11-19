@@ -66,11 +66,18 @@ layui.use(['laydate', 'table', 'form'], function () {
                     if (d.dealReviewStatusCode == "1") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
-                            '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n' +
-                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                            '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n'
+                            // '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                     } else if (d.dealReviewStatusCode == "2") {
-                        return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
+                        if (d.dealExistStatus=="提前结束") {
+                            return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                        }else {
+                            return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
+                                '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="zzht">终止合同</a>'+
+                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                        }
+
                     } else if (d.dealReviewStatusCode == "3") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
@@ -345,7 +352,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         var data = obj.data //获得当前行数据
             , layEvent = obj.event; //获得 lay-event 对应的值
         if (layEvent === 'del') {
-            layer.confirm('真的删除行么', function (index) {
+            layer.confirm('确定删除？', function (index) {
                 $.ajax({
                     url: IPzd + '/deal/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
@@ -811,6 +818,80 @@ layui.use(['laydate', 'table', 'form'], function () {
         } else if (layEvent == 'dy') {
             localStorage.htId = obj.data.id
             window.open('../fwzpht.html')
+        } else if (layEvent == 'zzht') {
+
+            var openMes = {
+                title: '终止合同',
+                area: ['800px', '350px'],
+                leixing: '编辑',
+                maxmin: true,
+                btn: ['确定', '取消'],
+                id: obj.data.id,
+                content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
+                    '<div class="addDig">' +
+                    '<div><form class="layui-form" action="">\n' +
+                    '  <div class="dialogDiv" style="min-width: 460px">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>合同终止时间</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime" style="width: 88%">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+
+                    '</form></div>' +
+                    '</div>' +
+                    '</div>',
+                look: function () {
+
+                    lay('.httime').each(function () {
+                        laydate.render({
+                            elem: this,
+                            format: 'yyyy年MM月dd日'
+                        });
+                    })
+                },
+                put: function () {
+                    if ($.trim($("#date").val()) !== "") {
+                        var data = {
+                            "id": obj.data.id,
+                            "date": sjc($("#date").val())
+                        }
+                        $.ajax({
+                            url: IPzd + '/deal/stop',    //请求的url地址
+                            dataType: "json",   //返回格式为json
+                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                            type: "PUT",   //请求方式
+                            data: JSON.stringify(data),
+                            contentType: "application/json;charset=UTF-8",
+                            // headers: {"token": sessionStorage.token},
+                            beforeSend: function () {
+                                //请求前的处理
+                            },
+                            success: function (req) {
+                                if (req.status == "200") {
+                                    layer.close(indexDig);
+                                    layer.msg(req.msg)
+                                    //执行重载
+                                    table.reload('tableList');
+                                } else {
+                                    layer.msg(req.msg)
+                                }
+
+                            },
+
+                            complete: function () {
+                                //请求完成的处理
+                            },
+                            error: function () {
+                                //请求出错处理
+                            }
+                        });
+                    } else {
+                        layer.msg("合同名称不能为空！")
+                    }
+
+                },
+            }
+            layerOpen(openMes);
         }
     });
 })
@@ -848,6 +929,7 @@ function getfy() {
         }
     });
 }
+
 
 // function getbjfy() {
 //     $.ajax({
