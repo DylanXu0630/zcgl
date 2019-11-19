@@ -7,6 +7,64 @@
 <body>
 <link rel="stylesheet" href="css/ht.css">
 <div id="htall">
+    <div class="firstPage">
+        <div class="titleBt">蠡园开发区房屋出租审核表（协商出租）</div>
+        <div class="thbh">合同编号：<span class="pageSpan htbh"></span></div>
+        <table class="pageTable" border="1" cellspacing="0" style="margin-bottom: 50px">
+            <tr>
+                <td style="width: 40%;padding:10px 0;padding-left:20px;">管理中心（或经营托管单位)</td>
+                <td colspan="5" style="padding:10px 0;padding-left:20px;"><span class="glzx"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 30%;padding:10px 0;padding-left:20px;">房屋产权单位</td>
+                <td colspan="5" style="padding:10px 0;padding-left:20px;"><span class="jf"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 30%;padding:10px 0;padding-left:20px;">房产坐落</td>
+                <td colspan="5" style="padding:10px 0;padding-left:20px;"><span class="zl"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 30%;padding:10px 0;padding-left:20px;">承租人</td>
+                <td colspan="5" style="padding:10px 0;padding-left:20px;"><span class="yf"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 30%;padding:30px 0;padding-left:20px;">租赁期限(月)</td>
+                <td colspan="6" style="padding:10px 0;padding-left:20px;"><span class="synx"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 20%;padding:20px 0;padding-left:20px;">合同面积（㎡）</td>
+                <td style="padding:10px 0;padding-left:20px;"><span class="mjjz"></span></td>
+                <td style="width: 20%;padding:20px 0;padding-left:20px;">合同单价（元/㎡/月）</td>
+                <td style="padding:10px 0;padding-left:20px;"><span class="sjzj"></span></td>
+                <td style="width: 20%;padding:20px 0;padding-left:20px;">开发区指导价（元/㎡/月）</td>
+                <td style="padding:10px 0;padding-left:20px;"><span class="zdj"></span></td>
+            </tr>
+            <tr>
+                <td style="padding:40px 0;padding-left:20px;">租赁期限(月)</td>
+                <td colspan="3" style="padding:10px 0;padding-left:20px;"><span class="synx"></span></td>
+                <td style="padding:40px 0;padding-left:20px;">新签/续签</td>
+                <td style="padding:10px 0;padding-left:20px;"style="padding:10px 0;padding-left:20px;"><span class="sfxq"></span></td>
+            </tr>
+            <tr>
+                <td colspan="1" style="padding:30px 0;padding-left:20px;">免租期限</td>
+                <td colspan="2" style="padding:30px 0;padding-left:20px;"><span class="mzq"></span></td>
+                <td colspan="1" style="padding:30px 0;padding-left:20px;">有无优惠条款</td>
+                <td colspan="2"style="padding:30px 0;padding-left:20px;"></span></td>
+            </tr>
+            <tr>
+                <td colspan="6" style="padding:20px 0;padding-left:20px;">经办人签字：</td>
+            </tr>
+            <tr>
+                <td colspan="6" style="padding:20px 0;padding-left:20px;">管理中心负责人签字：</td>
+            </tr>
+            <tr>
+                <td colspan="6" style="padding:20px 0;padding-left:20px;">资产办审核：</td>
+            </tr>
+            <tr>
+                <td colspan="6" style="padding:20px 0;padding-left:20px;">财政审计局审核：</td>
+            </tr>
+        </table>
+    </div>
     <div class="bbh">版本号：<span class="htSpan bbh"></span></div>
     <h2>房屋租赁合同</h2>
     <div>出租方（下称甲方）:<span class="htSpan jf"></span></div>
@@ -120,7 +178,7 @@
                 //请求前的处理
             },
             success: function (req) {
-                if (req.status==200){
+                if (req.status == 200) {
                     $(".bbh").text(req.data.dealSerial)
                     $(".yf").text(req.data.renter)
                     $(".jf").text(req.data.lessor)
@@ -134,6 +192,9 @@
                     $(".fkfs").text(req.data.payType)
                     $(".mzq").text(req.data.freeRentMonth)
                     $(".bzj").text(req.data.deposit)
+                    $(".glzx").text(req.data.manageUnit)
+                    $(".sfxq").text(req.data.rentType)
+                    $(".zdj").text(req.data.guideRentCharge)
                 } else {
                     alert(req.msg)
                 }
