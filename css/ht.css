@@ -38,3 +38,17 @@ h2 {
 .title{
     font-weight: bold;
 }
+.titleBt{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+.thbh{
+    text-align: right;
+    margin: 20px 0;
+}
+
+.pageTable{
+    width: 100%;
+    height: 2000px;
+}

@@ -7,6 +7,62 @@
 <body>
 <link rel="stylesheet" href="css/ht.css">
 <div id="htall">
+    <div class="firstPage">
+        <div class="titleBt">蠡园开发区房屋出租审核表（挂靠合同）</div>
+        <div class="thbh">合同编号：<span class="pageSpan htbh"></span></div>
+        <table class="pageTable" border="1" cellspacing="0" style="margin-bottom: 50px">
+            <tr>
+                <td style="width: 30%;padding:10px 0;padding-left:20px;">出租方(甲方)</td>
+                <td colspan="3" style="padding:10px 0;padding-left:20px;"><span class="jf"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 30%;padding:10px 0;padding-left:20px;">承租方(乙方)</td>
+                <td colspan="3" style="padding:10px 0;padding-left:20px;"><span class="yf"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 30%;padding:10px 0;padding-left:20px;">挂靠地址</td>
+                <td colspan="3" style="padding:10px 0;padding-left:20px;"><span class="zl"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 30%;padding:10px 0;padding-left:20px;">租赁期限(月)</td>
+                <td colspan="3" style="padding:10px 0;padding-left:20px;"><span class="synx"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 30%;padding:10px 0;padding-left:20px;">合同面积(m²)</td>
+                <td style="padding:10px 0;padding-left:20px;"><span class="mjjz"></span></td>
+                <td style="width: 30%;padding:10px 0;padding-left:20px;">合同单价(元/m²/月)</td>
+                <td style="padding:10px 0;padding-left:20px;"><span class="sjzj"></span></td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding:10px 0;padding-left:20px;">双方申请：甲乙双方签订上述租赁合同（详见合同原文）,合同内容对甲乙双方没有法律约束力</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width: 50%;padding:10px 0;padding-left:20px;height: 220px">
+                    挂靠原因说明：
+                </td>
+                <td colspan="2" style="width: 50%;padding:10px 0;padding-left:20px;height: 220px">
+                    原租户意见
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width: 50%;padding:10px 0;padding-left:20px;height: 220px">
+                    甲方：（签章）
+                </td>
+                <td colspan="2" style="width: 50%;padding:10px 0;padding-left:20px;height: 220px">
+                    乙方：（签章）
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding:10px 0;padding-left:20px;">经办人签字：</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding:10px 0;padding-left:20px;">管理中心负责人签字：</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding:10px 0;padding-left:20px;">财政审计局审核：</td>
+            </tr>
+        </table>
+    </div>
     <div class="bbh">版本号：<span class="htSpan bbh"></span></div>
     <h2>房屋租赁合同</h2>
     <div>出租方（下称甲方）:<span class="htSpan jf"></span></div>
@@ -120,7 +176,7 @@
                 //请求前的处理
             },
             success: function (req) {
-                if (req.status==200){
+                if (req.status == 200) {
                     $(".bbh").text(req.data.dealSerial)
                     $(".yf").text(req.data.renter)
                     $(".jf").text(req.data.lessor)
