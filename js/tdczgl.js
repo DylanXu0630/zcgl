@@ -201,8 +201,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                                     "landNum": $.trim($(".dh").val()),
                                     "money": $.trim($(".qdjz").val()),
                                     "picNum": $.trim($(".th").val()),
-                                    "remark": $.trim((".bz").val()),
-                                    "selfQueue": $.trim((".dzmj").val()),
+                                    "remark": $.trim($(".bz").val()),
+                                    "selfQueue": $.trim($(".dzmj").val()),
                                     "shareQueue": $.trim($(".ftmj").val()),
                                     "useType": $.trim($(".tdyt").val()),
                                     "useRight": $.trim($(".tdsylx").val())
