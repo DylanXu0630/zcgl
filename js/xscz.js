@@ -62,16 +62,16 @@ layui.use(['laydate', 'table', 'form'], function () {
             , {field: 'dealReviewStatus', title: '审核状态',}
             , {field: 'dealExistStatus', title: '合同状态',}
             , {
-                fixed: 'right', title: '操作', fixed: 'right', width: 220,templet:function (d) {
-                    if (d.dealReviewStatusCode == "1"){
+                fixed: 'right', title: '操作', fixed: 'right', width: 220, templet: function (d) {
+                    if (d.dealReviewStatusCode == "1") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
                             '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n' +
                             '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
-                    }else if (d.dealReviewStatusCode == "2"){
+                    } else if (d.dealReviewStatusCode == "2") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
-                    }else if (d.dealReviewStatusCode == "3"){
+                    } else if (d.dealReviewStatusCode == "3") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
                             '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
@@ -247,26 +247,26 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '</div>' +
                 '</div>',
             add: function () {
-                if ($(".dealName").val() !== "") {
-                    if ($(".houseFy").val() !== "") {
-                        if ($(".yf").val() !== "") {
-                            if ($(".bzj").val() !== "") {
-                                if ($("#date").val() !== "") {
-                                    if ($(".zsMouth").val() !== "") {
+                if ($.trim($(".dealName").val()) !== "") {
+                    if ($.trim($(".houseFy").val()) !== "") {
+                        if ($.trim($(".yf").val()) !== "") {
+                            if ($.trim($(".bzj").val()) !== "") {
+                                if ($.trim($("#date").val()) !== "") {
+                                    if ($.trim($(".zsMouth").val()) !== "") {
                                         if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
-                                            if ($(".zsMouth").val() !== "") {
+                                            if ($.trim($(".zsMouth").val()) !== "") {
                                                 var data = {
                                                     "createdBy": user,
-                                                    "dealName": $(".dealName").val(),
-                                                    "rentMonth": $(".zsMouth").val(),
-                                                    "fkHouseResourceId": $(".houseFy").val(),
-                                                    "fkRenterId": $(".yf").val(),
+                                                    "dealName": $.trim($(".dealName").val()),
+                                                    "rentMonth": $.trim($(".zsMouth").val()),
+                                                    "fkHouseResourceId": $.trim($(".houseFy").val()),
+                                                    "fkRenterId": $.trim($(".yf").val()),
                                                     "startTime": sjc($("#date").val() + " 00:00:00"),
-                                                    "payType": $(".zjzfType").val(),
-                                                    "deposit": $(".bzj").val(),
-                                                    "freeRentMonth": $(".mzMouth").val(),
-                                                    "dealType": $(".htType").val(),
-                                                    "rentType":$(".rentType").val()
+                                                    "payType": $.trim($(".zjzfType").val()),
+                                                    "deposit": $.trim($(".bzj").val()),
+                                                    "freeRentMonth": $.trim($(".mzMouth").val()),
+                                                    "dealType": $.trim($(".htType").val()),
+                                                    "rentType": $.trim($(".rentType").val())
                                                 }
 
                                                 $.ajax({
@@ -505,13 +505,13 @@ layui.use(['laydate', 'table', 'form'], function () {
                         success: function (req) {
                             $(".dealName").attr("htbh", "")
                             $(".dealName").val(req.data.dealName)
-                            if ($(".houseFy").children().length<2){
+                            if ($(".houseFy").children().length < 2) {
                                 $(".houseFy").children().remove()
                                 var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
-                                var options2 = $("<option value='"+req.data.resourceId+"'>"+req.data.resourceName+"</option>").appendTo(".houseFy")
+                                var options2 = $("<option value='" + req.data.resourceId + "'>" + req.data.resourceName + "</option>").appendTo(".houseFy")
                                 $(".houseFy").val(req.data.resourceId)
                                 form.render('select')
-                            }else {
+                            } else {
                                 $(".houseFy").val(req.data.resourceId)
                             }
                             $(".yf").val(req.data.renterId)
@@ -533,28 +533,28 @@ layui.use(['laydate', 'table', 'form'], function () {
                     })
                 },
                 put: function () {
-                    if ($(".dealName").val() !== "") {
-                        if ($(".houseFy").val() !== "") {
-                            if ($(".yf").val() !== "") {
-                                if ($(".bzj").val() !== "") {
-                                    if ($("#date").val() !== "") {
-                                        if ($(".zsMouth").val() !== "") {
+                    if ($.trim($(".dealName")).val() !== "") {
+                        if ($.trim($(".houseFy")).val() !== "") {
+                            if ($.trim($(".yf")).val() !== "") {
+                                if ($.trim($(".bzj")).val() !== "") {
+                                    if ($.trim($("#date")).val() !== "") {
+                                        if ($.trim($(".zsMouth")).val() !== "") {
                                             if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
-                                                if ($(".zsMouth").val() !== "") {
+                                                if ($.trim($(".zsMouth").val()) !== "") {
                                                     var data = {
                                                         "id": obj.data.id,
                                                         "createdBy": user,
-                                                        "dealName": $(".dealName").val(),
-                                                        "rentMonth": $(".zsMouth").val(),
-                                                        "fkHouseResourceId": $(".houseFy").val(),
-                                                        "fkRenterId": $(".yf").val(),
+                                                        "dealName": $.trim($(".dealName").val()),
+                                                        "rentMonth": $.trim($(".zsMouth").val()),
+                                                        "fkHouseResourceId": $.trim($(".houseFy").val()),
+                                                        "fkRenterId": $.trim($(".yf").val()),
                                                         "startTime": sjc($("#date").val() + " 00:00:00"),
-                                                        "payType": $(".zjzfType").val(),
-                                                        "deposit": $(".bzj").val(),
-                                                        "freeRentMonth": $(".mzMouth").val(),
-                                                        "dealType": $(".htType").val(),
-                                                        "dealSerial": $(".dealName").attr("htbh"),
-                                                        "rentType":$(".rentType").val()
+                                                        "payType": $.trim($(".zjzfType").val()),
+                                                        "deposit": $.trim($(".bzj").val()),
+                                                        "freeRentMonth": $.trim($(".mzMouth").val()),
+                                                        "dealType": $.trim($(".htType").val()),
+                                                        "dealSerial": $.trim($(".dealName").attr("htbh")),
+                                                        "rentType": $.trim($(".rentType").val())
                                                     }
 
 
@@ -848,6 +848,7 @@ function getfy() {
         }
     });
 }
+
 // function getbjfy() {
 //     $.ajax({
 //         url: IPzd + '/hresource/simple/norent',    //请求的url地址

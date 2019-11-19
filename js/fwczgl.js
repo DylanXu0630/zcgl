@@ -91,7 +91,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         var data = obj.data //获得当前行数据
             , layEvent = obj.event; //获得 lay-event 对应的值
         if (layEvent === 'del') {
-            layer.confirm('真的删除行么', function (index) {
+            layer.confirm('确定删除？', function (index) {
                 $.ajax({
                     url: IPzd + '/assets/house/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
@@ -284,32 +284,32 @@ layui.use(['table', 'laydate', 'form'], function () {
 
                 },
                 put: function () {
-                    if ($(".houseId").val() !== "") {
-                        if ($(".assetsName").val() !== "") {
-                            if ($(".co.fkOwnId").val() !== "") {
-                                if ($(".fkLandAssetsId").val() !== "") {
-                                    if ($(".totalLevel").val() !== "") {
-                                        if ($(".buildArea").val() !== "") {
-                                            if ($(".realArea").val() !== "") {
+                    if ($.trim($(".houseId").val()) !== "") {
+                        if ($.trim($(".assetsName").val()) !== "") {
+                            if ($.trim($(".co.fkOwnId").val()) !== "") {
+                                if ($.trim($(".fkLandAssetsId").val()) !== "") {
+                                    if ($.trim($(".totalLevel").val()) !== "") {
+                                        if ($.trim($(".buildArea").val()) !== "") {
+                                            if ($.trim($(".realArea").val()) !== "") {
                                                 if (parseInt($(".buildArea").val()) < parseInt($(".realArea").val())) {
                                                     layer.msg("建筑面积应大于套内面积")
                                                 } else {
                                                     var data = {
                                                         "id": obj.data.id,
-                                                        "assetsName": $(".assetsName").val(),
-                                                        "buildArea": $(".buildArea").val(),
+                                                        "assetsName": $.trim($(".assetsName").val()),
+                                                        "buildArea": $.trim($(".buildArea").val()),
                                                         "createdBy": user,
-                                                        "fkAgencyId": $(".gldw.manageUnit").val(),
-                                                        "fkHouseNature": $(".fcxz.hourseType").val(),
-                                                        "fkHouseShareId": $(".fwgyqk.shareType").val(),
-                                                        "fkHouseUsage": $(".fwghyt.housePlanUse").val(),
-                                                        "fkLandAssetsId": $(".fkLandAssetsId").val(),
-                                                        "fkOwnId": $(".co.fkOwnId").val(),
-                                                        "houseId": $(".houseId").val(),
-                                                        "otherArea": $(".otherArea").val(),
-                                                        "realArea": $(".realArea").val(),
-                                                        "remark": $(".remark").val(),
-                                                        "totalLevel": $(".totalLevel").val(),
+                                                        "fkAgencyId": $.trim($(".gldw.manageUnit").val()),
+                                                        "fkHouseNature": $.trim($(".fcxz.hourseType").val()),
+                                                        "fkHouseShareId": $.trim($(".fwgyqk.shareType").val()),
+                                                        "fkHouseUsage": $.trim($(".fwghyt.housePlanUse").val()),
+                                                        "fkLandAssetsId": $.trim($(".fkLandAssetsId").val()),
+                                                        "fkOwnId": $.trim($(".co.fkOwnId").val()),
+                                                        "houseId": $.trim($(".houseId").val()),
+                                                        "otherArea": $.trim($(".otherArea").val()),
+                                                        "realArea": $.trim($(".realArea").val()),
+                                                        "remark": $.trim($(".remark").val()),
+                                                        "totalLevel": $.trim($(".totalLevel").val()),
                                                         "registerTime": sjc($("#date").val() + " 00:00:00")
                                                     }
                                                     $.ajax({
@@ -513,8 +513,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landGetMethod" readonly>\n' +
                     // '    </div>\n' +
                     // '</div>\n' +
-                    '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label ">土地使用年限(年)</label>\n' +
+                    '<div class="dialogDiv" style="display: none">\n' +
+                    '    <label class="layui-form-label">土地使用年限(年)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landUseYear" readonly>\n' +
                     '    </div>\n' +
@@ -700,34 +700,34 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '</div>',
 
             add: function () {
-                if ($(".houseId").val() !== "") {
-                    if ($(".assetsName").val() !== "") {
-                        if ($(".co.fkOwnId").val() !== "") {
-                            if ($(".fkLandAssetsId").val() !== "") {
-                                if ($(".totalLevel").val() !== "") {
-                                    if ($(".buildArea").val() !== "") {
-                                        if ($(".realArea").val() !== "") {
+                if ($.trim($(".houseId").val()) !== "") {
+                    if ($.trim($(".assetsName").val()) !== "") {
+                        if ($.trim($(".co.fkOwnId").val()) !== "") {
+                            if ($.trim($(".fkLandAssetsId").val()) !== "") {
+                                if ($.trim($(".totalLevel").val()) !== "") {
+                                    if ($.trim($(".buildArea").val()) !== "") {
+                                        if ($.trim($(".realArea").val()) !== "") {
                                             if (parseInt($(".buildArea").val()) < parseInt($(".realArea").val())) {
 
                                                 layer.msg("建筑面积应大于套内面积")
                                             } else {
                                                 var data = {
-                                                    "assetsName": $(".assetsName").val(),
-                                                    "buildArea": $(".buildArea").val(),
+                                                    "assetsName": $.trim($(".assetsName").val()),
+                                                    "buildArea": $.trim($(".buildArea").val()),
                                                     "createdBy": user,
-                                                    "fkAgencyId": $(".gldw.manageUnit").val(),
-                                                    "fkHouseNature": $(".fcxz.hourseType").val(),
-                                                    "fkHouseShareId": $(".fwgyqk.shareType").val(),
-                                                    "fkHouseUsage": $(".fwghyt.housePlanUse").val(),
-                                                    "fkLandAssetsId": $(".fkLandAssetsId").val(),
-                                                    "fkOwnId": $(".co.fkOwnId").val(),
-                                                    "houseId": $(".houseId").val(),
-                                                    "otherArea": $(".otherArea").val(),
-                                                    "realArea": $(".realArea").val(),
-                                                    "remark": $(".remark").val(),
-                                                    "totalLevel": $(".totalLevel").val(),
+                                                    "fkAgencyId": $.trim($(".gldw.manageUnit").val()),
+                                                    "fkHouseNature": $.trim($(".fcxz.hourseType").val()),
+                                                    "fkHouseShareId": $.trim($(".fwgyqk.shareType").val()),
+                                                    "fkHouseUsage": $.trim($(".fwghyt.housePlanUse").val()),
+                                                    "fkLandAssetsId": $.trim($(".fkLandAssetsId").val()),
+                                                    "fkOwnId": $.trim($(".co.fkOwnId").val()),
+                                                    "houseId": $.trim($(".houseId").val()),
+                                                    "otherArea": $.trim($(".otherArea").val()),
+                                                    "realArea": $.trim($(".realArea").val()),
+                                                    "remark": $.trim($(".remark").val()),
+                                                    "totalLevel": $.trim($(".totalLevel").val()),
                                                     "registerTime": sjc($("#date").val() + " 00:00:00"),
-                                                    "location": $(".location").val()
+                                                    "location": $.trim($(".location").val())
                                                 }
                                                 $.ajax({
                                                     url: IPzd + '/assets/house',    //请求的url地址

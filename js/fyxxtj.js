@@ -241,22 +241,22 @@ layui.use(['table', 'form'], function () {
                 '</div>' +
                 '</div>',
             add: function () {
-                if ($(".fymc").val() == "") {
+                if ($.trim($(".fymc").val()) == "") {
                     layer.msg("房源名称不能为空！")
                 } else {
-                    if ($(".houseZh").val() == "") {
+                    if ($.trim($(".houseZh").val()) == "") {
                         layer.msg("房产不能为空！")
                     } else {
-                        if ($(".yqly").val() == "") {
+                        if ($.trim($(".yqly").val()) == "") {
                             layer.msg("园区不能为空！")
                         } else {
-                            if ($(".fymj").val() == "") {
+                            if ($.trim($(".fymj").val()) == "") {
                                 layer.msg("房源面积不能为空！")
                             } else {
-                                if ($(".sjzj").val() == "") {
+                                if ($.trim($(".sjzj").val()) == "") {
                                     layer.msg("实际租金不能为空！")
                                 } else {
-                                    if ($(".fymj").val() == "") {
+                                    if ($.trim($(".fymj").val()) == "") {
                                         layer.msg("房源面积不能为空！")
                                     } else {
                                         if ($(".cszt").val() == "1") {
@@ -265,22 +265,22 @@ layui.use(['table', 'form'], function () {
                                                 $(".czzt").val("-1")
                                             }else {
                                                 var data = {
-                                                    "buildLevel": $(".lc").val(),
-                                                    "buildNo": $(".lh").val(),
-                                                    "buildRoom": $(".fh").val(),
+                                                    "buildLevel": $.trim($(".lc").val()),
+                                                    "buildNo": $.trim($(".lh").val()),
+                                                    "buildRoom": $.trim($(".fh").val()),
                                                     "createdBy": user,
-                                                    "fkHouseAssetsId": $(".houseZh").val(),
-                                                    "remark": $(".fj").val(),
-                                                    "rentStatus": $(".cszt").val(),
-                                                    "resourceArea": $(".fymj").val(),
-                                                    "resourceName": $(".fymc").val(),
-                                                    "sellStatus": $(".cszt").val(),
-                                                    "rentStatus": $(".czzt").val(),
-                                                    "originRentCharge": $(".ylzj").val(),
-                                                    "realRentCharge": $(".sjzj").val(),
-                                                    "guideRentCharge": $(".zdj").val(),
-                                                    "park": $(".yqly").val(),
-                                                    "fkAgencyId": $(".gldw.manageUnit").val()
+                                                    "fkHouseAssetsId": $.trim($(".houseZh").val()),
+                                                    "remark": $.trim($(".fj").val()),
+                                                    "rentStatus": $.trim($(".cszt").val()),
+                                                    "resourceArea": $.trim($(".fymj").val()),
+                                                    "resourceName": $.trim($(".fymc").val()),
+                                                    "sellStatus": $.trim($(".cszt").val()),
+                                                    "rentStatus": $.trim($(".czzt").val()),
+                                                    "originRentCharge": $.trim($(".ylzj").val()),
+                                                    "realRentCharge": $.trim($(".sjzj").val()),
+                                                    "guideRentCharge": $.trim($(".zdj").val()),
+                                                    "park": $.trim($(".yqly").val()),
+                                                    "fkAgencyId": $.trim($(".gldw.manageUnit").val())
                                                 }
 
                                                 $.ajax({
@@ -684,22 +684,22 @@ layui.use(['table', 'form'], function () {
                     });
                 },
                 put: function () {
-                    if ($(".fymc").val() == "") {
+                    if ($.trim($(".fymc").val()) == "") {
                         layer.msg("房源名称不能为空！")
                     } else {
-                        if ($(".houseZh").val() == "") {
+                        if ($.trim($(".houseZh").val()) == "") {
                             layer.msg("房产不能为空！")
                         } else {
-                            if ($(".yqly").val() == "") {
+                            if ($.trim($(".yqly").val()) == "") {
                                 layer.msg("园区不能为空！")
                             } else {
-                                if ($(".fymj").val() == "") {
+                                if ($.trim($(".fymj").val()) == "") {
                                     layer.msg("房源面积不能为空！")
                                 } else {
-                                    if ($(".sjzj").val() == "") {
+                                    if ($.trim($(".sjzj").val()) == "") {
                                         layer.msg("实际租金不能为空！")
                                     } else {
-                                        if ($(".fymj").val() == "") {
+                                        if ($.trim($(".fymj").val()) == "") {
                                             layer.msg("房源面积不能为空！")
                                         } else {
                                             if ($(".cszt").val() == "1") {
@@ -709,21 +709,21 @@ layui.use(['table', 'form'], function () {
                                                 }else {
                                                     var data = {
                                                         "id": obj.data.id,
-                                                        "buildLevel": $(".lc").val(),
-                                                        "buildNo": $(".lh").val(),
-                                                        "buildRoom": $(".fh").val(),
+                                                        "buildLevel": $.trim($(".lc").val()),
+                                                        "buildNo": $.trim($(".lh").val()),
+                                                        "buildRoom": $.trim($(".fh").val()),
                                                         "createdBy": user,
-                                                        "fkHouseAssetsId": $(".houseZh").val(),
-                                                        "remark": $(".fj").val(),
-                                                        "rentStatus": $(".cszt").val(),
-                                                        "resourceArea": $(".fymj").val(),
-                                                        "resourceName": $(".fymc").val(),
-                                                        "sellStatus": $(".cszt").val(),
-                                                        "rentStatus": $(".czzt").val(),
-                                                        "originRentCharge": $(".ylzj").val(),
-                                                        "realRentCharge": $(".sjzj").val(),
-                                                        "guideRentCharge": $(".zdj").val(),
-                                                        "fkAgencyId": $(".gldw.manageUnit").val()
+                                                        "fkHouseAssetsId": $.trim($(".houseZh").val()),
+                                                        "remark": $.trim($(".fj").val()),
+                                                        "rentStatus": $.trim($(".cszt").val()),
+                                                        "resourceArea": $.trim($(".fymj").val()),
+                                                        "resourceName": $.trim($(".fymc").val()),
+                                                        "sellStatus": $.trim($(".cszt").val()),
+                                                        "rentStatus": $.trim($(".czzt").val()),
+                                                        "originRentCharge": $.trim($(".ylzj").val()),
+                                                        "realRentCharge": $.trim($(".sjzj").val()),
+                                                        "guideRentCharge": $.trim($(".zdj").val()),
+                                                        "fkAgencyId": $.trim($(".gldw.manageUnit").val())
                                                     }
                                                     $.ajax({
                                                         url: IPzd + '/hresource',    //请求的url地址
@@ -934,7 +934,7 @@ layui.use(['table', 'form'], function () {
                     // '    </div>\n' +
                     // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房产拥有者</label>\n' +
+                    '    <label class="layui-form-label">房屋所有权人</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input gldw" readonly>\n' +
                     '    </div>\n' +
@@ -943,7 +943,7 @@ layui.use(['table', 'form'], function () {
                     '<div class="dialogTitle">土地产证信息</div>' +
 
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地拥有者</label>\n' +
+                    '    <label class="layui-form-label">土地使用权人</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input tdyyz" readonly>\n' +
                     '    </div>\n' +
@@ -955,7 +955,7 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '   <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">地产坐落</label>\n' +
+                    '    <label class="layui-form-label">土地坐落</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dczl" readonly>\n' +
                     '    </div>\n' +
