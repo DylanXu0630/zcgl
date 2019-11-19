@@ -7,6 +7,11 @@ layui.use(['laydate', 'table', 'form'], function () {
     var laydate = layui.laydate;
     var form = layui.form;
 
+    sgetgldw()
+    sgetyf()
+    getfwghyt()
+    form.render('select')
+
     lay('.httime').each(function () {
         laydate.render({
             elem: this,
@@ -22,10 +27,10 @@ layui.use(['laydate', 'table', 'form'], function () {
         , method: "POST"
         , contentType: "application/json"
         , where: {
-            "asc":0,
+            "asc": 0,
             "agencyId": "",
             "dealExistStatusCode": "",
-            "dealName": "string",
+            "dealName": "",
             "dealReviewStatusCode": "",
             "dealTypeCode": "",
             "endTime": "",
@@ -49,10 +54,13 @@ layui.use(['laydate', 'table', 'form'], function () {
         , cols: [[ //表头
             {field: 'dealSerial', title: '合同编号'}
             , {field: 'dealName', title: '合同名称'}
+            , {field: 'dealType', title: '合同类型'}
             , {field: 'resourceName', title: '房源'}
             , {field: 'renter', title: '承租方',}
             , {field: 'startTime', title: '开始时间',}
             , {field: 'endTime', title: '结束时间',}
+            , {field: 'dealExistStatus', title: '审核状态',}
+            , {field: 'dealReviewStatus', title: '合同状态',}
             , {
                 fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 220,
             }
@@ -76,14 +84,14 @@ layui.use(['laydate', 'table', 'form'], function () {
                     curr: 1 //重新从第 1 页开始
                 }
                 , where: {//这里传参  向后台
-                    "asc":0,
+                    "asc": 0,
                     "agencyId": $(".s-gldw").val(),
                     "dealExistStatusCode": $(".s-hezt").val(),
                     "dealName": $(".s-htmc").val(),
                     "dealReviewStatusCode": $(".s-heshzt").val(),
                     "dealTypeCode": $(".s-httype").val(),
-                    "endTime": $("#date2").val(),
-                    "houseUsageId": $(".s-fyyc").val(),
+                    "endTime": sjc($("#s-date2").val()+ "23:59:59"),
+                    "houseUsageId": $(".fwghyt").val(),
                     "lessorId": $(".s-czr").val(),
                     "maxGuideRentCharge": $(".maxzdj").val(),
                     "maxOriginRentCharge": $(".maxyj").val(),
@@ -97,7 +105,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     "minResourceArea": $(".minzjj").val(),
                     "payTypeCode": $(".s-htzftype").val(),
                     "renterId": $(".s-czzr").val(),
-                    "startTime": $("#date").val()
+                    "startTime": sjc($("#s-date").val()+" 00:00:00")
                 },
                 url: IPzd + '/deal/all' //数据接口
                 , method: 'post'
@@ -107,7 +115,6 @@ layui.use(['laydate', 'table', 'form'], function () {
 
 
     })
-
 
 
     /*添加点击事件*/
@@ -582,6 +589,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">合同类型</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htType" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">出租人（甲方）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jf" readonly>\n' +
@@ -707,6 +720,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $("#date2").val(req.data.endTime)
                                 $(".htshzt").val(req.data.dealReviewStatus)
                                 $(".htzt").val(req.data.dealExistStatus)
+                                $(".htType").val(req.data.dealType)
                             } else {
                                 layer.msg("获取失败")
                             }
@@ -722,7 +736,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 }
             }
             layerOpen(openMes);
-        }else if (layEvent == 'dy'){
+        } else if (layEvent == 'dy') {
             localStorage.htId = obj.data.id
             window.open('../fwzpht.html')
         }
@@ -827,4 +841,34 @@ function getyf() {
     });
 }
 
+function sgetyf() {
+    $.ajax({
+        url: IPzd + '/renter/all',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $(".s-czzr").children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo(".s-czzr")
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".s-czzr")
+                })
+            } else {
+                layer.msg(req.msg)
+            }
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
 

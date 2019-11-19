@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="../layui/css/layui.css">
     <link rel="stylesheet" href="../css/page.css">
     <style>
-        .layui-inline{
+        .layui-inline {
             min-width: 400px;
         }
+
         .addDig .layui-form-label {
             width: 120px;
             text-align: right;
@@ -17,6 +18,7 @@
         .addDig .layui-input, .layui-anim.layui-anim-upbit {
             width: 90%;
         }
+
         .tjsx .layui-form-label {
             width: 140px;
             text-align: right;
@@ -24,6 +26,14 @@
 
         .tjsx .layui-input, .layui-anim.layui-anim-upbit {
             width: 70%;
+        }
+
+        .xlkInput .layui-input, .layui-anim.layui-anim-upbit {
+            width: 96%;
+        }
+
+        .sgInput .layui-input, .layui-anim.layui-anim-upbit {
+            width: 79%;
         }
     </style>
 </head>
@@ -49,7 +59,7 @@
                                 <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input s-htmc">
                             </div>
                         </div>
-                        <div class="layui-inline">
+                        <div class="layui-inline xlkInput" style="display: none">
                             <label class="layui-form-label" style="width: 90px;">出租人</label>
                             <div class="layui-input-block">
                                 <select name="ht" lay-verify="" class="s-czr">
@@ -57,7 +67,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="layui-inline">
+                        <div class="layui-inline xlkInput">
                             <label class="layui-form-label" style="width: 90px;">承租人</label>
                             <div class="layui-input-block">
                                 <select name="ht" lay-verify="" class="s-czzr">
@@ -65,7 +75,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="layui-inline">
+                        <div class="layui-inline sgInput">
                             <label class="layui-form-label">合同状态</label>
                             <div class="layui-input-block">
                                 <select name="ht" lay-verify="" class="s-hezt">
@@ -77,7 +87,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="layui-inline">
+                        <div class="layui-inline sgInput">
                             <label class="layui-form-label">合同审核状态</label>
                             <div class="layui-input-block">
                                 <select name="ht" lay-verify="" class="s-heshzt">
@@ -88,7 +98,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="layui-inline">
+                        <div class="layui-inline sgInput">
                             <label class="layui-form-label">合同类型</label>
                             <div class="layui-input-block">
                                 <select name="ht" lay-verify="" class="s-httype">
@@ -99,15 +109,15 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="layui-inline">
+                        <div class="layui-inline sgInput">
                             <label class="layui-form-label">房源用处</label>
                             <div class="layui-input-block">
-                                <select name="ht" lay-verify="" class="s-fyyc">
+                                <select name="ht" lay-verify="" class="fwghyt">
                                     <option value="">请选择</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="layui-inline">
+                        <div class="layui-inline sgInput">
                             <label class="layui-form-label">管理单位</label>
                             <div class="layui-input-block">
                                 <select name="ht" lay-verify="" class="s-gldw">
@@ -115,7 +125,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="layui-inline">
+                        <div class="layui-inline sgInput">
                             <label class="layui-form-label">合同支付方式</label>
                             <div class="layui-input-block">
                                 <select name="ht" lay-verify="" class="s-htzftype">
@@ -140,10 +150,10 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">合同开始结束时间</label>
                             <div class="layui-input-block">
-                                <input type="text" name="date" id="date" placeholder="请输入" autocomplete="off" class="layui-input minfymj httime"
+                                <input type="text" name="date" id="s-date" placeholder="请输入" autocomplete="off" class="layui-input minfymj httime"
                                        style="float: left;width: 36%">
                                 <span style="float: left;margin: 0 10px;line-height: 38px;">至</span>
-                                <input type="text" name="date" id="date2" placeholder="请输入" autocomplete="off" class="layui-input minfymj httime"
+                                <input type="text" name="date" id="s-date2" placeholder="请输入" autocomplete="off" class="layui-input minfymj httime"
                                        style="float: left;width: 36%">
                             </div>
                         </div>
