@@ -7,7 +7,7 @@
 <body>
 <link rel="stylesheet" href="css/ht.css">
 <div id="htall">
-    <div class="bbh">版本号：<span>2019 V1.0</span></div>
+    <div class="bbh">版本号：<span class="htSpan bbh"></span></div>
     <h2>房屋租赁合同</h2>
     <div>出租方（下称甲方）:<span class="htSpan jf"></span></div>
     <div>承租方（下称乙方）:<span class="htSpan yf"></span></div>
@@ -122,6 +122,7 @@
             },
             success: function (req) {
                 if (req.status==200){
+                    $(".bbh").text(req.data.dealSerial)
                     $(".yf").text(req.data.renter)
                     $(".jf").text(req.data.lessor)
                     $(".zl").text(req.data.location)

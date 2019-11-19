@@ -18,11 +18,12 @@ layui.use(['laydate', 'table', 'form'], function () {
         elem: '#tableList'
         // , toolbar: '#toolbarDemo'
         // , url: '../json/zctj.json' //数据接口
-        , url: IPzd + '/warn/deal/0/' + table.config.page + '/' + table.config.limit + '/' + $(".s-dqts").val() //数据接口
-        , method: "GET"
+        , url: IPzd + '/warn/deal' //数据接口
+        , method: "POST"
         , contentType: "application/json"
         , where: {
-            "day ": ""
+            "asc": 0,
+            "day": 14,
         }
         , page: true //开启分页
         , cols: [[ //表头
@@ -32,9 +33,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             , {field: 'renter', title: '承租方',}
             , {field: 'startTime', title: '开始时间',}
             , {field: 'endTime', title: '结束时间',}
-            , {
-                fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 220,
-            }
+            , {field: 'lastDay', title: '剩余天数', style: 'color: #ff0000;font-weight:bold;'}
         ]], parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
             return {
                 "code": 0, //解析接口状态
@@ -56,29 +55,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                 }
                 , where: {//这里传参  向后台
                     "asc": 0,
-                    "agencyId": $(".s-gldw").val(),
-                    "dealExistStatusCode": $(".s-hezt").val(),
-                    "dealName": $(".s-htmc").val(),
-                    "dealReviewStatusCode": $(".s-heshzt").val(),
-                    "dealTypeCode": $(".s-httype").val(),
-                    "endTime": $("#s-date2").val(),
-                    "houseUsageId": $(".s-fyyc").val(),
-                    "lessorId": $(".s-czr").val(),
-                    "maxGuideRentCharge": $(".maxzdj").val(),
-                    "maxOriginRentCharge": $(".maxyj").val(),
-                    "maxRealRentCharge": $(".maxfymj").val(),
-                    "maxRentMonth": $(".maxzly").val(),
-                    "maxResourceArea": $(".maxsjj").val(),
-                    "minGuideRentCharge": $(".minzdj").val(),
-                    "minOriginRentCharge": $(".minyj").val(),
-                    "minRealRentCharge": $(".minfymj").val(),
-                    "minRentMonth": $(".minzly").val(),
-                    "minResourceArea": $(".minzjj").val(),
-                    "payTypeCode": $(".s-htzftype").val(),
-                    "renterId": $(".s-czzr").val(),
-                    "startTime": $("#s-date").val()
+                    "day": $(".s-dqts").val(),
                 },
-                url: IPzd + '/deal/all' //数据接口
+                url: IPzd + '/warn/deal' //数据接口
                 , method: 'post'
             });
             return false;//false：阻止表单跳转  true：表单跳转

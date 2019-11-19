@@ -59,10 +59,24 @@ layui.use(['laydate', 'table', 'form'], function () {
             , {field: 'renter', title: '承租方',}
             , {field: 'startTime', title: '开始时间',}
             , {field: 'endTime', title: '结束时间',}
-            , {field: 'dealExistStatus', title: '审核状态',}
-            , {field: 'dealReviewStatus', title: '合同状态',}
+            , {field: 'dealReviewStatus', title: '审核状态',}
+            , {field: 'dealExistStatus', title: '合同状态',}
             , {
-                fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 220,
+                fixed: 'right', title: '操作', fixed: 'right', width: 220,templet:function (d) {
+                    if (d.dealReviewStatusCode == "1"){
+                        return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
+                            '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
+                            '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n' +
+                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                    }else if (d.dealReviewStatusCode == "2"){
+                        return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
+                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                    }else if (d.dealReviewStatusCode == "3"){
+                        return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
+                            '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
+                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                    }
+                }
             }
         ]], parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
             return {
@@ -77,39 +91,42 @@ layui.use(['laydate', 'table', 'form'], function () {
     /*搜索*/
     $("#sousuo").on("click", function () {
         form.on('submit(search)', function (data) {
-
             //执行重载
-            table.reload('tableList', {
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                }
-                , where: {//这里传参  向后台
-                    "asc": 0,
-                    "agencyId": $(".s-gldw").val(),
-                    "dealExistStatusCode": $(".s-hezt").val(),
-                    "dealName": $(".s-htmc").val(),
-                    "dealReviewStatusCode": $(".s-heshzt").val(),
-                    "dealTypeCode": $(".s-httype").val(),
-                    "endTime": sjc($("#s-date2").val()+ "23:59:59"),
-                    "houseUsageId": $(".fwghyt").val(),
-                    "lessorId": $(".s-czr").val(),
-                    "maxGuideRentCharge": $(".maxzdj").val(),
-                    "maxOriginRentCharge": $(".maxyj").val(),
-                    "maxRealRentCharge": $(".maxfymj").val(),
-                    "maxRentMonth": $(".maxzly").val(),
-                    "maxResourceArea": $(".maxsjj").val(),
-                    "minGuideRentCharge": $(".minzdj").val(),
-                    "minOriginRentCharge": $(".minyj").val(),
-                    "minRealRentCharge": $(".minfymj").val(),
-                    "minRentMonth": $(".minzly").val(),
-                    "minResourceArea": $(".minzjj").val(),
-                    "payTypeCode": $(".s-htzftype").val(),
-                    "renterId": $(".s-czzr").val(),
-                    "startTime": sjc($("#s-date").val()+" 00:00:00")
-                },
-                url: IPzd + '/deal/all' //数据接口
-                , method: 'post'
-            });
+            if (sjc($("#s-date").val()) > sjc($("#s-date2").val())) {
+                layer.msg("合同开始时间不能小于合同结束时间！")
+            } else {
+                table.reload('tableList', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {//这里传参  向后台
+                        "asc": 0,
+                        "agencyId": $(".s-gldw").val(),
+                        "dealExistStatusCode": $(".s-hezt").val(),
+                        "dealName": $(".s-htmc").val(),
+                        "dealReviewStatusCode": $(".s-heshzt").val(),
+                        "dealTypeCode": $(".s-httype").val(),
+                        "endTime": sjc($("#s-date2").val() + "23:59:59"),
+                        "houseUsageId": $(".fwghyt").val(),
+                        "lessorId": $(".s-czr").val(),
+                        "maxGuideRentCharge": $(".maxzdj").val(),
+                        "maxOriginRentCharge": $(".maxyj").val(),
+                        "maxRealRentCharge": $(".maxsjj").val(),
+                        "maxRentMonth": $(".maxzly").val(),
+                        "maxResourceArea": $(".maxfymj").val(),
+                        "minGuideRentCharge": $(".minzdj").val(),
+                        "minOriginRentCharge": $(".minyj").val(),
+                        "minRealRentCharge": $(".minsjj").val(),
+                        "minRentMonth": $(".minzly").val(),
+                        "minResourceArea": $(".minfymj").val(),
+                        "payTypeCode": $(".s-htzftype").val(),
+                        "renterId": $(".s-czzr").val(),
+                        "startTime": sjc($("#s-date").val() + " 00:00:00")
+                    },
+                    url: IPzd + '/deal/all' //数据接口
+                    , method: 'post'
+                });
+            }
             return false;//false：阻止表单跳转  true：表单跳转
         });
 
@@ -216,6 +233,16 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '      <input type="text" name="title" required onkeyup="checkNum(this)" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input mzMouth">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>是否续租</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="rentType">\n' +
+                '        <option value="1">新签</option>\n' +
+                '        <option value="2">续签</option>\n' +
+                // '        <option value="4">资产出售</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 '</form></div>' +
                 '</div>' +
                 '</div>',
@@ -238,7 +265,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                     "payType": $(".zjzfType").val(),
                                                     "deposit": $(".bzj").val(),
                                                     "freeRentMonth": $(".mzMouth").val(),
-                                                    "dealType": $(".htType").val()
+                                                    "dealType": $(".htType").val(),
+                                                    "rentType":$(".rentType").val()
                                                 }
 
                                                 $.ajax({
@@ -447,6 +475,16 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '      <input type="text" name="title" required onkeyup="checkNum(this)" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input mzMouth">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>是否续租</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="rentType">\n' +
+                    '        <option value="1">新签</option>\n' +
+                    '        <option value="2">续签</option>\n' +
+                    // '        <option value="4">资产出售</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
@@ -465,8 +503,17 @@ layui.use(['laydate', 'table', 'form'], function () {
                             //请求前的处理
                         },
                         success: function (req) {
+                            $(".dealName").attr("htbh", "")
                             $(".dealName").val(req.data.dealName)
-                            $(".houseFy").val(req.data.resourceId)
+                            if ($(".houseFy").children().length<2){
+                                $(".houseFy").children().remove()
+                                var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
+                                var options2 = $("<option value='"+req.data.resourceId+"'>"+req.data.resourceName+"</option>").appendTo(".houseFy")
+                                $(".houseFy").val(req.data.resourceId)
+                                form.render('select')
+                            }else {
+                                $(".houseFy").val(req.data.resourceId)
+                            }
                             $(".yf").val(req.data.renterId)
                             $(".zjzfType").val(req.data.payTypeCode)
                             $(".htType").val(req.data.dealTypeCode)
@@ -474,6 +521,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $("#date").val(req.data.startTime)
                             $(".zsMouth").val(req.data.rentMonth)
                             $(".mzMouth").val(req.data.freeRentMonth)
+                            $(".dealName").attr("htbh", req.data.dealSerial)
+                            $(".rentType").val(req.data.rentTypeCode)
                         }
                     })
                     lay('.httime').each(function () {
@@ -503,7 +552,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                         "payType": $(".zjzfType").val(),
                                                         "deposit": $(".bzj").val(),
                                                         "freeRentMonth": $(".mzMouth").val(),
-                                                        "dealType": $(".htType").val()
+                                                        "dealType": $(".htType").val(),
+                                                        "dealSerial": $(".dealName").attr("htbh"),
+                                                        "rentType":$(".rentType").val()
                                                     }
 
 
@@ -607,6 +658,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">付款方式</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fkfs" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">开始日期</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime" readonly>\n' +
@@ -619,6 +676,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">租赁月数(月)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zlys" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">合同状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htzt" readonly>\n' +
@@ -628,6 +691,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    <label class="layui-form-label">合同审核状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htshzt" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">是否续租</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input rentType" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
 
@@ -721,6 +790,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $(".htshzt").val(req.data.dealReviewStatus)
                                 $(".htzt").val(req.data.dealExistStatus)
                                 $(".htType").val(req.data.dealType)
+                                $(".fkfs").val(req.data.payType)
+                                $(".zlys").val(req.data.rentMonth)
+                                $(".rentType").val(req.data.rentType)
                             } else {
                                 layer.msg("获取失败")
                             }
@@ -776,6 +848,37 @@ function getfy() {
         }
     });
 }
+// function getbjfy() {
+//     $.ajax({
+//         url: IPzd + '/hresource/simple/norent',    //请求的url地址
+//         dataType: "json",   //返回格式为json
+//         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+//         type: "GET",   //请求方式
+//         contentType: "application/json;charset=UTF-8",
+//         // headers: {"token": sessionStorage.token},
+//         beforeSend: function () {
+//             //请求前的处理
+//         },
+//         success: function (req) {
+//             $(".houseFy").children().remove()
+//             var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
+//             if (req.status == "200") {
+//                 $(req.data).each(function (i, o) {
+//                     var option = $("<option value='" + o.id + "'>" + o.resourceName + "</option>").appendTo(".houseFy")
+//                 })
+//             } else {
+//                 // layer.msg(req.msg)
+//             }
+//
+//         },
+//         complete: function () {
+//             //请求完成的处理
+//         },
+//         error: function () {
+//             //请求出错处理
+//         }
+//     });
+// }
 
 function allgetfy() {
     $.ajax({
