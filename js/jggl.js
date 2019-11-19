@@ -13,7 +13,6 @@ layui.use(['table', 'form'], function () {
     table.render({
         elem: '#tableList'
         , id: 'idTest'
-        , toolbar: '#toolbarDemo'
 
         , url: IPzd+'/dic/agency?asc=1'//数据接口
         , parseData: function (res) { //res 即为原始返回的数据
@@ -38,7 +37,7 @@ layui.use(['table', 'form'], function () {
         var data = obj.data //获得当前行数据
             , layEvent = obj.event; //获得 lay-event 对应的值
         if (layEvent === 'del') {
-            layer.confirm('真的删除行么', function (index) {
+            layer.confirm('确定删除？', function (index) {
                 $.ajax({
                     url: IPzd+'/dic/agency/' + obj.data.id, //数据接口
                     dataType: "json",   //返回格式为json
