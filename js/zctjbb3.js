@@ -8,7 +8,7 @@ layui.use('table', function () {
     //第一个实例
     table.render({
         elem: '#tableList'
-        , toolbar: '#toolbarDemo'
+        // , toolbar: '#toolbarDemo'
         , url: '../json/zctjbb3.json' //数据接口
         , page: true //开启分页
         , cols: [[ //表头

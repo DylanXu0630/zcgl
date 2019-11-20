@@ -9,11 +9,15 @@ $(function () {
         var padlength = (window.innerHeight - 106 - 106 - $(".login-mid").height()) / 2;
         $(".login-mid").css("padding-top", padlength).css("padding-bottom", padlength);
     });
+    // 获取验证码需要的唯一UUID
+    localStorage.setItem("uuId", uuid());
 
+    //验证码图片获取 
+    $("#img").attr('src',login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
 
     $("#login").click(function () {
         $.ajax({
-            url: login + '/oauth/token?grant_type=password&scope=all&username=' + $(".username").val() + '&password=' + $(".password").val(),    //请求的url地址
+            url: login + '/authentication/form',    //请求的url地址
             dataType: "json",   //返回格式为json
             async: false,//请求是否异步，默认为异步，这也是ajax重要特性
             type: "POST",   //请求方式
@@ -21,34 +25,63 @@ $(function () {
             crossDomain: true,
             // headers: {"Authorization": "Basic amM6anM="},
             beforeSend: function (request) {
-                request.setRequestHeader("Authorization","Basic amM6anM=");
+                request.setRequestHeader("Authorization","Basic bGl5dWFuOjEyMzQ1Ng==");
+            },
+            data: {
+                "username": $(".username").val(),
+                "password": $(".password").val(),
+                "imageCode": $(".yzm").val(),
+                "deviceId": localStorage.getItem("uuId")
             },
             success: function (req) {
-                if (req.status == "200") {
-                    layer.close(indexDig);
-                    layer.msg("添加成功")
-                    var demoReload = $('#demoReload');
-                    //执行重载
-                    table.reload('idTest', {
-                        page: {
-                            curr: 1 //重新从第 1 页开始
-                        }
-                    });
-                } else {
-                    layer.msg("添加失败")
-                }
-
+                // if (req.status == "200") {
+                //     layer.close(indexDig);
+                //     layer.msg("添加成功")
+                //     var demoReload = $('#demoReload');
+                //     //执行重载
+                //     table.reload('idTest', {
+                //         page: {
+                //             curr: 1 //重新从第 1 页开始
+                //         }
+                //     });
+                // } else {
+                //     layer.msg("添加失败")
+                // }
+                localStorage.setItem("user_name", $(".username").val());
+                localStorage.setItem("access_token",req.access_token);
+                localStorage.setItem("refresh_token", req.refresh_token);
+                window.location.href = "admin.html";
             },
             complete: function (jqXHR) {
-                console.log(jqXHR.status);
+                // console.log(jqXHR.status);
             },
             error: function (jqXHR) {
-                console.log(jqXHR.status);
+                // console.log(jqXHR.status);
+                layer.msg(jqXHR.responseJSON.content)
             }
         });
     })
 })
 
+$("#img").click(function() {
+    localStorage.setItem("uuId", uuid());
+    $("#img").attr('src',login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
+})
+
+// uuid获取方法
+function uuid() {
+    var s = [];
+    var hexDigits = "0123456789abcdef";
+    for (var i = 0; i < 36; i++) {
+        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+    }
+    s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+    s[8] = s[13] = s[18] = s[23] = "-";
+
+    var uuid = s.join("");
+    return uuid;
+}
 
 //字符串转base64
 function encode(str) {

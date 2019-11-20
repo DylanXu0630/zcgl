@@ -1,6 +1,6 @@
 layui.use('element', function () {
     var element = layui.element;
-
+   
     //…
 });
 
@@ -22,6 +22,34 @@ $(function () {
         $("#show").attr("src", url)
     })
 
+    // 根据用户名称获取用户信息
+    $.ajax({
+        url: IPdz + '/user/'+localStorage.getItem("user_name"),    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            // 用户昵称
+            $("#nickName").text(req.data.nickname)
+            localStorage.setItem("userId", req.data.id)
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+
+    $(".tc").on("click", function () {
+        localStorage.clear()
+        window.location.href = "login.html";
+    })
 })
 
 // jQuery(".sideMenu").slide({

@@ -13,10 +13,33 @@ layui.use(['laydate', 'table', 'form'], function () {
         elem: '#tableList'
         // , toolbar: '#toolbarDemo'
         // , url: '../json/zctj.json' //数据接口
-        , url: IPzd + '/deal/all/noreview?asc=0' //数据接口
+        , url: IPzd + '/deal/all/noreview' //数据接口
         , method: "POST"
         , contentType: "application/json"
-        , where: {}
+        , where: {
+            "asc": 0,
+            "agencyId": "",
+            "dealExistStatusCode": "",
+            "dealName": "",
+            "dealReviewStatusCode": "",
+            "dealTypeCode": "",
+            "endTime": "",
+            "houseUsageId": "",
+            "lessorId": "",
+            "maxGuideRentCharge": "",
+            "maxOriginRentCharge": "",
+            "maxRealRentCharge": "",
+            "maxRentMonth": "",
+            "maxResourceArea": "",
+            "minGuideRentCharge": "",
+            "minOriginRentCharge": "",
+            "minRealRentCharge": "",
+            "minRentMonth": "",
+            "minResourceArea": "",
+            "payTypeCode": "",
+            "renterId": "",
+            "startTime": ""
+        }
         , page: true //开启分页
         , cols: [[ //表头
             {field: 'dealSerial', title: '合同编号'}
@@ -36,7 +59,49 @@ layui.use(['laydate', 'table', 'form'], function () {
         }
     });
 
+    $("#sousuo").on("click", function () {
+        form.on('submit(search)', function (data) {
+            //执行重载
+            if (sjc($("#s-date").val()) > sjc($("#s-date2").val())) {
+                layer.msg("合同开始时间不能小于合同结束时间！")
+            } else {
+                table.reload('tableList', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {//这里传参  向后台
+                        "asc": 0,
+                        "agencyId": $(".s-gldw").val(),
+                        "dealExistStatusCode": $(".s-hezt").val(),
+                        "dealName": $(".s-htmc").val(),
+                        "dealReviewStatusCode": $(".s-heshzt").val(),
+                        "dealTypeCode": $(".s-httype").val(),
+                        "endTime": sjc($("#s-date2").val() + "23:59:59"),
+                        "houseUsageId": $(".fwghyt").val(),
+                        "lessorId": $(".s-czr").val(),
+                        "maxGuideRentCharge": $(".maxzdj").val(),
+                        "maxOriginRentCharge": $(".maxyj").val(),
+                        "maxRealRentCharge": $(".maxsjj").val(),
+                        "maxRentMonth": $(".maxzly").val(),
+                        "maxResourceArea": $(".maxfymj").val(),
+                        "minGuideRentCharge": $(".minzdj").val(),
+                        "minOriginRentCharge": $(".minyj").val(),
+                        "minRealRentCharge": $(".minsjj").val(),
+                        "minRentMonth": $(".minzly").val(),
+                        "minResourceArea": $(".minfymj").val(),
+                        "payTypeCode": $(".s-htzftype").val(),
+                        "renterId": $(".s-czzr").val(),
+                        "startTime": sjc($("#s-date").val() + " 00:00:00")
+                    },
+                    url: IPzd + '/deal/all/noreview' //数据接口
+                    , method: 'post'
+                });
+            }
+            return false;//false：阻止表单跳转  true：表单跳转
+        });
 
+
+    })
 
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
         var data = obj.data //获得当前行数据
@@ -130,6 +195,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">合同类型</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htType" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">出租人（甲方）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jf" readonly>\n' +
@@ -139,6 +210,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    <label class="layui-form-label">承租人（乙方）</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input czfyf" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">付款方式</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fkfs" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -154,6 +231,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">租赁月数(月)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zlys" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">合同状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htzt" readonly>\n' +
@@ -163,6 +246,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '    <label class="layui-form-label">合同审核状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htshzt" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">是否续租</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input rentType" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
 
@@ -255,6 +344,10 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 $("#date2").val(req.data.endTime)
                                 $(".htshzt").val(req.data.dealReviewStatus)
                                 $(".htzt").val(req.data.dealExistStatus)
+                                $(".htType").val(req.data.dealType)
+                                $(".fkfs").val(req.data.payType)
+                                $(".zlys").val(req.data.rentMonth)
+                                $(".rentType").val(req.data.rentType)
                             } else {
                                 layer.msg("获取失败")
                             }

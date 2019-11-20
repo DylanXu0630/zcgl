@@ -36,7 +36,7 @@ layui.use(['table', 'form'], function () {
         var data = obj.data //获得当前行数据
             , layEvent = obj.event; //获得 lay-event 对应的值
         if (layEvent === 'del') {
-            layer.confirm('真的删除行么', function (index) {
+            layer.confirm('确定删除？', function (index) {
                 $.ajax({
                     url: IPzd + '/dic/assetsco/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
