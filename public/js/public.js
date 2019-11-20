@@ -1,11 +1,9 @@
 /*定义接口域名*/
-var login = "http://61.160.81.178:18009/auth"
-
-// var IPdz = "http://61.160.81.178:18007/uum"
-// var IPzd = "http://61.160.81.178:18007/estate"
-
-var IPdz = "http://192.168.10.56:18000/uum"
+var login = "http://192.168.44.78:18001/auth"
+// var IPdz = "http://192.168.10.56:18000/uum"
 var IPzd = "http://192.168.10.56:14000/estate"
+
+
 var indexDig
 /*当前登录的用户ID*/
 var user = 0
