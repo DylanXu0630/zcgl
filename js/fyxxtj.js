@@ -99,9 +99,9 @@ layui.use(['table', 'form'], function () {
                 '<div><form class="layui-form" action="">\n' +
                 '<div class="dialogTitle">房源基础信息</div>' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>房源名称</label>\n' +
+                '    <label class="layui-form-label">房源名称</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input fymc">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymc">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
@@ -231,7 +231,7 @@ layui.use(['table', 'form'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>房产名称</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="houseZh">\n' +
+                '      <select class="houseZh" onchange="cfsj(this)">\n' +
                 '         <option value="">请选择</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
@@ -240,132 +240,128 @@ layui.use(['table', 'form'], function () {
                 '</div>' +
                 '</div>',
             add: function () {
-                if ($.trim($(".fymc").val()) == "") {
-                    layer.msg("房源名称不能为空！")
+                if ($.trim($(".houseZh").val()) == "") {
+                    layer.msg("房产不能为空！")
                 } else {
-                    if ($.trim($(".houseZh").val()) == "") {
-                        layer.msg("房产不能为空！")
+                    if ($.trim($(".yqly").val()) == "") {
+                        layer.msg("园区不能为空！")
                     } else {
-                        if ($.trim($(".yqly").val()) == "") {
-                            layer.msg("园区不能为空！")
+                        if ($.trim($(".fymj").val()) == "") {
+                            layer.msg("房源面积不能为空！")
                         } else {
-                            if ($.trim($(".fymj").val()) == "") {
-                                layer.msg("房源面积不能为空！")
+                            if ($.trim($(".sjzj").val()) == "") {
+                                layer.msg("实际租金不能为空！")
                             } else {
-                                if ($.trim($(".sjzj").val()) == "") {
-                                    layer.msg("实际租金不能为空！")
+                                if ($.trim($(".fymj").val()) == "") {
+                                    layer.msg("房源面积不能为空！")
                                 } else {
-                                    if ($.trim($(".fymj").val()) == "") {
-                                        layer.msg("房源面积不能为空！")
-                                    } else {
-                                        if ($(".cszt").val() == "1") {
-                                            if ($(".czzt").val() !== "-1") {
-                                                layer.msg("已出售的房源不能出租")
-                                                $(".czzt").val("-1")
-                                            }else {
-                                                var data = {
-                                                    "buildLevel": $.trim($(".lc").val()),
-                                                    "buildNo": $.trim($(".lh").val()),
-                                                    "buildRoom": $.trim($(".fh").val()),
-                                                    "createdBy": user,
-                                                    "fkHouseAssetsId": $.trim($(".houseZh").val()),
-                                                    "remark": $.trim($(".fj").val()),
-                                                    "rentStatus": $.trim($(".cszt").val()),
-                                                    "resourceArea": $.trim($(".fymj").val()),
-                                                    "resourceName": $.trim($(".fymc").val()),
-                                                    "sellStatus": $.trim($(".cszt").val()),
-                                                    "rentStatus": $.trim($(".czzt").val()),
-                                                    "originRentCharge": $.trim($(".ylzj").val()),
-                                                    "realRentCharge": $.trim($(".sjzj").val()),
-                                                    "guideRentCharge": $.trim($(".zdj").val()),
-                                                    "park": $.trim($(".yqly").val()),
-                                                    "fkAgencyId": $.trim($(".gldw.manageUnit").val())
-                                                }
-
-                                                $.ajax({
-                                                    url: IPzd + '/hresource',    //请求的url地址
-                                                    dataType: "json",   //返回格式为json
-                                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                    data: JSON.stringify(data),    //参数值
-                                                    type: "POST",   //请求方式
-                                                    contentType: "application/json;charset=UTF-8",
-                                                    // headers: {"token": sessionStorage.token},
-                                                    beforeSend: function () {
-                                                        //请求前的处理
-                                                    },
-                                                    success: function (req) {
-                                                        if (req.status == "200") {
-                                                            layer.close(indexDig);
-                                                            layer.msg("添加成功")
-                                                            //执行重载
-                                                            table.reload('tableList');
-                                                        } else {
-                                                            layer.msg("添加失败")
-                                                        }
-
-                                                    },
-                                                    complete: function () {
-                                                        //请求完成的处理
-                                                    },
-                                                    error: function () {
-                                                        //请求出错处理
-                                                    }
-                                                });
+                                    if ($(".cszt").val() == "1") {
+                                        if ($(".czzt").val() !== "-1") {
+                                            layer.msg("已出售的房源不能出租")
+                                            $(".czzt").val("-1")
+                                        } else {
+                                            var data = {
+                                                "buildLevel": $.trim($(".lc").val()),
+                                                "buildNo": $.trim($(".lh").val()),
+                                                "buildRoom": $.trim($(".fh").val()),
+                                                "createdBy": user,
+                                                "fkHouseAssetsId": $.trim($(".houseZh").val()),
+                                                "remark": $.trim($(".fj").val()),
+                                                "rentStatus": $.trim($(".cszt").val()),
+                                                "resourceArea": $.trim($(".fymj").val()),
+                                                "resourceName": $.trim($(".fymc").val()),
+                                                "sellStatus": $.trim($(".cszt").val()),
+                                                "rentStatus": $.trim($(".czzt").val()),
+                                                "originRentCharge": $.trim($(".ylzj").val()),
+                                                "realRentCharge": $.trim($(".sjzj").val()),
+                                                "guideRentCharge": $.trim($(".zdj").val()),
+                                                "park": $.trim($(".yqly").val()),
+                                                "fkAgencyId": $.trim($(".gldw.manageUnit").val())
                                             }
 
-                                        } else if ($(".cszt").val() == 0) {
-                                            if ($(".czzt").val() == "-1") {
-                                                layer.msg("房源出租状态不能为空")
-                                            } else {
-                                                var data = {
-                                                    "buildLevel": $(".lc").val(),
-                                                    "buildNo": $(".lh").val(),
-                                                    "buildRoom": $(".fh").val(),
-                                                    "createdBy": user,
-                                                    "fkHouseAssetsId": $(".houseZh").val(),
-                                                    "remark": $(".fj").val(),
-                                                    "rentStatus": $(".cszt").val(),
-                                                    "resourceArea": $(".fymj").val(),
-                                                    "resourceName": $(".fymc").val(),
-                                                    "sellStatus": $(".cszt").val(),
-                                                    "rentStatus": $(".czzt").val(),
-                                                    "originRentCharge": $(".ylzj").val(),
-                                                    "realRentCharge": $(".sjzj").val(),
-                                                    "guideRentCharge": $(".zdj").val(),
-                                                    "park": $(".yqly").val(),
-                                                    "fkAgencyId": $(".gldw.manageUnit").val()
-                                                }
-
-                                                $.ajax({
-                                                    url: IPzd + '/hresource',    //请求的url地址
-                                                    dataType: "json",   //返回格式为json
-                                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                    data: JSON.stringify(data),    //参数值
-                                                    type: "POST",   //请求方式
-                                                    contentType: "application/json;charset=UTF-8",
-                                                    // headers: {"token": sessionStorage.token},
-                                                    beforeSend: function () {
-                                                        //请求前的处理
-                                                    },
-                                                    success: function (req) {
-                                                        if (req.status == "200") {
-                                                            layer.close(indexDig);
-                                                            layer.msg("添加成功")
-                                                            //执行重载
-                                                            table.reload('tableList');
-                                                        } else {
-                                                            layer.msg("添加失败")
-                                                        }
-
-                                                    },
-                                                    complete: function () {
-                                                        //请求完成的处理
-                                                    },
-                                                    error: function () {
-                                                        //请求出错处理
+                                            $.ajax({
+                                                url: IPzd + '/hresource',    //请求的url地址
+                                                dataType: "json",   //返回格式为json
+                                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                data: JSON.stringify(data),    //参数值
+                                                type: "POST",   //请求方式
+                                                contentType: "application/json;charset=UTF-8",
+                                                // headers: {"token": sessionStorage.token},
+                                                beforeSend: function () {
+                                                    //请求前的处理
+                                                },
+                                                success: function (req) {
+                                                    if (req.status == "200") {
+                                                        layer.close(indexDig);
+                                                        layer.msg("添加成功")
+                                                        //执行重载
+                                                        table.reload('tableList');
+                                                    } else {
+                                                        layer.msg("添加失败")
                                                     }
-                                                });
+
+                                                },
+                                                complete: function () {
+                                                    //请求完成的处理
+                                                },
+                                                error: function () {
+                                                    //请求出错处理
+                                                }
+                                            });
+                                        }
+
+                                    } else if ($(".cszt").val() == 0) {
+                                        if ($(".czzt").val() == "-1") {
+                                            layer.msg("房源出租状态不能为空")
+                                        } else {
+                                            var data = {
+                                                "buildLevel": $(".lc").val(),
+                                                "buildNo": $(".lh").val(),
+                                                "buildRoom": $(".fh").val(),
+                                                "createdBy": user,
+                                                "fkHouseAssetsId": $(".houseZh").val(),
+                                                "remark": $(".fj").val(),
+                                                "rentStatus": $(".cszt").val(),
+                                                "resourceArea": $(".fymj").val(),
+                                                "resourceName": $(".fymc").val(),
+                                                "sellStatus": $(".cszt").val(),
+                                                "rentStatus": $(".czzt").val(),
+                                                "originRentCharge": $(".ylzj").val(),
+                                                "realRentCharge": $(".sjzj").val(),
+                                                "guideRentCharge": $(".zdj").val(),
+                                                "park": $(".yqly").val(),
+                                                "fkAgencyId": $(".gldw.manageUnit").val()
                                             }
+
+                                            $.ajax({
+                                                url: IPzd + '/hresource',    //请求的url地址
+                                                dataType: "json",   //返回格式为json
+                                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                data: JSON.stringify(data),    //参数值
+                                                type: "POST",   //请求方式
+                                                contentType: "application/json;charset=UTF-8",
+                                                // headers: {"token": sessionStorage.token},
+                                                beforeSend: function () {
+                                                    //请求前的处理
+                                                },
+                                                success: function (req) {
+                                                    if (req.status == "200") {
+                                                        layer.close(indexDig);
+                                                        layer.msg("添加成功")
+                                                        //执行重载
+                                                        table.reload('tableList');
+                                                    } else {
+                                                        layer.msg("添加失败")
+                                                    }
+
+                                                },
+                                                complete: function () {
+                                                    //请求完成的处理
+                                                },
+                                                error: function () {
+                                                    //请求出错处理
+                                                }
+                                            });
                                         }
                                     }
                                 }
@@ -476,9 +472,9 @@ layui.use(['table', 'form'], function () {
                     '<div class="dialogTitle">房源基础信息</div>' +
 
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>房源名称</label>\n' +
+                    '    <label class="layui-form-label">房源名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input fymc">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymc">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -683,133 +679,129 @@ layui.use(['table', 'form'], function () {
                     });
                 },
                 put: function () {
-                    if ($.trim($(".fymc").val()) == "") {
-                        layer.msg("房源名称不能为空！")
+                    if ($.trim($(".houseZh").val()) == "") {
+                        layer.msg("房产不能为空！")
                     } else {
-                        if ($.trim($(".houseZh").val()) == "") {
-                            layer.msg("房产不能为空！")
+                        if ($.trim($(".yqly").val()) == "") {
+                            layer.msg("园区不能为空！")
                         } else {
-                            if ($.trim($(".yqly").val()) == "") {
-                                layer.msg("园区不能为空！")
+                            if ($.trim($(".fymj").val()) == "") {
+                                layer.msg("房源面积不能为空！")
                             } else {
-                                if ($.trim($(".fymj").val()) == "") {
-                                    layer.msg("房源面积不能为空！")
+                                if ($.trim($(".sjzj").val()) == "") {
+                                    layer.msg("实际租金不能为空！")
                                 } else {
-                                    if ($.trim($(".sjzj").val()) == "") {
-                                        layer.msg("实际租金不能为空！")
+                                    if ($.trim($(".fymj").val()) == "") {
+                                        layer.msg("房源面积不能为空！")
                                     } else {
-                                        if ($.trim($(".fymj").val()) == "") {
-                                            layer.msg("房源面积不能为空！")
-                                        } else {
-                                            if ($(".cszt").val() == "1") {
-                                                if ($(".czzt").val() !== "-1") {
-                                                    layer.msg("已出售的房源不能出租")
-                                                    $(".czzt").val("-1")
-                                                }else {
-                                                    var data = {
-                                                        "id": obj.data.id,
-                                                        "buildLevel": $.trim($(".lc").val()),
-                                                        "buildNo": $.trim($(".lh").val()),
-                                                        "buildRoom": $.trim($(".fh").val()),
-                                                        "createdBy": user,
-                                                        "fkHouseAssetsId": $.trim($(".houseZh").val()),
-                                                        "remark": $.trim($(".fj").val()),
-                                                        "rentStatus": $.trim($(".cszt").val()),
-                                                        "resourceArea": $.trim($(".fymj").val()),
-                                                        "resourceName": $.trim($(".fymc").val()),
-                                                        "sellStatus": $.trim($(".cszt").val()),
-                                                        "rentStatus": $.trim($(".czzt").val()),
-                                                        "originRentCharge": $.trim($(".ylzj").val()),
-                                                        "realRentCharge": $.trim($(".sjzj").val()),
-                                                        "guideRentCharge": $.trim($(".zdj").val()),
-                                                        "fkAgencyId": $.trim($(".gldw.manageUnit").val())
-                                                    }
-                                                    $.ajax({
-                                                        url: IPzd + '/hresource',    //请求的url地址
-                                                        dataType: "json",   //返回格式为json
-                                                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                        data: JSON.stringify(data),    //参数值
-                                                        type: "PUT",   //请求方式
-                                                        contentType: "application/json;charset=UTF-8",
-                                                        // headers: {"token": sessionStorage.token},
-                                                        beforeSend: function () {
-                                                            //请求前的处理
-                                                        },
-                                                        success: function (req) {
-                                                            if (req.status == "200") {
-                                                                layer.close(indexDig);
-                                                                layer.msg("修改成功")
-                                                                //执行重载
-                                                                table.reload('tableList');
-                                                            } else {
-                                                                layer.msg("修改失败")
-                                                            }
-
-                                                        },
-                                                        complete: function () {
-                                                            //请求完成的处理
-                                                        },
-                                                        error: function () {
-                                                            //请求出错处理
-                                                        }
-                                                    });
+                                        if ($(".cszt").val() == "1") {
+                                            if ($(".czzt").val() !== "-1") {
+                                                layer.msg("已出售的房源不能出租")
+                                                $(".czzt").val("-1")
+                                            } else {
+                                                var data = {
+                                                    "id": obj.data.id,
+                                                    "buildLevel": $.trim($(".lc").val()),
+                                                    "buildNo": $.trim($(".lh").val()),
+                                                    "buildRoom": $.trim($(".fh").val()),
+                                                    "createdBy": user,
+                                                    "fkHouseAssetsId": $.trim($(".houseZh").val()),
+                                                    "remark": $.trim($(".fj").val()),
+                                                    "rentStatus": $.trim($(".cszt").val()),
+                                                    "resourceArea": $.trim($(".fymj").val()),
+                                                    "resourceName": $.trim($(".fymc").val()),
+                                                    "sellStatus": $.trim($(".cszt").val()),
+                                                    "rentStatus": $.trim($(".czzt").val()),
+                                                    "originRentCharge": $.trim($(".ylzj").val()),
+                                                    "realRentCharge": $.trim($(".sjzj").val()),
+                                                    "guideRentCharge": $.trim($(".zdj").val()),
+                                                    "fkAgencyId": $.trim($(".gldw.manageUnit").val())
                                                 }
-
-                                            } else if ($(".cszt").val() == 0) {
-                                                if ($(".czzt").val() == "-1") {
-                                                    layer.msg("房源出租状态不能为空")
-                                                } else {
-                                                    var data = {
-                                                        "id": obj.data.id,
-                                                        "buildLevel": $(".lc").val(),
-                                                        "buildNo": $(".lh").val(),
-                                                        "buildRoom": $(".fh").val(),
-                                                        "createdBy": user,
-                                                        "fkHouseAssetsId": $(".houseZh").val(),
-                                                        "remark": $(".fj").val(),
-                                                        "rentStatus": $(".cszt").val(),
-                                                        "resourceArea": $(".fymj").val(),
-                                                        "resourceName": $(".fymc").val(),
-                                                        "sellStatus": $(".cszt").val(),
-                                                        "rentStatus": $(".czzt").val(),
-                                                        "originRentCharge": $(".ylzj").val(),
-                                                        "realRentCharge": $(".sjzj").val(),
-                                                        "guideRentCharge": $(".zdj").val(),
-                                                        "fkAgencyId": $(".gldw.manageUnit").val()
-                                                    }
-                                                    $.ajax({
-                                                        url: IPzd + '/hresource',    //请求的url地址
-                                                        dataType: "json",   //返回格式为json
-                                                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                        data: JSON.stringify(data),    //参数值
-                                                        type: "PUT",   //请求方式
-                                                        contentType: "application/json;charset=UTF-8",
-                                                        // headers: {"token": sessionStorage.token},
-                                                        beforeSend: function () {
-                                                            //请求前的处理
-                                                        },
-                                                        success: function (req) {
-                                                            if (req.status == "200") {
-                                                                layer.close(indexDig);
-                                                                layer.msg("修改成功")
-                                                                //执行重载
-                                                                table.reload('tableList');
-                                                            } else {
-                                                                layer.msg("修改失败")
-                                                            }
-
-                                                        },
-                                                        complete: function () {
-                                                            //请求完成的处理
-                                                        },
-                                                        error: function () {
-                                                            //请求出错处理
+                                                $.ajax({
+                                                    url: IPzd + '/hresource',    //请求的url地址
+                                                    dataType: "json",   //返回格式为json
+                                                    async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                    data: JSON.stringify(data),    //参数值
+                                                    type: "PUT",   //请求方式
+                                                    contentType: "application/json;charset=UTF-8",
+                                                    // headers: {"token": sessionStorage.token},
+                                                    beforeSend: function () {
+                                                        //请求前的处理
+                                                    },
+                                                    success: function (req) {
+                                                        if (req.status == "200") {
+                                                            layer.close(indexDig);
+                                                            layer.msg("修改成功")
+                                                            //执行重载
+                                                            table.reload('tableList');
+                                                        } else {
+                                                            layer.msg("修改失败")
                                                         }
-                                                    });
-                                                }
+
+                                                    },
+                                                    complete: function () {
+                                                        //请求完成的处理
+                                                    },
+                                                    error: function () {
+                                                        //请求出错处理
+                                                    }
+                                                });
                                             }
 
+                                        } else if ($(".cszt").val() == 0) {
+                                            if ($(".czzt").val() == "-1") {
+                                                layer.msg("房源出租状态不能为空")
+                                            } else {
+                                                var data = {
+                                                    "id": obj.data.id,
+                                                    "buildLevel": $(".lc").val(),
+                                                    "buildNo": $(".lh").val(),
+                                                    "buildRoom": $(".fh").val(),
+                                                    "createdBy": user,
+                                                    "fkHouseAssetsId": $(".houseZh").val(),
+                                                    "remark": $(".fj").val(),
+                                                    "rentStatus": $(".cszt").val(),
+                                                    "resourceArea": $(".fymj").val(),
+                                                    "resourceName": $(".fymc").val(),
+                                                    "sellStatus": $(".cszt").val(),
+                                                    "rentStatus": $(".czzt").val(),
+                                                    "originRentCharge": $(".ylzj").val(),
+                                                    "realRentCharge": $(".sjzj").val(),
+                                                    "guideRentCharge": $(".zdj").val(),
+                                                    "fkAgencyId": $(".gldw.manageUnit").val()
+                                                }
+                                                $.ajax({
+                                                    url: IPzd + '/hresource',    //请求的url地址
+                                                    dataType: "json",   //返回格式为json
+                                                    async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                    data: JSON.stringify(data),    //参数值
+                                                    type: "PUT",   //请求方式
+                                                    contentType: "application/json;charset=UTF-8",
+                                                    // headers: {"token": sessionStorage.token},
+                                                    beforeSend: function () {
+                                                        //请求前的处理
+                                                    },
+                                                    success: function (req) {
+                                                        if (req.status == "200") {
+                                                            layer.close(indexDig);
+                                                            layer.msg("修改成功")
+                                                            //执行重载
+                                                            table.reload('tableList');
+                                                        } else {
+                                                            layer.msg("修改失败")
+                                                        }
+
+                                                    },
+                                                    complete: function () {
+                                                        //请求完成的处理
+                                                    },
+                                                    error: function () {
+                                                        //请求出错处理
+                                                    }
+                                                });
+                                            }
                                         }
+
                                     }
                                 }
                             }
@@ -1105,6 +1097,11 @@ function sgetfczh() {
             //请求出错处理
         }
     });
+}
+
+function cfsj(obj) {
+    var id = obj.value
+    console.log(id)
 }
 
 

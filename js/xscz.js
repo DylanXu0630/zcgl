@@ -66,11 +66,11 @@ layui.use(['laydate', 'table', 'form'], function () {
                     if (d.dealReviewStatusCode == "1") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
-                            '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n'
-                            // '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                            '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n'+
+                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                     } else if (d.dealReviewStatusCode == "2") {
                         if (d.dealExistStatus=="提前结束") {
-                            return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
+                            return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n'+
                             '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                         }else {
                             return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
@@ -80,7 +80,7 @@ layui.use(['laydate', 'table', 'form'], function () {
 
                     } else if (d.dealReviewStatusCode == "3") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
-                            '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
+                            '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n'+
                             '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                     }
                 }
