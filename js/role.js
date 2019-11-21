@@ -8,7 +8,7 @@ layui.use('table', function () {
     // 获取系统所有权限名称 
     var qxs = []
     $.ajax({
-        url: IPdz + '/permission',    //请求的url地址
+        url: IPdz + '/permission/menu',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -175,7 +175,7 @@ layui.use('table', function () {
              var openMes = {
                 title: '用户权限',
                 leixing: '编辑',
-                area: ['500px', '250px'],
+                area: ['700px', '500px'],
                 maxmin: true,
                 btn: ['确定', '取消'],
                 id: obj.data.id,
@@ -184,10 +184,37 @@ layui.use('table', function () {
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '<div id="buttons">\n' +
                     '</div>\n' +
+                    '<div id="test1"> </div>' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
+                    // 树形控件
+                    layui.use('tree', function() {
+                        var tree = layui.tree;
+                        var inst1 = tree.render({
+                            elem: '#test1'
+                            , showCheckbox: true
+                            , id: 'id'
+                            , data: [{
+                                'id': '1', 
+                                'title': '江西', 
+                                'children': [{
+                                    'id': '2',
+                                    'title': '南昌',
+                                    'children': [{
+                                        'id': '3',
+                                        'title': '高新区'
+                                    }, {
+                                        'id': '4',
+                                        'checked': 'true',
+                                        'title': 'hello'
+                                    }]
+                                }]
+                            }]
+                        })
+                    })
+
                     // 根据用户ID得到对应用户权限
                     $.ajax({
                         url: IPdz + '/permission/' + obj.data.id,    //请求的url地址
@@ -325,7 +352,7 @@ $(function() {
     // 获取系统所有权限名称 
     var qxs = []
     $.ajax({
-        url: IPdz + '/permission',    //请求的url地址
+        url: IPdz + '/permission/menu',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式

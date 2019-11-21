@@ -57,7 +57,7 @@ layui.use(['table', 'form'], function () {
             }
             , {field: 'phone', title: '联系方式'}
             , {field: 'email', title: '邮件'}
-            // , { field: 'sm', title: '说明' }
+            , { field: 'accountEnable', title: '可用状态' }
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 220}
         ]]
     });
@@ -126,7 +126,7 @@ layui.use(['table', 'form'], function () {
             var openMes = {
                 title: '编辑系统用户',
                 leixing: '编辑',
-                area: ['650px', '300px'],
+                area: ['650px', '350px'],
                 maxmin: true,
                 btn: ['确定', '取消'],
                 id: obj.data.id,
@@ -170,19 +170,50 @@ layui.use(['table', 'form'], function () {
                     '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input location">\n' +
                     '    </div>\n' +
                     '</div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">状态：</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="checkbox" name="switch" class="status" lay-text="开启|关闭" lay-skin="switch">\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
-                    $(".email").val(obj.data.email)
-                    $(".location").val(obj.data.location)
-                    $(".nickname").val(obj.data.nickname)
-                    $(".phone").val(obj.data.phone)
-                    $(".username").val(obj.data.username)
-                    $("input[name=sex][value='1']").attr("checked", obj.data.sex == 1 ? true : false);
-                    $("input[name=sex][value='2']").attr("checked", obj.data.sex == 2 ? true : false);
+                    $(".status").attr("checked", obj.data.accountEnableCode);
+                    $.ajax({
+                        url: IPdz + '/user/detail/' + obj.data.id,    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                        type: "GET",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            if (req.status == "200") {
+                                $(".email").val(req.data.email)
+                                $(".location").val(req.data.location)
+                                $(".nickname").val(req.data.nickname)
+                                $(".phone").val(req.data.phone)
+                                $(".username").val(req.data.username)
+                                $("input[name=sex][value='1']").attr("checked", req.data.sex == 1 ? true : false);
+                                $("input[name=sex][value='0']").attr("checked", req.data.sex == 0 ? true : false);
+                            } else {
+                                layer.msg("获取失败")
+                            }
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
                 },
                 put: function () {
+                    console.log($('.status:checked').val() === 'on' ? 1 : 0)
                     var data = {
                         "id": obj.data.id,
                         // "createdBy": "1",
@@ -241,7 +272,7 @@ layui.use(['table', 'form'], function () {
             var openMes = {
                 title: '查看系统用户',
                 leixing: '查看',
-                area: ['650px', '300px'],
+                area: ['650px', '350px'],
                 maxmin: true,
                 id: obj.data.id,
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
@@ -284,17 +315,48 @@ layui.use(['table', 'form'], function () {
                     '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input location" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">状态：</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="checkbox" name="switch" class="status" lay-text="开启|关闭" lay-skin="switch" disabled>\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
-                    $(".email").val(obj.data.email)
-                    $(".location").val(obj.data.location)
-                    $(".nickname").val(obj.data.nickname)
-                    $(".phone").val(obj.data.phone)
-                    $(".username").val(obj.data.username)
-                    $("input[name=sex][value='1']").attr("checked", obj.data.sex == 1 ? true : false);
-                    $("input[name=sex][value='2']").attr("checked", obj.data.sex == 2 ? true : false);
+                    $.ajax({
+                        url: IPdz + '/user/detail/' + obj.data.id,    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                        type: "GET",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            if (req.status == "200") {
+                                $(".email").val(req.data.email)
+                                $(".location").val(req.data.location)
+                                $(".nickname").val(req.data.nickname)
+                                $(".phone").val(req.data.phone)
+                                $(".username").val(req.data.username)
+                                $("input[name=sex][value='1']").attr("checked", req.data.sex == 1 ? true : false);
+                                $("input[name=sex][value='0']").attr("checked", req.data.sex == 0 ? true : false);
+                                // 读取用户状态数据
+                                $(".status").attr("checked", req.data.accountEnable === "可用" ? true : false);
+                            } else {
+                                layer.msg("获取失败")
+                            }
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
                 }
             }
 
@@ -425,6 +487,12 @@ layui.use(['table', 'form'], function () {
                 '    <label class="layui-form-label">地址：</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input location">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">状态：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="checkbox" name="switch" class="status" lay-text="开启|关闭" checked lay-skin="switch">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +

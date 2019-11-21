@@ -1,0 +1,223 @@
+{
+    "code":0,
+    "data":[
+        {
+            "id": "1",
+            "name": "首页",
+            "pid": "0",
+            "url": "pages/home.html",
+            "children": []
+        },
+        {
+            "id": "2",
+            "name": "资产管理",
+            "pid": "0",
+            "url": "#",
+            "children": [
+                {
+                    "id": "21",
+                    "name": "土地产证管理",
+                    "pid": "2",
+                    "url": "pages/tdczgl.html",
+                    "children": []
+                },
+                {
+                    "id": "22",
+                    "name": "房屋产证管理",
+                    "pid": "2",
+                    "url": "pages/fwczgl.html",
+                    "children": []
+                },
+                {
+                    "id": "23",
+                    "pid": "2",
+                    "name": "房源信息统计",
+                    "url": "pages/fyxxtj.html",
+                    "children": []
+                },
+                {
+                    "id": "24",
+                    "pid": "2",
+                    "name": "园区租金管理",
+                    "url": "pages/yqzjgl.html",
+                    "children": []
+                },
+                {
+                    "id": "25",
+                    "pid": "2",
+                    "name": "资产统计报表",
+                    "url": "#",
+                    "children": [
+                        {
+                            "id": "251",
+                            "name": "月度资产统计表",
+                            "pid": "25",
+                            "url": "pages/zctjbb.html",
+                            "children": []
+                        },
+                        {
+                            "id": "252",
+                            "name": "租售月报表",
+                            "pid": "25",
+                            "url": "pages/zctjbb2.html",
+                            "children": [] 
+                        }, 
+                        {
+                            "id": "253",
+                            "name": "收入明显月报表",
+                            "pid": "25",
+                            "url": "pages/zctjbb3.html",
+                            "children": [] 
+                        }
+                    ]
+                }
+            ]
+        }, 
+        {
+            "id": "3",
+            "name": "合同管理",
+            "pid": "0",
+            "url": "#",
+            "children": [
+                {
+                    "id": "31",
+                    "name": "合同管理",
+                    "pid": "3",
+                    "url": "pages/xscz.html",
+                    "children": []
+                },
+                {
+                    "id": "32",
+                    "name": "合同信息审核",
+                    "pid": "3",
+                    "url": "#",
+                    "children": [
+                        {
+                            "id": "321",
+                            "name": "合同审核",
+                            "pid": "32",
+                            "url": "pages/xsczsh.html",
+                            "children": [] 
+                        }
+                    ]
+                }
+            ]
+        }, {
+            "id": "4",
+            "name": "企业管理",
+            "url": "#",
+            "pid": "0",
+            "children": [
+                {
+                    "id": "42",
+                    "name": "企业信息管理",
+                    "pid": "4",
+                    "url": "pages/qyxxgl.html",
+                    "children": [] 
+                }
+            ]
+        }, {
+            "id": "5",
+            "name": "预警管理",
+            "url": "#",
+            "pid": "0",
+            "children": [
+                {
+                    "id": "51",
+                    "name": "合同到期预警",
+                    "pid": "5",
+                    "url": "pages/htdqyj.html",
+                    "children": []  
+                }, {
+                    "id": "52",
+                    "name": "租金交期预警",
+                    "pid": "5",
+                    "url": "pages/zjjqyj.html",
+                    "children": [] 
+                }
+            ]
+        }, {
+            "id": "6",
+            "name": "系统管理",
+            "pid": "0",
+            "url": "#",
+            "children": [
+                {
+                    "id": "61",
+                    "name": "机构管理",
+                    "pid": "6",
+                    "url": "pages/jggl.html",
+                    "children": []  
+                }, {
+                    "id": "62",
+                    "name": "系统用户管理",
+                    "pid": "6",
+                    "url": "pages/sysUser.html",
+                    "children": [] 
+                }, {
+                    "id": "63",
+                    "name": "系统角色管理",
+                    "pid": "6",
+                    "url": "pages/role.html",
+                    "children": []  
+                }, {
+                    "id": "64",
+                    "name": "系统权限管理",
+                    "pid": "6",
+                    "url": "pages/permission.html",
+                    "children": []  
+                }
+            ]
+        }, {
+            "id": "7",
+            "name": "信息管理",
+            "url": "#",
+            "pid": "0",
+            "children": [
+                {
+                    "id": "71",
+                    "name": "产权单位管理",
+                    "pid": "7",
+                    "url": "pages/cqdwgl.html",
+                    "children": []  
+                }, {
+                    "id": "72",
+                    "name": "合同状态管理",
+                    "pid": "7",
+                    "url": "pages/sysUser.html",
+                    "children": [] 
+                }, {
+                    "id": "73",
+                    "name": "房屋产权性质",
+                    "pid": "7",
+                    "url": "pages/role.html",
+                    "children": []  
+                }, {
+                    "id": "74",
+                    "name": "房屋共有情况",
+                    "pid": "7",
+                    "url": "pages/gyqk.html",
+                    "children": []  
+                }, {
+                    "id": "75",
+                    "name": "房屋用途情况",
+                    "pid": "7",
+                    "url": "pages/ytqk.html",
+                    "children": []  
+                }, {
+                    "id": "76",
+                    "name": "土地使用类型",
+                    "pid": "7",
+                    "url": "pages/cqlx.html",
+                    "children": []  
+                }, {
+                    "id": "77",
+                    "name": "土地用途情况",
+                    "pid": "7",
+                    "url": "pages/tdytgl.html",
+                    "children": []  
+                }
+            ]
+        }
+    ]
+}
