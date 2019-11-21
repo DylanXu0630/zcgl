@@ -594,6 +594,16 @@ function getOneUser() {
     });
 }
 $(function() {
+
+   var buttonqx = localStorage.getItem("buttonqx")
+   if (buttonqx.indexOf('delete') !== -1) {
+        var deleteButton = $('<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>').appendTo("#barDemo")
+   } 
+   if (buttonqx.indexOf('add') !== -1) {
+       var add = $('<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>').prependTo("#addButton")
+   }
+
+
    $("body").on("click",".hello",function(){
        var userId = $(this).attr("userId");
        var arr2 = [] 
