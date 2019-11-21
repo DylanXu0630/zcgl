@@ -1028,7 +1028,7 @@ layui.use(['table', 'form'], function () {
                     });
                 }
             }
-            layerOpen(openMes);
+            layerLookOpen(openMes);
         }
     });
 })

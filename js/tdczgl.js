@@ -590,8 +590,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     gettdyt()
                     $(".cqmz").val(obj.data.assetsName)
                     $(".symj").val(obj.data.assetsQueue)
-                    $(".tdyt").val(obj.data.useTypeCode),
-                        $(".tdsylx").val(obj.data.useRightCode)
+                    $(".tdyt").val(obj.data.useTypeCode)
+                    $(".tdsylx").val(obj.data.useRightCode)
                     $(".zl").val(obj.data.assetsLocation)
                     $("#date").val(obj.data.endTime)
                     $(".co").val(obj.data.owner)
@@ -604,7 +604,7 @@ layui.use(['table', 'laydate', 'form'], function () {
 
                 }
             }
-            layerOpen(openMes);
+            layerLookOpen(openMes);
         }
     });
 })

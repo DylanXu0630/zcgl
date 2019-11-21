@@ -26,7 +26,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
-                "msg": res.message, //解析提示文本
+                "msg": res.msg, //解析提示文本
                 "count": res.data.total, //解析数据长度
                 "data": res.data.records //解析数据列表
             };
@@ -557,7 +557,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".location").val(obj.data.location)
                 }
             }
-            layerOpen(openMes);
+            layerLookOpen(openMes);
         }
     });
 

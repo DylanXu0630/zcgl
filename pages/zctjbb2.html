@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>租售月报表</title>
+    <title>房源统计表</title>
     <link rel="stylesheet" href="../layui/css/layui.css">
     <link rel="stylesheet" href="../css/page.css">
+    <style>
+        table {
+            width: 100%;
+            border-color: #e6e6e6;
+        }
+
+        .bj {
+            width: 100px;
+            padding: 5px 10px;
+            background: #f2f2f2;
+        }
+
+        .mouthTD {
+            padding: 5px 10px;
+        }
+        .bjTD{
+            background: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
 <div class="pageDiv">
@@ -12,7 +31,7 @@
 
         <div class="site-title">
             <fieldset>
-                <legend><a name="use"><h2>租售月报表</h2></a></legend>
+                <legend><a name="use"><h2>房源统计表</h2></a></legend>
             </fieldset>
         </div>
     </div>
@@ -22,20 +41,35 @@
             <div class="layui-card-body-tj" style="padding: 15px;">
                 <div class="layui-form-item">
                     <form class="layui-form" action="">
+                        <!--<div class="layui-inline">-->
+                        <!--<label class="layui-form-label">管理单位</label>-->
+                        <!--<div class="layui-input-block">-->
+                        <!--<select name="ht" lay-verify="" lay-search class="s-gldw">-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <div class="layui-inline">
                             <label class="layui-form-label">管理单位</label>
-                            <div class="layui-input-block">
-                                <select name="ht" lay-verify="" lay-search>
-                                    <option value="" disabled selected hidden></option>
-                                    <option value="1">单位一</option>
-                                    <option value="2">单位二</option>
-                                    <option value="3">单位三</option>
-                                </select>
+                            <div class="layui-input-block" id="gldwCheck">
+
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="LAY-user-front-search">
-                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            <label class="layui-form-label" style="    width: 120px;">房源查询时间段</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="date" id="s-date" placeholder="请输入" autocomplete="off" class="layui-input minfymj httime"
+                                       style="float: left;width: 36%">
+                                <span style="float: left;margin: 0 10px;line-height: 38px;">至</span>
+                                <input type="text" name="date" id="s-date2" placeholder="请输入" autocomplete="off" class="layui-input minfymj httime"
+                                       style="float: left;width: 36%">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn" id="sousuo" lay-filter="search" lay-submit="">
+                                查询
+                            </button>
+                            <button class="layui-btn" id="sx">
+                                重置
                             </button>
                         </div>
                     </form>
@@ -45,10 +79,20 @@
     </div>
     <div class="layui-fluid">
         <div class="layui-card">
-            <div class="layui-card-header">资产出售列表</div>
+            <div class="layui-card-header">房源统计表</div>
             <div class="layui-card-body" style="padding: 15px;">
                 <!--<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>-->
-                <table class="layui-hide" id="tableList" lay-filter="test"></table>
+                <div class="layui-card-body" style="padding: 15px;">
+                    <table id="tableList" border="1" style="border: #e6e6e6">
+                        <tr class="totalResourceArea"></tr>
+                        <tr class="totalResourceYzArea"></tr>
+                        <tr class="totalResourceWzArea"></tr>
+                        <tr class="totalResourceNum"></tr>
+                        <tr class="month"></tr>
+                        <tr class="totalRentedResourceNum"></tr>
+                        <tr class="totalRentedResourceArea"></tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

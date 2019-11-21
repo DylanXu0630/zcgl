@@ -140,7 +140,6 @@ layui.use(['laydate', 'table', 'form'], function () {
 
     })
 
-
     /*添加点击事件*/
     $("body").on("click", ".layui-btn.layui-btn-sm", function () {
         /*生成一个对象
@@ -824,7 +823,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     });
                 }
             }
-            layerOpen(openMes);
+            layerLookOpen(openMes);
         } else if (layEvent == 'dy') {
             localStorage.htId = obj.data.id
             if (obj.data.dealType=="协商出租"){

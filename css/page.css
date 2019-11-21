@@ -189,5 +189,14 @@ fieldset {
 .layui-form-label {
     max-height: 20px;
 }
+.addDig .layui-input-block{
+    margin-left: 150px;
+}
+.addDig .layui-unselect.layui-form-select{
+    width: 88%;
+}
 
+.addDig .layui-unselect.layui-form-select .layui-input.layui-unselect{
+    width: 100%;
+}
   

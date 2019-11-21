@@ -353,7 +353,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     });
                 }
             }
-            layerOpen(openMes);
+            layerLookOpen(openMes);
         }
     });
 })

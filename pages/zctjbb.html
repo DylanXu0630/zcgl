@@ -5,13 +5,32 @@
     <title>月度资产统计报表</title>
     <link rel="stylesheet" href="../layui/css/layui.css">
     <link rel="stylesheet" href="../css/page.css">
+    <style>
+        table {
+            width: 100%;
+            border-color: #e6e6e6;
+        }
+
+        .bj {
+            width: 100px;
+            padding: 5px 10px;
+            background: #f2f2f2;
+        }
+
+        .mouthTD {
+            padding: 5px 10px;
+        }
+        .bjTD{
+            background: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
 <div class="pageDiv">
     <div class="title">
         <div class="site-title">
             <fieldset>
-                <legend><a name="use"><h2>月度资产统计报表</h2></a></legend>
+                <legend><a name="use"><h2>房产统计报表</h2></a></legend>
             </fieldset>
         </div>
     </div>
@@ -21,21 +40,25 @@
             <div class="layui-card-body-tj" style="padding: 15px;">
                 <div class="layui-form-item">
                     <form class="layui-form" action="">
+                        <!--<div class="layui-inline">-->
+                            <!--<label class="layui-form-label">管理单位</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<select name="ht" lay-verify="" lay-search class="s-gldw">-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="layui-inline">
-                            <label class="layui-form-label">管理中心</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <label class="layui-form-label">管理单位</label>
+                            <div class="layui-input-block" id="gldwCheck">
+
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">房产名称</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="LAY-user-front-search">
-                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            <button class="layui-btn" id="sousuo" lay-filter="search" lay-submit="">
+                                查询
+                            </button>
+                            <button class="layui-btn" id="sx">
+                                重置
                             </button>
                         </div>
                     </form>
@@ -45,10 +68,15 @@
     </div>
     <div class="layui-fluid">
         <div class="layui-card">
-            <div class="layui-card-header">月度资产统计报表</div>
+            <div class="layui-card-header">房产统计报表</div>
             <div class="layui-card-body" style="padding: 15px;">
-                <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
-                <table class="layui-hide" id="tableList" lay-filter="test"></table>
+                <table id="tableList" border="1" style="border: #e6e6e6">
+                    <tr class="agencyName"></tr>
+                    <tr class="houseAssetsNum"></tr>
+                    <tr class="totalBuildArea"></tr>
+                    <tr class="totalOtherArea"></tr>
+                    <tr class="totalRealArea"></tr>
+                </table>
             </div>
         </div>
     </div>

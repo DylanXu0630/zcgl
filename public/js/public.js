@@ -4,9 +4,9 @@ var login = "http://61.160.81.178:18009/auth"
 // var IPdz = "http://61.160.81.178:18007/uum"
 // var IPzd = "http://61.160.81.178:18007/estate"
 
-var IPdz = "http://192.168.10.56:18000/uum"
-var IPzd = "http://192.168.10.56:14000/estate"
-var indexDig
+var IPdz = "http://192.168.10.56:18000/uum"
+var IPzd = "http://192.168.1.17:14000/estate"
+var indexDig, lookDig
 /*当前登录的用户ID*/
 var user = 0
 layui.use('element', function () {
@@ -25,7 +25,7 @@ function layerOpen(openMes) {
         title: openMes.title,
         content: openMes.content,
         btn: openMes.btn,
-        area: openMes.area,
+        area: openMes.area,
         maxmin: true,
         success: function () {
 
@@ -73,6 +73,60 @@ function layerOpen(openMes) {
             return false;
         }
     });
+
+    layer.full(indexDig)
+}
+
+function layerLookOpen(openMes) {
+    lookDig = layer.open({
+        type: 1,
+        title: openMes.title,
+        content: openMes.content,
+        btn: openMes.btn,
+        area: openMes.area,
+        maxmin: true,
+        success: function () {
+
+
+            if (openMes.leixing == "查看" || openMes.leixing == "编辑") {
+                openMes.look()
+            }
+
+            layui.use('form', function () {
+                var form = layui.form;
+                //自定义验证规则
+                form.render();
+                form.render('select')
+            });
+        },
+        end: function () {
+
+        },
+        btn1: function () {
+            if (openMes.leixing == "添加") {
+                openMes.add()
+            } else if (openMes.leixing == "编辑") {
+                openMes.put()
+            }
+        },
+        btn2: function (index, layero) {
+            layer.confirm('确定关闭？', {
+                btn: ['确定', '取消'] //按钮
+            }, function (index) {
+                layer.close(index);
+                layer.close(indexDig);
+            }, function () {
+
+            });
+            return false;
+        },
+        cancel: function (index, layero) {
+            layer.close(lookDig);
+            return false;
+        }
+    });
+
+    layer.full(lookDig)
 }
 
 

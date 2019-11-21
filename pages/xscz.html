@@ -16,25 +16,23 @@
         }
 
         .addDig .layui-input, .layui-anim.layui-anim-upbit {
-            width: 90%;
+            width: 88%;
         }
 
         .tjsx .layui-form-label {
-            width: 140px;
+            width: 112px;
             text-align: right;
         }
 
-        .tjsx .layui-input, .layui-anim.layui-anim-upbit {
-            width: 70%;
+        .layui-input-block {
+            margin-left: 142px;
         }
 
-        .xlkInput .layui-input, .layui-anim.layui-anim-upbit {
-            width: 96%;
+        .tjsx .httime {
+            width: 30% !important;
         }
 
-        .sgInput .layui-input, .layui-anim.layui-anim-upbit {
-            width: 79%;
-        }
+
     </style>
 </head>
 <body>
@@ -60,7 +58,7 @@
                             </div>
                         </div>
                         <div class="layui-inline xlkInput" style="display: none">
-                            <label class="layui-form-label" style="width: 90px;">出租人</label>
+                            <label class="layui-form-label">出租人</label>
                             <div class="layui-input-block">
                                 <select name="ht" lay-verify="" class="s-czr">
                                     <option value="">请选择</option>
@@ -68,8 +66,8 @@
                             </div>
                         </div>
                         <div class="layui-inline xlkInput">
-                            <label class="layui-form-label" style="width: 90px;">承租人</label>
-                            <div class="layui-input-block">
+                            <label class="layui-form-label">承租人</label>
+                            <div class="layui-input-block ts">
                                 <select name="ht" lay-verify="" class="s-czzr">
                                     <option value="">请选择</option>
                                 </select>
@@ -136,7 +134,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="layui-inline"  style="display: none">
+                        <div class="layui-inline" style="display: none">
                             <label class="layui-form-label">面积(m²)</label>
                             <div class="layui-input-block">
                                 <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input minfymj"
@@ -166,7 +164,7 @@
                                        style="float: left;width: 36%">
                             </div>
                         </div>
-                        <div class="layui-inline"  style="display: none">
+                        <div class="layui-inline" style="display: none">
                             <label class="layui-form-label">原价(元/m²/月)</label>
                             <div class="layui-input-block">
                                 <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input minyj"
@@ -186,7 +184,7 @@
                                        style="float: left;width: 36%">
                             </div>
                         </div>
-                        <div class="layui-inline"  style="display: none">
+                        <div class="layui-inline" style="display: none">
                             <label class="layui-form-label">实际价(元/m²/月)</label>
                             <div class="layui-input-block">
                                 <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input minsjj"
@@ -198,7 +196,10 @@
                         </div>
                         <div class="layui-inline">
                             <button class="layui-btn" id="sousuo" lay-filter="search" lay-submit="">
-                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                查询
+                            </button>
+                            <button class="layui-btn" id="sx">
+                                重置
                             </button>
                         </div>
                     </form>
