@@ -131,7 +131,7 @@ layui.use(['table', 'form'], function () {
                 '    <label class="layui-form-label">上级菜单：</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select id="sjcd" lay-verify="required">' +
-                '       <option value="">根菜单</option>' +
+                '       <option value="0">根菜单</option>' +
                 '      </select>' +
                 '    </div>\n' +
                 '</div>\n' +
@@ -180,7 +180,7 @@ layui.use(['table', 'form'], function () {
                         form.render('select');
                     }
                     $.ajax({
-                        url: IPdz + '/permission/menu',    //请求的url地址
+                        url: IPdz + '/permission/all',    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         type: "GET",   //请求方式
@@ -191,7 +191,7 @@ layui.use(['table', 'form'], function () {
                         },
                         success: function (req) {
                             req.data.forEach(element => {
-                                var div = $('<option value="' + element.id + '">'+ element.cnName +'</option>').appendTo("#sjcd")
+                                var div = $('<option value="' + element.id + '">'+ element.name +'</option>').appendTo("#sjcd")
                             });
                         },
                         complete: function () {
@@ -300,7 +300,7 @@ layui.use(['table', 'form'], function () {
                 '    <label class="layui-form-label">上级菜单：</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select id="sjcd" lay-verify="required">' +
-                '       <option value="">根菜单</option>' +
+                '       <option value="0">根菜单</option>' +
                 '      </select>' +
                 '    </div>\n' +
                 '</div>\n' +
@@ -332,7 +332,7 @@ layui.use(['table', 'form'], function () {
                 '</div>', 
             look: function () {
                 $.ajax({
-                    url: IPdz + '/permission/menu',    //请求的url地址
+                    url: IPdz + '/permission/all',    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "GET",   //请求方式
@@ -343,7 +343,7 @@ layui.use(['table', 'form'], function () {
                     },
                     success: function (req) {
                         req.data.forEach(element => {
-                            var div = $('<option value="' + element.id + '">'+ element.cnName +'</option>').appendTo("#sjcd")
+                            var div = $('<option value="' + element.id + '">'+ element.name +'</option>').appendTo("#sjcd")
                         });
                     },
                     complete: function () {
