@@ -5,7 +5,7 @@ var login = "http://61.160.81.178:18009/auth"
 // var IPzd = "http://61.160.81.178:18007/estate"
 
 var IPdz = "http://192.168.10.56:18000/uum"
-var IPzd = "http://192.168.1.17:14000/estate"
+var IPzd = "http://192.168.10.56:14000/estate"
 var indexDig, lookDig
 /*当前登录的用户ID*/
 var user = 0
