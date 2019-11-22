@@ -8,7 +8,7 @@ layui.use('table', function () {
     // 获取系统所有权限名称 
     var qxs = []
     $.ajax({
-        url: IPdz + '/permission/menu',    //请求的url地址
+        url: IPdz + '/permission/all',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -184,30 +184,37 @@ layui.use('table', function () {
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '<div id="buttons">\n' +
                     '</div>\n' +
-                    '<div id="test1"> </div>' +
+                    // '<div id="test1"> </div>' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
                     // 树形控件
+                    // 1.根据获取树状图
+
                     layui.use('tree', function() {
                         var tree = layui.tree;
                         var inst1 = tree.render({
                             elem: '#test1'
+                            
                             , showCheckbox: true
                             , id: 'id'
                             , data: [{
                                 'id': '1', 
                                 'title': '江西', 
+                                'spread': 'true',
                                 'children': [{
                                     'id': '2',
                                     'title': '南昌',
+                                    'spread': 'true',
                                     'children': [{
                                         'id': '3',
+                                        'spread': 'true',
                                         'title': '高新区'
                                     }, {
                                         'id': '4',
                                         'checked': 'true',
+                                        'spread': 'true',
                                         'title': 'hello'
                                     }]
                                 }]
@@ -230,14 +237,14 @@ layui.use('table', function () {
                             // 处理权限数据
                             if (!req.data) {
                                 qxs.forEach(element => {
-                                    var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + obj.data.id + '" flag="0" buttonNum="' + element.id + '">'+element.cnName+'</button>').appendTo("#buttons");
+                                    var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + obj.data.id + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
                                 });
                             } else {
                                 var arr = qxs.slice(0)
                                 qxs.forEach(element => {
                                     req.data.forEach(item => {
                                         if (item.id === element.id) {
-                                            var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.cnName+'</button>').appendTo("#buttons");
+                                            var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
                                             arr.splice(arr.findIndex((ee)=> ee.id === element.id), 1);
                                             return
                                         } 
@@ -245,7 +252,7 @@ layui.use('table', function () {
                                 })
                                 if(!!arr.length) {
                                     arr.forEach(element => {
-                                        var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.cnName+'</button>').appendTo("#buttons");
+                                        var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
                                     });
                                 }
                             }
@@ -352,7 +359,7 @@ $(function() {
     // 获取系统所有权限名称 
     var qxs = []
     $.ajax({
-        url: IPdz + '/permission/menu',    //请求的url地址
+        url: IPdz + '/permission/all',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -404,14 +411,14 @@ $(function() {
                          // 处理权限数据
                          if (!req.data) {
                              qxs.forEach(element => {
-                                 var checkboxs = $('<button type="button" class="layui-btn layui-btn-primary hello" userId="' + roleId + '" flag="0" buttonNum="' + element.id + '">'+element.cnName+'</button>').appendTo("#buttons");
+                                 var checkboxs = $('<button type="button" class="layui-btn layui-btn-primary hello" userId="' + roleId + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
                              });
                          } else {
                              arr2 = qxs.slice(0)
                              qxs.forEach(element => {
                                  req.data.forEach(item => {
                                      if (item.id === element.id) {
-                                         var checkbvoxs = $('<button type="button" class="layui-btn hello" flag="1" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.cnName+'</button>').appendTo("#buttons");
+                                         var checkbvoxs = $('<button type="button" class="layui-btn hello" flag="1" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
                                          arr2.splice(arr2.findIndex((ee)=> ee.id === element.id), 1);
                                          return
                                      } 
@@ -419,7 +426,7 @@ $(function() {
                              })
                              if(!!arr2.length) {
                                  arr2.forEach(element => {
-                                     var checkboxs = $('<button style="margin:2px 2px" type="button" class="layui-btn layui-btn-primary hello" flag="0" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.cnName+'</button>').appendTo("#buttons");
+                                     var checkboxs = $('<button style="margin:2px 2px" type="button" class="layui-btn layui-btn-primary hello" flag="0" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
                                  });
                              }
                          }
@@ -468,14 +475,14 @@ $(function() {
                          // 处理权限数据
                          if (!req.data) {
                              qxs.forEach(element => {
-                                 var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + roleId + '" flag="0" buttonNum="' + element.id + '">'+element.cnName+'</button>').appendTo("#buttons");
+                                 var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + roleId + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
                              });
                          } else {
                              arr2 = qxs.slice(0)
                              qxs.forEach(element => {
                                  req.data.forEach(item => {
                                      if (item.id === element.id) {
-                                         var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.cnName+'</button>').appendTo("#buttons");
+                                         var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
                                          arr2.splice(arr2.findIndex((ee)=> ee.id === element.id), 1);
                                          return
                                      } 
@@ -483,7 +490,7 @@ $(function() {
                              })
                              if(!!arr2.length) {
                                  arr2.forEach(element => {
-                                     var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.cnName+'</button>').appendTo("#buttons");
+                                     var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
                                  });
                              }
                          }

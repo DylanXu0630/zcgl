@@ -447,27 +447,27 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">账户名</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>账户名</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">姓名：</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>姓名：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input nickname">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">密码：</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>密码：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="password" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input password">\n' +
+                '      <input type="password" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input password">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">手机：</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>手机：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input phone">\n' +
+                '      <input type="tel" name="phone" placeholder="*为必填项"  lay-verify="required|phone" autocomplete="off" class="layui-input phone">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
@@ -478,9 +478,9 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">邮件：</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>邮件：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input email">\n' +
+                '      <input type="tel" name="phone" placeholder="*为必填项" lay-verify="required|phone" autocomplete="off" class="layui-input email">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
@@ -499,7 +499,28 @@ layui.use(['table', 'form'], function () {
                 '</div>' +
                 '</div>',
             add: function () {
+                if ($(".username").val() == '') {
+                    layer.msg("账户名不能为空！")
+                    return
+                }
+                if ($(".nickname").val() == '') {
+                    layer.msg("姓名不能为空！")
+                    return
+                }
+                if ($(".password").val() == '') {
+                    layer.msg("密码不能为空！")
+                    return
+                }
+                if ($(".phone").val() == '') {
+                    layer.msg("电话号码不能为空！")
+                    return
+                }
+                if ($(".email").val() == '') {
+                    layer.msg("邮箱不能为空！")
+                    return
+                }
                 var data = {
+                    "accountEnable": $('.status:checked').val() === 'on' ? 1 : 0,
                     "email": $(".email").val(),
                     "location": $(".location").val(),
                     "nickname": $(".nickname").val(),
@@ -510,7 +531,7 @@ layui.use(['table', 'form'], function () {
                     "username": $(".username").val(),
                     "wxid": ""
                 }
-
+                
                 $.ajax({
                     url: IPdz + '/user',    //请求的url地址
                     dataType: "json",   //返回格式为json
@@ -597,10 +618,10 @@ $(function() {
 
    var buttonqx = localStorage.getItem("buttonqx")
    if (buttonqx.indexOf('delete') !== -1) {
-        var deleteButton = $('<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>').appendTo("#barDemo")
+        // var deleteButton = $('<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>').appendTo("#barDemo")
    } 
    if (buttonqx.indexOf('add') !== -1) {
-       var add = $('<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>').prependTo("#addButton")
+        // var add = $('<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>').prependTo("#addButton")
    }
 
 
