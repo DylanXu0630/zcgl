@@ -1,5 +1,5 @@
 /*定义接口域名*/
-var login = "http://61.160.81.178:18009/auth"
+var login = "http://192.168.44.78:18001/auth"
 
 // var IPdz = "http://61.160.81.178:18007/uum"
 // var IPzd = "http://61.160.81.178:18007/estate"
