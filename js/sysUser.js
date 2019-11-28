@@ -181,6 +181,8 @@ layui.use(['table', 'form'], function () {
                     '</div>',
                 look: function () {
                     $(".status").attr("checked", obj.data.accountEnableCode);
+                    $("input[name=sex][value='1']").attr("checked", obj.data.sex == 1 ? true : false);
+                    $("input[name=sex][value='0']").attr("checked", obj.data.sex == 0 ? true : false);
                     $.ajax({
                         url: IPdz + '/user/detail/' + obj.data.id,    //请求的url地址
                         dataType: "json",   //返回格式为json
@@ -198,8 +200,6 @@ layui.use(['table', 'form'], function () {
                                 $(".nickname").val(req.data.nickname)
                                 $(".phone").val(req.data.phone)
                                 $(".username").val(req.data.username)
-                                $("input[name=sex][value='1']").attr("checked", req.data.sex == 1 ? true : false);
-                                $("input[name=sex][value='0']").attr("checked", req.data.sex == 0 ? true : false);
                             } else {
                                 layer.msg("获取失败")
                             }
@@ -213,7 +213,6 @@ layui.use(['table', 'form'], function () {
                     });
                 },
                 put: function () {
-                    console.log($('.status:checked').val() === 'on' ? 1 : 0)
                     var data = {
                         "id": obj.data.id,
                         // "createdBy": "1",
@@ -325,10 +324,13 @@ layui.use(['table', 'form'], function () {
                     '</div>' +
                     '</div>',
                 look: function () {
+                    $(".status").attr("checked", obj.data.accountEnableCode);
+                    $("input[name=sex][value='1']").attr("checked", obj.data.sex == 1 ? true : false);
+                    $("input[name=sex][value='0']").attr("checked", obj.data.sex == 0 ? true : false);
                     $.ajax({
                         url: IPdz + '/user/detail/' + obj.data.id,    //请求的url地址
                         dataType: "json",   //返回格式为json
-                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         type: "GET",   //请求方式
                         contentType: "application/json;charset=UTF-8",
                         // headers: {"token": sessionStorage.token},
@@ -342,10 +344,6 @@ layui.use(['table', 'form'], function () {
                                 $(".nickname").val(req.data.nickname)
                                 $(".phone").val(req.data.phone)
                                 $(".username").val(req.data.username)
-                                $("input[name=sex][value='1']").attr("checked", req.data.sex == 1 ? true : false);
-                                $("input[name=sex][value='0']").attr("checked", req.data.sex == 0 ? true : false);
-                                // 读取用户状态数据
-                                $(".status").attr("checked", req.data.accountEnable === "可用" ? true : false);
                             } else {
                                 layer.msg("获取失败")
                             }

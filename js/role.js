@@ -171,58 +171,54 @@ layui.use('table', function () {
             }
             layerOpen(openMes);
          } else {
+             var tree;
              /*权限操作;*/
              var openMes = {
                 title: '用户权限',
                 leixing: '编辑',
-                area: ['700px', '500px'],
+                area: ['700px', '650px'],
                 maxmin: true,
                 btn: ['确定', '取消'],
                 id: obj.data.id,
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
-                    '<div id="buttons">\n' +
-                    '</div>\n' +
-                    // '<div id="test1"> </div>' +
+                    // '<div id="buttons">\n' +
+                    // '</div>\n' +
+                    '<div id="treeT"> </div>' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
-                    // 树形控件
-                    // 1.根据获取树状图
-
-                    layui.use('tree', function() {
-                        var tree = layui.tree;
-                        var inst1 = tree.render({
-                            elem: '#test1'
-                            
-                            , showCheckbox: true
-                            , id: 'id'
-                            , data: [{
-                                'id': '1', 
-                                'title': '江西', 
-                                'spread': 'true',
-                                'children': [{
-                                    'id': '2',
-                                    'title': '南昌',
-                                    'spread': 'true',
-                                    'children': [{
-                                        'id': '3',
-                                        'spread': 'true',
-                                        'title': '高新区'
-                                    }, {
-                                        'id': '4',
-                                        'checked': 'true',
-                                        'spread': 'true',
-                                        'title': 'hello'
-                                    }]
-                                }]
-                            }]
-                        })
-                    })
-
+                    // 树形控件tree
+                    // 1.获取全部权限树
+                    var trees = [];
+                    $.ajax({
+                        url: IPdz + '/permission/tree',    //请求的url地址
+                        // url: '/json/ss.json',
+                        dataType: "json",   //返回格式为json
+                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        type: "GET",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                           trees = req.data
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
+                    
                     // 根据用户ID得到对应用户权限
+
+                    var checkedInfo = []
+
                     $.ajax({
                         url: IPdz + '/permission/' + obj.data.id,    //请求的url地址
                         dataType: "json",   //返回格式为json
@@ -235,27 +231,31 @@ layui.use('table', function () {
                         },
                         success: function (req) {
                             // 处理权限数据
-                            if (!req.data) {
-                                qxs.forEach(element => {
-                                    var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + obj.data.id + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                });
-                            } else {
-                                var arr = qxs.slice(0)
-                                qxs.forEach(element => {
-                                    req.data.forEach(item => {
-                                        if (item.id === element.id) {
-                                            var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                            arr.splice(arr.findIndex((ee)=> ee.id === element.id), 1);
-                                            return
-                                        } 
-                                    })
-                                })
-                                if(!!arr.length) {
-                                    arr.forEach(element => {
-                                        var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                    });
-                                }
-                            }
+                            // if (!req.data) {
+                            //     qxs.forEach(element => {
+                            //         var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + obj.data.id + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
+                            //     });
+                            // } else {
+                            //     var arr = qxs.slice(0)
+                            //     qxs.forEach(element => { 
+                            //         req.data.forEach(item => {
+                            //             if (item.id === element.id) {
+                            //                 var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
+                            //                 arr.splice(arr.findIndex((ee)=> ee.id === element.id), 1);
+                            //                 return
+                            //             } 
+                            //         })
+                            //     })
+                            //     if(!!arr.length) {
+                            //         arr.forEach(element => {
+                            //             var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
+                            //         });
+                            //     }
+                            // }
+                            console.log(req.data)
+                            req.data.forEach(element => {
+                                checkedInfo.push(element.id);
+                            });
                         },
                         complete: function () {
                             //请求完成的处理
@@ -264,6 +264,30 @@ layui.use('table', function () {
                             //请求出错处理
                         }
                     });
+                  
+                    layui.use('tree', function() {
+                        tree = layui.tree;
+                        tree.render({
+                            elem: '#treeT'
+                            , showCheckbox: true
+                            , id: 'id'
+                            , data: trees
+                            , oncheck: function(obj) {
+                                console.log(obj)
+                                if (obj.checked) {
+                                    // 绑定 
+                                    if ($.inArray(parseInt(obj.data.id), checkedInfo) =="-1") {
+                                        // 正常绑定
+                                    } else {
+                                        // 忽略加载时的数据
+                                    }
+                                } else {
+                                    // 解绑
+                                }
+                            }
+                        })
+                        tree.setChecked('id', checkedInfo)
+                    })
                 },
                 put: function () {
                     layer.close(indexDig);
