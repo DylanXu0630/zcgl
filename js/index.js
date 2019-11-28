@@ -1,22 +1,22 @@
 layui.use('element', function () {
     var element = layui.element;
-   
+
     //…
 });
 
 $(function () {
     /*shwo 的 height*/
-    $("#show").css("height", window.innerHeight-60)
+    $("#show").css("height", window.innerHeight - 60)
     $(".layui-body").css("width", window.innerWidth - 225)
     $(".layui-body").css("height", window.innerHeight)
     /*当浏览器窗口发生变化*/
     $(window).resize(function () {
         /*shwo 的 height*/
-        $("#show").css("height", window.innerHeight-60)
+        $("#show").css("height", window.innerHeight - 60)
         $(".layui-body").css("width", window.innerWidth - 225)
         $(".layui-body").css("height", window.innerHeight)
     });
-    
+
 
     // 根据用户名称获取用户信息
     $.ajax({
@@ -31,8 +31,14 @@ $(function () {
         },
         success: function (req) {
             // 用户昵称
-            $("#nickName").text(req.data.nickname)
-            localStorage.setItem("userId", req.data.id)
+            if (req.status == 200) {
+                $("#nickName").text(req.data.nickname)
+                localStorage.setItem("userId", req.data.id)
+            } else {
+                alert(req.msg)
+                window.location.href = "login.html"
+            }
+
         },
         complete: function () {
             //请求完成的处理
@@ -44,7 +50,7 @@ $(function () {
 
     // 根据用户ID得到菜单权限
     $.ajax({
-        url: IPdz + '/permission/menu/'+localStorage.getItem("userId"),    //请求的url地址
+        url: IPdz + '/permission/menu/' + localStorage.getItem("userId"),    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "GET",   //请求方式
@@ -69,15 +75,15 @@ $(function () {
                     else if (gen.name == "系统管理") imgs = '<img class="iconImg" src="./icon/xtgl.svg"></img>'
                     else if (gen.name == "信息管理") imgs = '<img class="iconImg" src="./icon/xxgl.svg"></img>'
                     if (gen.children.length != 0) {
-                        var yiji = $(' <li class="layui-nav-item"><a class="" href="javascript:;">' + imgs + gen.name +'</a><dl class="layui-nav-child erji'+gen.id+'"></dl></li>').appendTo("#menuT")
+                        var yiji = $(' <li class="layui-nav-item"><a class="" href="javascript:;">' + imgs + gen.name + '</a><dl class="layui-nav-child erji' + gen.id + '"></dl></li>').appendTo("#menuT")
                         gen.children.forEach(erjiT => {
                             if (erjiT.children.length != 0) {
-                                var erji = $('<dd data-name="grid"><a href="javascript:;">' + erjiT.name + '<span class="layui-nav-more"></span></a><dl class="layui-nav-child sanji'+erjiT.id+'"></dl></dd>').appendTo(".erji" + erjiT.pid)
+                                var erji = $('<dd data-name="grid"><a href="javascript:;">' + erjiT.name + '<span class="layui-nav-more"></span></a><dl class="layui-nav-child sanji' + erjiT.id + '"></dl></dd>').appendTo(".erji" + erjiT.pid)
                                 erjiT.children.forEach(sanjiT => {
-                                    var sanji = $('<dd class="three_child"><a href="javascript:;" class="menu" url="'+ sanjiT.url +'">'+sanjiT.name+'</a></dd>').appendTo('.sanji'+sanjiT.pid)
+                                    var sanji = $('<dd class="three_child"><a href="javascript:;" class="menu" url="' + sanjiT.url + '">' + sanjiT.name + '</a></dd>').appendTo('.sanji' + sanjiT.pid)
                                 });
                             } else {
-                                var erji = $('<dd><a href="javascript:;" class="menu" url="' + erjiT.url + '">'+ erjiT.name +'</a></dd>').appendTo(".erji" + erjiT.pid)
+                                var erji = $('<dd><a href="javascript:;" class="menu" url="' + erjiT.url + '">' + erjiT.name + '</a></dd>').appendTo(".erji" + erjiT.pid)
                             }
                         });
                     }
@@ -94,7 +100,7 @@ $(function () {
 
     $(".menu").on("click", function () {
         var xml = this
-         // 根据用户ID得到菜单权限
+        // 根据用户ID得到菜单权限
         $.ajax({
             url: './json/buttonqx.json',    //请求的url地址
             dataType: "json",   //返回格式为json
@@ -116,9 +122,9 @@ $(function () {
                 //请求出错处理
             }
         });
-            var url = $(xml).attr("url")
-            $("#show").attr("src", url)
-        })
+        var url = $(xml).attr("url")
+        $("#show").attr("src", url)
+    })
 
     $(".tc").on("click", function () {
         localStorage.clear()
