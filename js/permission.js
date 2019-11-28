@@ -8,18 +8,32 @@ layui.use(['table', 'form'], function () {
     var table = layui.table;
     var form = layui.form;
     form.render();
+    form.on('select(qxlx)', function(data) {
+        if (data.value === '1') {
+            $("#qqfs").val('GET');
+            $("#put").attr("disabled","true");
+            $("#delete").attr("disabled","true");
+            $("#post").attr("disabled","true");
+            form.render('select');
+        } else {
+            $("#put").removeAttr("disabled");
+            $("#delete").removeAttr("disabled");
+            $("#post").removeAttr("disabled");
+            form.render('select');
+        }
+    })
     //第一个实例
     table.render({
         elem: '#tableList'
         , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
-        , url: IPdz + '/permission' //数据接口
+        , url: IPdz + '/permission?asc=0' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
                 "msg": res.message, //解析提示文本
                 "count": res.data.total, //解析数据长度
-                "data": res.data //解析数据列表
+                "data": res.data.records //解析数据列表
             };
         }
         , page: true //开启分页
@@ -27,6 +41,7 @@ layui.use(['table', 'form'], function () {
             {field: 'cnName', title: '名称', width: 200}
             , {field: 'method', title: '请求方式'}
             , {field: 'url', title: 'url地址'}
+            , {field: 'parent', title: '父级名称'}
             , {field: 'type', title: '权限类型', templet: function (d) {
                 return getQx(d.type)
             }}
@@ -104,32 +119,9 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">URL地址：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input url">\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">说明：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input description">\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">请求方法：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <select id="qqfs" lay-verify="required">' +
-                '        <option value="GET">GET</option>' +
-                '        <option value="PUT">PUT</option>' +
-                '        <option value="DELETE">DELETE</option>' +
-                '        <option value="POST">POST</option>'+
-                '       </select>' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">权限类型：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select id="qxlx" lay-verify="required" lay-filter="college">' +
+                '      <select id="qxlx" lay-verify="required" lay-filter="qxlx">' +
                 '        <option value="1">菜单</option>' +
                 '        <option value="2">按钮</option>' +
                 '       </select>' +
@@ -139,7 +131,31 @@ layui.use(['table', 'form'], function () {
                 '    <label class="layui-form-label">上级菜单：</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select id="sjcd" lay-verify="required">' +
-            '           </select>' +
+                '       <option value="0">根菜单</option>' +
+                '      </select>' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">请求方法：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select id="qqfs" lay-verify="required">' +
+                '        <option value="GET">GET</option>' +
+                '        <option value="PUT" id="put">PUT</option>' +
+                '        <option value="DELETE" id="delete">DELETE</option>' +
+                '        <option value="POST" id="post">POST</option>'+
+                '       </select>' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">URL地址：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input url">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">说明：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input description">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
@@ -152,8 +168,19 @@ layui.use(['table', 'form'], function () {
                     $(".description").val(obj.data.description)
                     $("#qqfs").val(obj.data.method);
                     $("#qxlx").val(obj.data.type);
+                    if (obj.data.type == '1') {
+                        $("#put").attr("disabled","true");
+                        $("#delete").attr("disabled","true");
+                        $("#post").attr("disabled","true");
+                        form.render('select');
+                    } else {
+                        $("#put").removeAttr("disabled");
+                        $("#delete").removeAttr("disabled");
+                        $("#post").removeAttr("disabled");
+                        form.render('select');
+                    }
                     $.ajax({
-                        url: IPdz + '/permission/menu',    //请求的url地址
+                        url: IPdz + '/permission/all',    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         type: "GET",   //请求方式
@@ -164,7 +191,7 @@ layui.use(['table', 'form'], function () {
                         },
                         success: function (req) {
                             req.data.forEach(element => {
-                                var div = $('<option value="' + element.id + '">'+ element.cnName +'</option>').appendTo("#sjcd")
+                                var div = $('<option value="' + element.id + '">'+ element.name +'</option>').appendTo("#sjcd")
                             });
                         },
                         complete: function () {
@@ -261,6 +288,34 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">权限类型：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select id="qxlx" lay-verify="required" lay-filter="qxlx">' +
+                '        <option value="1">菜单</option>' +
+                '        <option value="2">按钮</option>' +
+                '       </select>' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv test">\n' +
+                '    <label class="layui-form-label">上级菜单：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select id="sjcd" lay-verify="required">' +
+                '       <option value="0">根菜单</option>' +
+                '      </select>' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">请求方法：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select id="qqfs" lay-verify="required">' +
+                '        <option value="GET">GET</option>' +
+                '        <option value="PUT" id="put" disabled>PUT</option>' +
+                '        <option value="DELETE" id="delete" disabled>DELETE</option>' +
+                '        <option value="POST" id="post" disabled>POST</option>'+
+                '       </select>' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">URL地址：</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input url">\n' +
@@ -272,39 +327,12 @@ layui.use(['table', 'form'], function () {
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input description">\n' +
                 '    </div>\n' +
                 '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">请求方法：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <select id="qqfs" lay-verify="required">' +
-                '        <option value="GET">GET</option>' +
-                '        <option value="PUT">PUT</option>' +
-                '        <option value="DELETE">DELETE</option>' +
-                '        <option value="POST">POST</option>'+
-                '       </select>' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">权限类型：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <select id="qxlx" lay-verify="required" lay-filter="college">' +
-                '        <option value="1">菜单</option>' +
-                '        <option value="2">按钮</option>' +
-                '       </select>' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv test">\n' +
-                '    <label class="layui-form-label">上级菜单：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <select id="sjcd" lay-verify="required">' +
-            '           </select>' +
-                '    </div>\n' +
-                '</div>\n' +
                 '</form></div>' +
                 '</div>' +
                 '</div>', 
             look: function () {
                 $.ajax({
-                    url: IPdz + '/permission/menu',    //请求的url地址
+                    url: IPdz + '/permission/all',    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "GET",   //请求方式
@@ -315,7 +343,7 @@ layui.use(['table', 'form'], function () {
                     },
                     success: function (req) {
                         req.data.forEach(element => {
-                            var div = $('<option value="' + element.id + '">'+ element.cnName +'</option>').appendTo("#sjcd")
+                            var div = $('<option value="' + element.id + '">'+ element.name +'</option>').appendTo("#sjcd")
                         });
                     },
                     complete: function () {

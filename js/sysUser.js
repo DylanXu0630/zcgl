@@ -57,7 +57,7 @@ layui.use(['table', 'form'], function () {
             }
             , {field: 'phone', title: '联系方式'}
             , {field: 'email', title: '邮件'}
-            // , { field: 'sm', title: '说明' }
+            , { field: 'accountEnable', title: '可用状态' }
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 220}
         ]]
     });
@@ -126,7 +126,7 @@ layui.use(['table', 'form'], function () {
             var openMes = {
                 title: '编辑系统用户',
                 leixing: '编辑',
-                area: ['650px', '300px'],
+                area: ['650px', '350px'],
                 maxmin: true,
                 btn: ['确定', '取消'],
                 id: obj.data.id,
@@ -170,17 +170,47 @@ layui.use(['table', 'form'], function () {
                     '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input location">\n' +
                     '    </div>\n' +
                     '</div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">状态：</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="checkbox" name="switch" class="status" lay-text="开启|关闭" lay-skin="switch">\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
-                    $(".email").val(obj.data.email)
-                    $(".location").val(obj.data.location)
-                    $(".nickname").val(obj.data.nickname)
-                    $(".phone").val(obj.data.phone)
-                    $(".username").val(obj.data.username)
+                    $(".status").attr("checked", obj.data.accountEnableCode);
                     $("input[name=sex][value='1']").attr("checked", obj.data.sex == 1 ? true : false);
-                    $("input[name=sex][value='2']").attr("checked", obj.data.sex == 2 ? true : false);
+                    $("input[name=sex][value='0']").attr("checked", obj.data.sex == 0 ? true : false);
+                    $.ajax({
+                        url: IPdz + '/user/detail/' + obj.data.id,    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                        type: "GET",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            if (req.status == "200") {
+                                $(".email").val(req.data.email)
+                                $(".location").val(req.data.location)
+                                $(".nickname").val(req.data.nickname)
+                                $(".phone").val(req.data.phone)
+                                $(".username").val(req.data.username)
+                            } else {
+                                layer.msg("获取失败")
+                            }
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
                 },
                 put: function () {
                     var data = {
@@ -241,7 +271,7 @@ layui.use(['table', 'form'], function () {
             var openMes = {
                 title: '查看系统用户',
                 leixing: '查看',
-                area: ['650px', '300px'],
+                area: ['650px', '350px'],
                 maxmin: true,
                 id: obj.data.id,
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
@@ -284,17 +314,47 @@ layui.use(['table', 'form'], function () {
                     '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input location" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">状态：</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="checkbox" name="switch" class="status" lay-text="开启|关闭" lay-skin="switch" disabled>\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
-                    $(".email").val(obj.data.email)
-                    $(".location").val(obj.data.location)
-                    $(".nickname").val(obj.data.nickname)
-                    $(".phone").val(obj.data.phone)
-                    $(".username").val(obj.data.username)
+                    $(".status").attr("checked", obj.data.accountEnableCode);
                     $("input[name=sex][value='1']").attr("checked", obj.data.sex == 1 ? true : false);
-                    $("input[name=sex][value='2']").attr("checked", obj.data.sex == 2 ? true : false);
+                    $("input[name=sex][value='0']").attr("checked", obj.data.sex == 0 ? true : false);
+                    $.ajax({
+                        url: IPdz + '/user/detail/' + obj.data.id,    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        type: "GET",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            if (req.status == "200") {
+                                $(".email").val(req.data.email)
+                                $(".location").val(req.data.location)
+                                $(".nickname").val(req.data.nickname)
+                                $(".phone").val(req.data.phone)
+                                $(".username").val(req.data.username)
+                            } else {
+                                layer.msg("获取失败")
+                            }
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
                 }
             }
 
@@ -385,27 +445,27 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">账户名</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>账户名</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">姓名：</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>姓名：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input nickname">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">密码：</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>密码：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="password" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input password">\n' +
+                '      <input type="password" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input password">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">手机：</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>手机：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input phone">\n' +
+                '      <input type="tel" name="phone" placeholder="*为必填项"  lay-verify="required|phone" autocomplete="off" class="layui-input phone">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
@@ -416,9 +476,9 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">邮件：</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>邮件：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input email">\n' +
+                '      <input type="tel" name="phone" placeholder="*为必填项" lay-verify="required|phone" autocomplete="off" class="layui-input email">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
@@ -427,11 +487,38 @@ layui.use(['table', 'form'], function () {
                 '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input location">\n' +
                 '    </div>\n' +
                 '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">状态：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="checkbox" name="switch" class="status" lay-text="开启|关闭" checked lay-skin="switch">\n' +
+                '    </div>\n' +
+                '</div>\n' +
                 '</form></div>' +
                 '</div>' +
                 '</div>',
             add: function () {
+                if ($(".username").val() == '') {
+                    layer.msg("账户名不能为空！")
+                    return
+                }
+                if ($(".nickname").val() == '') {
+                    layer.msg("姓名不能为空！")
+                    return
+                }
+                if ($(".password").val() == '') {
+                    layer.msg("密码不能为空！")
+                    return
+                }
+                if ($(".phone").val() == '') {
+                    layer.msg("电话号码不能为空！")
+                    return
+                }
+                if ($(".email").val() == '') {
+                    layer.msg("邮箱不能为空！")
+                    return
+                }
                 var data = {
+                    "accountEnable": $('.status:checked').val() === 'on' ? 1 : 0,
                     "email": $(".email").val(),
                     "location": $(".location").val(),
                     "nickname": $(".nickname").val(),
@@ -442,7 +529,7 @@ layui.use(['table', 'form'], function () {
                     "username": $(".username").val(),
                     "wxid": ""
                 }
-
+                
                 $.ajax({
                     url: IPdz + '/user',    //请求的url地址
                     dataType: "json",   //返回格式为json
@@ -526,6 +613,16 @@ function getOneUser() {
     });
 }
 $(function() {
+
+   var buttonqx = localStorage.getItem("buttonqx")
+   if (buttonqx.indexOf('delete') !== -1) {
+        // var deleteButton = $('<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>').appendTo("#barDemo")
+   } 
+   if (buttonqx.indexOf('add') !== -1) {
+        // var add = $('<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>').prependTo("#addButton")
+   }
+
+
    $("body").on("click",".hello",function(){
        var userId = $(this).attr("userId");
        var arr2 = [] 
