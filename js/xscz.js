@@ -66,21 +66,21 @@ layui.use(['laydate', 'table', 'form'], function () {
                     if (d.dealReviewStatusCode == "1") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
-                            '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n'+
+                            '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n' +
                             '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                     } else if (d.dealReviewStatusCode == "2") {
-                        if (d.dealExistStatus=="提前结束") {
-                            return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n'+
-                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
-                        }else {
+                        if (d.dealExistStatus == "提前结束") {
                             return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
-                                '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="zzht">终止合同</a>'+
-                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                        } else {
+                            return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
+                                '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="zzht">终止合同</a>' +
+                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                         }
 
                     } else if (d.dealReviewStatusCode == "3") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
-                            '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n'+
+                            '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
                             '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                     }
                 }
@@ -170,14 +170,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                 // '    </div>\n' +
                 // '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <select class="houseFy">\n' +
-                '    <option value="">请选择</option>\n' +
-                '     </select>\n' +
-                '    </div>\n' +
-                '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>承租人（乙方）</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="yf">\n' +
@@ -249,31 +241,48 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="houseResource houseFy">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '<div id="addFyDiv">' +
+                '</div>' +
+                '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
+                '  </div>\n' +
                 '</form></div>' +
                 '</div>' +
                 '</div>',
             add: function () {
+                var fyArr = []
+                $(".houseResource").each(function (i,o) {
+                    if ($(o).val()!==""){
+                        fyArr.push($(o).val())
+                    }
+                })
                 if ($.trim($(".dealName").val()) !== "") {
-                    if ($.trim($(".houseFy").val()) !== "") {
+                    if (fyArr.length !== 0) {
                         if ($.trim($(".yf").val()) !== "") {
                             if ($.trim($(".bzj").val()) !== "") {
                                 if ($.trim($("#date").val()) !== "") {
                                     if ($.trim($(".zsMouth").val()) !== "") {
                                         if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
                                             if ($.trim($(".zsMouth").val()) !== "") {
-                                                if ($(".htType").val()!==""){
+                                                if ($(".htType").val() !== "") {
                                                     var data = {
                                                         "createdBy": user,
-                                                        "dealName": $.trim($(".dealName").val()),
+                                                        // "dealName": $.trim($(".dealName").val()),
                                                         "rentMonth": $.trim($(".zsMouth").val()),
-                                                        "fkHouseResourceId": $.trim($(".houseFy").val()),
+                                                        "fkHouseResourceId": fyArr,
                                                         "fkRenterId": $.trim($(".yf").val()),
                                                         "startTime": sjc($("#date").val() + " 00:00:00"),
                                                         "payType": $.trim($(".zjzfType").val()),
                                                         "deposit": $.trim($(".bzj").val()),
                                                         "freeRentMonth": $.trim($(".mzMouth").val()),
                                                         "dealType": $.trim($(".htType").val()),
-                                                        "rentType": $.trim($(".rentType").val())
+                                                        "isNewRent": $.trim($(".rentType").val())
                                                     }
 
                                                     $.ajax({
@@ -347,9 +356,18 @@ layui.use(['laydate', 'table', 'form'], function () {
                 format: 'yyyy年MM月dd日'
             });
         })
-
-
         form.render();
+        var n = 0
+        $("#addFy").on("click", function () {
+            n = n + 1
+            var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy"+n+"'><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
+            getaddyf(n)
+            form.render('select')
+        })
+
+        $("#addFyDiv").on("click",".clearAddFy",function () {
+            $(this).parent().remove()
+        })
     })
 
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
@@ -416,14 +434,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                     // '     </select>\n' +
                     // '    </div>\n' +
                     // '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <select class="houseFy">\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label"><span class="inputBtx">*</span>承租人（乙方）</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -496,6 +506,17 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="houseResource houseFy">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '<div id="addFyDiv">' +
+                    '</div>' +
+                    '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
+                    '  </div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
@@ -516,15 +537,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                         success: function (req) {
                             $(".dealName").attr("htbh", "")
                             $(".dealName").val(req.data.dealName)
-                            if ($(".houseFy").children().length < 2) {
-                                $(".houseFy").children().remove()
-                                var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
-                                var options2 = $("<option value='" + req.data.resourceId + "'>" + req.data.resourceName + "</option>").appendTo(".houseFy")
-                                $(".houseFy").val(req.data.resourceId)
-                                form.render('select')
-                            } else {
-                                $(".houseFy").val(req.data.resourceId)
-                            }
                             $(".yf").val(req.data.renterId)
                             $(".zjzfType").val(req.data.payTypeCode)
                             $(".htType").val(req.data.dealTypeCode)
@@ -534,6 +546,29 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(".mzMouth").val(req.data.freeRentMonth)
                             $(".dealName").attr("htbh", req.data.dealSerial)
                             $(".rentType").val(req.data.rentTypeCode)
+                            var fyArr = req.data.resourceId.splice(",")
+                            if (fyArr.length<2){
+                                if ($(".houseFy").children().length < 2) {
+                                    $(".houseFy").children().remove()
+                                    var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
+                                    var options2 = $("<option value='" + req.data.resourceId + "'>" + req.data.resourceName + "</option>").appendTo(".houseFy")
+                                    $(".houseFy").val(req.data.resourceId)
+                                    form.render('select')
+                                } else {
+                                    $(".houseFy").val(req.data.resourceId)
+                                }
+                            } else {
+                                $(fyArr).each(function (i,o) {
+                                    if (i>0){
+                                        var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy"+i+"'><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
+                                        getaddyf(n)
+                                        $(".houseFy"+i).val(o)
+                                        form.render('select')
+                                    } else{
+                                        $(".houseFy").val(req.data.resourceId)
+                                    }
+                                })
+                            }
                         }
                     })
                     lay('.httime').each(function () {
@@ -542,10 +577,26 @@ layui.use(['laydate', 'table', 'form'], function () {
                             format: 'yyyy年MM月dd日'
                         });
                     })
+                    $("#addFy").on("click", function () {
+                        var n = $(".houseResource").length + 1
+                        var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy"+n+"'><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
+                        getaddyf(n)
+                        form.render('select')
+                    })
+
+                    $("#addFyDiv").on("click",".clearAddFy",function () {
+                        $(this).parent().remove()
+                    })
                 },
                 put: function () {
+                    var fyArr = []
+                    $(".houseResource").each(function (i,o) {
+                        if ($(o).val()!==""){
+                            fyArr.push($(o).val())
+                        }
+                    })
                     if ($.trim($(".dealName").val()) !== "") {
-                        if ($.trim($(".houseFy").val()) !== "") {
+                        if (fyArr.length !== 0) {
                             if ($.trim($(".yf").val()) !== "") {
                                 if ($.trim($(".bzj").val()) !== "") {
                                     if ($.trim($("#date").val()) !== "") {
@@ -558,7 +609,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                             "createdBy": user,
                                                             "dealName": $.trim($(".dealName").val()),
                                                             "rentMonth": $.trim($(".zsMouth").val()),
-                                                            "fkHouseResourceId": $.trim($(".houseFy").val()),
+                                                            "fkHouseResourceId": fyArr,
                                                             "fkRenterId": $.trim($(".yf").val()),
                                                             "startTime": sjc($("#date").val() + " 00:00:00"),
                                                             "payType": $.trim($(".zjzfType").val()),
@@ -566,10 +617,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                             "freeRentMonth": $.trim($(".mzMouth").val()),
                                                             "dealType": $.trim($(".htType").val()),
                                                             "dealSerial": $.trim($(".dealName").attr("htbh")),
-                                                            "rentType": $.trim($(".rentType").val())
+                                                            "isNewRent": $.trim($(".rentType").val())
                                                         }
-
-
                                                         $.ajax({
                                                             url: IPzd + '/deal',    //请求的url地址
                                                             dataType: "json",   //返回格式为json
@@ -603,7 +652,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                                 //请求出错处理
                                                             }
                                                         });
-                                                    }else {
+                                                    } else {
                                                         layer.msg("合同类型不能为空！")
                                                     }
 
@@ -826,11 +875,11 @@ layui.use(['laydate', 'table', 'form'], function () {
             layerLookOpen(openMes);
         } else if (layEvent == 'dy') {
             localStorage.htId = obj.data.id
-            if (obj.data.dealType=="协商出租"){
+            if (obj.data.dealType == "协商出租") {
                 window.open('../fwzpht.html')
-            }else if (obj.data.dealType=="一事一议"){
+            } else if (obj.data.dealType == "一事一议") {
                 window.open('../ysyy.html')
-            }else if (obj.data.dealType=="挂靠"){
+            } else if (obj.data.dealType == "挂靠") {
                 window.open('../gkht.html')
             }
 
@@ -946,7 +995,38 @@ function getfy() {
     });
 }
 
+function getaddyf(n) {
+    $.ajax({
+        url: IPzd + '/hresource/simple/norent',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            $('.houseFy'+n).children().remove()
+            var options = $("<option value=''>请选择</option>").appendTo('.houseFy'+n)
+            if (req.status == "200") {
+                $(req.data).each(function (i, o) {
+                    var option = $("<option value='" + o.id + "'>" + o.resourceName + "</option>").appendTo('.houseFy'+n)
+                })
+            } else {
+                layer.msg(req.msg)
+            }
 
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+
+}
 // function getbjfy() {
 //     $.ajax({
 //         url: IPzd + '/hresource/simple/norent',    //请求的url地址

@@ -6,7 +6,7 @@
 </head>
 <body>
 <link rel="stylesheet" href="css/ht.css">
-<div id="htall">
+<div id="htall" style="font-size: 16px">
     <div class="firstPage">
         <div class="titleBt">蠡园开发区房屋出租审核表（协商出租）</div>
         <div class="thbh">合同编号：<span class="pageSpan s-bbh"></span></div>
@@ -189,7 +189,7 @@
                     $(".glzx").text(req.data.manageUnit)
                     $(".sfxq").text(req.data.rentType)
                     $(".zdj").text(req.data.guideRentCharge)
-                    watermark({watermark_txt: "XS-201911-001"})//传入动态水印内容
+                    watermark({watermark_txt: req.data.dealSerial})//传入动态水印内容
                 } else {
                     alert(req.msg)
                 }

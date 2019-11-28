@@ -190,7 +190,7 @@
                     $(".fkfs").text(req.data.payType)
                     $(".mzq").text(req.data.freeRentMonth)
                     $(".bzj").text(req.data.deposit)
-                    watermark({watermark_txt: "XS-201911-001"})//传入动态水印内容
+                    watermark({watermark_txt: req.data.dealSerial})//传入动态水印内容
                 } else {
                     alert(req.msg)
                 }
