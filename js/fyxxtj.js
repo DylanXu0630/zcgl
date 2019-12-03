@@ -31,9 +31,9 @@ layui.use(['table', 'form'], function () {
             "sellStatus": "-1"
         }
         , cols: [[ //表头
-            {field: 'resourceName', title: '房源名称'},
+            // {field: 'resourceName', title: '房源名称'},
             {field: 'assetsName', title: '房产名称'},
-            {field: 'manageUnit', title: '管理单位'},
+            {field: 'agency', title: '管理单位'},
             {field: 'guideRentCharge', title: '指导价(月/元)'},
             {field: 'originRentCharge', title: '原来租金(月/元)'},
             {field: 'realRentCharge', title: '实际租金(月/元)'},
@@ -98,12 +98,12 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '<div class="dialogTitle">房源基础信息</div>' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">房源名称</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymc">\n' +
-                '    </div>\n' +
-                '  </div>\n' +
+                // '  <div class="dialogDiv">\n' +
+                // '    <label class="layui-form-label">房源名称</label>\n' +
+                // '    <div class="layui-input-block">\n' +
+                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymc">\n' +
+                // '    </div>\n' +
+                // '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>园区/楼宇</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -269,7 +269,7 @@ layui.use(['table', 'form'], function () {
                                                 "remark": $.trim($(".fj").val()),
                                                 "rentStatus": $.trim($(".cszt").val()),
                                                 "resourceArea": $.trim($(".fymj").val()),
-                                                "resourceName": $.trim($(".fymc").val()),
+                                                // "resourceName": $.trim($(".fymc").val()),
                                                 "sellStatus": $.trim($(".cszt").val()),
                                                 "rentStatus": $.trim($(".czzt").val()),
                                                 "originRentCharge": $.trim($(".ylzj").val()),
@@ -323,7 +323,7 @@ layui.use(['table', 'form'], function () {
                                                 "remark": $(".fj").val(),
                                                 "rentStatus": $(".cszt").val(),
                                                 "resourceArea": $(".fymj").val(),
-                                                "resourceName": $(".fymc").val(),
+                                                // "resourceName": $(".fymc").val(),
                                                 "sellStatus": $(".cszt").val(),
                                                 "rentStatus": $(".czzt").val(),
                                                 "originRentCharge": $(".ylzj").val(),
@@ -471,12 +471,12 @@ layui.use(['table', 'form'], function () {
 
                     '<div class="dialogTitle">房源基础信息</div>' +
 
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房源名称</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymc">\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
+                    // '  <div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">房源名称</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymc">\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label"><span class="inputBtx">*</span>园区/楼宇</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -653,7 +653,7 @@ layui.use(['table', 'form'], function () {
                                 $(".fj").val(req.data.remark)
                                 $(".cszt").val(req.data.rentCode)
                                 $(".fymj").val(req.data.resourceArea)
-                                $(".fymc").val(req.data.resourceName)
+                                // $(".fymc").val(req.data.resourceName)
                                 $(".cszt").val(req.data.sellCode)
                                 $(".czzt").val(req.data.rentCode)
                                 $(".gldw").val(req.data.agencyId)
@@ -709,7 +709,7 @@ layui.use(['table', 'form'], function () {
                                                     "remark": $.trim($(".fj").val()),
                                                     "rentStatus": $.trim($(".cszt").val()),
                                                     "resourceArea": $.trim($(".fymj").val()),
-                                                    "resourceName": $.trim($(".fymc").val()),
+                                                    // "resourceName": $.trim($(".fymc").val()),
                                                     "sellStatus": $.trim($(".cszt").val()),
                                                     "rentStatus": $.trim($(".czzt").val()),
                                                     "originRentCharge": $.trim($(".ylzj").val()),
@@ -762,7 +762,7 @@ layui.use(['table', 'form'], function () {
                                                     "remark": $(".fj").val(),
                                                     "rentStatus": $(".cszt").val(),
                                                     "resourceArea": $(".fymj").val(),
-                                                    "resourceName": $(".fymc").val(),
+                                                    // "resourceName": $(".fymc").val(),
                                                     "sellStatus": $(".cszt").val(),
                                                     "rentStatus": $(".czzt").val(),
                                                     "originRentCharge": $(".ylzj").val(),
@@ -825,12 +825,12 @@ layui.use(['table', 'form'], function () {
                     '<div><form class="layui-form" action="">\n' +
 
                     '<div class="dialogTitle">房源基础信息</div>' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房源名称</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymc" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
+                    // '  <div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">房源名称</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymc" readonly>\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">园区/楼宇</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -1002,7 +1002,7 @@ layui.use(['table', 'form'], function () {
                                 $(".fj").val(req.data.remark)
                                 $(".cszt").val(req.data.rentCode)
                                 $(".fymj").val(req.data.resourceArea)
-                                $(".fymc").val(req.data.resourceName)
+                                // $(".fymc").val(req.data.resourceName)
                                 $(".cszt").val(req.data.sellStatus)
                                 $(".czzt").val(req.data.rentStatus)
                                 $(".fygldw").val(req.data.agency)

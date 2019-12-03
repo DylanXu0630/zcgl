@@ -237,6 +237,18 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input otherArea">\n' +
                     '    </div>\n' +
                     '</div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>有证面积(m²)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required|number" placeholder="*号为必填项" autocomplete="off" class="layui-input yzmj">\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>无证面积(m²)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="*号为必填项" autocomplete="off" class="layui-input wzmj">\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">座落</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -276,6 +288,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".totalLevel").val(obj.data.totalLevel)
                     $("#date").val(obj.data.registerTime)
                     $(".location").val(obj.data.location)
+                    $(".yzmj").val(obj.data.yzArea)
+                    $(".wzmj").val(obj.data.wzArea)
                     laydate.render({
                         elem: '#date',
                         value: obj.data.registerTime,
@@ -289,65 +303,75 @@ layui.use(['table', 'laydate', 'form'], function () {
                             if ($.trim($(".fkLandAssetsId").val()) !== "") {
                                 if ($.trim($(".totalLevel").val()) !== "") {
                                     if ($.trim($(".buildArea").val()) !== "") {
-                                        if ($.trim($(".realArea").val()) !== "") {
-                                            if (parseInt($(".buildArea").val()) < parseInt($(".realArea").val())) {
-                                                layer.msg("建筑面积应大于套内面积")
-                                            } else {
-                                                var data = {
-                                                    "id": obj.data.id,
-                                                    "assetsName": $.trim($(".assetsName").val()),
-                                                    "buildArea": $.trim($(".buildArea").val()),
-                                                    "createdBy": user,
-                                                    "fkAgencyId": $.trim($(".gldw.manageUnit").val()),
-                                                    "fkHouseNature": $.trim($(".fcxz.hourseType").val()),
-                                                    "fkHouseShareId": $.trim($(".fwgyqk.shareType").val()),
-                                                    "fkHouseUsage": $.trim($(".fwghyt.housePlanUse").val()),
-                                                    "fkLandAssetsId": $.trim($(".fkLandAssetsId").val()),
-                                                    "fkOwnId": $.trim($(".co.fkOwnId").val()),
-                                                    "houseId": $.trim($(".houseId").val()),
-                                                    "otherArea": $.trim($(".otherArea").val()),
-                                                    "realArea": $.trim($(".realArea").val()),
-                                                    "remark": $.trim($(".remark").val()),
-                                                    "totalLevel": $.trim($(".totalLevel").val()),
-                                                    "registerTime": sjc($("#date").val() + " 00:00:00")
-                                                }
-                                                $.ajax({
-                                                    url: IPzd + '/assets/house',    //请求的url地址
-                                                    dataType: "json",   //返回格式为json
-                                                    async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                    data: JSON.stringify(data),    //参数值
-                                                    type: "PUT",   //请求方式
-                                                    contentType: "application/json;charset=UTF-8",
-                                                    // headers: {"token": sessionStorage.token},
-                                                    beforeSend: function () {
-                                                        //请求前的处理
-                                                    },
-                                                    success: function (req) {
-                                                        if (req.status == "200") {
-                                                            layer.close(indexDig);
-                                                            layer.msg("修改成功")
-                                                            var demoReload = $('#demoReload');
-                                                            //执行重载
-                                                            table.reload('tableList', {
-                                                                page: {
-                                                                    curr: 1 //重新从第 1 页开始
-                                                                }
-                                                            });
-                                                        } else {
-                                                            layer.msg("修改失败")
+                                        if ($.trim($(".yzmj").val()) !== "") {
+                                            if ($.trim($(".wzmj").val()) !== "") {
+                                                if ($.trim($(".realArea").val()) !== "") {
+                                                    if (parseInt($(".buildArea").val()) < parseInt($(".realArea").val())) {
+                                                        layer.msg("建筑面积应大于套内面积")
+                                                    } else {
+                                                        var data = {
+                                                            "id": obj.data.id,
+                                                            "assetsName": $.trim($(".assetsName").val()),
+                                                            "buildArea": $.trim($(".buildArea").val()),
+                                                            "createdBy": user,
+                                                            "fkAgencyId": $.trim($(".gldw.manageUnit").val()),
+                                                            "fkHouseNature": $.trim($(".fcxz.hourseType").val()),
+                                                            "fkHouseShareId": $.trim($(".fwgyqk.shareType").val()),
+                                                            "fkHouseUsage": $.trim($(".fwghyt.housePlanUse").val()),
+                                                            "fkLandAssetsId": $.trim($(".fkLandAssetsId").val()),
+                                                            "fkOwnId": $.trim($(".co.fkOwnId").val()),
+                                                            "houseId": $.trim($(".houseId").val()),
+                                                            "otherArea": $.trim($(".otherArea").val()),
+                                                            "realArea": $.trim($(".realArea").val()),
+                                                            "remark": $.trim($(".remark").val()),
+                                                            "totalLevel": $.trim($(".totalLevel").val()),
+                                                            "registerTime": sjc($("#date").val() + " 00:00:00"),
+                                                            "yzArea": $.trim($(".yzmj").val()),
+                                                            "wzArea": $.trim($(".wzmj").val())
                                                         }
+                                                        $.ajax({
+                                                            url: IPzd + '/assets/house',    //请求的url地址
+                                                            dataType: "json",   //返回格式为json
+                                                            async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                            data: JSON.stringify(data),    //参数值
+                                                            type: "PUT",   //请求方式
+                                                            contentType: "application/json;charset=UTF-8",
+                                                            // headers: {"token": sessionStorage.token},
+                                                            beforeSend: function () {
+                                                                //请求前的处理
+                                                            },
+                                                            success: function (req) {
+                                                                if (req.status == "200") {
+                                                                    layer.close(indexDig);
+                                                                    layer.msg("修改成功")
+                                                                    var demoReload = $('#demoReload');
+                                                                    //执行重载
+                                                                    table.reload('tableList', {
+                                                                        page: {
+                                                                            curr: 1 //重新从第 1 页开始
+                                                                        }
+                                                                    });
+                                                                } else {
+                                                                    layer.msg("修改失败")
+                                                                }
 
-                                                    },
-                                                    complete: function () {
-                                                        //请求完成的处理
-                                                    },
-                                                    error: function () {
-                                                        //请求出错处理
+                                                            },
+                                                            complete: function () {
+                                                                //请求完成的处理
+                                                            },
+                                                            error: function () {
+                                                                //请求出错处理
+                                                            }
+                                                        });
                                                     }
-                                                });
+                                                } else {
+                                                    layer.msg("套内面积不能为空！")
+                                                }
+                                            } else {
+                                                layer.msg("无证面积不能为空！")
                                             }
                                         } else {
-                                            layer.msg("套内面积不能为空！")
+                                            layer.msg("有证面积不能为空！")
                                         }
                                     } else {
                                         layer.msg("建筑面积不能为空！")
@@ -483,6 +507,18 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input otherArea" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">有证面积(m²)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required|number" placeholder="*号为必填项" autocomplete="off" class="layui-input yzmj">\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">无证面积(m²)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="*号为必填项" autocomplete="off" class="layui-input wzmj">\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">座落</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -551,6 +587,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".landNum").val(obj.data.landNum)
                     $(".landUseYear").val(obj.data.landUseYear)
                     $(".location").val(obj.data.location)
+                    $(".yzmj").val(obj.data.yzArea)
+                    $(".wzmj").val(obj.data.wzArea)
                 }
             }
             layerLookOpen(openMes);
@@ -679,6 +717,18 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input otherArea">\n' +
                 '    </div>\n' +
                 '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>有证面积(m²)</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required|number" placeholder="*号为必填项" autocomplete="off" class="layui-input yzmj">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>无证面积(m²)</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="number" placeholder="*号为必填项" autocomplete="off" class="layui-input wzmj">\n' +
+                '    </div>\n' +
+                '</div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">座落</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -694,73 +744,80 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '</form></div>' +
                 '</div>' +
                 '</div>',
-
             add: function () {
                 if ($.trim($(".houseId").val()) !== "") {
                     if ($.trim($(".co.fkOwnId").val()) !== "") {
                         if ($.trim($(".fkLandAssetsId").val()) !== "") {
                             if ($.trim($(".totalLevel").val()) !== "") {
                                 if ($.trim($(".buildArea").val()) !== "") {
-                                    if ($.trim($(".realArea").val()) !== "") {
-                                        if (parseInt($(".buildArea").val()) < parseInt($(".realArea").val())) {
-
-                                            layer.msg("建筑面积应大于套内面积")
-                                        } else {
-                                            var data = {
-                                                "assetsName": $.trim($(".assetsName").val()),
-                                                "buildArea": $.trim($(".buildArea").val()),
-                                                "createdBy": user,
-                                                "fkAgencyId": $.trim($(".gldw.manageUnit").val()),
-                                                "fkHouseNature": $.trim($(".fcxz.hourseType").val()),
-                                                "fkHouseShareId": $.trim($(".fwgyqk.shareType").val()),
-                                                "fkHouseUsage": $.trim($(".fwghyt.housePlanUse").val()),
-                                                "fkLandAssetsId": $.trim($(".fkLandAssetsId").val()),
-                                                "fkOwnId": $.trim($(".co.fkOwnId").val()),
-                                                "houseId": $.trim($(".houseId").val()),
-                                                "otherArea": $.trim($(".otherArea").val()),
-                                                "realArea": $.trim($(".realArea").val()),
-                                                "remark": $.trim($(".remark").val()),
-                                                "totalLevel": $.trim($(".totalLevel").val()),
-                                                "registerTime": sjc($("#date").val() + " 00:00:00"),
-                                                "location": $.trim($(".location").val())
-                                            }
-                                            $.ajax({
-                                                url: IPzd + '/assets/house',    //请求的url地址
-                                                dataType: "json",   //返回格式为json
-                                                async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                data: JSON.stringify(data),    //参数值
-                                                type: "POST",   //请求方式
-                                                contentType: "application/json;charset=UTF-8",
-                                                // headers: {"token": sessionStorage.token},
-                                                beforeSend: function () {
-                                                    //请求前的处理
-                                                },
-                                                success: function (req) {
-                                                    if (req.status == "200") {
-                                                        layer.close(indexDig);
-                                                        layer.msg("添加成功")
-                                                        //执行重载
-                                                        table.reload('tableList', {
-                                                            page: {
-                                                                curr: 1 //重新从第 1 页开始
-                                                            }
-                                                        });
-                                                    } else {
-                                                        layer.msg("添加失败")
+                                    if ($.trim($(".yzmj").val()) !== "") {
+                                        if ($.trim($(".wzmj").val()) !== "") {
+                                            if ($.trim($(".realArea").val()) !== "") {
+                                                if (parseInt($(".buildArea").val()) < parseInt($(".realArea").val())) {
+                                                    layer.msg("建筑面积应大于套内面积")
+                                                } else {
+                                                    var data = {
+                                                        "assetsName": $.trim($(".assetsName").val()),
+                                                        "buildArea": $.trim($(".buildArea").val()),
+                                                        "createdBy": user,
+                                                        "fkAgencyId": $.trim($(".gldw.manageUnit").val()),
+                                                        "fkHouseNature": $.trim($(".fcxz.hourseType").val()),
+                                                        "fkHouseShareId": $.trim($(".fwgyqk.shareType").val()),
+                                                        "fkHouseUsage": $.trim($(".fwghyt.housePlanUse").val()),
+                                                        "fkLandAssetsId": $.trim($(".fkLandAssetsId").val()),
+                                                        "fkOwnId": $.trim($(".co.fkOwnId").val()),
+                                                        "houseId": $.trim($(".houseId").val()),
+                                                        "otherArea": $.trim($(".otherArea").val()),
+                                                        "realArea": $.trim($(".realArea").val()),
+                                                        "remark": $.trim($(".remark").val()),
+                                                        "totalLevel": $.trim($(".totalLevel").val()),
+                                                        "registerTime": sjc($("#date").val() + " 00:00:00"),
+                                                        "location": $.trim($(".location").val()),
+                                                        "yzArea": $.trim($(".yzmj").val()),
+                                                        "wzArea": $.trim($(".wzmj").val())
                                                     }
+                                                    $.ajax({
+                                                        url: IPzd + '/assets/house',    //请求的url地址
+                                                        dataType: "json",   //返回格式为json
+                                                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                        data: JSON.stringify(data),    //参数值
+                                                        type: "POST",   //请求方式
+                                                        contentType: "application/json;charset=UTF-8",
+                                                        // headers: {"token": sessionStorage.token},
+                                                        beforeSend: function () {
+                                                            //请求前的处理
+                                                        },
+                                                        success: function (req) {
+                                                            if (req.status == "200") {
+                                                                layer.close(indexDig);
+                                                                layer.msg("添加成功")
+                                                                //执行重载
+                                                                table.reload('tableList', {
+                                                                    page: {
+                                                                        curr: 1 //重新从第 1 页开始
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                layer.msg("添加失败")
+                                                            }
 
-                                                },
-                                                complete: function () {
-                                                    //请求完成的处理
-                                                },
-                                                error: function () {
-                                                    //请求出错处理
+                                                        },
+                                                        complete: function () {
+                                                            //请求完成的处理
+                                                        },
+                                                        error: function () {
+                                                            //请求出错处理
+                                                        }
+                                                    });
                                                 }
-                                            });
+                                            } else {
+                                                layer.msg("套内面积不能为空！")
+                                            }
+                                        } else {
+                                            layer.msg("无证面积不能为空！")
                                         }
-
                                     } else {
-                                        layer.msg("套内面积不能为空！")
+                                        layer.msg("有证面积不能为空！")
                                     }
                                 } else {
                                     layer.msg("建筑面积不能为空！")

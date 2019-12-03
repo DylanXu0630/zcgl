@@ -5,10 +5,10 @@ var login = "http://192.168.44.78:18001/auth"
 // var IPzd = "http://61.160.81.178:18007/estate"
 
 var IPdz = "http://192.168.10.56:18000/uum"
-var IPzd = "http://192.168.10.56:14000/estate"
-var indexDig, lookDig
+var IPzd = "http://172.1.1.151:14000/estate"
+var indexDig, lookDig, aid
 /*当前登录的用户ID*/
-var user = 0
+var user = localStorage.userId
 layui.use('element', function () {
     var element = layui.element;
 });
@@ -150,7 +150,6 @@ function getcqdw() {
             } else {
                 layer.msg("产权单位获取失败")
             }
-
         },
         complete: function () {
             //请求完成的处理
@@ -181,11 +180,9 @@ function sgetcqdw() {
                 $(req.data).each(function (i, o) {
                     var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".s-co")
                 })
-
             } else {
                 layer.msg("产权单位获取失败")
             }
-
         },
         complete: function () {
             //请求完成的处理
@@ -689,7 +686,7 @@ function getfkLandAssetsId() {
             var options = $("<option value=''>请选择</option>").appendTo(".fkLandAssetsId")
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.assetsName + "</option>").appendTo(".fkLandAssetsId")
+                    var option = $("<option value='" + o.id + "'>" + o.landNum + "</option>").appendTo(".fkLandAssetsId")
                 })
             } else {
                 layer.msg("管理单位获取失败")
