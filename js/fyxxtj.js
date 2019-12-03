@@ -28,7 +28,8 @@ layui.use(['table', 'form'], function () {
             "maxArea": "",
             "minArea": "",
             "rentStatus": "-1",
-            "sellStatus": "-1"
+            "sellStatus": "-1",
+            "aid": aid
         }
         , cols: [[ //表头
             // {field: 'resourceName', title: '房源名称'},
@@ -70,7 +71,8 @@ layui.use(['table', 'form'], function () {
                     "maxArea": $(".maxfymj").val(),
                     "minArea": $(".minfymj").val(),
                     "rentStatus": $(".isCz").val(),
-                    "sellStatus": $(".isCs").val()
+                    "sellStatus": $(".isCs").val(),
+                    "aid": aid
                 },
                 url: IPzd + '/hresource/all?asc=0' //数据接口
                 , method: 'post'

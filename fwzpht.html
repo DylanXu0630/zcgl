@@ -183,12 +183,11 @@
 <script>
     $(function () {
         $("#btnPrintFull").click(function () {
-            $("#htall").css("height","100%")
+            $("#htall").css("width","100%")
             $("#htall").jqprint();
         });
 
         var heObj = JSON.parse(localStorage.getItem("heObj"));
-        console.log(heObj)
 
         $(".fczl").text(heObj.location)
         $(".s-bbh").text(heObj.dealSerial)

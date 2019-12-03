@@ -48,7 +48,8 @@ layui.use(['laydate', 'table', 'form'], function () {
             "minResourceArea": "",
             "payTypeCode": "",
             "renterId": "",
-            "startTime": ""
+            "startTime": "",
+            "aid": aid
         }
         , page: true //开启分页
         , cols: [[ //表头
@@ -128,7 +129,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                         "minResourceArea": $(".minfymj").val(),
                         "payTypeCode": $(".s-htzftype").val(),
                         "renterId": $(".s-czzr").val(),
-                        "startTime": sjc($("#s-date").val() + " 00:00:00")
+                        "startTime": sjc($("#s-date").val() + " 00:00:00"),
+                        "aid": aid
                     },
                     url: IPzd + '/deal/all' //数据接口
                     , method: 'post'

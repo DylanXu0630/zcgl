@@ -28,7 +28,8 @@ layui.use(['table', 'laydate', 'form'], function () {
         , where: {
             "landNum": "",
             "location": "",
-            "ownId": ""
+            "ownId": "",
+            "aid": aid
         }
         , page: true //开启分页
         , cols: [[ //表头
@@ -71,7 +72,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                 , where: {//这里传参  向后台
                     "landNum": landNum,
                     "location": location,
-                    "ownId": ownId
+                    "ownId": ownId,
+                    "aid": aid
                 },
                 url: IPzd + '/assets/land/all?asc=0' //数据接口
                 , method: 'post'

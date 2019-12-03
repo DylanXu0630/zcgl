@@ -48,6 +48,35 @@ $(function () {
         }
     });
 
+    $.ajax({
+        url: IPzd + '/user/' + localStorage.userId,    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            // 用户昵称
+            if (req.status == 200) {
+                localStorage.setItem("aId", req.data.agencyId)
+
+            } else {
+                alert(req.msg)
+                window.location.href = "login.html"
+            }
+
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+
     // 根据用户ID得到菜单权限
     $.ajax({
         url: IPdz + '/permission/menu/' + localStorage.getItem("userId"),    //请求的url地址

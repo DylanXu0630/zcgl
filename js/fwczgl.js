@@ -22,13 +22,15 @@ layui.use(['table', 'laydate', 'form'], function () {
             "agencyId": "",
             "location": "",
             "ownerId": "",
+            "aid": aid
         }
         , parseData: function (res) { //res 即为原始返回的数据
             return {
                 "code": 0, //解析接口状态
                 "msg": res.msg, //解析提示文本
                 "count": res.data.total, //解析数据长度
-                "data": res.data.records //解析数据列表
+                "data": res.data.records, //解析数据列表
+
             };
         }
         , page: true //开启分页
@@ -74,7 +76,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                 , where: {//这里传参  向后台
                     "agencyId": agencyId,
                     "location": location,
-                    "ownerId": ownId
+                    "ownerId": ownId,
+                    "aid": aid
                 },
                 url: IPzd + '/assets/house/all?asc=0' //数据接口
                 , method: 'post'
@@ -851,7 +854,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         getfwgyqk()//获取房屋共有情况
         getgldw()//获取管理单位
         getfcxz()//获取房屋性质
-        getfwghyt()//获取房屋规划用途 
+        getfwghyt()//获取房屋规划用途
         getfkLandAssetsId()//获取土地证号
         form.render();
 
