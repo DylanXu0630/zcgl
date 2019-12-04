@@ -272,48 +272,53 @@ layui.use(['laydate', 'table', 'form'], function () {
                                     if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
                                         if ($.trim($(".zsMouth").val()) !== "") {
                                             if ($(".htType").val() !== "") {
-                                                var data = {
-                                                    "createdBy": user,
-                                                    // "dealName": $.trim($(".dealName").val()),
-                                                    "rentMonth": $.trim($(".zsMouth").val()),
-                                                    "fkHouseResourceId": fyArr,
-                                                    "fkRenterId": $.trim($(".yf").val()),
-                                                    "startTime": sjc($("#date").val() + " 00:00:00"),
-                                                    "payType": $.trim($(".zjzfType").val()),
-                                                    "deposit": $.trim($(".bzj").val()),
-                                                    "freeRentMonth": $.trim($(".mzMouth").val()),
-                                                    "dealType": $.trim($(".htType").val()),
-                                                    "isNewRent": $.trim($(".rentType").val())
+                                                if (isCffy(fyArr)) {
+                                                    var data = {
+                                                        "createdBy": user,
+                                                        // "dealName": $.trim($(".dealName").val()),
+                                                        "rentMonth": $.trim($(".zsMouth").val()),
+                                                        "fkHouseResourceId": fyArr,
+                                                        "fkRenterId": $.trim($(".yf").val()),
+                                                        "startTime": sjc($("#date").val() + " 00:00:00"),
+                                                        "payType": $.trim($(".zjzfType").val()),
+                                                        "deposit": $.trim($(".bzj").val()),
+                                                        "freeRentMonth": $.trim($(".mzMouth").val()),
+                                                        "dealType": $.trim($(".htType").val()),
+                                                        "isNewRent": $.trim($(".rentType").val())
+                                                    }
+
+                                                    $.ajax({
+                                                        url: IPzd + '/deal',    //请求的url地址
+                                                        dataType: "json",   //返回格式为json
+                                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                        data: JSON.stringify(data),    //参数值
+                                                        type: "POST",   //请求方式
+                                                        contentType: "application/json;charset=UTF-8",
+                                                        // headers: {"token": sessionStorage.token},
+                                                        beforeSend: function () {
+                                                            //请求前的处理
+                                                        },
+                                                        success: function (req) {
+                                                            if (req.status == "200") {
+                                                                layer.close(indexDig);
+                                                                layer.msg("添加成功")
+                                                                //执行重载
+                                                                table.reload('tableList');
+                                                            } else {
+                                                                layer.msg(req.msg)
+                                                            }
+                                                        },
+                                                        complete: function () {
+                                                            //请求完成的处理
+                                                        },
+                                                        error: function () {
+                                                            //请求出错处理
+                                                        }
+                                                    });
+                                                } else {
+                                                    layer.msg("房源不能选择相同的！")
                                                 }
 
-                                                $.ajax({
-                                                    url: IPzd + '/deal',    //请求的url地址
-                                                    dataType: "json",   //返回格式为json
-                                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                    data: JSON.stringify(data),    //参数值
-                                                    type: "POST",   //请求方式
-                                                    contentType: "application/json;charset=UTF-8",
-                                                    // headers: {"token": sessionStorage.token},
-                                                    beforeSend: function () {
-                                                        //请求前的处理
-                                                    },
-                                                    success: function (req) {
-                                                        if (req.status == "200") {
-                                                            layer.close(indexDig);
-                                                            layer.msg("添加成功")
-                                                            //执行重载
-                                                            table.reload('tableList');
-                                                        } else {
-                                                            layer.msg(req.msg)
-                                                        }
-                                                    },
-                                                    complete: function () {
-                                                        //请求完成的处理
-                                                    },
-                                                    error: function () {
-                                                        //请求出错处理
-                                                    }
-                                                });
                                             } else {
                                                 layer.msg("合同类型不能为空！")
                                             }
@@ -611,54 +616,58 @@ layui.use(['laydate', 'table', 'form'], function () {
                                             if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
                                                 if ($.trim($(".zsMouth").val()) !== "") {
                                                     if ($.trim($(".htType").val()) !== "") {
-                                                        var data = {
-                                                            "id": obj.data.id,
-                                                            "createdBy": user,
-                                                            "dealName": $.trim($(".dealName").val()),
-                                                            "rentMonth": $.trim($(".zsMouth").val()),
-                                                            "fkHouseResourceId": fyArr,
-                                                            "fkRenterId": $.trim($(".yf").val()),
-                                                            "startTime": sjc($("#date").val() + " 00:00:00"),
-                                                            "payType": $.trim($(".zjzfType").val()),
-                                                            "deposit": $.trim($(".bzj").val()),
-                                                            "freeRentMonth": $.trim($(".mzMouth").val()),
-                                                            "dealType": $.trim($(".htType").val()),
-                                                            "dealSerial": $.trim($(".dealName").attr("htbh")),
-                                                            "isNewRent": $.trim($(".rentType").val())
-                                                        }
-                                                        $.ajax({
-                                                            url: IPzd + '/deal',    //请求的url地址
-                                                            dataType: "json",   //返回格式为json
-                                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                            data: JSON.stringify(data),    //参数值
-                                                            type: "PUT",   //请求方式
-                                                            contentType: "application/json;charset=UTF-8",
-                                                            // headers: {"token": sessionStorage.token},
-                                                            beforeSend: function () {
-                                                                //请求前的处理
-                                                            },
-                                                            success: function (req) {
-                                                                if (req.status == "200") {
-                                                                    layer.close(indexDig);
-                                                                    layer.msg("修改成功")
-                                                                    //执行重载
-                                                                    table.reload('tableList', {
-                                                                        page: {
-                                                                            curr: 1 //重新从第 1 页开始
-                                                                        }
-                                                                    });
-                                                                } else {
-                                                                    layer.msg("修改失败")
-                                                                }
-
-                                                            },
-                                                            complete: function () {
-                                                                //请求完成的处理
-                                                            },
-                                                            error: function () {
-                                                                //请求出错处理
+                                                        if (isCffy(fyArr)) {
+                                                            var data = {
+                                                                "id": obj.data.id,
+                                                                "createdBy": user,
+                                                                "dealName": $.trim($(".dealName").val()),
+                                                                "rentMonth": $.trim($(".zsMouth").val()),
+                                                                "fkHouseResourceId": fyArr,
+                                                                "fkRenterId": $.trim($(".yf").val()),
+                                                                "startTime": sjc($("#date").val() + " 00:00:00"),
+                                                                "payType": $.trim($(".zjzfType").val()),
+                                                                "deposit": $.trim($(".bzj").val()),
+                                                                "freeRentMonth": $.trim($(".mzMouth").val()),
+                                                                "dealType": $.trim($(".htType").val()),
+                                                                "dealSerial": $.trim($(".dealName").attr("htbh")),
+                                                                "isNewRent": $.trim($(".rentType").val())
                                                             }
-                                                        });
+                                                            $.ajax({
+                                                                url: IPzd + '/deal',    //请求的url地址
+                                                                dataType: "json",   //返回格式为json
+                                                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                                data: JSON.stringify(data),    //参数值
+                                                                type: "PUT",   //请求方式
+                                                                contentType: "application/json;charset=UTF-8",
+                                                                // headers: {"token": sessionStorage.token},
+                                                                beforeSend: function () {
+                                                                    //请求前的处理
+                                                                },
+                                                                success: function (req) {
+                                                                    if (req.status == "200") {
+                                                                        layer.close(indexDig);
+                                                                        layer.msg("修改成功")
+                                                                        //执行重载
+                                                                        table.reload('tableList', {
+                                                                            page: {
+                                                                                curr: 1 //重新从第 1 页开始
+                                                                            }
+                                                                        });
+                                                                    } else {
+                                                                        layer.msg("修改失败")
+                                                                    }
+
+                                                                },
+                                                                complete: function () {
+                                                                    //请求完成的处理
+                                                                },
+                                                                error: function () {
+                                                                    //请求出错处理
+                                                                }
+                                                            });
+                                                        } else {
+                                                            layer.msg("房源不能选择相同的！")
+                                                        }
                                                     } else {
                                                         layer.msg("合同类型不能为空！")
                                                     }
@@ -1142,5 +1151,20 @@ function sgetyf() {
             //请求出错处理
         }
     });
+}
+
+
+/*判断是否重复选择房源*/
+function isCffy(arr) {
+    var istrue = true
+    var nary = arr.sort()
+    for (var i = 0; i < arr.length; i++) {
+        if (nary[i] == nary[i + 1]) {
+            istrue = false
+            break;
+        }
+    }
+
+    return istrue
 }
 
