@@ -33,8 +33,8 @@ layui.use(['table', 'laydate', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'assetsName', title: '土地名称'}
-            , {field: 'owner', title: '土地使用权人'}
+            // {field: 'assetsName', title: '土地名称'}
+             {field: 'owner', title: '土地使用权人'}
             , {field: 'assetsLocation', title: '座落'}
             , {field: 'landNum', title: '地号'}
             , {field: 'picNum', title: '图号'}
@@ -499,30 +499,30 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input cqmz" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input cqmz" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地使用权人</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input co" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input co" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">座落</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input zl" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input dh" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">图号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input th" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -535,7 +535,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">取得价值(元)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input qdjz" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -554,23 +554,23 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">使用权面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input symj" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input symj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">独占面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dzmj" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input dzmj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">分摊面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ftmj" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input ftmj" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">备注</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input bz" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input bz" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '</form></div>' +
