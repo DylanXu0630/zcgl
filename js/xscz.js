@@ -780,7 +780,7 @@ layui.use(['laydate', 'table', 'form'], function () {
 
                         '<div class="dialogTitle">房源基础信息</div>' +
                         '<div id="fyjcxx"></div>' +
-                        '<div class="dialogTitle">收款详细</div>' +
+                        '<div class="dialogTitle">应收款详细</div>' +
                         '<table id="zjlb"></table>' +
                         '<div class="dialogTitle">收款记录</div>' +
                         '<table id="skjl"></table>' +
