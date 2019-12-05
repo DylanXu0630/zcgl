@@ -1,11 +1,12 @@
 /*定义接口域名*/
-var login = "http://192.168.44.78:18001/auth"
+// var login = "http://192.168.44.78:18001/auth"
+var login = "http://61.160.81.178:21004/auth"
 
-// var IPdz = "http://61.160.81.178:18007/uum"
-// var IPzd = "http://61.160.81.178:18007/estate"
+var IPdz = "http://61.160.81.178:21003/uum"
+var IPzd = "http://61.160.81.178:21002/estate"
 
-var IPdz = "http://192.168.10.56:18000/uum"
-var IPzd = "http://172.1.1.151:14000/estate"
+// var IPdz = "http://192.168.10.56:18000/uum"
+// var IPzd = "http://172.1.1.151:14000/estate"
 // var IPdz = "http://192.168.10.56:18000/uum"
 // var IPzd = "http://192.168.10.56:14000/estate"
 // var IPzd = "http://192.168.10.56:14000/estate"
