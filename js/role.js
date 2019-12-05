@@ -31,7 +31,7 @@ layui.use('table', function () {
     //第一个实例
     table.render({
         elem: '#tableList'
-        , toolbar: '#toolbarDemo'
+        // , toolbar: '#toolbarDemo'
         , url:  IPdz + '/role?asc=0' //数据接口
         , page: true //开启分页
         , parseData: function (res) { //res 即为原始返回的数据

@@ -25,7 +25,7 @@ layui.use(['table', 'form'], function () {
     //第一个实例
     table.render({
         elem: '#tableList'
-        , toolbar: '#toolbarDemo'
+        // , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
         , url: IPdz + '/permission?asc=0' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据

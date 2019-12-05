@@ -10,7 +10,16 @@ layui.use(['laydate', 'table', 'form'], function () {
     laydate.render({
         elem: '#test1',
         format: 'yyyy年MM月',
-        value: getNOW()
+        value: getNOW(),
+        type: 'month',
+        ready: function (date) {
+            $("#layui-laydate1").off('click').on('click', '.laydate-month-list li', function () {
+                $("#layui-laydate1").remove();
+            });
+        },
+        change:function(value,dates,edate){
+            $('#test1').val(value);
+        }
     });
 
 
@@ -267,7 +276,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         "certNo": $(".pzh").val(),
                         "fkMustMoneyId": obj.data.payId,
                         "money": $(".ss").val(),
-                        "moneyDate": sjc($("#test2").val()+" 23:59:59")
+                        "moneyDate": sjc($("#test2").val() + " 23:59:59")
                     }
 
                     $.ajax({

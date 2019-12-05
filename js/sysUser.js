@@ -35,7 +35,7 @@ layui.use(['table', 'form'], function () {
     //第一个实例
     table.render({
         elem: '#tableList'
-        , toolbar: '#toolbarDemo'
+        // , toolbar: '#toolbarDemo'
         // , url: '../json/sysUser.json'
         , url: IPdz + '/user?asc=0' //数据接口
         , parseData: function (res) { //res 即为原始返回的数据
@@ -450,6 +450,7 @@ layui.use(['table', 'form'], function () {
                     '</div>',
                 look: function () {
                     getgldw()
+                    $(".manageUnit").val(aid)
                 },
                 put: function () {
                     // var data = {
