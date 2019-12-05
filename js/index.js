@@ -62,10 +62,11 @@ $(function () {
             // 用户昵称
             if (req.status == 200) {
                 localStorage.setItem("aId", req.data.agencyId)
-
-            } else {
-                alert(req.msg)
-                window.location.href = "login.html"
+            } else if (req.status == 400) {
+                localStorage.setItem("aId", "")
+            }else {
+                // alert(req.msg)
+                // window.location.href = "login.html"
             }
 
         },
