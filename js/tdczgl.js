@@ -36,8 +36,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             // {field: 'assetsName', title: '土地名称'}
              {field: 'owner', title: '土地使用权人'}
             , {field: 'assetsLocation', title: '座落'}
-            , {field: 'landNum', title: '地号'}
-            , {field: 'picNum', title: '图号'}
+            , {field: 'landNum', title: '土地证号'}
             , {field: 'assetsQueue', title: '使用权面积(m²)'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
@@ -120,7 +119,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">地号</label>\n' +
+                '    <label class="layui-form-label">土地证号</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
                 '    </div>\n' +
@@ -155,7 +154,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '  </div>\n' + '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">终止日期</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '       <input type="text" name="date" id="date" placeholder="请选择" autocomplete="off" class="layui-input">\n' +
+                '       <input type="text" name="date" id="date" placeholder="请选择时间" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
@@ -333,7 +332,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">地号</label>\n' +
+                    '    <label class="layui-form-label">土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
                     '    </div>\n' +
@@ -368,7 +367,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">终止日期</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '       <input type="text" name="date" id="date" placeholder="请选择" autocomplete="off" class="layui-input">\n' +
+                    '       <input type="text" name="date" id="date" placeholder="请选择时间" autocomplete="off" class="layui-input">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -519,7 +518,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">地号</label>\n' +
+                    '    <label class="layui-form-label">土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input dh" readonly>\n' +
                     '    </div>\n' +

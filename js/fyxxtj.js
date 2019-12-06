@@ -107,7 +107,7 @@ layui.use(['table', 'form'], function () {
                 // '    </div>\n' +
                 // '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>园区/楼宇</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>楼宇</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input yqly">\n' +
                 '    </div>\n' +
@@ -209,8 +209,8 @@ layui.use(['table', 'form'], function () {
                 '    <div class="layui-input-block">\n' +
                 '      <select class="czzt">\n' +
                 '         <option value="-1">请选择</option>\n' +
-                '         <option value="1">已出租</option>\n' +
-                '         <option value="0">未出租</option>\n' +
+                '         <option value="1">出租</option>\n' +
+                '         <option value="0">闲置</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
                 '    </div>\n' +
@@ -219,7 +219,8 @@ layui.use(['table', 'form'], function () {
                 '    <div class="layui-input-block">\n' +
                 '      <select class="cszt">\n' +
                 '         <option value="0">未出售</option>\n' +
-                '         <option value="1">已出售</option>\n' +
+                '         <option value="1">已出售已过户</option>\n' +
+                '         <option value="2">已出售未过户</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
                 '    </div>\n' +
@@ -476,7 +477,7 @@ layui.use(['table', 'form'], function () {
                     // '    </div>\n' +
                     // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>园区/楼宇</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>楼宇</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input yqly">\n' +
                     '    </div>\n' +
@@ -535,8 +536,8 @@ layui.use(['table', 'form'], function () {
                     '    <div class="layui-input-block">\n' +
                     '      <select class="czzt">\n' +
                     '         <option value="-1">请选择</option>\n' +
-                    '         <option value="1">已出租</option>\n' +
-                    '         <option value="0">未出租</option>\n' +
+                    '         <option value="1">出租</option>\n' +
+                    '         <option value="0">闲置</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
                     '    </div>\n' +
@@ -544,7 +545,8 @@ layui.use(['table', 'form'], function () {
                     '    <label class="layui-form-label"><span class="inputBtx">*</span>出售状态</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="cszt">\n' +
-                    '         <option value="1">已出售</option>\n' +
+                    '         <option value="1">已出售已过户</option>\n' +
+                    '         <option value="2">已出售未过户</option>\n' +
                     '         <option value="0">未出售</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
@@ -825,7 +827,7 @@ layui.use(['table', 'form'], function () {
                     // '    </div>\n' +
                     // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">园区/楼宇</label>\n' +
+                    '    <label class="layui-form-label">楼宇</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yqly" readonly>\n' +
                     '    </div>\n' +
