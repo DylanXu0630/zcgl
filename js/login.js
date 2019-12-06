@@ -6,6 +6,7 @@ $(function () {
     $(".login-div").css("margin-top", logDivLength)
 
 
+
     $(window).resize(function () {
         var padlength = (window.innerHeight - 106 - 106 - $(".login-mid").height()) / 2;
         $(".login-mid").css("padding-top", padlength).css("padding-bottom", padlength);

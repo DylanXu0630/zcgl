@@ -191,7 +191,11 @@
         $(".endTime").text(heObj.endTime)
         // $(".sjzj").text(heObj.realRentCharge)
         $(".fkfs").text(heObj.payType)
-        $(".mzq").text(heObj.freeRentMonth)
+        if (heObj.freeRentMonth == 0) {
+            $(".freeZq").css("display", "none")
+        } else {
+            $(".mzq").text(heObj.freeRentMonth)
+        }
         // $(".bzj").text(heObj.deposit)
         $(".sfxq").text(heObj.isNewRent)
         $(".zdj").text(heObj.guideRentCharge)

@@ -11,7 +11,8 @@
         span {
             padding: 0 15px;
         }
-        #htall{
+
+        #htall {
             width: 750px;
         }
     </style>
@@ -98,7 +99,8 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">一、租赁房屋的坐落、面积、租赁期限</span><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲方将座落于<span class="zlwz"></span>，租赁期限为<span
             class="htSpan synx"></span>个月，从<span
-            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。免租期<span class="htSpan mzq">1</span>个月<br>
+            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。<span class="freeZq">免租期<span
+            class="htSpan mzq">1</span>个月</span><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">二、房屋的租金</span><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）租赁房屋每月租金为<span class="htSpan htsjzj"></span>元，乙方先支付租金再使用房屋，乙方应当在下一个周期开始前5天支付租金，第一期租金应当在本合同签署之日同时支付，甲方收到房屋租金和履约保证金后再向乙方交付租赁房屋。<br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方按照以下第<span class="htSpan fkfs"></span>项方式支付租金：<br>
@@ -168,7 +170,7 @@
             class=""></span><br>
         <div style="text-align: right;margin-top: 20px">
             本合同签订时间<span class="" style="margin: 0 20px;margin-left: 60px"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""
-                                                                                                                       style="margin: 0 20px;"></span>日
+                                                                                                                                        style="margin: 0 20px;"></span>日
         </div>
     </div>
 </div>
@@ -183,7 +185,7 @@
 <script>
     $(function () {
         $("#btnPrintFull").click(function () {
-            $("#htall").css("width","100%")
+            $("#htall").css("width", "100%")
             $("#htall").jqprint();
         });
 
@@ -200,7 +202,12 @@
         $(".endTime").text(heObj.endTime)
         // $(".sjzj").text(heObj.realRentCharge)
         $(".fkfs").text(heObj.payType)
-        $(".mzq").text(heObj.freeRentMonth)
+        if (heObj.freeRentMonth == 0) {
+            $(".freeZq").css("display", "none")
+        } else {
+            $(".mzq").text(heObj.freeRentMonth)
+        }
+
         // $(".bzj").text(heObj.deposit)
         $(".sfxq").text(heObj.isNewRent)
         $(".zdj").text(heObj.guideRentCharge)
@@ -212,8 +219,8 @@
             $(".ywyhtj").text("有")
         }
 
-        $(heObj.mustMoney).each(function (i,o) {
-            if (o.moneyType=="保证金"){
+        $(heObj.mustMoney).each(function (i, o) {
+            if (o.moneyType == "保证金") {
                 $(".bzj").text(o.money)
             }
         })
@@ -224,7 +231,7 @@
             $(".mjjz").text(heObj.houseResourceDetail[0].resourceArea)
             $(".sjzj").text(heObj.houseResourceDetail[0].rentMoneyPerArea)
             $(".zdj").text(heObj.houseResourceDetail[0].guideRentCharge)
-            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + heObj.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ heObj.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ heObj.houseResourceDetail[0].rentMoneyPerArea +"</span><span元/m²/月</span><span>)</span>").appendTo(".zlwz")
+            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + heObj.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + heObj.houseResourceDetail[0].houseUsage + "</span>使用<span>,</span><span class='htSpan mpfsjzj'>" + heObj.houseResourceDetail[0].rentMoneyPerArea + "</span><span元/m²/月</span><span>)</span>").appendTo(".zlwz")
             $(".htsjzj").text(heObj.houseResourceDetail[0].realRentCharge)
             $(".mpfsjzj").text(heObj.houseResourceDetail[0].rentMoneyPerArea)
         } else {
@@ -233,7 +240,7 @@
             var djArr = []
             var zdjArr = []
             var yzjArr = []
-            var realArr =[]
+            var realArr = []
             $(heObj.houseResourceDetail).each(function (i, o) {
                 glzxArr.push(o.agency)
                 heAreaArr.push(o.resourceArea)
@@ -242,9 +249,9 @@
                 yzjArr.push(o.realRentCharge)
 
                 if (i > 0) {
-                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.rentMoneyPerArea + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                 } else {
-                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.rentMoneyPerArea + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                 }
             })
 
@@ -279,7 +286,7 @@
             watermark_width: 880,//水印宽度
             watermark_height: 96,//水印长度
             watermark_angle: 15,//水印倾斜度数
-            watermark_padding:70
+            watermark_padding: 70
         };
         //采用配置项替换默认值，作用类似jquery.extend
         if (arguments.length === 1 && typeof arguments[0] === "object") {

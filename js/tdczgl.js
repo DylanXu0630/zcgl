@@ -91,7 +91,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         * 生成弹窗
         * */
         var openMes = {
-            title: '土地产证添加',
+            title: '土地证添加',
             area: ['1300px', '650px'],
             leixing: '添加',
             maxmin: true,
@@ -124,12 +124,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
                 '    </div>\n' +
-                '  </div>\n' + '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">图号</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
-                '    </div>\n' +
                 '  </div>\n' +
+                // '  <div class="dialogDiv">\n' +
+                // '    <label class="layui-form-label">图号</label>\n' +
+                // '    <div class="layui-input-block">\n' +
+                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
+                // '    </div>\n' +
+                // '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">地类</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -137,12 +138,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    <option value="">请选择</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
-                '  </div>\n' + '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">取得价格(元)</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz">\n' +
-                '    </div>\n' +
                 '  </div>\n' +
+                // '  <div class="dialogDiv">\n' +
+                // '    <label class="layui-form-label">取得价格(元)</label>\n' +
+                // '    <div class="layui-input-block">\n' +
+                // '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz">\n' +
+                // '    </div>\n' +
+                // '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">使用权类型</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -153,7 +155,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '  </div>\n' + '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">终止日期</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input">\n' +
+                '       <input type="text" name="date" id="date" placeholder="请选择" autocomplete="off" class="layui-input">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
@@ -197,8 +199,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                                 "endTime": sjc($("#date").val() + " 23:59:59"),
                                 "fkOwnId": $.trim($(".co").val()),
                                 "landNum": $.trim($(".dh").val()),
-                                "money": $.trim($(".qdjz").val()),
-                                "picNum": $.trim($(".th").val()),
+                                "money": "",
+                                "picNum": "",
                                 "remark": $.trim($(".bz").val()),
                                 "selfQueue": $.trim($(".dzmj").val()),
                                 "shareQueue": $.trim($(".ftmj").val()),
@@ -301,7 +303,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         } else if (layEvent === 'edit') {
             /*编辑操作;*/
             var openMes = {
-                title: '编辑土地产证',
+                title: '编辑土地证',
                 area: ['1300px', '650px'],
                 leixing: '编辑',
                 maxmin: true,
@@ -335,12 +337,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
                     '    </div>\n' +
-                    '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">图号</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
-                    '    </div>\n' +
                     '  </div>\n' +
+                    // '  <div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">图号</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地类</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -348,12 +351,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
-                    '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">取得价值(元)</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz">\n' +
-                    '    </div>\n' +
                     '  </div>\n' +
+                    // '  <div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">取得价值(元)</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input qdjz">\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">使用权类型</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -364,7 +368,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">终止日期</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input">\n' +
+                    '       <input type="text" name="date" id="date" placeholder="请选择" autocomplete="off" class="layui-input">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -402,8 +406,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                         $("#date").val(obj.data.endTime),
                         $(".co").val(obj.data.fkOwnId),
                         $(".dh").val(obj.data.landNum),
-                        $(".qdjz").val(obj.data.money),
-                        $(".th").val(obj.data.picNum),
+                        // $(".qdjz").val(obj.data.money),
+                        // $(".th").val(obj.data.picNum),
                         $(".bz").val(obj.data.remark),
                         $(".dzmj").val(obj.data.selfQueue),
                         $(".ftmj").val(obj.data.shareQueue),
@@ -432,8 +436,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                                     "endTime": sjc($("#date").val() + " 23:59:59"),
                                     "fkOwnId": $.trim($(".co").val()),
                                     "landNum": $.trim($(".dh").val()),
-                                    "money": $.trim($(".qdjz").val()),
-                                    "picNum": $.trim($(".th").val()),
+                                    "money": "",
+                                    "picNum": "",
                                     "remark": $.trim($(".bz").val()),
                                     "selfQueue": $.trim($(".dzmj").val()),
                                     "shareQueue": $.trim($(".ftmj").val()),
@@ -488,7 +492,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         else if (layEvent == 'detail') {
             /*查看操作*/
             var openMes = {
-                title: '查看土地产证',
+                title: '查看土地证',
                 leixing: '查看',
                 area: ['1300px', '650px'],
                 maxmin: true,
@@ -519,12 +523,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input dh" readonly>\n' +
                     '    </div>\n' +
-                    '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">图号</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input th" readonly>\n' +
-                    '    </div>\n' +
                     '  </div>\n' +
+                    // '  <div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">图号</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input th" readonly>\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地类</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -532,12 +537,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    <option value="">请选择</option>\n' +
                     '     </select>\n' +
                     '    </div>\n' +
-                    '  </div>\n' + '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">取得价值(元)</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input qdjz" readonly>\n' +
-                    '    </div>\n' +
                     '  </div>\n' +
+                    // '  <div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">取得价值(元)</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input qdjz" readonly>\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">使用权类型</label>\n' +
                     '    <div class="layui-input-block">\n' +
