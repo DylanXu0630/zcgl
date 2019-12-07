@@ -36,19 +36,7 @@ $(function () {
                 "deviceId": localStorage.getItem("uuId")
             },
             success: function (req) {
-                // if (req.status == "200") {
-                //     layer.close(indexDig);
-                //     layer.msg("添加成功")
-                //     var demoReload = $('#demoReload');
-                //     //执行重载
-                //     table.reload('idTest', {
-                //         page: {
-                //             curr: 1 //重新从第 1 页开始
-                //         }
-                //     });
-                // } else {
-                //     layer.msg("添加失败")
-                // }
+                // if ()
                 localStorage.setItem("user_name", $(".username").val());
                 localStorage.setItem("access_token",req.access_token);
                 localStorage.setItem("refresh_token", req.refresh_token);
@@ -60,6 +48,7 @@ $(function () {
             error: function (jqXHR) {
                 // console.log(jqXHR.status);
                 layer.msg(jqXHR.responseJSON.content)
+                $("#img").attr('src',login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
             }
         });
     })
