@@ -1,6 +1,5 @@
 //JavaScript代码区域
 
-var reload;
 layui.use('element', function () {
     var element = layui.element;
 });
@@ -9,6 +8,8 @@ layui.use(['table', 'form'], function () {
     var form = layui.form;
     form.render();
     //第一个实例
+
+    layer.msg("数据没对接")
 
     table.render({
         elem: '#tableList'
@@ -29,7 +30,6 @@ layui.use(['table', 'form'], function () {
             , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200 }
         ]]
     });
-    // table.reload;
 
     //监听行工具事件
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
