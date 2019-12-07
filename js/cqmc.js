@@ -24,8 +24,7 @@ layui.use(['table', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'name', title: '产权单位'}
-            , {field: 'shortname', title: '产权单位简称', width: 400}
+            {field: 'name', title: '产权名称'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
     });
