@@ -1045,7 +1045,7 @@ function getfczh() {
             var options = $("<option value=''>请选择</option>").appendTo(".houseZh")
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.assetsName + "</option>").appendTo(".houseZh")
+                    var option = $("<option value='" + o.id + "'>" + o.name + "</option>").appendTo(".houseZh")
                 })
             } else {
                 layer.msg("房屋产证获取失败")

@@ -570,16 +570,16 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '      <input type="text" name="title" required lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input location" readonly>\n' +
                     '    </div>\n' +
                     '</div>\n' +
+                    // '<div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">土地证号</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <select class="fkLandAssetsId" disabled>\n' +
+                    // '    <option value="">请选择</option>\n' +
+                    // '     </select>\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地证号</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <select class="fkLandAssetsId" disabled>\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">地号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landNum" readonly>\n' +
                     '    </div>\n' +
@@ -620,7 +620,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".fcxz.hourseType").val(obj.data.houseNatureId)
                     $(".fwgyqk.shareType").val(obj.data.houseShareId)
                     $(".fwghyt.housePlanUse").val(obj.data.houseUsageId)
-                    $(".fkLandAssetsId").val(obj.data.landAssetsId)
+                    // $(".fkLandAssetsId").val(obj.data.landAssetsId)
                     $(".co.fkOwnId").val(obj.data.owner)
                     $(".houseId").val(obj.data.houseId)
                     $(".houseNum").val(obj.data.houseNum)

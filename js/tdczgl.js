@@ -242,7 +242,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                                 //执行重载
                                                 table.reload('tableList');
                                             } else {
-                                                layer.msg("添加失败")
+                                                layer.msg(req.msg)
                                             }
 
                                         },
@@ -545,7 +545,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                                         }
                                                     });
                                                 } else {
-                                                    layer.msg("修改失败")
+                                                    layer.msg(req.msg)
                                                 }
 
                                             },
@@ -656,7 +656,20 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input ftmj" readonly>\n' +
                     '    </div>\n' +
-                    '  </div>\n' + '  <div class="dialogDiv">\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>有证面积(m²)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="*为必填项" autocomplete="off" class="layui-input yzmj" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">无证面积(m²)</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="请输入" autocomplete="off" class="layui-input wzmj" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">备注</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input bz" readonly>\n' +
@@ -682,6 +695,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".bz").val(obj.data.remark)
                     $(".dzmj").val(obj.data.selfArea)
                     $(".ftmj").val(obj.data.shareArea)
+                    $(".yzmj").val(obj.data.yzArea)
+                    $(".wzmj").val(obj.data.wzArea)
                 }
             }
             layerLookOpen(openMes);
