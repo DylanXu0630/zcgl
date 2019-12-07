@@ -658,7 +658,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>有证面积(m²)</label>\n' +
+                    '    <label class="layui-form-label">有证面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="*为必填项" autocomplete="off" class="layui-input yzmj" readonly>\n' +
                     '    </div>\n' +
