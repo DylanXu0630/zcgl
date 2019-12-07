@@ -35,8 +35,9 @@ layui.use(['table', 'laydate', 'form'], function () {
         , cols: [[ //表头
             // {field: 'assetsName', title: '土地名称'}
             {field: 'owner', title: '土地使用权人'}
+            , {field: 'landNo', title: '土地证号'}
             , {field: 'assetsLocation', title: '座落'}
-            , {field: 'landNum', title: '土地证号'}
+            , {field: 'landNum', title: '地号'}
             , {field: 'assetsArea', title: '使用权面积(m²)'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
@@ -115,7 +116,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input dh">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input tdzh">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
@@ -130,6 +131,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                 // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
                 // '    </div>\n' +
                 // '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">地号</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">地类</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -196,7 +203,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '</div>' +
                 '</div>',
             add: function () {
-                if ($.trim($(".dh").val()) !== "") {
+                if ($.trim($(".tdzh").val()) !== "") {
                     if ($.trim($(".co").val()) == "") {
                         layer.msg("土地权利人不能空！")
                     } else {
@@ -221,7 +228,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                                         "useType": $.trim($(".tdyt").val()),
                                         "useRight": $.trim($(".tdsylx").val()),
                                         "wzArea": $.trim($(".wzmj").val()),
-                                        "yzArea": $.trim($(".yzmj").val())
+                                        "yzArea": $.trim($(".yzmj").val()),
+                                        "landNo": $.trim($(".tdzh").val())
                                     }
 
                                     $.ajax({
@@ -390,7 +398,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input dh">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input tdzh">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -405,6 +413,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                     // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
                     // '    </div>\n' +
                     // '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">地号</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地类</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -485,6 +499,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                         $(".ftmj").val(obj.data.shareArea),
                         $(".tdyt").val(obj.data.useTypeCode),
                         $(".tdsylx").val(obj.data.useRightCode)
+                    $(".tdzh").val(obj.data.landNo)
                     $(".yzmj").val(obj.data.yzArea)
                     $(".wzmj").val(obj.data.wzArea)
                     laydate.render({
@@ -494,7 +509,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     });
                 },
                 put: function () {
-                    if ($.trim($(".dh").val()) !== "") {
+                    if ($.trim($(".tdzh").val()) !== "") {
                         if ($.trim($(".co").val()) == "") {
                             layer.msg("土地权利人不能空！")
                         } else {
@@ -520,7 +535,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                                             "useType": $.trim($(".tdyt").val()),
                                             "useRight": $.trim($(".tdsylx").val()),
                                             "wzArea": $.trim($(".wzmj").val()),
-                                            "yzArea": $.trim($(".yzmj").val())
+                                            "yzArea": $.trim($(".yzmj").val()),
+                                            "landNo": $.trim($(".tdzh").val())
                                         }
                                         $.ajax({
                                             url: IPzd + '/assets/land',    //请求的url地址
@@ -598,7 +614,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input dh" readonly>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input tdzh" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
@@ -613,6 +629,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                     // '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input th" readonly>\n' +
                     // '    </div>\n' +
                     // '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">地号</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input dh" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地类</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -697,6 +719,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".ftmj").val(obj.data.shareArea)
                     $(".yzmj").val(obj.data.yzArea)
                     $(".wzmj").val(obj.data.wzArea)
+                    $(".tdzh").val(obj.data.landNo)
                 }
             }
             layerLookOpen(openMes);
