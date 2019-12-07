@@ -25,7 +25,6 @@ layui.use(['table', 'form'], function () {
         , page: true //开启分页
         , cols: [[ //表头
             { field: 'name', title: '产权单位' }
-            , { field: 'shortname', title: '产权单位简称', width: 400 }
             , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200 }
         ]]
     });
@@ -93,24 +92,17 @@ layui.use(['table', 'form'], function () {
                     '      <input type="text" name="title"  placeholder="必填项，请输入" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
-                    '<div class="dialogDiv", style="width:88%">\n' +
-                    '    <label class="layui-form-label">简称</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title"  placeholder="请输入" autocomplete="off" class="layui-input shortname">\n' +
-                    '    </div>\n' +
-                    '</div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
                     $(".name").val(obj.data.name)
-                    $(".shortname").val(obj.data.shortname)
+                    // $(".shortname").val(obj.data.shortname)
                 },
                 put: function () {
                     var data = {
                         "id": obj.data.id,
-                        "name": $(".name").val(),
-                        "shortname": $(".shortname").val(),
+                        "name": $(".name").val()
                     }
                     if ($(".name").val().length > 0) {
                         $.ajax({
@@ -189,20 +181,12 @@ layui.use(['table', 'form'], function () {
                 '      <input type="text" name="title"  placeholder="必填项，请输入" autocomplete="off" class="layui-input name">\n' +
                 '    </div>\n' +
                 '</div>\n' +
-                '<div class="dialogDiv", style="width:88%;">\n' +
-                '    <label class="layui-form-label">简称</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title"  placeholder="请输入" autocomplete="off" class="layui-input shortname">\n' +
-                '    </div>\n' +
-                '</div>\n' +
                 '</form></div>' +
                 '</div>' +
                 '</div>',
             add: function () {
-
                 var data = {
                     "name": $(".name").val(),
-                    "shortname": $(".shortname").val(),
                 }
                 if ($(".name").val().length > 0) {
                     $.ajax({

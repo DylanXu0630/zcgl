@@ -93,59 +93,52 @@ layui.use(['table', 'form'], function () {
                     '      <input type="text" name="title"  placeholder="必填项，请输入" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
                     '</div>\n' +
-                    '<div class="dialogDiv", style="width:88%">\n' +
-                    '    <label class="layui-form-label">简称</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title"  placeholder="请输入" autocomplete="off" class="layui-input shortname">\n' +
-                    '    </div>\n' +
-                    '</div>\n' +
                     '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
                     $(".name").val(obj.data.name)
-                    $(".shortname").val(obj.data.shortname)
                 },
                 put: function () {
                     var data = {
                         "id": obj.data.id,
                         "name": $(".name").val(),
-                        "shortname": $(".shortname").val(),
                     }
                     if ($(".name").val().length > 0) {
-                        $.ajax({
-                            url: IPzd + '/dic/assetsco',    //请求的url地址
-                            dataType: "json",   //返回格式为json
-                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                            data: JSON.stringify(data),    //参数值
-                            type: "PUT",   //请求方式
-                            contentType: "application/json;charset=UTF-8",
-                            // headers: {"token": sessionStorage.token},
-                            beforeSend: function () {
-                                //请求前的处理
-                            },
-                            success: function (req) {
-                                if (req.status == "200") {
-                                    layer.close(indexDig);
-                                    layer.msg("修改成功")
-                                    //执行重载
-                                    table.reload('idTest', {
-                                        page: {
-                                            curr: 1 //重新从第 1 页开始
-                                        }
-                                    });
-                                } else {
-                                    layer.msg("修改失败")
-                                }
-
-                            },
-                            complete: function () {
-                                //请求完成的处理
-                            },
-                            error: function () {
-                                //请求出错处理
-                            }
-                        });
+                        // $.ajax({
+                        //     url: IPzd + '/dic/assetsco',    //请求的url地址
+                        //     dataType: "json",   //返回格式为json
+                        //     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        //     data: JSON.stringify(data),    //参数值
+                        //     type: "PUT",   //请求方式
+                        //     contentType: "application/json;charset=UTF-8",
+                        //     // headers: {"token": sessionStorage.token},
+                        //     beforeSend: function () {
+                        //         //请求前的处理
+                        //     },
+                        //     success: function (req) {
+                        //         if (req.status == "200") {
+                        //             layer.close(indexDig);
+                        //             layer.msg("修改成功")
+                        //             //执行重载
+                        //             table.reload('idTest', {
+                        //                 page: {
+                        //                     curr: 1 //重新从第 1 页开始
+                        //                 }
+                        //             });
+                        //         } else {
+                        //             layer.msg("修改失败")
+                        //         }
+                        //
+                        //     },
+                        //     complete: function () {
+                        //         //请求完成的处理
+                        //     },
+                        //     error: function () {
+                        //         //请求出错处理
+                        //     }
+                        // });
+                        layer.msg("接口未对接！")
                     } else {
                         layer.msg("产权单位不能为空！")
 
@@ -189,12 +182,6 @@ layui.use(['table', 'form'], function () {
                 '      <input type="text" name="title"  placeholder="必填项，请输入" autocomplete="off" class="layui-input name">\n' +
                 '    </div>\n' +
                 '</div>\n' +
-                '<div class="dialogDiv", style="width:88%;">\n' +
-                '    <label class="layui-form-label">简称</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title"  placeholder="请输入" autocomplete="off" class="layui-input shortname">\n' +
-                '    </div>\n' +
-                '</div>\n' +
                 '</form></div>' +
                 '</div>' +
                 '</div>',
@@ -202,42 +189,42 @@ layui.use(['table', 'form'], function () {
 
                 var data = {
                     "name": $(".name").val(),
-                    "shortname": $(".shortname").val(),
                 }
                 if ($(".name").val().length > 0) {
-                    $.ajax({
-                        url: IPzd + '/dic/assetsco',    //请求的url地址
-                        dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                        data: JSON.stringify(data),    //参数值
-                        type: "POST",   //请求方式
-                        contentType: "application/json;charset=UTF-8",
-                        // headers: {"token": sessionStorage.token},
-                        beforeSend: function () {
-                            //请求前的处理
-                        },
-                        success: function (req) {
-                            if (req.status == "200") {
-                                layer.close(indexDig);
-                                layer.msg("添加成功")
-                                //执行重载
-                                table.reload('idTest', {
-                                    page: {
-                                        curr: 1 //重新从第 1 页开始
-                                    }
-                                });
-                            } else {
-                                layer.msg("添加失败")
-                            }
-
-                        },
-                        complete: function () {
-                            //请求完成的处理
-                        },
-                        error: function () {
-                            //请求出错处理
-                        }
-                    });
+                    // $.ajax({
+                    //                     //     url: IPzd + '/dic/assetsco',    //请求的url地址
+                    //                     //     dataType: "json",   //返回格式为json
+                    //                     //     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    //                     //     data: JSON.stringify(data),    //参数值
+                    //                     //     type: "POST",   //请求方式
+                    //                     //     contentType: "application/json;charset=UTF-8",
+                    //                     //     // headers: {"token": sessionStorage.token},
+                    //                     //     beforeSend: function () {
+                    //                     //         //请求前的处理
+                    //                     //     },
+                    //                     //     success: function (req) {
+                    //                     //         if (req.status == "200") {
+                    //                     //             layer.close(indexDig);
+                    //                     //             layer.msg("添加成功")
+                    //                     //             //执行重载
+                    //                     //             table.reload('idTest', {
+                    //                     //                 page: {
+                    //                     //                     curr: 1 //重新从第 1 页开始
+                    //                     //                 }
+                    //                     //             });
+                    //                     //         } else {
+                    //                     //             layer.msg("添加失败")
+                    //                     //         }
+                    //                     //
+                    //                     //     },
+                    //                     //     complete: function () {
+                    //                     //         //请求完成的处理
+                    //                     //     },
+                    //                     //     error: function () {
+                    //                     //         //请求出错处理
+                    //                     //     }
+                    //                     // });
+                    layer.msg("接口未对接！")
                 } else {
                     layer.msg("产权单位不能为空！")
 
