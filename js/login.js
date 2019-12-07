@@ -6,7 +6,6 @@ $(function () {
     $(".login-div").css("margin-top", logDivLength)
 
 
-
     $(window).resize(function () {
         var padlength = (window.innerHeight - 106 - 106 - $(".login-mid").height()) / 2;
         $(".login-mid").css("padding-top", padlength).css("padding-bottom", padlength);
@@ -15,7 +14,7 @@ $(function () {
     localStorage.setItem("uuId", uuid());
 
     //验证码图片获取 
-    $("#img").attr('src',login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
+    $("#img").attr('src', login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
 
     $("#login").click(function () {
         $.ajax({
@@ -27,7 +26,7 @@ $(function () {
             crossDomain: true,
             // headers: {"Authorization": "Basic amM6anM="},
             beforeSend: function (request) {
-                request.setRequestHeader("Authorization","Basic bGl5dWFuOjEyMzQ1Ng==");
+                request.setRequestHeader("Authorization", "Basic bGl5dWFuOjEyMzQ1Ng==");
             },
             data: {
                 "username": $(".username").val(),
@@ -38,7 +37,7 @@ $(function () {
             success: function (req) {
                 // if ()
                 localStorage.setItem("user_name", $(".username").val());
-                localStorage.setItem("access_token",req.access_token);
+                localStorage.setItem("access_token", req.access_token);
                 localStorage.setItem("refresh_token", req.refresh_token);
                 window.location.href = "admin.html";
             },
@@ -47,16 +46,21 @@ $(function () {
             },
             error: function (jqXHR) {
                 // console.log(jqXHR.status);
-                layer.msg(jqXHR.responseJSON.content)
-                $("#img").attr('src',login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
+                if (jqXHR.responseJSON.content == "IMAGE验证码不匹配") {
+                    layer.msg("验证码不匹配")
+                } else {
+                    layer.msg(jqXHR.responseJSON.content)
+                }
+
+                $("#img").attr('src', login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
             }
         });
     })
 })
 
-$("#img").click(function() {
+$("#img").click(function () {
     localStorage.setItem("uuId", uuid());
-    $("#img").attr('src',login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
+    $("#img").attr('src', login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
 })
 
 // uuid获取方法
