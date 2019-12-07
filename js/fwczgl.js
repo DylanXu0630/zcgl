@@ -88,6 +88,46 @@ layui.use(['table', 'laydate', 'form'], function () {
 
     })
 
+    /*模板下载点击事件*/
+    $("body").on("click", ".mbxz", function () {
+        window.location.href = "../model/房产证模板.xlsx"
+    })
+
+    /*导入点击事件*/
+    $("body").on("click", ".layui-btn.layui-btn-sm.dr", function () {
+        if ($("#uploadFile").val() == "") {
+            layer.msg("导入前请先选择文件！")
+        } else {
+            var formData = new FormData();
+            formData.append("file", $("#uploadFile")[0].files[0]);
+
+            var reg = /^.*\.(?:xls|xlsx)$/i;//文件名可以带空格
+            if (!reg.test($("#uploadFile").val())) {//校验不通过
+                layer.msg("请选择excel格式的文件!")
+            } else {
+                // $.ajax({
+                //     url: IPzd + "/io/houseresource",
+                //     type: 'POST',
+                //     async: false,
+                //     data: formData,
+                //     // 告诉jQuery不要去处理发送的数据
+                //     processData: false,
+                //     // 告诉jQuery不要去设置Content-Type请求头
+                //     contentType: false,
+                //     beforeSend: function () {
+                //         layer.msg("正在导入！")
+                //     },
+                //     success: function (responseStr) {
+                //         var file = $("#uploadFile");
+                //         $(file).val('');
+                //         table.reload('tableList');
+                //         layer.msg("导入成功！")
+                //     }
+                // });
+                layer.msg("接口未对接")
+            }
+        }
+    })
 
     //监听行工具事件
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
@@ -590,7 +630,7 @@ layui.use(['table', 'laydate', 'form'], function () {
 
 
     /*添加点击事件*/
-    $("body").on("click", ".layui-btn.layui-btn-sm", function () {
+    $("body").on("click", ".layui-btn.layui-btn-sm.add", function () {
         /*生成一个对象
         * 传入标题和内容
         * 生成弹窗
