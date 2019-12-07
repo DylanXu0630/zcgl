@@ -37,7 +37,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             {field: 'owner', title: '土地使用权人'}
             , {field: 'assetsLocation', title: '座落'}
             , {field: 'landNum', title: '土地证号'}
-            , {field: 'assetsQueue', title: '使用权面积(m²)'}
+            , {field: 'assetsArea', title: '使用权面积(m²)'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
         , parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
@@ -560,15 +560,15 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">座落</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input zl" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input dh" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">座落</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input zl" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     // '  <div class="dialogDiv">\n' +
@@ -634,7 +634,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     gettdsylx()
                     gettdyt()
                     $(".cqmz").val(obj.data.assetsName)
-                    $(".symj").val(obj.data.assetsQueue)
+                    $(".symj").val(obj.data.assetsArea)
                     $(".tdyt").val(obj.data.useTypeCode)
                     $(".tdsylx").val(obj.data.useRightCode)
                     $(".zl").val(obj.data.assetsLocation)
@@ -644,8 +644,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".qdjz").val(obj.data.money)
                     $(".th").val(obj.data.picNum)
                     $(".bz").val(obj.data.remark)
-                    $(".dzmj").val(obj.data.selfQueue)
-                    $(".ftmj").val(obj.data.shareQueue)
+                    $(".dzmj").val(obj.data.selfArea)
+                    $(".ftmj").val(obj.data.shareArea)
                 }
             }
             layerLookOpen(openMes);
