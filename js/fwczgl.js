@@ -39,6 +39,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             , {field: 'assetsName', title: '产权名称', width: 160}
             , {field: 'owner', title: '房屋所有权人', width: 260}
             , {field: 'houseShare', title: '共有情况', width: 160}
+            , {field: 'landNum', title: '土地证号', width: 160}
             , {field: 'agency', title: '管理单位', width: 160}
             , {field: 'location', title: '座落', width: 200}
             , {field: 'houseNature', title: '房屋性质', width: 160}
@@ -47,8 +48,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             , {field: 'buildArea', title: '建筑面积(㎡)', width: 160}
             , {field: 'realArea', title: '套内建筑面积(㎡)', width: 160}
             , {field: 'otherArea', title: '其他面积(㎡)', width: 160}
-            , {field: 'landNum', title: '土地地号', width: 160}
-            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 220}
+            , {title: '操作', toolbar: '#barDemo', width: 220}
         ]]
         , parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
             return {
@@ -742,7 +742,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                     var data = {
                                         "assetsName": $.trim($(".assetsName").val()),
                                         "buildArea": $.trim($(".buildArea").val()),
-                                        "createdBy": user,
+                                        // "createdBy": user,
                                         "fkAgencyId": $.trim($(".gldw.manageUnit").val()),
                                         "fkHouseNature": $.trim($(".fcxz.hourseType").val()),
                                         "fkHouseShareId": $.trim($(".fwgyqk.shareType").val()),

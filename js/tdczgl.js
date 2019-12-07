@@ -21,7 +21,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         elem: '#tableList'
         // , toolbar: '#toolbarDemo'
         // , url: '../json/czgl.json' //数据接口
-        , url: IPzd + '/assets/land/all?asc=0' //数据接口
+        , url: IPzd + '/assets/land/all?asc=1' //数据接口
         , method: "POST"
         , contentType: "application/json"
         , async: true
@@ -34,7 +34,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         , page: true //开启分页
         , cols: [[ //表头
             // {field: 'assetsName', title: '土地名称'}
-             {field: 'owner', title: '土地使用权人'}
+            {field: 'owner', title: '土地使用权人'}
             , {field: 'assetsLocation', title: '座落'}
             , {field: 'landNum', title: '土地证号'}
             , {field: 'assetsQueue', title: '使用权面积(m²)'}
@@ -74,7 +74,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     "ownId": ownId,
                     "aid": aid
                 },
-                url: IPzd + '/assets/land/all?asc=0' //数据接口
+                url: IPzd + '/assets/land/all?asc=1' //数据接口
                 , method: 'post'
             });
             return false;//false：阻止表单跳转  true：表单跳转
@@ -98,12 +98,12 @@ layui.use(['table', 'laydate', 'form'], function () {
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">土地名称</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="title" placeholder="请输入" autocomplete="off" class="layui-input cqmz">\n' +
-                '    </div>\n' +
-                '  </div>\n' +
+                // '  <div class="dialogDiv">\n' +
+                // '    <label class="layui-form-label">土地名称</label>\n' +
+                // '    <div class="layui-input-block">\n' +
+                // '      <input type="text" name="title" required  lay-verify="title" placeholder="请输入" autocomplete="off" class="layui-input cqmz">\n' +
+                // '    </div>\n' +
+                // '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>土地使用权人</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -113,15 +113,15 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">座落</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
-                '    </div>\n' +
-                '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">土地证号</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">座落</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 // '  <div class="dialogDiv">\n' +
@@ -191,18 +191,18 @@ layui.use(['table', 'laydate', 'form'], function () {
                             layer.msg("独占面积与分摊面积相加不能大于使用权面积！")
                         } else {
                             var data = {
-                                "assetsName": $.trim($(".cqmz").val()),
+                                // "assetsName": $.trim($(".cqmz").val()),
                                 "assetsLocation": $.trim($(".zl").val()),
-                                "assetsQueue": $.trim($(".symj").val()),
-                                "createdBy": user,
+                                "assetsArea": $.trim($(".symj").val()),
+                                // "createdBy": user,
                                 "endTime": sjc($("#date").val() + " 23:59:59"),
                                 "fkOwnId": $.trim($(".co").val()),
                                 "landNum": $.trim($(".dh").val()),
                                 "money": "",
                                 "picNum": "",
                                 "remark": $.trim($(".bz").val()),
-                                "selfQueue": $.trim($(".dzmj").val()),
-                                "shareQueue": $.trim($(".ftmj").val()),
+                                "selfArea": $.trim($(".dzmj").val()),
+                                "shareArea": $.trim($(".ftmj").val()),
                                 "useType": $.trim($(".tdyt").val()),
                                 "useRight": $.trim($(".tdsylx").val())
                             }
@@ -311,12 +311,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地名称</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input cqmz">\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
+                    // '  <div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">土地名称</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input cqmz">\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label"><span class="inputBtx">*</span>土地使用权人</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -326,15 +326,15 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">座落</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">座落</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     // '  <div class="dialogDiv">\n' +
@@ -401,15 +401,15 @@ layui.use(['table', 'laydate', 'form'], function () {
                     gettdyt()
                     $(".cqmz").val(obj.data.assetsName),
                         $(".zl").val(obj.data.assetsLocation),
-                        $(".symj").val(obj.data.assetsQueue),
+                        $(".symj").val(obj.data.assetsArea),
                         $("#date").val(obj.data.endTime),
                         $(".co").val(obj.data.fkOwnId),
                         $(".dh").val(obj.data.landNum),
                         // $(".qdjz").val(obj.data.money),
                         // $(".th").val(obj.data.picNum),
                         $(".bz").val(obj.data.remark),
-                        $(".dzmj").val(obj.data.selfQueue),
-                        $(".ftmj").val(obj.data.shareQueue),
+                        $(".dzmj").val(obj.data.selfArea),
+                        $(".ftmj").val(obj.data.shareArea),
                         $(".tdyt").val(obj.data.useTypeCode),
                         $(".tdsylx").val(obj.data.useRightCode)
                     laydate.render({
@@ -428,18 +428,18 @@ layui.use(['table', 'laydate', 'form'], function () {
                             } else {
                                 var data = {
                                     "id": obj.data.id,
-                                    "assetsName": $.trim($(".cqmz").val()),
+                                    // "assetsName": $.trim($(".cqmz").val()),
                                     "assetsLocation": $.trim($(".zl").val()),
-                                    "assetsQueue": $.trim($(".symj").val()),
-                                    "createdBy": user,
+                                    "assetsArea": $.trim($(".symj").val()),
+                                    // "createdBy": user,
                                     "endTime": sjc($("#date").val() + " 23:59:59"),
                                     "fkOwnId": $.trim($(".co").val()),
                                     "landNum": $.trim($(".dh").val()),
                                     "money": "",
                                     "picNum": "",
                                     "remark": $.trim($(".bz").val()),
-                                    "selfQueue": $.trim($(".dzmj").val()),
-                                    "shareQueue": $.trim($(".ftmj").val()),
+                                    "selfArea": $.trim($(".dzmj").val()),
+                                    "shareArea": $.trim($(".ftmj").val()),
                                     "useType": $.trim($(".tdyt").val()),
                                     "useRight": $.trim($(".tdsylx").val())
                                 }
@@ -499,12 +499,12 @@ layui.use(['table', 'laydate', 'form'], function () {
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地名称</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input cqmz" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
+                    // '  <div class="dialogDiv">\n' +
+                    // '    <label class="layui-form-label">土地名称</label>\n' +
+                    // '    <div class="layui-input-block">\n' +
+                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input cqmz" readonly>\n' +
+                    // '    </div>\n' +
+                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地使用权人</label>\n' +
                     '    <div class="layui-input-block">\n' +

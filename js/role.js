@@ -183,37 +183,37 @@ layui.use('table', function () {
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
-                    // '<div id="buttons">\n' +
-                    // '</div>\n' +
-                    '<div id="treeT"> </div>' +
-                    '</form></div>' +
+                    '<div id="buttons">\n' +
+                    '</div>\n' +
+                    // '<div id="treeT"> </div>' +
+                    // '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
                     // 树形控件tree
                     // 1.获取全部权限树
                     var trees = [];
-                    $.ajax({
-                        url: IPdz + '/permission/tree',    //请求的url地址
-                        // url: '/json/ss.json',
-                        dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                        type: "GET",   //请求方式
-                        contentType: "application/json;charset=UTF-8",
-                        // headers: {"token": sessionStorage.token},
-                        beforeSend: function () {
-                            //请求前的处理
-                        },
-                        success: function (req) {
-                           trees = req.data
-                        },
-                        complete: function () {
-                            //请求完成的处理
-                        },
-                        error: function () {
-                            //请求出错处理
-                        }
-                    });
+                    // $.ajax({
+                    //     url: IPdz + '/permission/tree',    //请求的url地址
+                    //     // url: '/json/ss.json',
+                    //     dataType: "json",   //返回格式为json
+                    //     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    //     type: "GET",   //请求方式
+                    //     contentType: "application/json;charset=UTF-8",
+                    //     // headers: {"token": sessionStorage.token},
+                    //     beforeSend: function () {
+                    //         //请求前的处理
+                    //     },
+                    //     success: function (req) {
+                    //        trees = req.data
+                    //     },
+                    //     complete: function () {
+                    //         //请求完成的处理
+                    //     },
+                    //     error: function () {
+                    //         //请求出错处理
+                    //     }
+                    // });
                     
                     // 根据用户ID得到对应用户权限
 
@@ -231,31 +231,31 @@ layui.use('table', function () {
                         },
                         success: function (req) {
                             // 处理权限数据
-                            // if (!req.data) {
-                            //     qxs.forEach(element => {
-                            //         var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + obj.data.id + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                            //     });
-                            // } else {
-                            //     var arr = qxs.slice(0)
-                            //     qxs.forEach(element => { 
-                            //         req.data.forEach(item => {
-                            //             if (item.id === element.id) {
-                            //                 var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                            //                 arr.splice(arr.findIndex((ee)=> ee.id === element.id), 1);
-                            //                 return
-                            //             } 
-                            //         })
-                            //     })
-                            //     if(!!arr.length) {
-                            //         arr.forEach(element => {
-                            //             var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                            //         });
-                            //     }
-                            // }
-                            console.log(req.data)
-                            req.data.forEach(element => {
-                                checkedInfo.push(element.id);
-                            });
+                            if (!req.data) {
+                                qxs.forEach(element => {
+                                    var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + obj.data.id + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
+                                });
+                            } else {
+                                var arr = qxs.slice(0)
+                                qxs.forEach(element => {
+                                    req.data.forEach(item => {
+                                        if (item.id === element.id) {
+                                            var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
+                                            arr.splice(arr.findIndex((ee)=> ee.id === element.id), 1);
+                                            return
+                                        }
+                                    })
+                                })
+                                if(!!arr.length) {
+                                    arr.forEach(element => {
+                                        var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
+                                    });
+                                }
+                            }
+                            // console.log(req.data)
+                            // req.data.forEach(element => {
+                            //     checkedInfo.push(element.id);
+                            // });
                         },
                         complete: function () {
                             //请求完成的处理
