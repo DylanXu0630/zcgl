@@ -35,19 +35,22 @@ layui.use(['table', 'laydate', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'houseId', title: '房产证号', width: 200}
+            {field: 'agency', title: '管理单位', width: 160}
+            , {field: 'houseId', title: '房产证号', width: 200}
             , {field: 'houseName', title: '产权名称', width: 160}
             , {field: 'owner', title: '房屋所有权人', width: 260}
-            , {field: 'houseShare', title: '共有情况', width: 160}
+            // , {field: 'houseShare', title: '共有情况', width: 160}
             , {field: 'landNum', title: '土地证号', width: 160}
-            , {field: 'agency', title: '管理单位', width: 160}
+
             , {field: 'location', title: '座落', width: 200}
             , {field: 'houseNature', title: '房屋性质', width: 160}
-            , {field: 'houseUsage', title: '房产规划用途', width: 160}
-            , {field: 'totalLevel', title: '房屋总层数(层)', width: 160}
+            // , {field: 'houseUsage', title: '房产规划用途', width: 160}
+            // , {field: 'totalLevel', title: '房屋总层数(层)', width: 160}
             , {field: 'buildArea', title: '建筑面积(㎡)', width: 160}
-            , {field: 'realArea', title: '套内建筑面积(㎡)', width: 160}
-            , {field: 'otherArea', title: '其他面积(㎡)', width: 160}
+            , {field: 'yzArea', title: '有证面积(㎡)', width: 160}
+            , {field: 'wzArea', title: '无证面积(㎡)', width: 160}
+            // , {field: 'realArea', title: '套内建筑面积(㎡)', width: 160}
+            // , {field: 'otherArea', title: '其他面积(㎡)', width: 160}
             , {title: '操作', toolbar: '#barDemo', width: 220}
         ]]
         , parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
@@ -758,7 +761,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>有证面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input yzmj">\n' +
+                '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required|number" placeholder="*为必填项" autocomplete="off" class="layui-input yzmj">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '  <div class="dialogDiv">\n' +
