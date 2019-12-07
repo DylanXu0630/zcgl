@@ -40,7 +40,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             , {field: 'houseName', title: '产权名称', width: 160}
             , {field: 'owner', title: '房屋所有权人', width: 260}
             // , {field: 'houseShare', title: '共有情况', width: 160}
-            , {field: 'landNum', title: '土地证号', width: 160}
+            , {field: 'landNum', title: '地号', width: 160}
 
             , {field: 'location', title: '座落', width: 200}
             , {field: 'houseNature', title: '房屋性质', width: 160}
@@ -207,7 +207,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>地号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <select class="fkLandAssetsId">\n' +
                     '    <option value="">请选择</option>\n' +
@@ -416,7 +416,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                                 layer.msg("建筑面积不能为空！")
                                             }
                                         } else {
-                                            layer.msg("土地证号不能为空！")
+                                            layer.msg("地号不能为空！")
                                         }
                                     } else {
                                         layer.msg("房屋所有权人不能为空！")
@@ -579,7 +579,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     // '    </div>\n' +
                     // '  </div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">土地证号</label>\n' +
+                    '    <label class="layui-form-label">地号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landNum" readonly>\n' +
                     '    </div>\n' +
@@ -686,7 +686,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>地号</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="fkLandAssetsId">\n' +
                 '    <option value="">请选择</option>\n' +
@@ -855,7 +855,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                             layer.msg("建筑面积不能为空！")
                                         }
                                     } else {
-                                        layer.msg("土地证号不能为空！")
+                                        layer.msg("地号不能为空！")
                                     }
                                 } else {
                                     layer.msg("房屋所有权人不能为空！")
