@@ -26,7 +26,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         , contentType: "application/json"
         , async: true
         , where: {
-            "landNum": "",
+            "landNo": "",
             "location": "",
             "ownId": "",
             "aid": aid
@@ -70,7 +70,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     curr: 1 //重新从第 1 页开始
                 }
                 , where: {//这里传参  向后台
-                    "landNum": landNum,
+                    "landNo": landNum,
                     "location": location,
                     "ownId": ownId,
                     "aid": aid
