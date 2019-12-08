@@ -223,8 +223,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                                             "remark": $.trim($(".bz").val()),
                                             "selfArea": $.trim($(".dzmj").val()),
                                             "shareArea": $.trim($(".ftmj").val()),
-                                            "useType": $.trim($(".tdyt").val()),
-                                            "useRight": $.trim($(".tdsylx").val()),
+                                            "fkLandUsageId": $.trim($(".tdyt").val()),
+                                            "fkLandNatureId": $.trim($(".tdsylx").val()),
                                             "wzArea": $.trim($(".wzmj").val()),
                                             "yzArea": $.trim($(".yzmj").val()),
                                             "landNo": $.trim($(".tdzh").val())
@@ -327,9 +327,11 @@ layui.use(['table', 'laydate', 'form'], function () {
                                 $(responseStr.data.errorRows).each(function (i, o) {
                                     sbts = sbts + '<div style="margin: 5px 0;color: red">' + o + '条</div>'
                                 })
+                            }else {
+                                sbts = sbts + '<div style="margin: 5px 0;color: red">无</div>'
                             }
 
-                            var html = '<div style="margin: 5px 0">总共导入' + responseStr.data.totalRow + '条</div><div style="margin: 5px 0">成功导入' + responseStr.data.successRow + '条</div><div style="margin: 5px 0">导入失败' + responseStr.data.errorRow + '条</div><div style="margin: 5px 0">导入失败数据</div><div class="sbtotal">' + sbts + '</div>'
+                            var html = '<div style="margin: 5px 0">总共导入' + responseStr.data.totalRow + '条</div><div style="margin: 5px 0">成功导入' + responseStr.data.successRow + '条</div><div style="margin: 5px 0">导入失败' + responseStr.data.errorRow + '条</div><div style="margin: 5px 0">导入失败数据：</div><div class="sbtotal">' + sbts + '</div>'
                             layer.open({
                                 type: 1
                                 , offset: "auto"
@@ -523,8 +525,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".bz").val(obj.data.remark)
                     $(".dzmj").val(obj.data.selfArea)
                     $(".ftmj").val(obj.data.shareArea)
-                    $(".tdyt").val(obj.data.useTypeCode)
-                    $(".tdsylx").val(obj.data.useRightCode)
+                    $(".tdyt").val(obj.data.fkLandUsageId)
+                    $(".tdsylx").val(obj.data.fkLandNatureId)
                     $(".tdzh").val(obj.data.landNo)
                     $(".yzmj").val(obj.data.yzArea)
                     $(".wzmj").val(obj.data.wzArea)
@@ -560,8 +562,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                                                 "remark": $.trim($(".bz").val()),
                                                 "selfArea": $.trim($(".dzmj").val()),
                                                 "shareArea": $.trim($(".ftmj").val()),
-                                                "useType": $.trim($(".tdyt").val()),
-                                                "useRight": $.trim($(".tdsylx").val()),
+                                                "fkLandUsageId": $.trim($(".tdyt").val()),
+                                                "fkLandNatureId": $.trim($(".tdsylx").val()),
                                                 "wzArea": $.trim($(".wzmj").val()),
                                                 "yzArea": $.trim($(".yzmj").val()),
                                                 "landNo": $.trim($(".tdzh").val())
@@ -740,8 +742,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getgldw()
                     $(".cqmz").val(obj.data.assetsName)
                     $(".symj").val(obj.data.assetsArea)
-                    $(".tdyt").val(obj.data.useTypeCode)
-                    $(".tdsylx").val(obj.data.useRightCode)
+                    $(".tdyt").val(obj.data.fkLandUsageId)
+                    $(".tdsylx").val(obj.data.fkLandNatureId)
                     $(".zl").val(obj.data.assetsLocation)
                     $("#date").val(obj.data.endTime)
                     $(".co").val(obj.data.owner)
