@@ -39,6 +39,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             , {field: 'assetsLocation', title: '座落'}
             , {field: 'landNum', title: '地号'}
             , {field: 'assetsArea', title: '使用权面积(m²)'}
+            , {field: 'agencyName', title: '管理单位'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
         , parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
