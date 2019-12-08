@@ -33,7 +33,7 @@ layui.use(['table', 'form'], function () {
         }
         , cols: [[ //表头
             // {field: 'resourceName', title: '房源名称'},
-            {field: 'assetsName', title: '房产名称'},
+            {field: 'location', title: '房源地址'},
             {field: 'agency', title: '管理单位'},
             {field: 'guideRentCharge', title: '指导价(月/元)'},
             {field: 'originRentCharge', title: '历史租金(月/元)'},
@@ -100,12 +100,14 @@ layui.use(['table', 'form'], function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '<div class="dialogTitle">房源基础信息</div>' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">房源名称</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fymc">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">管理单位</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="gldw manageUnit">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>楼宇</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -131,15 +133,17 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>房源面积(m²)</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>资产类型</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input fymj">\n' +
+                '      <select class="zclx">\n' +
+                '         <option value="">未出售</option>\n' +
+                '     </select>\n' +
                 '    </div>\n' +
-                '  </div>\n' +
+                '    </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>有证面积(m²)</label>\n' +
+                '    <label class="layui-form-label">有证面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="*为必填项" autocomplete="off" class="layui-input yzmj">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="请输入" autocomplete="off" class="layui-input yzmj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
@@ -160,62 +164,16 @@ layui.use(['table', 'form'], function () {
                 '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zdj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" onkeyup="clearNoNum(this)" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjzj">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">管理单位</label>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>出售状态</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="gldw manageUnit">\n' +
-                '    <option value="">请选择</option>\n' +
+                '      <select class="cszt">\n' +
+                '         <option value="1">未出售</option>\n' +
+                '         <option value="2">已出售未过户</option>\n' +
+                '         <option value="3">已出售已过户</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
-                '  </div>\n' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">房产所有人</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
-                // '   <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">房屋有证面积</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fyzmj">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
-                // '   <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">房屋无证面积</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fwzmj">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
-                // '   <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">土地证号码</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
-                // '   <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">土地所有权人</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
-                // '   <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">土地有证面积</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input tdyzmj">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
-                // '   <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">土地无证面积</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input tdwzmj">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
+                '    </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>出租状态</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -223,16 +181,6 @@ layui.use(['table', 'form'], function () {
                 '         <option value="-1">请选择</option>\n' +
                 '         <option value="1">出租</option>\n' +
                 '         <option value="0">闲置</option>\n' +
-                '     </select>\n' +
-                '    </div>\n' +
-                '    </div>\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>出售状态</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <select class="cszt">\n' +
-                '         <option value="0">未出售</option>\n' +
-                '         <option value="1">已出售已过户</option>\n' +
-                '         <option value="2">已出售未过户</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
                 '    </div>\n' +
@@ -261,120 +209,171 @@ layui.use(['table', 'form'], function () {
                     if ($.trim($(".yqly").val()) == "") {
                         layer.msg("园区不能为空！")
                     } else {
-                        if ($.trim($(".fymj").val()) == "") {
-                            layer.msg("房源面积不能为空！")
+                        if (!areaISOk()) {
+                            layer.msg("有证面积和无证面积相加不能为0！")
                         } else {
-                            if ($.trim($(".fymj").val()) == "") {
-                                layer.msg("房源面积不能为空！")
-                            } else {
-                                if ($(".cszt").val() == "1") {
-                                    if ($(".czzt").val() !== "-1") {
-                                        layer.msg("已出售的房源不能出租")
-                                        $(".czzt").val("-1")
-                                    } else {
-                                        var data = {
-                                            "buildLevel": $.trim($(".lc").val()),
-                                            "buildNo": $.trim($(".lh").val()),
-                                            "buildRoom": $.trim($(".fh").val()),
-                                            "createdBy": user,
-                                            "fkHouseAssetsId": $.trim($(".houseZh").val()),
-                                            "remark": $.trim($(".fj").val()),
-                                            "rentStatus": $.trim($(".cszt").val()),
-                                            "resourceArea": $.trim($(".fymj").val()),
-                                            // "resourceName": $.trim($(".fymc").val()),
-                                            "sellStatus": $.trim($(".cszt").val()),
-                                            "rentStatus": $.trim($(".czzt").val()),
-                                            "originRentCharge": $.trim($(".ylzj").val()),
-                                            "realRentCharge": "",
-                                            "guideRentCharge": $.trim($(".zdj").val()),
-                                            "park": $.trim($(".yqly").val()),
-                                            "fkAgencyId": $.trim($(".gldw.manageUnit").val())
-                                        }
-
-                                        $.ajax({
-                                            url: IPzd + '/hresource',    //请求的url地址
-                                            dataType: "json",   //返回格式为json
-                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                            data: JSON.stringify(data),    //参数值
-                                            type: "POST",   //请求方式
-                                            contentType: "application/json;charset=UTF-8",
-                                            // headers: {"token": sessionStorage.token},
-                                            beforeSend: function () {
-                                                //请求前的处理
-                                            },
-                                            success: function (req) {
-                                                if (req.status == "200") {
-                                                    layer.close(indexDig);
-                                                    layer.msg("添加成功")
-                                                    //执行重载
-                                                    table.reload('tableList');
-                                                } else {
-                                                    layer.msg("添加失败")
-                                                }
-
-                                            },
-                                            complete: function () {
-                                                //请求完成的处理
-                                            },
-                                            error: function () {
-                                                //请求出错处理
-                                            }
-                                        });
+                            /*出售为未出售*/
+                            if ($(".cszt").val() == "1") {
+                                if ($(".czzt").val() == "-1") {
+                                    layer.msg("房源未出售请选择出租状态！")
+                                } else {
+                                    var data = {
+                                        "buildLevel": $.trim($(".lc").val()),
+                                        "buildNo": $.trim($(".lh").val()),
+                                        "buildRoom": $.trim($(".fh").val()),
+                                        "createdBy": user,
+                                        "fkHouseAssetsId": $.trim($(".houseZh").val()),
+                                        "remark": $.trim($(".fj").val()),
+                                        "rentStatus": $.trim($(".cszt").val()),
+                                        "resourceArea": $.trim($(".fymj").val()),
+                                        // "resourceName": $.trim($(".fymc").val()),
+                                        "sellStatus": $.trim($(".cszt").val()),
+                                        "rentStatus": $.trim($(".czzt").val()),
+                                        "originRentCharge": $.trim($(".ylzj").val()),
+                                        "realRentCharge": "",
+                                        "guideRentCharge": $.trim($(".zdj").val()),
+                                        "park": $.trim($(".yqly").val()),
+                                        "fkAgencyId": $.trim($(".gldw.manageUnit").val())
                                     }
 
-                                } else if ($(".cszt").val() == 0) {
-                                    if ($(".czzt").val() == "-1") {
-                                        layer.msg("房源出租状态不能为空")
-                                    } else {
-                                        var data = {
-                                            "buildLevel": $(".lc").val(),
-                                            "buildNo": $(".lh").val(),
-                                            "buildRoom": $(".fh").val(),
-                                            "createdBy": user,
-                                            "fkHouseAssetsId": $(".houseZh").val(),
-                                            "remark": $(".fj").val(),
-                                            "rentStatus": $(".cszt").val(),
-                                            "resourceArea": $(".fymj").val(),
-                                            // "resourceName": $(".fymc").val(),
-                                            "sellStatus": $(".cszt").val(),
-                                            "rentStatus": $(".czzt").val(),
-                                            "originRentCharge": $(".ylzj").val(),
-                                            "realRentCharge": "",
-                                            "guideRentCharge": $(".zdj").val(),
-                                            "park": $(".yqly").val(),
-                                            "fkAgencyId": $(".gldw.manageUnit").val()
-                                        }
-
-                                        $.ajax({
-                                            url: IPzd + '/hresource',    //请求的url地址
-                                            dataType: "json",   //返回格式为json
-                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                            data: JSON.stringify(data),    //参数值
-                                            type: "POST",   //请求方式
-                                            contentType: "application/json;charset=UTF-8",
-                                            // headers: {"token": sessionStorage.token},
-                                            beforeSend: function () {
-                                                //请求前的处理
-                                            },
-                                            success: function (req) {
-                                                if (req.status == "200") {
-                                                    layer.close(indexDig);
-                                                    layer.msg("添加成功")
-                                                    //执行重载
-                                                    table.reload('tableList');
-                                                } else {
-                                                    layer.msg("添加失败")
-                                                }
-
-                                            },
-                                            complete: function () {
-                                                //请求完成的处理
-                                            },
-                                            error: function () {
-                                                //请求出错处理
+                                    $.ajax({
+                                        url: IPzd + '/hresource',    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        data: JSON.stringify(data),    //参数值
+                                        type: "POST",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            if (req.status == "200") {
+                                                layer.close(indexDig);
+                                                layer.msg("添加成功")
+                                                //执行重载
+                                                table.reload('tableList');
+                                            } else {
+                                                layer.msg("添加失败")
                                             }
-                                        });
+
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                }
+                             /*出售为已出售未过户*/
+                            } else if ($(".cszt").val() == 2) {
+                                if ($(".czzt").val() !== "-1") {
+                                    layer.msg("房源已出售不能出租！")
+                                    $(".czzt").val(-1)
+                                } else {
+                                    var data = {
+                                        "buildLevel": $(".lc").val(),
+                                        "buildNo": $(".lh").val(),
+                                        "buildRoom": $(".fh").val(),
+                                        "createdBy": user,
+                                        "fkHouseAssetsId": $(".houseZh").val(),
+                                        "remark": $(".fj").val(),
+                                        "rentStatus": $(".cszt").val(),
+                                        "resourceArea": $(".fymj").val(),
+                                        // "resourceName": $(".fymc").val(),
+                                        "sellStatus": $(".cszt").val(),
+                                        "rentStatus": $(".czzt").val(),
+                                        "originRentCharge": $(".ylzj").val(),
+                                        "realRentCharge": "",
+                                        "guideRentCharge": $(".zdj").val(),
+                                        "park": $(".yqly").val(),
+                                        "fkAgencyId": $(".gldw.manageUnit").val()
                                     }
+
+                                    $.ajax({
+                                        url: IPzd + '/hresource',    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        data: JSON.stringify(data),    //参数值
+                                        type: "POST",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            if (req.status == "200") {
+                                                layer.close(indexDig);
+                                                layer.msg("添加成功")
+                                                //执行重载
+                                                table.reload('tableList');
+                                            } else {
+                                                layer.msg("添加失败")
+                                            }
+
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                }
+                            }else if ($(".cszt").val() == 3) {
+                                if ($(".czzt").val() !== "-1") {
+                                    layer.msg("房源已出售不能出租！")
+                                    $(".czzt").val(-1)
+                                } else {
+                                    var data = {
+                                        "buildLevel": $(".lc").val(),
+                                        "buildNo": $(".lh").val(),
+                                        "buildRoom": $(".fh").val(),
+                                        "createdBy": user,
+                                        "fkHouseAssetsId": $(".houseZh").val(),
+                                        "remark": $(".fj").val(),
+                                        "rentStatus": $(".cszt").val(),
+                                        "resourceArea": $(".fymj").val(),
+                                        // "resourceName": $(".fymc").val(),
+                                        "sellStatus": $(".cszt").val(),
+                                        "rentStatus": $(".czzt").val(),
+                                        "originRentCharge": $(".ylzj").val(),
+                                        "realRentCharge": "",
+                                        "guideRentCharge": $(".zdj").val(),
+                                        "park": $(".yqly").val(),
+                                        "fkAgencyId": $(".gldw.manageUnit").val()
+                                    }
+
+                                    $.ajax({
+                                        url: IPzd + '/hresource',    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        data: JSON.stringify(data),    //参数值
+                                        type: "POST",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            if (req.status == "200") {
+                                                layer.close(indexDig);
+                                                layer.msg("添加成功")
+                                                //执行重载
+                                                table.reload('tableList');
+                                            } else {
+                                                layer.msg("添加失败")
+                                            }
+
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
                                 }
                             }
                         }
@@ -1110,5 +1109,26 @@ function cfsj(obj) {
     console.log(id)
 }
 
+/*判断有证面积和无证面积总和不能为0*/
+function areaISOk() {
+    if ($(".yzmj").val() == "") {
+        var yzArea = 0
+    } else {
+        var yzArea = parseInt($(".yzmj").val())
+    }
 
+    if ($(".wzmj").val() == "") {
+        var wzArea = 0
+    } else {
+        var wzArea = parseInt($(".wzmj").val())
+    }
+
+    var area = yzArea + wzArea
+    var isTrue = true
+    if (area == 0) {
+        isTrue = false
+    }
+
+    return isTrue
+}
 

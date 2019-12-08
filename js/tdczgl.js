@@ -99,12 +99,6 @@ layui.use(['table', 'laydate', 'form'], function () {
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">土地名称</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="title" placeholder="请输入" autocomplete="off" class="layui-input cqmz">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>土地使用权人</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -125,18 +119,21 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">图号</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>管理单位</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="gldw manageUnit">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">地号</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dh">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
+
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">地类</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -207,67 +204,71 @@ layui.use(['table', 'laydate', 'form'], function () {
                     if ($.trim($(".co").val()) == "") {
                         layer.msg("土地权利人不能空！")
                     } else {
-                        if ($.trim($(".yzmj").val()) !== "") {
-                            if ($.trim($(".symj").val()) !== "") {
-                                if (parseInt($(".symj").val()) < (parseInt($(".dzmj").val()) + parseInt($(".ftmj").val()))) {
-                                    layer.msg("独占面积与分摊面积相加不能大于使用权面积！")
-                                } else {
-                                    var data = {
-                                        // "assetsName": $.trim($(".cqmz").val()),
-                                        "assetsLocation": $.trim($(".zl").val()),
-                                        "assetsArea": $.trim($(".symj").val()),
-                                        // "createdBy": user,
-                                        "endTime": sjc($("#date").val() + " 23:59:59"),
-                                        "fkOwnId": $.trim($(".co").val()),
-                                        "landNum": $.trim($(".dh").val()),
-                                        "money": "",
-                                        "picNum": "",
-                                        "remark": $.trim($(".bz").val()),
-                                        "selfArea": $.trim($(".dzmj").val()),
-                                        "shareArea": $.trim($(".ftmj").val()),
-                                        "useType": $.trim($(".tdyt").val()),
-                                        "useRight": $.trim($(".tdsylx").val()),
-                                        "wzArea": $.trim($(".wzmj").val()),
-                                        "yzArea": $.trim($(".yzmj").val()),
-                                        "landNo": $.trim($(".tdzh").val())
+                        if ($(".gldw").val() !== "") {
+                            if ($.trim($(".yzmj").val()) !== "") {
+                                if ($.trim($(".symj").val()) !== "") {
+                                    if (parseInt($(".symj").val()) < (parseInt($(".dzmj").val()) + parseInt($(".ftmj").val()))) {
+                                        layer.msg("独占面积与分摊面积相加不能大于使用权面积！")
+                                    } else {
+                                        var data = {
+                                            "fkAgencyId": $(".gldw").val(),
+                                            "assetsLocation": $.trim($(".zl").val()),
+                                            "assetsArea": $.trim($(".symj").val()),
+                                            // "createdBy": user,
+                                            "endTime": sjc($("#date").val() + " 23:59:59"),
+                                            "fkOwnId": $.trim($(".co").val()),
+                                            "landNum": $.trim($(".dh").val()),
+                                            "money": "",
+                                            "picNum": "",
+                                            "remark": $.trim($(".bz").val()),
+                                            "selfArea": $.trim($(".dzmj").val()),
+                                            "shareArea": $.trim($(".ftmj").val()),
+                                            "useType": $.trim($(".tdyt").val()),
+                                            "useRight": $.trim($(".tdsylx").val()),
+                                            "wzArea": $.trim($(".wzmj").val()),
+                                            "yzArea": $.trim($(".yzmj").val()),
+                                            "landNo": $.trim($(".tdzh").val())
+                                        }
+
+                                        $.ajax({
+                                            url: IPzd + '/assets/land',    //请求的url地址
+                                            dataType: "json",   //返回格式为json
+                                            async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                                            data: JSON.stringify(data),    //参数值
+                                            type: "POST",   //请求方式
+                                            contentType: "application/json;charset=UTF-8",
+                                            // headers: {"token": sessionStorage.token},
+                                            beforeSend: function () {
+                                                //请求前的处理
+                                            },
+                                            success: function (req) {
+                                                if (req.status == "200") {
+                                                    layer.close(indexDig);
+                                                    layer.msg("添加成功")
+                                                    //执行重载
+                                                    table.reload('tableList');
+                                                } else {
+                                                    layer.msg(req.msg)
+                                                }
+
+                                            },
+                                            complete: function () {
+                                                //请求完成的处理
+                                            },
+                                            error: function () {
+                                                //请求出错处理
+                                            }
+                                        });
                                     }
 
-                                    $.ajax({
-                                        url: IPzd + '/assets/land',    //请求的url地址
-                                        dataType: "json",   //返回格式为json
-                                        async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-                                        data: JSON.stringify(data),    //参数值
-                                        type: "POST",   //请求方式
-                                        contentType: "application/json;charset=UTF-8",
-                                        // headers: {"token": sessionStorage.token},
-                                        beforeSend: function () {
-                                            //请求前的处理
-                                        },
-                                        success: function (req) {
-                                            if (req.status == "200") {
-                                                layer.close(indexDig);
-                                                layer.msg("添加成功")
-                                                //执行重载
-                                                table.reload('tableList');
-                                            } else {
-                                                layer.msg(req.msg)
-                                            }
-
-                                        },
-                                        complete: function () {
-                                            //请求完成的处理
-                                        },
-                                        error: function () {
-                                            //请求出错处理
-                                        }
-                                    });
+                                } else {
+                                    layer.msg("请填写正确的使用权面积！")
                                 }
-
                             } else {
-                                layer.msg("请填写正确的使用权面积！")
+                                layer.msg("有证面积不能为空！")
                             }
                         } else {
-                            layer.msg("有证面积不能为空！")
+                            layer.msg("管理单位不能为空！")
                         }
                     }
                 } else {
@@ -286,6 +287,7 @@ layui.use(['table', 'laydate', 'form'], function () {
         getcqdw()
         gettdsylx()
         gettdyt()
+        getgldw()
         form.render('select')
     })
 
@@ -306,26 +308,47 @@ layui.use(['table', 'laydate', 'form'], function () {
             if (!reg.test($("#uploadFile").val())) {//校验不通过
                 layer.msg("请选择excel格式的文件!")
             } else {
-                // $.ajax({
-                //     url: IPzd + "/io/houseresource",
-                //     type: 'POST',
-                //     async: false,
-                //     data: formData,
-                //     // 告诉jQuery不要去处理发送的数据
-                //     processData: false,
-                //     // 告诉jQuery不要去设置Content-Type请求头
-                //     contentType: false,
-                //     beforeSend: function () {
-                //         layer.msg("正在导入！")
-                //     },
-                //     success: function (responseStr) {
-                //         var file = $("#uploadFile");
-                //         $(file).val('');
-                //         table.reload('tableList');
-                //         layer.msg("导入成功！")
-                //     }
-                // });
-                layer.msg("接口未对接")
+                $.ajax({
+                    url: IPzd + "/io/land/in",
+                    type: 'POST',
+                    async: false,
+                    data: formData,
+                    // 告诉jQuery不要去处理发送的数据
+                    processData: false,
+                    // 告诉jQuery不要去设置Content-Type请求头
+                    contentType: false,
+                    beforeSend: function () {
+                        layer.msg("正在导入！")
+                    },
+                    success: function (responseStr) {
+                        if (responseStr.status == 200) {
+                            var sbts = ''
+                            if (responseStr.data.errorRows !== null) {
+                                $(responseStr.data.errorRows).each(function (i, o) {
+                                    sbts = sbts + '<div style="margin: 5px 0;color: red">' + o + '条</div>'
+                                })
+                            }
+
+                            var html = '<div style="margin: 5px 0">总共导入' + responseStr.data.totalRow + '条</div><div style="margin: 5px 0">成功导入' + responseStr.data.successRow + '条</div><div style="margin: 5px 0">导入失败' + responseStr.data.errorRow + '条</div><div style="margin: 5px 0">导入失败数据</div><div class="sbtotal">' + sbts + '</div>'
+                            layer.open({
+                                type: 1
+                                , offset: "auto"
+                                , content: '<div style="padding: 20px 100px;">' + html + '</div>'
+                                , btn: '确定'
+                                , btnAlign: 'c' //按钮居中
+                                , shade: 0 //不显示遮罩
+                                , yes: function () {
+                                    var file = $("#uploadFile");
+                                    $(file).val('');
+                                    table.reload('tableList');
+                                    layer.closeAll();
+                                }
+                            });
+                        } else {
+                            layer.msg("导入失败！")
+                        }
+                    }
+                });
             }
         }
     })
@@ -407,12 +430,14 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zl">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
-                    // '  <div class="dialogDiv">\n' +
-                    // '    <label class="layui-form-label">图号</label>\n' +
-                    // '    <div class="layui-input-block">\n' +
-                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input th">\n' +
-                    // '    </div>\n' +
-                    // '  </div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>管理单位</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="gldw manageUnit">\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '     </select>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地号</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -488,20 +513,22 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getcqdw()
                     gettdsylx()
                     gettdyt()
-                    $(".cqmz").val(obj.data.assetsName),
-                        $(".zl").val(obj.data.assetsLocation),
-                        $(".symj").val(obj.data.assetsArea),
-                        $("#date").val(obj.data.endTime),
-                        $(".co").val(obj.data.fkOwnId),
-                        $(".dh").val(obj.data.landNum),
-                        $(".bz").val(obj.data.remark),
-                        $(".dzmj").val(obj.data.selfArea),
-                        $(".ftmj").val(obj.data.shareArea),
-                        $(".tdyt").val(obj.data.useTypeCode),
-                        $(".tdsylx").val(obj.data.useRightCode)
+                    getgldw()
+                    $(".cqmz").val(obj.data.assetsName)
+                    $(".zl").val(obj.data.assetsLocation)
+                    $(".symj").val(obj.data.assetsArea)
+                    $("#date").val(obj.data.endTime)
+                    $(".co").val(obj.data.fkOwnId)
+                    $(".dh").val(obj.data.landNum)
+                    $(".bz").val(obj.data.remark)
+                    $(".dzmj").val(obj.data.selfArea)
+                    $(".ftmj").val(obj.data.shareArea)
+                    $(".tdyt").val(obj.data.useTypeCode)
+                    $(".tdsylx").val(obj.data.useRightCode)
                     $(".tdzh").val(obj.data.landNo)
                     $(".yzmj").val(obj.data.yzArea)
                     $(".wzmj").val(obj.data.wzArea)
+                    $(".gldw").val(obj.data.fkAgencyId)
                     laydate.render({
                         elem: '#date',
                         value: obj.data.endTime,
@@ -513,72 +540,76 @@ layui.use(['table', 'laydate', 'form'], function () {
                         if ($.trim($(".co").val()) == "") {
                             layer.msg("土地权利人不能空！")
                         } else {
-                            if ($.trim($(".yzmj").val()) !== "") {
-                                if ($.trim($(".symj").val()) !== "") {
-                                    if (parseInt($(".symj").val()) < (parseInt($(".dzmj").val()) + parseInt($(".ftmj").val()))) {
-                                        layer.msg("独占面积与分摊面积相加不能大于使用权面积！")
-                                    } else {
-                                        var data = {
-                                            "id": obj.data.id,
-                                            // "assetsName": $.trim($(".cqmz").val()),
-                                            "assetsLocation": $.trim($(".zl").val()),
-                                            "assetsArea": $.trim($(".symj").val()),
-                                            // "createdBy": user,
-                                            "endTime": sjc($("#date").val() + " 23:59:59"),
-                                            "fkOwnId": $.trim($(".co").val()),
-                                            "landNum": $.trim($(".dh").val()),
-                                            "money": "",
-                                            "picNum": "",
-                                            "remark": $.trim($(".bz").val()),
-                                            "selfArea": $.trim($(".dzmj").val()),
-                                            "shareArea": $.trim($(".ftmj").val()),
-                                            "useType": $.trim($(".tdyt").val()),
-                                            "useRight": $.trim($(".tdsylx").val()),
-                                            "wzArea": $.trim($(".wzmj").val()),
-                                            "yzArea": $.trim($(".yzmj").val()),
-                                            "landNo": $.trim($(".tdzh").val())
-                                        }
-                                        $.ajax({
-                                            url: IPzd + '/assets/land',    //请求的url地址
-                                            dataType: "json",   //返回格式为json
-                                            async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-                                            data: JSON.stringify(data),    //参数值
-                                            type: "PUT",   //请求方式
-                                            contentType: "application/json;charset=UTF-8",
-                                            // headers: {"token": sessionStorage.token},
-                                            beforeSend: function () {
-                                                //请求前的处理
-                                            },
-                                            success: function (req) {
-                                                if (req.status == "200") {
-                                                    layer.close(indexDig);
-                                                    layer.msg("修改成功")
-                                                    var demoReload = $('#demoReload');
-                                                    //执行重载
-                                                    table.reload('tableList', {
-                                                        page: {
-                                                            curr: 1 //重新从第 1 页开始
-                                                        }
-                                                    });
-                                                } else {
-                                                    layer.msg(req.msg)
-                                                }
-
-                                            },
-                                            complete: function () {
-                                                //请求完成的处理
-                                            },
-                                            error: function () {
-                                                //请求出错处理
+                            if ($(".gldw").val() !== "") {
+                                if ($.trim($(".yzmj").val()) !== "") {
+                                    if ($.trim($(".symj").val()) !== "") {
+                                        if (parseInt($(".symj").val()) < (parseInt($(".dzmj").val()) + parseInt($(".ftmj").val()))) {
+                                            layer.msg("独占面积与分摊面积相加不能大于使用权面积！")
+                                        } else {
+                                            var data = {
+                                                "id": obj.data.id,
+                                                "fkAgencyId": $(".gldw").val(),
+                                                "assetsLocation": $.trim($(".zl").val()),
+                                                "assetsArea": $.trim($(".symj").val()),
+                                                // "createdBy": user,
+                                                "endTime": sjc($("#date").val() + " 23:59:59"),
+                                                "fkOwnId": $.trim($(".co").val()),
+                                                "landNum": $.trim($(".dh").val()),
+                                                "money": "",
+                                                "picNum": "",
+                                                "remark": $.trim($(".bz").val()),
+                                                "selfArea": $.trim($(".dzmj").val()),
+                                                "shareArea": $.trim($(".ftmj").val()),
+                                                "useType": $.trim($(".tdyt").val()),
+                                                "useRight": $.trim($(".tdsylx").val()),
+                                                "wzArea": $.trim($(".wzmj").val()),
+                                                "yzArea": $.trim($(".yzmj").val()),
+                                                "landNo": $.trim($(".tdzh").val())
                                             }
-                                        });
-                                    }
+                                            $.ajax({
+                                                url: IPzd + '/assets/land',    //请求的url地址
+                                                dataType: "json",   //返回格式为json
+                                                async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                data: JSON.stringify(data),    //参数值
+                                                type: "PUT",   //请求方式
+                                                contentType: "application/json;charset=UTF-8",
+                                                // headers: {"token": sessionStorage.token},
+                                                beforeSend: function () {
+                                                    //请求前的处理
+                                                },
+                                                success: function (req) {
+                                                    if (req.status == "200") {
+                                                        layer.close(indexDig);
+                                                        layer.msg("修改成功")
+                                                        var demoReload = $('#demoReload');
+                                                        //执行重载
+                                                        table.reload('tableList', {
+                                                            page: {
+                                                                curr: 1 //重新从第 1 页开始
+                                                            }
+                                                        });
+                                                    } else {
+                                                        layer.msg(req.msg)
+                                                    }
 
+                                                },
+                                                complete: function () {
+                                                    //请求完成的处理
+                                                },
+                                                error: function () {
+                                                    //请求出错处理
+                                                }
+                                            });
+                                        }
+
+                                    } else {
+                                        layer.msg("请填写正确的使用权面积！")
+                                    }
                                 } else {
-                                    layer.msg("请填写正确的使用权面积！")
+                                    layer.msg("有证面积不能为空！")
                                 }
                             } else {
-                                layer.msg("有证面积不能为空！")
+                                layer.msg("管理单位不能为空！")
                             }
                         }
                     } else {
@@ -599,12 +630,6 @@ layui.use(['table', 'laydate', 'form'], function () {
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
-                    // '  <div class="dialogDiv">\n' +
-                    // '    <label class="layui-form-label">土地名称</label>\n' +
-                    // '    <div class="layui-input-block">\n' +
-                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input cqmz" readonly>\n' +
-                    // '    </div>\n' +
-                    // '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">土地使用权人</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -621,6 +646,14 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    <label class="layui-form-label">座落</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input zl" readonly>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '<div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>管理单位</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <select class="gldw manageUnit" disabled>\n' +
+                    '    <option value="">请选择</option>\n' +
+                    '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     // '  <div class="dialogDiv">\n' +
@@ -704,6 +737,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getcqdw()
                     gettdsylx()
                     gettdyt()
+                    getgldw()
                     $(".cqmz").val(obj.data.assetsName)
                     $(".symj").val(obj.data.assetsArea)
                     $(".tdyt").val(obj.data.useTypeCode)
@@ -720,6 +754,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".yzmj").val(obj.data.yzArea)
                     $(".wzmj").val(obj.data.wzArea)
                     $(".tdzh").val(obj.data.landNo)
+                    $(".gldw").val(obj.data.fkAgencyId)
                 }
             }
             layerLookOpen(openMes);
