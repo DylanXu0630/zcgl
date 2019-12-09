@@ -11,8 +11,12 @@ layui.use(['table', 'form'], function () {
     table.render({
         elem: '#tableList'
         , id: 'idTest'
-        , url: IPzd + '/dic/house/name/all?asc=1' //数据接口
+        , url: IPzd + '/dic/resource/type/all' //数据接口
         , method: "POST"
+        , where: {//这里传参  向后台
+            "asc": 1,
+            "aid": aid
+        }
         , contentType: "application/json"
         , parseData: function (res) { //res 即为原始返回的数据
             return {
@@ -36,7 +40,7 @@ layui.use(['table', 'form'], function () {
         if (layEvent === 'del') {
             layer.confirm('确定删除？', function (index) {
                 $.ajax({
-                    url: IPzd + '/dic/house/name/' + obj.data.id,    //请求的url地址
+                    url: IPzd + '/dic/resource/type/' + obj.data.id,    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "DELETE",   //请求方式
@@ -104,7 +108,7 @@ layui.use(['table', 'form'], function () {
                     }
                     if ($(".name").val().length > 0) {
                         $.ajax({
-                            url: IPzd + '/dic/house/name',    //请求的url地址
+                            url: IPzd + '/dic/resource/type',    //请求的url地址
                             dataType: "json",   //返回格式为json
                             async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                             data: JSON.stringify(data),    //参数值
@@ -189,7 +193,7 @@ layui.use(['table', 'form'], function () {
                 }
                 if ($(".name").val().length > 0) {
                     $.ajax({
-                        url: IPzd + '/dic/house/name',    //请求的url地址
+                        url: IPzd + '/dic/resource/type',    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         data: JSON.stringify(data),    //参数值
