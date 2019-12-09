@@ -450,7 +450,7 @@ layui.use(['table', 'form'], function () {
                 layer.msg("请选择excel格式的文件!")
             } else {
                 $.ajax({
-                    url: IPzd + "/io/houseresource",
+                    url: IPzd + "/io/resource/in",
                     type: 'POST',
                     async: false,
                     data: formData,
@@ -462,10 +462,34 @@ layui.use(['table', 'form'], function () {
                         layer.msg("正在导入！")
                     },
                     success: function (responseStr) {
-                        var file = $("#uploadFile");
-                        $(file).val('');
-                        table.reload('tableList');
-                        layer.msg("导入成功！")
+                        if (responseStr.status == 200) {
+                            var sbts = ''
+                            if (responseStr.data.errorRows !== null) {
+                                $(responseStr.data.errorRows).each(function (i, o) {
+                                    sbts = sbts + '<div style="margin: 5px 0;color: red">' + o + '条</div>'
+                                })
+                            }else {
+                                sbts = sbts + '<div style="margin: 5px 0;color: red">无</div>'
+                            }
+
+                            var html = '<div style="margin: 5px 0">总共导入' + responseStr.data.totalRow + '条</div><div style="margin: 5px 0">成功导入' + responseStr.data.successRow + '条</div><div style="margin: 5px 0">导入失败' + responseStr.data.errorRow + '条</div><div style="margin: 5px 0">导入失败数据：</div><div class="sbtotal">' + sbts + '</div>'
+                            layer.open({
+                                type: 1
+                                , offset: "auto"
+                                , content: '<div style="padding: 20px 100px;">' + html + '</div>'
+                                , btn: '确定'
+                                , btnAlign: 'c' //按钮居中
+                                , shade: 0 //不显示遮罩
+                                , yes: function () {
+                                    var file = $("#uploadFile");
+                                    $(file).val('');
+                                    table.reload('tableList');
+                                    layer.closeAll();
+                                }
+                            });
+                        } else {
+                            layer.msg("导入失败！")
+                        }
                     }
                 });
             }
