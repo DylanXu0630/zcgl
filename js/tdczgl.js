@@ -328,7 +328,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                 $(responseStr.data.errorRows).each(function (i, o) {
                                     sbts = sbts + '<div style="margin: 5px 0;color: red">' + o + '条</div>'
                                 })
-                            }else {
+                            } else {
                                 sbts = sbts + '<div style="margin: 5px 0;color: red">无</div>'
                             }
 
@@ -765,7 +765,14 @@ layui.use(['table', 'laydate', 'form'], function () {
     });
 })
 
-
+$(function () {
+    var button = JSON.parse(localStorage.buttonqx)
+    $(button).each(function (i, o) {
+        if (o.name == "添加") {
+            $(".add").css("display", "initial")
+        }
+    })
+})
 
 
 

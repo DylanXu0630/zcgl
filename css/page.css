@@ -145,6 +145,7 @@ fieldset {
 
 .layui-fluid.tjsx {
     margin-top: 20px;
+    position: relative;
 }
 
 .layui-fluid {
@@ -189,14 +190,61 @@ fieldset {
 .layui-form-label {
     max-height: 20px;
 }
-.addDig .layui-input-block{
+
+.addDig .layui-input-block {
     margin-left: 150px;
 }
-.addDig .layui-unselect.layui-form-select{
+
+.addDig .layui-unselect.layui-form-select {
     width: 88%;
 }
 
-.addDig .layui-unselect.layui-form-select .layui-input.layui-unselect{
+.addDig .layui-unselect.layui-form-select .layui-input.layui-unselect {
     width: 100%;
 }
-  
+
+.add {
+    /*display: none;*/
+}
+
+.ssyx {
+    display: none;
+    max-height: 190px;
+    position: absolute;
+    top: 40px;
+    left: 18px;
+    width: 93%;
+    background-color: white;
+    border: 1px solid #b8b8b8;
+    z-index: 10;
+    overflow-y: auto;
+}
+
+.sslb {
+    color: #000;
+    font: 14px arial;
+    line-height: 22px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.sslb:hover {
+    font-weight: bold;
+}
+
+/*滚动条样式*/
+.ssyx::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 2px; /*高宽分别对应横竖滚动条的尺寸*/
+}
+
+.ssyx::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgb(2, 208, 188);
+}
+
+.ssyx::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}

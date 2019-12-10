@@ -61,10 +61,14 @@ $(function () {
         success: function (req) {
             // 用户昵称
             if (req.status == 200) {
-                if (req.data==null){
+                if (req.data == null) {
+                    if (localStorage.user_name !== "admin") {
+                        alert("请先绑定机构")
+                        window.location.href = "login.html"
+                    }
                     localStorage.setItem("aId", "")
-                }else {
-                    localStorage.setItem("aId", req.data)
+                } else {
+                    localStorage.setItem("aId", req.data.agencyId)
                 }
 
 
@@ -114,10 +118,10 @@ $(function () {
                             if (erjiT.children.length != 0) {
                                 var erji = $('<dd data-name="grid"><a href="javascript:;">' + erjiT.name + '<span class="layui-nav-more"></span></a><dl class="layui-nav-child sanji' + erjiT.id + '"></dl></dd>').appendTo(".erji" + erjiT.pid)
                                 erjiT.children.forEach(sanjiT => {
-                                    var sanji = $('<dd class="three_child"><a href="javascript:;" class="menu" url="' + sanjiT.url + '">' + sanjiT.name + '</a></dd>').appendTo('.sanji' + sanjiT.pid)
+                                    var sanji = $('<dd class="three_child"><a href="javascript:;" class="menu" url="' + sanjiT.url + '" id="' + sanjiT.id + '">' + sanjiT.name + '</a></dd>').appendTo('.sanji' + sanjiT.pid)
                                 });
                             } else {
-                                var erji = $('<dd><a href="javascript:;" class="menu" url="' + erjiT.url + '">' + erjiT.name + '</a></dd>').appendTo(".erji" + erjiT.pid)
+                                var erji = $('<dd><a href="javascript:;" class="menu" url="' + erjiT.url + '" id="' + erjiT.id + '">' + erjiT.name + '</a></dd>').appendTo(".erji" + erjiT.pid)
                             }
                         });
                     }
@@ -134,9 +138,10 @@ $(function () {
 
     $(".menu").on("click", function () {
         var xml = this
+        var id = $(this).attr("id")
         // 根据用户ID得到菜单权限
         $.ajax({
-            url: './json/buttonqx.json',    //请求的url地址
+            url: IPdz + '/permission/button/' + id,    //请求的url地址
             dataType: "json",   //返回格式为json
             async: false,//请求是否异步，默认为异步，这也是ajax重要特性
             type: "GET",   //请求方式
@@ -147,7 +152,7 @@ $(function () {
             },
             success: function (req) {
                 // 处理权限数据
-                localStorage.setItem("buttonqx", req.data);
+                localStorage.setItem("buttonqx", JSON.stringify(req.data));
             },
             complete: function () {
                 //请求完成的处理

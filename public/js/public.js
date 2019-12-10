@@ -5,7 +5,7 @@ var login = "http://192.168.44.78:18001/auth"
 // var IPdz = "http://61.160.81.178:21003/uum"
 // var IPzd = "http://61.160.81.178:21002/estate"
 
-var IPdz = "http://192.168.10.56:18000/uum"
+var IPdz = "http://172.1.1.151:18000/uum"
 var IPzd = "http://172.1.1.151:14000/estate"
 // var IPdz = "http://192.168.10.56:18000/uum"
 // var IPzd = "http://192.168.10.56:14000/estate"
@@ -817,4 +817,49 @@ function checkMouth(mon, num) {
     } else {
         return false
     }
+}
+
+function landSelect(obj) {
+    var landNo = obj.value
+
+    $.ajax({
+        url: IPzd + '/search/land?landNo=' + landNo,    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+            $(".landNo").children().remove()
+        },
+        success: function (req) {
+
+            if (req.status == 200) {
+                $(".ssyx").css("display","block")
+                if (req.data.length!==0){
+                    $(req.data).each(function (i, o) {
+                        var div = $("<div class='sslb'>" + o.name + "</div>").appendTo(".landNo")
+                    })
+                } else{
+
+                }
+
+                $("body").on("click",".sslb",function () {
+                    var no = $(this).text()
+                    $(this).parent().parent().find(".s-dh").val(no)
+                })
+                $("body").on("click",function () {
+                    var no = $(this).text()
+                    $(".landNo").css("display","none")
+                })
+            }
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
 }
