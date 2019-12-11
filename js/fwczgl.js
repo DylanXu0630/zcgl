@@ -125,7 +125,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                             var sbts = ''
                             if (responseStr.data.errorRows !== null) {
                                 $(responseStr.data.errorRows).each(function (i, o) {
-                                    sbts = sbts + '<div style="margin: 5px 0;color: red">' + o + '条</div>'
+                                    sbts = sbts + '<div style="margin: 5px 0;color: red">房产证号：' + o + '</div>'
                                 })
                             } else {
                                 sbts = sbts + '<div style="margin: 5px 0;color: red">无</div>'
