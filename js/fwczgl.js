@@ -40,7 +40,7 @@ layui.use(['table', 'laydate', 'form'], function () {
             , {field: 'houseName', title: '产权名称', width: 160}
             , {field: 'owner', title: '房屋所有权人', width: 260}
             // , {field: 'houseShare', title: '共有情况', width: 160}
-            , {field: 'landNum', title: '地号', width: 160}
+            , {field: 'landNo', title: '土地证号', width: 160}
 
             , {field: 'location', title: '座落', width: 200}
             , {field: 'houseNature', title: '房屋性质', width: 160}
@@ -127,7 +127,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                 $(responseStr.data.errorRows).each(function (i, o) {
                                     sbts = sbts + '<div style="margin: 5px 0;color: red">' + o + '条</div>'
                                 })
-                            }else {
+                            } else {
                                 sbts = sbts + '<div style="margin: 5px 0;color: red">无</div>'
                             }
 
@@ -230,11 +230,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '    </div>\n' +
                     '  </div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"><span class="inputBtx">*</span>地号</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="fkLandAssetsId">\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="*号为必填项" tid="" autocomplete="off" onkeyup="fwlandSelect(this)" class="layui-input fkLandAssetsId">\n' +
+                    '      <div class="ssyx landNo"></div>' +
+                    // '      <select class="fkLandAssetsId">\n' +
+                    // '    <option value="">请选择</option>\n' +
+                    // '     </select>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
 
@@ -349,7 +351,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".fcxz.hourseType").val(obj.data.houseNatureId)
                     $(".fwgyqk.shareType").val(obj.data.houseShareId)
                     $(".fwghyt.housePlanUse").val(obj.data.houseUsageId)
-                    $(".fkLandAssetsId").val(obj.data.landAssetsId)
+                    $(".fkLandAssetsId").val(obj.data.landNo)
+                    $(".fkLandAssetsId").attr("tid",obj.data.landAssetsId)
                     $(".co.fkOwnId").val(obj.data.fkOwnerId)
                     $(".houseId").val(obj.data.houseId)
                     $(".houseNum").val(obj.data.houseNum)
@@ -374,7 +377,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                             if ($.trim($(".yzmj").val()) !== "") {
                                 if ($.trim($(".houseId").val()) !== "") {
                                     if ($.trim($(".co.fkOwnId").val()) !== "") {
-                                        if ($.trim($(".fkLandAssetsId").val()) !== "") {
+                                        if ($(".fkLandAssetsId").attr("tid") !== "") {
                                             if ($.trim($(".buildArea").val()) !== "") {
                                                 if (parseInt($(".buildArea").val()) < parseInt($(".realArea").val())) {
                                                     layer.msg("建筑面积应大于套内面积")
@@ -388,7 +391,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                                         "fkHouseNature": $.trim($(".fcxz.hourseType").val()),
                                                         "fkHouseShareId": $.trim($(".fwgyqk.shareType").val()),
                                                         "fkHouseUsage": $.trim($(".fwghyt.housePlanUse").val()),
-                                                        "fkLandAssetsId": $.trim($(".fkLandAssetsId").val()),
+                                                        "fkLandAssetsId": $(".fkLandAssetsId").attr("tid"),
                                                         "fkOwnId": $.trim($(".co.fkOwnId").val()),
                                                         "houseId": $.trim($(".houseId").val()),
                                                         "otherArea": $.trim($(".otherArea").val()),
@@ -439,7 +442,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                                 layer.msg("建筑面积不能为空！")
                                             }
                                         } else {
-                                            layer.msg("地号不能为空！")
+                                            layer.msg("土地证号不能为空！")
                                         }
                                     } else {
                                         layer.msg("房屋所有权人不能为空！")
@@ -602,7 +605,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     // '    </div>\n' +
                     // '  </div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">地号</label>\n' +
+                    '    <label class="layui-form-label">土地证号</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input landNum" readonly>\n' +
                     '    </div>\n' +
@@ -652,7 +655,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".remark").val(obj.data.remark)
                     $(".totalLevel").val(obj.data.totalLevel)
                     $("#date").val(obj.data.registerTime)
-                    $(".landNum").val(obj.data.landNum)
+                    $(".landNum").val(obj.data.landNo)
                     $(".landUseYear").val(obj.data.landUseYear)
                     $(".location").val(obj.data.location)
                     $(".yzmj").val(obj.data.yzArea)
@@ -709,11 +712,13 @@ layui.use(['table', 'laydate', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>地号</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>土地证号</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="fkLandAssetsId">\n' +
-                '    <option value="">请选择</option>\n' +
-                '     </select>\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*号为必填项" tid="" autocomplete="off" onkeyup="fwlandSelect(this)" class="layui-input fkLandAssetsId">\n' +
+                '      <div class="ssyx landNo"></div>' +
+                // '      <select class="fkLandAssetsId">\n' +
+                // '    <option value="">请选择</option>\n' +
+                // '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
 
@@ -814,7 +819,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                         if ($.trim($(".yzmj").val()) !== "") {
                             if ($.trim($(".houseId").val()) !== "") {
                                 if ($.trim($(".co.fkOwnId").val()) !== "") {
-                                    if ($.trim($(".fkLandAssetsId").val()) !== "") {
+                                    if ($(".fkLandAssetsId").attr("tid") !== "") {
                                         if ($.trim($(".buildArea").val()) !== "") {
                                             if (parseInt($(".buildArea").val()) < parseInt($(".realArea").val())) {
                                                 layer.msg("建筑面积应大于套内面积")
@@ -827,7 +832,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                                     "fkHouseNature": $.trim($(".fcxz.hourseType").val()),
                                                     "fkHouseShareId": $.trim($(".fwgyqk.shareType").val()),
                                                     "fkHouseUsage": $.trim($(".fwghyt.housePlanUse").val()),
-                                                    "fkLandAssetsId": $.trim($(".fkLandAssetsId").val()),
+                                                    "fkLandAssetsId": $(".fkLandAssetsId").attr("tid"),
                                                     "fkOwnId": $.trim($(".co.fkOwnId").val()),
                                                     "houseId": $.trim($(".houseId").val()),
                                                     "otherArea": $.trim($(".otherArea").val()),
@@ -878,7 +883,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                                             layer.msg("建筑面积不能为空！")
                                         }
                                     } else {
-                                        layer.msg("地号不能为空！")
+                                        layer.msg("土地证号不能为空！")
                                     }
                                 } else {
                                     layer.msg("房屋所有权人不能为空！")
@@ -919,5 +924,58 @@ layui.use(['table', 'laydate', 'form'], function () {
 
     })
 })
+
+function fwlandSelect(obj) {
+    var landNo = obj.value
+
+    $.ajax({
+        url: IPzd + '/search/land?landNo=' + landNo,    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+            $(".landNo").children().remove()
+            $(".fkLandAssetsId").attr("tid", "")
+            $(".landNo").css("left", "2px")
+            $(".landNo").css("width", "86%")
+        },
+        success: function (req) {
+
+            if (req.status == 200) {
+                $(".ssyx").css("display", "block")
+                if (req.data.length !== 0) {
+                    $(req.data).each(function (i, o) {
+                        var div = $("<div class='sslb' tid='" + o.id + "'>" + o.name + "</div>").appendTo(".landNo")
+                    })
+                } else {
+                    var div = $("<div class='sslb' tid=''>没有此土地证</div>").appendTo(".landNo")
+                }
+
+                $("body").on("click", ".sslb", function () {
+                    var no = $(this).text()
+                    var tid = $(this).attr("tid")
+                    $(this).parent().parent().find(".fkLandAssetsId").val(no)
+                    $(this).parent().parent().find(".fkLandAssetsId").attr("tid", tid)
+                })
+                $("body").on("click", function () {
+                    var no = $(this).text()
+                    $(".landNo").css("display", "none")
+                })
+            } else {
+                $(".ssyx").css("display", "block")
+                var div = $("<div class='sslb' tid=''>没有此土地证</div>").appendTo(".landNo")
+            }
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
 
 
