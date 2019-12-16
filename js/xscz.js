@@ -204,18 +204,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
-                '    </div>\n' +
-                '  </div>\n' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label">指导价</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input guidePrice">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>合同开始日期</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '       <input type="text" name="date" id="date" placeholder="请选择时间" autocomplete="off" class="layui-input httime">\n' +
@@ -234,6 +222,15 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>是否有优惠</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="isHaveDiscount">\n' +
+                '        <option value="2">无</option>\n' +
+                '        <option value="1">有</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>是否续租</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <select class="rentType">\n' +
@@ -243,6 +240,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
+                '<div>' +
+                '</div>' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -254,97 +253,125 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '</div>' +
                 '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
                 '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>实际租金</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj">\n' +
+                '<div id="addsjjDiv">' +
+                '</div>' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 '</form></div>' +
                 '</div>' +
                 '</div>',
             add: function () {
                 var fyArr = []
+                var zjArr = []
+                $(".sjj").each(function (n, m) {
+                    zjArr.push($(m).val())
+                })
                 $(".houseResource").each(function (i, o) {
                     if ($(o).val() !== "") {
-                        fyArr.push($(o).val())
+                        var obj = {
+                            "fkHouseResourceId": $(o).val(),
+                            "realMoney": zjArr[i]
+                        }
+                        fyArr.push(obj)
                     }
                 })
-                if (fyArr.length !== 0) {
-                    if ($.trim($(".yf").val()) !== "") {
-                        if ($.trim($(".bzj").val()) !== "") {
-                            if ($.trim($("#date").val()) !== "") {
-                                if ($.trim($(".zsMouth").val()) !== "") {
-                                    if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
-                                        if ($.trim($(".zsMouth").val()) !== "") {
-                                            if ($(".htType").val() !== "") {
-                                                if (isCffy(fyArr)) {
-                                                    var data = {
-                                                        "createdBy": user,
-                                                        // "dealName": $.trim($(".dealName").val()),
-                                                        "rentMonth": $.trim($(".zsMouth").val()),
-                                                        "fkHouseResourceId": fyArr,
-                                                        "fkRenterId": $.trim($(".yf").val()),
-                                                        "startTime": sjc($("#date").val() + " 00:00:00"),
-                                                        "payType": $.trim($(".zjzfType").val()),
-                                                        "deposit": $.trim($(".bzj").val()),
-                                                        "freeRentMonth": $.trim($(".mzMouth").val()),
-                                                        "dealType": $.trim($(".htType").val()),
-                                                        "isNewRent": $.trim($(".rentType").val())
+                if ($(".houseResource").length !== $(".sjj").length) {
+                    layer.msg("房源和实际价格对应！")
+                } else {
+                    if (fyArr.length !== 0) {
+                        if ($.trim($(".yf").val()) !== "") {
+                            if ($.trim($(".bzj").val()) !== "") {
+                                if ($.trim($("#date").val()) !== "") {
+                                    if ($.trim($(".zsMouth").val()) !== "") {
+                                        if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
+                                            if ($.trim($(".zsMouth").val()) !== "") {
+                                                if ($(".htType").val() !== "") {
+                                                    if (isCffy(fyArr)) {
+                                                        var data = {
+                                                            "createdBy": user,
+                                                            // "dealName": $.trim($(".dealName").val()),
+                                                            "rentMonth": $.trim($(".zsMouth").val()),
+                                                            "dealAndHouses": fyArr,
+                                                            "fkRenterId": $.trim($(".yf").val()),
+                                                            "startTime": sjc($("#date").val() + " 00:00:00"),
+                                                            "payType": $.trim($(".zjzfType").val()),
+                                                            "deposit": $.trim($(".bzj").val()),
+                                                            "freeRentMonth": $.trim($(".mzMouth").val()),
+                                                            "dealType": $.trim($(".htType").val()),
+                                                            "isNewRent": $.trim($(".rentType").val()),
+                                                            "isHaveDiscount": $(".isHaveDiscount").val()
+                                                        }
+
+                                                        $.ajax({
+                                                            url: IPzd + '/deal',    //请求的url地址
+                                                            dataType: "json",   //返回格式为json
+                                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                            data: JSON.stringify(data),    //参数值
+                                                            type: "POST",   //请求方式
+                                                            contentType: "application/json;charset=UTF-8",
+                                                            // headers: {"token": sessionStorage.token},
+                                                            beforeSend: function () {
+                                                                //请求前的处理
+                                                            },
+                                                            success: function (req) {
+                                                                if (req.status == "200") {
+                                                                    layer.close(indexDig);
+                                                                    layer.msg("添加成功")
+                                                                    //执行重载
+                                                                    table.reload('tableList');
+                                                                } else {
+                                                                    layer.msg(req.msg)
+                                                                }
+                                                            },
+                                                            complete: function () {
+                                                                //请求完成的处理
+                                                            },
+                                                            error: function () {
+                                                                //请求出错处理
+                                                            }
+                                                        });
+                                                    } else {
+                                                        layer.msg("房源不能选择相同的！")
                                                     }
 
-                                                    $.ajax({
-                                                        url: IPzd + '/deal',    //请求的url地址
-                                                        dataType: "json",   //返回格式为json
-                                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                        data: JSON.stringify(data),    //参数值
-                                                        type: "POST",   //请求方式
-                                                        contentType: "application/json;charset=UTF-8",
-                                                        // headers: {"token": sessionStorage.token},
-                                                        beforeSend: function () {
-                                                            //请求前的处理
-                                                        },
-                                                        success: function (req) {
-                                                            if (req.status == "200") {
-                                                                layer.close(indexDig);
-                                                                layer.msg("添加成功")
-                                                                //执行重载
-                                                                table.reload('tableList');
-                                                            } else {
-                                                                layer.msg(req.msg)
-                                                            }
-                                                        },
-                                                        complete: function () {
-                                                            //请求完成的处理
-                                                        },
-                                                        error: function () {
-                                                            //请求出错处理
-                                                        }
-                                                    });
                                                 } else {
-                                                    layer.msg("房源不能选择相同的！")
+                                                    layer.msg("合同类型不能为空！")
                                                 }
 
                                             } else {
-                                                layer.msg("合同类型不能为空！")
+                                                layer.msg("租赁月份不能为空！")
                                             }
 
                                         } else {
-                                            layer.msg("租赁月份不能为空！")
+                                            layer.msg("租金支付方式与租赁月份为倍数关系且不能小于租金支付的月份！")
                                         }
-
                                     } else {
-                                        layer.msg("租金支付方式与租赁月份为倍数关系且不能小于租金支付的月份！")
+                                        layer.msg("租赁月份不能为空！")
                                     }
                                 } else {
-                                    layer.msg("租赁月份不能为空！")
+                                    layer.msg("合同开始日期不能为空！")
                                 }
                             } else {
-                                layer.msg("合同开始日期不能为空！")
+                                layer.msg("保证金不能为空！")
                             }
                         } else {
-                            layer.msg("保证金不能为空！")
+                            layer.msg("承租人不能为空！")
                         }
                     } else {
-                        layer.msg("承租人不能为空！")
+                        layer.msg("房源不能为空！")
                     }
-                } else {
-                    layer.msg("房源不能为空！")
                 }
+
             },
         }
         /*调用弹窗方法*/
@@ -362,13 +389,15 @@ layui.use(['laydate', 'table', 'form'], function () {
         var n = 0
         $("#addFy").on("click", function () {
             n = n + 1
-            var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + n + "'><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
+            var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + n + "' xlh='" + n + "' ><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
+            var sjjDiv = $("<input type='text' style='margin-top: 16px;' xlh='" + n + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
             getaddyf(n)
             form.render('select')
         })
 
         $("#addFyDiv").on("click", ".clearAddFy", function () {
             $(this).parent().remove()
+            $(".sjzj" + $(this).parent().find("select").attr("xlh")).remove()
         })
     })
 
@@ -468,12 +497,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '     </select>\n' +
                         '    </div>\n' +
                         '  </div>\n' +
-                        '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
-                        '    </div>\n' +
-                        '  </div>\n' +
                         // '  <div class="dialogDiv">\n' +
                         // '    <label class="layui-form-label">指导价</label>\n' +
                         // '    <div class="layui-input-block">\n' +
@@ -499,6 +522,15 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '    </div>\n' +
                         '  </div>\n' +
                         '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label"><span class="inputBtx">*</span>是否有优惠</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <select class="isHaveDiscount">\n' +
+                        '        <option value="2">无</option>\n' +
+                        '        <option value="1">有</option>\n' +
+                        '     </select>\n' +
+                        '    </div>\n' +
+                        '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
                         '    <label class="layui-form-label"><span class="inputBtx">*</span>是否续租</label>\n' +
                         '    <div class="layui-input-block">\n' +
                         '      <select class="rentType">\n' +
@@ -517,13 +549,28 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '    </div>\n' +
                         '<div id="addFyDiv">' +
                         '</div>' +
+
                         '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
+                        '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label"><span class="inputBtx">*</span>实际租金</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj">\n' +
+                        '<div id="addsjjDiv">' +
+                        '</div>' +
+                        '    </div>\n' +
+                        '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
+                        '    </div>\n' +
                         '  </div>\n' +
                         '</form></div>' +
                         '</div>' +
                         '</div>',
                     look: function () {
-                        // getfy()
+                        getfy()
                         getgldw()
                         getyf()
                         var fyArr = obj.data.houseResourceDetail
@@ -533,9 +580,11 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
                                 var options2 = $("<option value='" + obj.data.houseResourceDetail[0].assetsId + "'>" + obj.data.houseResourceDetail[0].assetsName + "</option>").appendTo(".houseFy")
                                 $(".houseFy").val(obj.data.houseResourceDetail[0].assetsId)
+                                $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
                                 form.render('select')
                             } else {
                                 $(".houseFy").val(obj.data.houseResourceDetail[0].assetsId)
+                                $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
                             }
                         } else {
                             $(fyArr).each(function (i, o) {
@@ -592,13 +641,15 @@ layui.use(['laydate', 'table', 'form'], function () {
                         })
                         $("#addFy").on("click", function () {
                             var n = $(".houseResource").length + 1
-                            var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + n + "'><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
+                            var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + n + "' xlh='" + n + "'><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
+                            var sjjDiv = $("<input type='text' style='margin-top: 16px;' xlh='" + n + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
                             getaddyf(n)
                             form.render('select')
                         })
 
                         $("#addFyDiv").on("click", ".clearAddFy", function () {
                             $(this).parent().remove()
+                            $(".sjzj" + $(this).parent().find("select").attr("xlh")).remove()
                         })
                     },
                     put: function () {
@@ -823,29 +874,29 @@ layui.use(['laydate', 'table', 'form'], function () {
                         if (obj.data.mustMoney.length !== 0) {
                             var sm = $("<tr></tr>").appendTo("#zjlb")
                             var smsm = $("<td>收款原因</td>").appendTo(sm)
-                            var lx = $("<tr></tr>").appendTo("#zjlb")
-                            var lxsm = $("<td>类型</td>").appendTo(lx)
-                            var rq = $("<tr></tr>").appendTo("#zjlb")
-                            var rqsm = $("<td>日期</td>").appendTo(rq)
-                            var money = $("<tr></tr>").appendTo("#zjlb")
-                            var msm = $("<td>金额(元)</td>").appendTo(money)
+                            var lxsm = $("<td>类型</td>").appendTo(sm)
+                            var rqsm = $("<td>日期</td>").appendTo(sm)
+                            var msm = $("<td>金额(元)</td>").appendTo(sm)
 
                             $(obj.data.mustMoney).each(function (i, o) {
                                 if (o.moneyType == "往年欠款") {
-                                    $(smsm).after("<td>" + o.mustReason + "</td>")
-                                    $(lxsm).after("<td>" + o.moneyType + "</td>")
-                                    $(rqsm).after("<td>" + o.mustDate + "</td>")
-                                    $(msm).after("<td>" + o.money + "</td>")
+                                    var wnqk = $("<tr></tr>").appendTo("#zjlb")
+                                    var lxtd = $("<td>" + o.mustReason + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.moneyType + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.mustDate + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.money + "</td>").appendTo(tr)
                                 } else if (o.moneyType == "保证金") {
-                                    $(smsm).after("<td>" + o.mustReason + "</td>")
-                                    $(lxsm).after("<td>" + o.moneyType + "</td>")
-                                    $(rqsm).after("<td>" + o.mustDate + "</td>")
-                                    $(msm).after("<td>" + o.money + "</td>")
+                                    var tr = $("<tr></tr>").appendTo("#zjlb")
+                                    var lxtd = $("<td>" + o.mustReason + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.moneyType + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.mustDate + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.money + "</td>").appendTo(tr)
                                 } else {
-                                    var lxtd = $("<td>" + o.mustReason + "</td>").appendTo(sm)
-                                    var lxtd = $("<td>" + o.moneyType + "</td>").appendTo(lx)
-                                    var lxtd = $("<td>" + o.mustDate + "</td>").appendTo(rq)
-                                    var lxtd = $("<td>" + o.money + "</td>").appendTo(money)
+                                    var tr = $("<tr></tr>").appendTo("#zjlb")
+                                    var lxtd = $("<td>" + o.mustReason + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.moneyType + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.mustDate + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.money + "</td>").appendTo(tr)
                                 }
                             })
                         }
