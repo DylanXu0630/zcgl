@@ -26,6 +26,60 @@ layui.use('table', function () {
         ]]
     });
 
+    // 获取全部权限树
+    var trees = [];
+    $.ajax({
+        url: IPdz + '/permission/tree',    //请求的url地址
+        // url: '/json/ss.json',
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            let arr = req.data 
+            // 禁用父节点被选中    
+            arr.forEach(element => {
+                if (element.children.length === 0) {
+                element.disabled = false
+                } else {
+                element.disabled = true
+                element.children.forEach(e1 => {
+                    if (e1.children.length === 0) {
+                        e1.disabled = false
+                    } else {
+                        e1.disabled = true
+                        e1.children.forEach(e2 => {
+                            if (e2.children.length === 0) {
+                                e2.disabled = false
+                            } else {
+                                e2.disabled = true
+                                e2.children.forEach(e3 => {
+                                    if (e3.children.length === 0) {
+                                        e3.disabled = false
+                                    } else {
+                                        e3.disabled = true
+                                    }
+                                })
+                            }
+                        })
+                    }
+                });
+                }
+            });
+            trees = arr
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+
     //监听行工具事件
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
         var data = obj.data //获得当前行数据
@@ -167,66 +221,13 @@ layui.use('table', function () {
                 look: function () {
                     // 树形控件tree
 
-                    // 1.获取全部权限树
-                    var trees = [];
-                    $.ajax({
-                        url: IPdz + '/permission/tree',    //请求的url地址
-                        // url: '/json/ss.json',
-                        dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                        type: "GET",   //请求方式
-                        contentType: "application/json;charset=UTF-8",
-                        // headers: {"token": sessionStorage.token},
-                        beforeSend: function () {
-                            //请求前的处理
-                        },
-                        success: function (req) {
-                           let arr = req.data 
-                           // 禁用父节点被选中    
-                           arr.forEach(element => {
-                               if (element.children.length === 0) {
-                                 element.disabled = false
-                               } else {
-                                 element.disabled = true
-                                 element.children.forEach(e1 => {
-                                     if (e1.children.length === 0) {
-                                        e1.disabled = false
-                                     } else {
-                                        e1.disabled = true
-                                        e1.children.forEach(e2 => {
-                                            if (e2.children.length === 0) {
-                                                e2.disabled = false
-                                            } else {
-                                                e2.disabled = true
-                                                e2.children.forEach(e3 => {
-                                                    if (e3.children.length === 0) {
-                                                        e3.disabled = false
-                                                    } else {
-                                                        e3.disabled = true
-                                                    }
-                                                })
-                                            }
-                                        })
-                                     }
-                                });
-                               }
-                           });
-                           trees = arr
-                        },
-                        complete: function () {
-                            //请求完成的处理
-                        },
-                        error: function () {
-                            //请求出错处理
-                        }
-                    });
-                    
+                    // 保存角色ID 用户解绑和绑定
                     var roleId = obj.data.id
 
-                    // 根据用户ID得到对应用户权限
+                    // 根据角色ID得到对应用户权限
                     var checkedInfo = []
                     $.ajax({
-                        url: IPdz + '/permission/' + obj.data.id,    //请求的url地址
+                        url: IPdz + '/permission/' + roleId,    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         type: "GET",   //请求方式
@@ -311,10 +312,12 @@ layui.use('table', function () {
                                 }
                             }
                         })
+                        // 将已经有的权限渲染到树中
                         tree.setChecked('id', checkedInfo)
                     })
                 },
                 put: function () {
+                    // 确定后直接关闭模态窗口
                     layer.close(indexDig);
                 },
             }
