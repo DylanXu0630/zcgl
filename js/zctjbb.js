@@ -3,10 +3,58 @@ layui.use('element', function () {
     var element = layui.element;
 });
 
-layui.use(['form'], function () {
+layui.use(['table', 'form'], function () {
     var form = layui.form;
-    getgldwcheck()
+    var table = layui.table;
     form.render()
+
+    var dateList = []
+
+    $.ajax({
+        url: IPzd + '/report/rent/area',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "POST",   //请求方式
+        data: JSON.stringify({
+            "date" : ""
+        }),
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            dateList = req.data
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+
+
+
+
+    table.render({
+        elem: '#tableList'
+        , id: 'idTest'
+        , data: dateList
+        , contentType: "application/json"
+        , parseData: function (res) { //res 即为原始返回的数据
+            return {
+                "code": 0, //解析接口状态
+                "msg": res.message, //解析提示文本
+                "count": res.data.total, //解析数据长度
+                "data": res.data.records //解析数据列表
+            };
+        }
+        , page: false //开启分页
+        , cols: [[ //表头
+            {field: 'agency', title: '管理中心'}
+        ]]
+    });
 
     $("#sousuo").on("click", function () {
         form.on('submit(search)', function (data) {
@@ -19,7 +67,7 @@ layui.use(['form'], function () {
 
 
 $(function () {
-    getDatas()
+    // getDatas()
 })
 
 function getDatas() {
@@ -27,7 +75,7 @@ function getDatas() {
     if ($(".mangit").length !== 0) {
         agency = []
         $(".mangit").each(function (i, o) {
-            if ($(this).is(':checked')){
+            if ($(this).is(':checked')) {
                 agency.push($(o).attr("id"))
             }
         })
