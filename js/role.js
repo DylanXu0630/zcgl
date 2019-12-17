@@ -5,29 +5,6 @@ layui.use('element', function () {
 layui.use('table', function () {
     var table = layui.table;
 
-    // 获取系统所有权限名称 
-    var qxs = []
-    $.ajax({
-        url: IPdz + '/permission/all',    //请求的url地址
-        dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-        type: "GET",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            qxs = req.data;
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
-
     //第一个实例
     table.render({
         elem: '#tableList'
@@ -47,6 +24,60 @@ layui.use('table', function () {
             , {field: 'description', title: '说明'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
         ]]
+    });
+
+    // 获取全部权限树
+    var trees = [];
+    $.ajax({
+        url: IPdz + '/permission/tree',    //请求的url地址
+        // url: '/json/ss.json',
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            let arr = req.data
+            // 禁用父节点被选中    
+            arr.forEach(element => {
+                if (element.children.length === 0) {
+                    element.disabled = false
+                } else {
+                    element.disabled = true
+                    element.children.forEach(e1 => {
+                        if (e1.children.length === 0) {
+                            e1.disabled = false
+                        } else {
+                            e1.disabled = true
+                            e1.children.forEach(e2 => {
+                                if (e2.children.length === 0) {
+                                    e2.disabled = false
+                                } else {
+                                    e2.disabled = true
+                                    e2.children.forEach(e3 => {
+                                        if (e3.children.length === 0) {
+                                            e3.disabled = false
+                                        } else {
+                                            e3.disabled = true
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    });
+                }
+            });
+            trees = arr
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
     });
 
     //监听行工具事件
@@ -170,10 +201,10 @@ layui.use('table', function () {
                 },
             }
             layerOpen(openMes);
-         } else {
-             var tree;
-             /*权限操作;*/
-             var openMes = {
+        } else {
+            var tree;
+            /*权限操作;*/
+            var openMes = {
                 title: '用户权限',
                 leixing: '编辑',
                 area: ['700px', '650px'],
@@ -183,44 +214,20 @@ layui.use('table', function () {
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
-                    '<div id="buttons">\n' +
-                    '</div>\n' +
-                    // '<div id="treeT"> </div>' +
-                    // '</form></div>' +
+                    '<div id="treeT"> </div>' +
+                    '</form></div>' +
                     '</div>' +
                     '</div>',
                 look: function () {
                     // 树形控件tree
-                    // 1.获取全部权限树
-                    var trees = [];
-                    // $.ajax({
-                    //     url: IPdz + '/permission/tree',    //请求的url地址
-                    //     // url: '/json/ss.json',
-                    //     dataType: "json",   //返回格式为json
-                    //     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                    //     type: "GET",   //请求方式
-                    //     contentType: "application/json;charset=UTF-8",
-                    //     // headers: {"token": sessionStorage.token},
-                    //     beforeSend: function () {
-                    //         //请求前的处理
-                    //     },
-                    //     success: function (req) {
-                    //        trees = req.data
-                    //     },
-                    //     complete: function () {
-                    //         //请求完成的处理
-                    //     },
-                    //     error: function () {
-                    //         //请求出错处理
-                    //     }
-                    // });
-                    
-                    // 根据用户ID得到对应用户权限
 
+                    // 保存角色ID 用户解绑和绑定
+                    var roleId = obj.data.id
+
+                    // 根据角色ID得到对应用户权限
                     var checkedInfo = []
-
                     $.ajax({
-                        url: IPdz + '/permission/' + obj.data.id,    //请求的url地址
+                        url: IPdz + '/permission/' + roleId,    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                         type: "GET",   //请求方式
@@ -230,32 +237,10 @@ layui.use('table', function () {
                             //请求前的处理
                         },
                         success: function (req) {
-                            // 处理权限数据
-                            if (!req.data) {
-                                qxs.forEach(element => {
-                                    var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + obj.data.id + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                });
-                            } else {
-                                var arr = qxs.slice(0)
-                                qxs.forEach(element => {
-                                    req.data.forEach(item => {
-                                        if (item.id === element.id) {
-                                            var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                            arr.splice(arr.findIndex((ee)=> ee.id === element.id), 1);
-                                            return
-                                        }
-                                    })
-                                })
-                                if(!!arr.length) {
-                                    arr.forEach(element => {
-                                        var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + obj.data.id + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                    });
-                                }
-                            }
-                            // console.log(req.data)
-                            // req.data.forEach(element => {
-                            //     checkedInfo.push(element.id);
-                            // });
+                            if (!req.data) return
+                            req.data.forEach(element => {
+                                checkedInfo.push(element.id);
+                            });
                         },
                         complete: function () {
                             //请求完成的处理
@@ -264,7 +249,8 @@ layui.use('table', function () {
                             //请求出错处理
                         }
                     });
-                  
+
+                    // 渲染权限树  以及解绑和绑定操作
                     layui.use('tree', function() {
                         tree = layui.tree;
                         tree.render({
@@ -273,267 +259,151 @@ layui.use('table', function () {
                             , id: 'id'
                             , data: trees
                             , oncheck: function(obj) {
-                                console.log(obj)
                                 if (obj.checked) {
-                                    // 绑定 
-                                    if ($.inArray(parseInt(obj.data.id), checkedInfo) =="-1") {
-                                        // 正常绑定
+                                    if ($.inArray(obj.data.id, checkedInfo) == "-1") {
+                                        // 绑定
+                                        $.ajax({
+                                            url: IPdz + '/role/role/' + roleId + '/permission/'+ obj.data.id + '',    //请求的url地址
+                                            dataType: "json",   //返回格式为json
+                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                            type: "POST",   //请求方式
+                                            contentType: "application/json;charset=UTF-8",
+                                            // headers: {"token": sessionStorage.token},
+                                            beforeSend: function () {
+                                                //请求前的处理
+                                            },
+                                            success: function (req) {
+                                                layer.msg("绑定成功")
+                                                checkedInfo.push(obj.data.id)
+                                            },
+                                            complete: function () {
+                                                //请求完成的处理
+                                            },
+                                            error: function () {
+                                                //请求出错处理
+                                            }
+                                        });
                                     } else {
                                         // 忽略加载时的数据
                                     }
                                 } else {
                                     // 解绑
+                                    $.ajax({
+                                        url: IPdz + '/role/role/' + roleId + '/permission/'+ obj.data.id + '',    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "DELETE",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            layer.msg("解绑成功")
+                                            checkedInfo.splice(checkedInfo.findIndex((item) => item === obj.data.id), 1);
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
                                 }
                             }
                         })
+                        // 将已经有的权限渲染到树中
                         tree.setChecked('id', checkedInfo)
                     })
                 },
                 put: function () {
+                    // 确定后直接关闭模态窗口
                     layer.close(indexDig);
                 },
             }
             layerOpen(openMes);
         }
     });
-     /*添加点击事件*/
- $("body").on("click", ".layui-btn.layui-btn-sm", function () {
-    /*生成一个对象
-    * 传入标题和内容
-    * 生成弹窗
-    * */
-    var openMes = {
-        title: '角色添加',
-        leixing: '添加',
-        maxmin: true,
-        area: ['650px', '250px'],
-        btn: ['确定', '取消'],
-        content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
-            '<div class="addDig">' +
-            '<div><form class="layui-form" action="">\n' +
-            '  <div class="dialogDiv">\n' +
-            '    <label class="layui-form-label">中文名称:</label>\n' +
-            '    <div class="layui-input-block">\n' +
-            '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input zwmc">\n' +
-            '    </div>\n' +
-            '</div>\n' +
-            '<div class="dialogDiv">\n' +
-            '    <label class="layui-form-label">角色描述：</label>\n' +
-            '    <div class="layui-input-block">\n' +
-            '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jsms">\n' +
-            '    </div>\n' +
-            '</div>\n' +
-            '<div class="dialogDiv">\n' +
-            '    <label class="layui-form-label">英文名称：</label>\n' +
-            '    <div class="layui-input-block">\n' +
-            '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ywmc">\n' +
-            '    </div>\n' +
-            '</div>\n' +
-            '</form></div>' +
-            '</div>' +
-            '</div>',
-        add: function () {
-            var data = {
-                "cnName": $(".zwmc").val(),
-                "description": $(".jsms").val(),
-                "enName": $(".ywmc").val(),
-                "parentId": 0,
-            }
-            $.ajax({
-                url: IPdz + '/role',    //请求的url地址
-                dataType: "json",   //返回格式为json
-                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                data: JSON.stringify(data),    //参数值
-                type: "POST",   //请求方式
-                contentType: "application/json;charset=UTF-8",
-                // headers: {"token": sessionStorage.token},
-                beforeSend: function () {
-                    //请求前的处理
-                },
-                success: function (req) {
-                    if (req.status == "200") {
-                        layer.close(indexDig);
-                        layer.msg("添加成功")
-                        var demoReload = $('#demoReload');
-                        //执行重载
-                        table.reload('tableList', {
-                            page: {
-                                curr: 1 //重新从第 1 页开始
-                            }
-                        });
-                    } else {
-                        layer.msg("添加失败")
-                    }
-                },
-                complete: function () {
-                    //请求完成的处理
-                },
-                error: function () {
-                    //请求出错处理
+    /*添加点击事件*/
+    $("body").on("click", ".layui-btn.layui-btn-sm", function () {
+        /*生成一个对象
+        * 传入标题和内容
+        * 生成弹窗
+        * */
+        var openMes = {
+            title: '角色添加',
+            leixing: '添加',
+            maxmin: true,
+            area: ['650px', '250px'],
+            btn: ['确定', '取消'],
+            content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
+                '<div class="addDig">' +
+                '<div><form class="layui-form" action="">\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">中文名称:</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input zwmc">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">角色描述：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jsms">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">英文名称：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ywmc">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '</form></div>' +
+                '</div>' +
+                '</div>',
+            add: function () {
+                var data = {
+                    "cnName": $(".zwmc").val(),
+                    "description": $(".jsms").val(),
+                    "enName": $(".ywmc").val(),
+                    "parentId": 0,
                 }
-            });
-        },
-    }
-    /*调用弹窗方法*/
-    layerOpen(openMes);
-})
+                $.ajax({
+                    url: IPdz + '/role',    //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    data: JSON.stringify(data),    //参数值
+                    type: "POST",   //请求方式
+                    contentType: "application/json;charset=UTF-8",
+                    // headers: {"token": sessionStorage.token},
+                    beforeSend: function () {
+                        //请求前的处理
+                    },
+                    success: function (req) {
+                        if (req.status == "200") {
+                            layer.close(indexDig);
+                            layer.msg("添加成功")
+                            var demoReload = $('#demoReload');
+                            //执行重载
+                            table.reload('tableList', {
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                            });
+                        } else {
+                            layer.msg("添加失败")
+                        }
+                    },
+                    complete: function () {
+                        //请求完成的处理
+                    },
+                    error: function () {
+                        //请求出错处理
+                    }
+                });
+            },
+        }
+        /*调用弹窗方法*/
+        layerOpen(openMes);
+    })
 })
 
-$(function() {
-    // 获取系统所有权限名称 
-    var qxs = []
-    $.ajax({
-        url: IPdz + '/permission/all',    //请求的url地址
-        dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-        type: "GET",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            qxs = req.data;
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
-    $("body").on("click",".hello",function(){
-        var roleId = $(this).attr("userId");
-        var arr2 = [] 
-       //  flag === 0 未绑定数据,flag === 1 已绑定数据
-       if ($(this).attr("flag") === '0') {
-         $.ajax({
-             url: IPdz + '/role/role/' + roleId + '/permission/'+ $(this).attr("buttonNum") +'',    //请求的url地址
-             dataType: "json",   //返回格式为json
-             async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-             type: "POST",   //请求方式
-             contentType: "application/json;charset=UTF-8",
-             // headers: {"token": sessionStorage.token},
-             beforeSend: function () {
-                 //请求前的处理
-             },
-             success: function (req) {
-                 layer.msg("绑定成功")
-                 $("#buttons").find("button").remove();
-                 // 根据用户ID得到对应用户权限
-                 $.ajax({
-                     url: IPdz + '/permission/' + roleId,    //请求的url地址
-                     dataType: "json",   //返回格式为json
-                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                     type: "GET",   //请求方式
-                     contentType: "application/json;charset=UTF-8",
-                     // headers: {"token": sessionStorage.token},
-                     beforeSend: function () {
-                         //请求前的处理
-                     },
-                     success: function (req) {
-                         // 处理权限数据
-                         if (!req.data) {
-                             qxs.forEach(element => {
-                                 var checkboxs = $('<button type="button" class="layui-btn layui-btn-primary hello" userId="' + roleId + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                             });
-                         } else {
-                             arr2 = qxs.slice(0)
-                             qxs.forEach(element => {
-                                 req.data.forEach(item => {
-                                     if (item.id === element.id) {
-                                         var checkbvoxs = $('<button type="button" class="layui-btn hello" flag="1" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                         arr2.splice(arr2.findIndex((ee)=> ee.id === element.id), 1);
-                                         return
-                                     } 
-                                 })
-                             })
-                             if(!!arr2.length) {
-                                 arr2.forEach(element => {
-                                     var checkboxs = $('<button style="margin:2px 2px" type="button" class="layui-btn layui-btn-primary hello" flag="0" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                 });
-                             }
-                         }
-                     },
-                     complete: function () {
-                         //请求完成的处理
-                     },
-                     error: function () {
-                         //请求出错处理
-                     }
-                 });
-             },
-             complete: function () {
-                 //请求完成的处理
-             },
-             error: function () {
-                 //请求出错处理
-             }
-         });
-       } else {
-         $.ajax({
-             url: IPdz + '/role/role/' + roleId + '/permission/'+ $(this).attr("buttonNum") +'',    //请求的url地址
-             dataType: "json",   //返回格式为json
-             async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-             type: "DELETE",   //请求方式
-             contentType: "application/json;charset=UTF-8",
-             // headers: {"token": sessionStorage.token},
-             beforeSend: function () {
-                 //请求前的处理
-             },
-             success: function (req) {
-                 layer.msg("解绑成功")
-                  $("#buttons").find("button").remove();
-                 // 根据用户ID得到对应用户权限
-                 $.ajax({
-                     url: IPdz + '/permission/' + roleId,    //请求的url地址
-                     dataType: "json",   //返回格式为json
-                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                     type: "GET",   //请求方式
-                     contentType: "application/json;charset=UTF-8",
-                     // headers: {"token": sessionStorage.token},
-                     beforeSend: function () {
-                         //请求前的处理
-                     },
-                     success: function (req) {
-                         // 处理权限数据
-                         if (!req.data) {
-                             qxs.forEach(element => {
-                                 var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" userId="' + roleId + '" flag="0" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                             });
-                         } else {
-                             arr2 = qxs.slice(0)
-                             qxs.forEach(element => {
-                                 req.data.forEach(item => {
-                                     if (item.id === element.id) {
-                                         var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn hello" flag="1" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                         arr2.splice(arr2.findIndex((ee)=> ee.id === element.id), 1);
-                                         return
-                                     } 
-                                 })
-                             })
-                             if(!!arr2.length) {
-                                 arr2.forEach(element => {
-                                     var checkboxs = $('<button type="button" style="margin:2px 2px" class="layui-btn layui-btn-primary hello" flag="0" userId="' + roleId + '" buttonNum="' + element.id + '">'+element.name+'</button>').appendTo("#buttons");
-                                 });
-                             }
-                         }
-                     },
-                     complete: function () {
-                         //请求完成的处理
-                     },
-                     error: function () {
-                         //请求出错处理
-                     }
-                 });
-             },
-             complete: function () {
-                 //请求完成的处理
-             },
-             error: function () {
-                 //请求出错处理
-             }
-         });
-       }
-    })
- })
