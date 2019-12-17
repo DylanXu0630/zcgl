@@ -259,10 +259,8 @@ layui.use('table', function () {
                             , data: trees
                             , oncheck: function(obj) {
                                 if (obj.checked) {
-                                    // 绑定 
                                     if ($.inArray(obj.data.id, checkedInfo) == "-1") {
-                                        // 正常绑定
-                                        console.log('正常绑定')
+                                        // 绑定
                                         $.ajax({
                                             url: IPdz + '/role/role/' + roleId + '/permission/'+ obj.data.id + '',    //请求的url地址
                                             dataType: "json",   //返回格式为json
@@ -289,7 +287,6 @@ layui.use('table', function () {
                                     }
                                 } else {
                                     // 解绑
-                                    console.log('解绑');
                                     $.ajax({
                                         url: IPdz + '/role/role/' + roleId + '/permission/'+ obj.data.id + '',    //请求的url地址
                                         dataType: "json",   //返回格式为json
