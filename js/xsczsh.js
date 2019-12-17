@@ -44,11 +44,13 @@ layui.use(['laydate', 'table', 'form'], function () {
         , page: true //开启分页
         , cols: [[ //表头
             {field: 'dealSerial', title: '合同编号'}
-            , {field: 'dealName', title: '合同名称'}
-            , {field: 'resourceName', title: '房源'}
-            , {field: 'renter', title: '承租方',}
-            , {field: 'startTime', title: '开始时间',}
-            , {field: 'endTime', title: '结束时间',}
+            , {field: 'dealType', title: '合同类型'}
+            , {field: 'location', title: '座落'}
+            , {field: 'renter', title: '承租方'}
+            , {field: 'startTime', title: '开始时间'}
+            , {field: 'endTime', title: '结束时间'}
+            , {field: 'dealReviewStatus', title: '审核状态'}
+            , {field: 'dealExistStatus', title: '合同状态'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 200}
         ]], parseData: function (res) {//将原始数据解析成 table 组件所规定的数据
             return {
@@ -60,49 +62,6 @@ layui.use(['laydate', 'table', 'form'], function () {
         }
     });
 
-    $("#sousuo").on("click", function () {
-        form.on('submit(search)', function (data) {
-            //执行重载
-            if (sjc($("#s-date").val()) > sjc($("#s-date2").val())) {
-                layer.msg("合同开始时间不能小于合同结束时间！")
-            } else {
-                table.reload('tableList', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                    , where: {//这里传参  向后台
-                        "asc": 0,
-                        "agencyId": $(".s-gldw").val(),
-                        "dealExistStatusCode": $(".s-hezt").val(),
-                        "dealName": $(".s-htmc").val(),
-                        "dealReviewStatusCode": $(".s-heshzt").val(),
-                        "dealTypeCode": $(".s-httype").val(),
-                        "endTime": sjc($("#s-date2").val() + "23:59:59"),
-                        "houseUsageId": $(".fwghyt").val(),
-                        "lessorId": $(".s-czr").val(),
-                        "maxGuideRentCharge": $(".maxzdj").val(),
-                        "maxOriginRentCharge": $(".maxyj").val(),
-                        "maxRealRentCharge": $(".maxsjj").val(),
-                        "maxRentMonth": $(".maxzly").val(),
-                        "maxResourceArea": $(".maxfymj").val(),
-                        "minGuideRentCharge": $(".minzdj").val(),
-                        "minOriginRentCharge": $(".minyj").val(),
-                        "minRealRentCharge": $(".minsjj").val(),
-                        "minRentMonth": $(".minzly").val(),
-                        "minResourceArea": $(".minfymj").val(),
-                        "payTypeCode": $(".s-htzftype").val(),
-                        "renterId": $(".s-czzr").val(),
-                        "startTime": sjc($("#s-date").val() + " 00:00:00")
-                    },
-                    url: IPzd + '/deal/all/noreview' //数据接口
-                    , method: 'post'
-                });
-            }
-            return false;//false：阻止表单跳转  true：表单跳转
-        });
-
-
-    })
 
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
         var data = obj.data //获得当前行数据

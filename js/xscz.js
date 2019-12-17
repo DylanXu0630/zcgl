@@ -256,7 +256,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>实际租金</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
                 '<div id="addsjjDiv">' +
                 '</div>' +
                 '    </div>\n' +
@@ -297,49 +297,54 @@ layui.use(['laydate', 'table', 'form'], function () {
                                             if ($.trim($(".zsMouth").val()) !== "") {
                                                 if ($(".htType").val() !== "") {
                                                     if (isCffy(fyArr)) {
-                                                        var data = {
-                                                            "createdBy": user,
-                                                            // "dealName": $.trim($(".dealName").val()),
-                                                            "rentMonth": $.trim($(".zsMouth").val()),
-                                                            "dealAndHouses": fyArr,
-                                                            "fkRenterId": $.trim($(".yf").val()),
-                                                            "startTime": sjc($("#date").val() + " 00:00:00"),
-                                                            "payType": $.trim($(".zjzfType").val()),
-                                                            "deposit": $.trim($(".bzj").val()),
-                                                            "freeRentMonth": $.trim($(".mzMouth").val()),
-                                                            "dealType": $.trim($(".htType").val()),
-                                                            "isNewRent": $.trim($(".rentType").val()),
-                                                            "isHaveDiscount": $(".isHaveDiscount").val()
+                                                        if (!isBzj()) {
+                                                            layer.msg("保证金不能少于三个月的实际租金！")
+                                                        } else {
+                                                            var data = {
+                                                                "createdBy": user,
+                                                                // "dealName": $.trim($(".dealName").val()),
+                                                                "rentMonth": $.trim($(".zsMouth").val()),
+                                                                "dealAndHouses": fyArr,
+                                                                "fkRenterId": $.trim($(".yf").val()),
+                                                                "startTime": sjc($("#date").val() + " 00:00:00"),
+                                                                "payType": $.trim($(".zjzfType").val()),
+                                                                "deposit": $.trim($(".bzj").val()),
+                                                                "freeRentMonth": $.trim($(".mzMouth").val()),
+                                                                "dealType": $.trim($(".htType").val()),
+                                                                "isNewRent": $.trim($(".rentType").val()),
+                                                                "isHaveDiscount": $(".isHaveDiscount").val()
+                                                            }
+
+                                                            $.ajax({
+                                                                url: IPzd + '/deal',    //请求的url地址
+                                                                dataType: "json",   //返回格式为json
+                                                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                                data: JSON.stringify(data),    //参数值
+                                                                type: "POST",   //请求方式
+                                                                contentType: "application/json;charset=UTF-8",
+                                                                // headers: {"token": sessionStorage.token},
+                                                                beforeSend: function () {
+                                                                    //请求前的处理
+                                                                },
+                                                                success: function (req) {
+                                                                    if (req.status == "200") {
+                                                                        layer.close(indexDig);
+                                                                        layer.msg("添加成功")
+                                                                        //执行重载
+                                                                        table.reload('tableList');
+                                                                    } else {
+                                                                        layer.msg(req.msg)
+                                                                    }
+                                                                },
+                                                                complete: function () {
+                                                                    //请求完成的处理
+                                                                },
+                                                                error: function () {
+                                                                    //请求出错处理
+                                                                }
+                                                            });
                                                         }
 
-                                                        $.ajax({
-                                                            url: IPzd + '/deal',    //请求的url地址
-                                                            dataType: "json",   //返回格式为json
-                                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                            data: JSON.stringify(data),    //参数值
-                                                            type: "POST",   //请求方式
-                                                            contentType: "application/json;charset=UTF-8",
-                                                            // headers: {"token": sessionStorage.token},
-                                                            beforeSend: function () {
-                                                                //请求前的处理
-                                                            },
-                                                            success: function (req) {
-                                                                if (req.status == "200") {
-                                                                    layer.close(indexDig);
-                                                                    layer.msg("添加成功")
-                                                                    //执行重载
-                                                                    table.reload('tableList');
-                                                                } else {
-                                                                    layer.msg(req.msg)
-                                                                }
-                                                            },
-                                                            complete: function () {
-                                                                //请求完成的处理
-                                                            },
-                                                            error: function () {
-                                                                //请求出错处理
-                                                            }
-                                                        });
                                                     } else {
                                                         layer.msg("房源不能选择相同的！")
                                                     }
@@ -390,7 +395,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         $("#addFy").on("click", function () {
             n = n + 1
             var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + n + "' xlh='" + n + "' ><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
-            var sjjDiv = $("<input type='text' style='margin-top: 16px;' xlh='" + n + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
+            var sjjDiv = $("<input type='text' style='margin-top: 16px;' onkeyup='bzj()' xlh='" + n + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
             getaddyf(n)
             form.render('select')
         })
@@ -555,7 +560,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '  <div class="dialogDiv">\n' +
                         '    <label class="layui-form-label"><span class="inputBtx">*</span>实际租金</label>\n' +
                         '    <div class="layui-input-block">\n' +
-                        '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj">\n' +
+                        '      <input type="text" name="title" required  lay-verify="required" onkeyup="bzj()" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj">\n' +
                         '<div id="addsjjDiv">' +
                         '</div>' +
                         '    </div>\n' +
@@ -570,40 +575,60 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '</div>' +
                         '</div>',
                     look: function () {
-                        getfy()
+                        // getfy()
                         getgldw()
                         getyf()
                         var fyArr = obj.data.houseResourceDetail
                         if (fyArr.length < 2) {
                             if ($(".houseFy").children().length < 2) {
                                 $(".houseFy").children().remove()
-                                var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
-                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].assetsId + "'>" + obj.data.houseResourceDetail[0].assetsName + "</option>").appendTo(".houseFy")
+                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].assetsId + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
                                 $(".houseFy").val(obj.data.houseResourceDetail[0].assetsId)
                                 $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
                                 form.render('select')
                             } else {
+                                $(".houseFy").children().remove()
+                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].assetsId + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
                                 $(".houseFy").val(obj.data.houseResourceDetail[0].assetsId)
                                 $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
+                                form.render('select')
                             }
                         } else {
                             $(fyArr).each(function (i, o) {
                                 if (i > 0) {
-                                    var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + i + "'></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
-                                    var options = $("<option value=''>请选择</option>").appendTo(".houseFy" + i)
-                                    var options2 = $("<option value='" + o.assetsId + "'>" + o.assetsName + "</option>").appendTo(".houseFy" + i)
+                                    var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select xlh='" + i + "' class='houseResource houseFy" + i + "'></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
+                                    var options2 = $("<option value='" + o.assetsId + "'>" + o.location + "</option>").appendTo(".houseFy" + i)
                                     // getaddyf(i)
+                                    var sjjDiv = $("<input type='text' onkeyup='bzj()' style='margin-top: 16px;' xlh='" + i + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + i + "'>").appendTo("#addsjjDiv")
                                     $(".houseFy" + i).val(o.assetsId)
+                                    $(".sjzj" + i).val(o.realRentCharge)
                                     form.render('select')
                                 } else {
-                                    var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
-                                    var options2 = $("<option value='" + obj.data.houseResourceDetail[0].assetsId + "'>" + obj.data.houseResourceDetail[0].assetsName + "</option>").appendTo(".houseFy")
+                                    var options2 = $("<option value='" + obj.data.houseResourceDetail[0].assetsId + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
                                     $(".houseFy").val(obj.data.houseResourceDetail[0].assetsId)
+                                    $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
+                                    form.render('select')
                                 }
                             })
                         }
 
-                        $("body").on("click", ".layui-unselect", function () {
+                        $(".yf").val(obj.data.renterId)
+                        $(".zjzfType").val(obj.data.payTypeCode)
+                        $(".htType").val(obj.data.dealTypeCode)
+                        $(".httime").val(obj.data.startTime)
+                        $(".zsMouth").val(obj.data.rentMonth)
+                        $(".mzMouth").val(obj.data.freeRentMonth)
+                        $(".isHaveDiscount").val(obj.data.freeRentMonth)
+                        $(".rentType").val(obj.data.isNewRentCode)
+
+                        $(obj.data.mustMoney).each(function (n, m) {
+                            if (m.moneyType == "保证金") {
+                                $(".bzj").val(m.money)
+                            }
+                        })
+
+
+                        $("body").on("click", ".houseResource", function () {
                             var selectDiv = $(this).parent().parent().parent().find('.houseResource')
                             $.ajax({
                                 url: IPzd + '/hresource/simple/norent',    //请求的url地址
@@ -642,7 +667,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         $("#addFy").on("click", function () {
                             var n = $(".houseResource").length + 1
                             var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + n + "' xlh='" + n + "'><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
-                            var sjjDiv = $("<input type='text' style='margin-top: 16px;' xlh='" + n + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
+                            var sjjDiv = $("<input type='text' style='margin-top: 16px;' onkeyup='bzj()'  name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
                             getaddyf(n)
                             form.render('select')
                         })
@@ -654,98 +679,110 @@ layui.use(['laydate', 'table', 'form'], function () {
                     },
                     put: function () {
                         var fyArr = []
+                        var zjArr = []
+                        $(".sjj").each(function (n, m) {
+                            zjArr.push($(m).val())
+                        })
                         $(".houseResource").each(function (i, o) {
                             if ($(o).val() !== "") {
-                                fyArr.push($(o).val())
+                                var obj = {
+                                    "fkHouseResourceId": $(o).val(),
+                                    "realMoney": zjArr[i]
+                                }
+                                fyArr.push(obj)
                             }
                         })
-                        if (fyArr.length !== 0) {
-                            if ($.trim($(".yf").val()) !== "") {
-                                if ($.trim($(".bzj").val()) !== "") {
-                                    if ($.trim($("#date").val()) !== "") {
-                                        if ($.trim($(".zsMouth").val()) !== "") {
-                                            if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
-                                                if ($.trim($(".zsMouth").val()) !== "") {
-                                                    if ($.trim($(".htType").val()) !== "") {
-                                                        if (isCffy(fyArr)) {
-                                                            var data = {
-                                                                "id": obj.data.id,
-                                                                "createdBy": user,
-                                                                "dealName": $.trim($(".dealName").val()),
-                                                                "rentMonth": $.trim($(".zsMouth").val()),
-                                                                "fkHouseResourceId": fyArr,
-                                                                "fkRenterId": $.trim($(".yf").val()),
-                                                                "startTime": sjc($("#date").val() + " 00:00:00"),
-                                                                "payType": $.trim($(".zjzfType").val()),
-                                                                "deposit": $.trim($(".bzj").val()),
-                                                                "freeRentMonth": $.trim($(".mzMouth").val()),
-                                                                "dealType": $.trim($(".htType").val()),
-                                                                "dealSerial": $.trim($(".dealName").attr("htbh")),
-                                                                "isNewRent": $.trim($(".rentType").val())
-                                                            }
-                                                            $.ajax({
-                                                                url: IPzd + '/deal',    //请求的url地址
-                                                                dataType: "json",   //返回格式为json
-                                                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                                data: JSON.stringify(data),    //参数值
-                                                                type: "PUT",   //请求方式
-                                                                contentType: "application/json;charset=UTF-8",
-                                                                // headers: {"token": sessionStorage.token},
-                                                                beforeSend: function () {
-                                                                    //请求前的处理
-                                                                },
-                                                                success: function (req) {
-                                                                    if (req.status == "200") {
-                                                                        layer.close(indexDig);
-                                                                        layer.msg("修改成功")
-                                                                        //执行重载
-                                                                        table.reload('tableList', {
-                                                                            page: {
-                                                                                curr: 1 //重新从第 1 页开始
-                                                                            }
-                                                                        });
-                                                                    } else {
-                                                                        layer.msg("修改失败")
+                        if ($(".houseResource").length !== $(".sjj").length) {
+                            layer.msg("房源和实际价格对应！")
+                        } else {
+                            if (fyArr.length !== 0) {
+                                if ($.trim($(".yf").val()) !== "") {
+                                    if ($.trim($(".bzj").val()) !== "") {
+                                        if ($.trim($("#date").val()) !== "") {
+                                            if ($.trim($(".zsMouth").val()) !== "") {
+                                                if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
+                                                    if ($.trim($(".zsMouth").val()) !== "") {
+                                                        if ($(".htType").val() !== "") {
+                                                            if (isCffy(fyArr)) {
+                                                                if (!isBzj()) {
+                                                                    layer.msg("保证金不能少于三个月的实际租金！")
+                                                                } else {
+                                                                    var data = {
+                                                                        "id": obj.data.id,
+                                                                        "createdBy": user,
+                                                                        "rentMonth": $.trim($(".zsMouth").val()),
+                                                                        "dealAndHouses": fyArr,
+                                                                        "fkRenterId": $.trim($(".yf").val()),
+                                                                        "startTime": sjc($("#date").val() + " 00:00:00"),
+                                                                        "payType": $.trim($(".zjzfType").val()),
+                                                                        "deposit": $.trim($(".bzj").val()),
+                                                                        "freeRentMonth": $.trim($(".mzMouth").val()),
+                                                                        "dealType": $.trim($(".htType").val()),
+                                                                        "isNewRent": $.trim($(".rentType").val()),
+                                                                        "isHaveDiscount": $(".isHaveDiscount").val()
                                                                     }
 
-                                                                },
-                                                                complete: function () {
-                                                                    //请求完成的处理
-                                                                },
-                                                                error: function () {
-                                                                    //请求出错处理
+                                                                    $.ajax({
+                                                                        url: IPzd + '/deal',    //请求的url地址
+                                                                        dataType: "json",   //返回格式为json
+                                                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                                        data: JSON.stringify(data),    //参数值
+                                                                        type: "PUT",   //请求方式
+                                                                        contentType: "application/json;charset=UTF-8",
+                                                                        // headers: {"token": sessionStorage.token},
+                                                                        beforeSend: function () {
+                                                                            //请求前的处理
+                                                                        },
+                                                                        success: function (req) {
+                                                                            if (req.status == "200") {
+                                                                                layer.close(indexDig);
+                                                                                layer.msg("修改成功")
+                                                                                //执行重载
+                                                                                table.reload('tableList');
+                                                                            } else {
+                                                                                layer.msg(req.msg)
+                                                                            }
+                                                                        },
+                                                                        complete: function () {
+                                                                            //请求完成的处理
+                                                                        },
+                                                                        error: function () {
+                                                                            //请求出错处理
+                                                                        }
+                                                                    });
                                                                 }
-                                                            });
+
+                                                            } else {
+                                                                layer.msg("房源不能选择相同的！")
+                                                            }
+
                                                         } else {
-                                                            layer.msg("房源不能选择相同的！")
+                                                            layer.msg("合同类型不能为空！")
                                                         }
+
                                                     } else {
-                                                        layer.msg("合同类型不能为空！")
+                                                        layer.msg("租赁月份不能为空！")
                                                     }
 
                                                 } else {
-                                                    layer.msg("租赁月份不能为空！")
+                                                    layer.msg("租金支付方式与租赁月份为倍数关系且不能小于租金支付的月份！")
                                                 }
-
                                             } else {
-                                                layer.msg("租金支付方式与租赁月份为倍数关系且不能小于租金支付的月份！")
+                                                layer.msg("租赁月份不能为空！")
                                             }
                                         } else {
-                                            layer.msg("租赁月份不能为空！")
+                                            layer.msg("合同开始日期不能为空！")
                                         }
                                     } else {
-                                        layer.msg("合同开始日期不能为空！")
+                                        layer.msg("保证金不能为空！")
                                     }
                                 } else {
-                                    layer.msg("保证金不能为空！")
+                                    layer.msg("承租人不能为空！")
                                 }
                             } else {
-                                layer.msg("承租人不能为空！")
+                                layer.msg("房源不能为空！")
                             }
-                        } else {
-                            layer.msg("房源不能为空！")
                         }
-
                     },
                 }
                 layerOpen(openMes);
@@ -1219,3 +1256,31 @@ function isCffy(arr) {
     return istrue
 }
 
+function bzj() {
+    var bzj = 0
+    $(".sjj").each(function (i, o) {
+        if ($(o).val() == "") {
+            bzj = bzj + 0
+        } else {
+            bzj = bzj + parseInt($(o).val())
+        }
+    })
+
+    $(".bzj").val(bzj * 3)
+}
+
+function isBzj() {
+    var bzj = 0
+    var isTrue = true
+    $(".sjj").each(function (i, o) {
+        if ($(o).val() == "") {
+            bzj = bzj + 0
+        } else {
+            bzj = bzj + parseInt($(o).val())
+        }
+    })
+    if ($(".bzj").val() < bzj * 3) {
+        isTrue = false
+    }
+    return isTrue
+}
