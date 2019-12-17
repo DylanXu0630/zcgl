@@ -89,8 +89,8 @@ layui.use(['table', 'form'], function () {
                 content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
-                    '  <div class="dialogDiv", style="width:88%;margin-top:20px">\n' +
-                    '    <label class="layui-form-label">产权单位</label>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label"  style="width: 100px;">资产类型名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title"  placeholder="必填项，请输入" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +
@@ -177,8 +177,8 @@ layui.use(['table', 'form'], function () {
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig",>' +
                 '<div><form class="layui-form" action="">\n' +
-                '  <div class="dialogDiv", style="width:88%;margin-top:20px">\n' +
-                '    <label class="layui-form-label">产权名称</label>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label" style="width: 100px;">资产类型名称</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title"  placeholder="必填项，请输入" autocomplete="off" class="layui-input name">\n' +
                 '    </div>\n' +

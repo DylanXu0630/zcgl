@@ -105,7 +105,7 @@ layui.use(['table', 'form'], function () {
                         "id": obj.data.id,
                         "name": $(".name").val(),
                     }
-                    if ($(".name").val().length > 0) {
+                    if ($.trim($(".name").val()).length > 0) {
 
                     $.ajax({
                         url: IPzd+'/renter', //数据接口
@@ -187,7 +187,7 @@ layui.use(['table', 'form'], function () {
                 var data = {
                     "name": $(".name").val(),
                 }
-                if ($(".name").val().length > 0) {
+                if ($.trim($(".name").val()).length > 0) {
 
                 $.ajax({
                     url: IPzd+'/renter', //数据接口

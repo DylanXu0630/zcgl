@@ -254,7 +254,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>实际租金</label>\n' +
+                '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
                 '<div id="addsjjDiv">' +
@@ -274,7 +274,11 @@ layui.use(['laydate', 'table', 'form'], function () {
                 var fyArr = []
                 var zjArr = []
                 $(".sjj").each(function (n, m) {
-                    zjArr.push($(m).val())
+                    if ($(m).val() == "") {
+                        zjArr.push(0)
+                    } else {
+                        zjArr.push($(m).val())
+                    }
                 })
                 $(".houseResource").each(function (i, o) {
                     if ($(o).val() !== "") {
@@ -298,7 +302,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                 if ($(".htType").val() !== "") {
                                                     if (isCffy(fyArr)) {
                                                         if (!isBzj()) {
-                                                            layer.msg("保证金不能少于三个月的实际租金！")
+                                                            layer.msg("保证金不能少于两个月的实际租金！")
                                                         } else {
                                                             var data = {
                                                                 "createdBy": user,
@@ -395,7 +399,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         $("#addFy").on("click", function () {
             n = n + 1
             var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + n + "' xlh='" + n + "' ><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
-            var sjjDiv = $("<input type='text' style='margin-top: 16px;' onkeyup='bzj()' xlh='" + n + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
+            var sjjDiv = $("<input type='text' style='margin-top: 16px;' onkeyup='bzj()' xlh='" + n + "' name='title' required  lay-verify='required' placeholder='请输入' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
             getaddyf(n)
             form.render('select')
         })
@@ -558,7 +562,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
                         '  </div>\n' +
                         '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label"><span class="inputBtx">*</span>实际租金</label>\n' +
+                        '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
                         '    <div class="layui-input-block">\n' +
                         '      <input type="text" name="title" required  lay-verify="required" onkeyup="bzj()" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj">\n' +
                         '<div id="addsjjDiv">' +
@@ -644,7 +648,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 success: function (req) {
                                     if (req.status == "200") {
                                         $(req.data).each(function (i, o) {
-                                            var option = $("<option value='" + o.id + "'>" + o.resourceName + "</option>").appendTo(selectDiv)
+                                            var option = $("<option value='" + o.id + "' resourceArea='" + o.resourceArea + "'>" + o.resourceName + "</option>").appendTo(selectDiv)
                                         })
                                     } else {
                                         layer.msg(req.msg)
@@ -915,6 +919,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             var lxsm = $("<td>类型</td>").appendTo(sm)
                             var rqsm = $("<td>日期</td>").appendTo(sm)
                             var msm = $("<td>金额(元)</td>").appendTo(sm)
+                            var zt = $("<td>状态</td>").appendTo(sm)
 
                             $(obj.data.mustMoney).each(function (i, o) {
                                 if (o.moneyType == "往年欠款") {
@@ -923,18 +928,21 @@ layui.use(['laydate', 'table', 'form'], function () {
                                     var lxtd = $("<td>" + o.moneyType + "</td>").appendTo(tr)
                                     var lxtd = $("<td>" + o.mustDate + "</td>").appendTo(tr)
                                     var lxtd = $("<td>" + o.money + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.payStatus + "</td>").appendTo(tr)
                                 } else if (o.moneyType == "保证金") {
                                     var tr = $("<tr></tr>").appendTo("#zjlb")
                                     var lxtd = $("<td>" + o.mustReason + "</td>").appendTo(tr)
                                     var lxtd = $("<td>" + o.moneyType + "</td>").appendTo(tr)
                                     var lxtd = $("<td>" + o.mustDate + "</td>").appendTo(tr)
                                     var lxtd = $("<td>" + o.money + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.payStatus + "</td>").appendTo(tr)
                                 } else {
                                     var tr = $("<tr></tr>").appendTo("#zjlb")
                                     var lxtd = $("<td>" + o.mustReason + "</td>").appendTo(tr)
                                     var lxtd = $("<td>" + o.moneyType + "</td>").appendTo(tr)
                                     var lxtd = $("<td>" + o.mustDate + "</td>").appendTo(tr)
                                     var lxtd = $("<td>" + o.money + "</td>").appendTo(tr)
+                                    var lxtd = $("<td>" + o.payStatus + "</td>").appendTo(tr)
                                 }
                             })
                         }
@@ -1066,7 +1074,7 @@ function getfy() {
             var options = $("<option value=''>请选择</option>").appendTo(".houseFy")
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.resourceName + "</option>").appendTo(".houseFy")
+                    var option = $("<option value='" + o.id + "' resourceArea='" + o.resourceArea + "'>" + o.resourceName + "</option>").appendTo(".houseFy")
                 })
             } else {
                 layer.msg(req.msg)
@@ -1098,7 +1106,7 @@ function getaddyf(n) {
             var options = $("<option value=''>请选择</option>").appendTo('.houseFy' + n)
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
-                    var option = $("<option value='" + o.id + "'>" + o.resourceName + "</option>").appendTo('.houseFy' + n)
+                    var option = $("<option value='" + o.id + "' resourceArea='" + o.resourceArea + "'>" + o.resourceName + "</option>").appendTo('.houseFy' + n)
                 })
             } else {
                 layer.msg(req.msg)
@@ -1246,9 +1254,13 @@ function sgetyf() {
 /*判断是否重复选择房源*/
 function isCffy(arr) {
     var istrue = true
-    var nary = arr.sort()
+    var idArr = []
+    $(arr).each(function (i, o) {
+        idArr.push(o.fkHouseResourceId)
+    })
+    var nary = idArr.sort()
     for (var i = 0; i < arr.length; i++) {
-        if (nary[i].fkHouseResourceId == nary[i + 1].fkHouseResourceId) {
+        if (nary[i] == nary[i + 1]) {
             istrue = false
             break;
         }
@@ -1259,27 +1271,46 @@ function isCffy(arr) {
 
 function bzj() {
     var bzj = 0
+    var areaArr = []
+    $(".houseResource option:selected").each(function (n,m) {
+        if ($(m).attr("resourcearea")!==undefined){
+            areaArr.push($(m).attr("resourcearea"))
+        } else {
+            areaArr.push(0)
+        }
+
+    })
     $(".sjj").each(function (i, o) {
         if ($(o).val() == "") {
             bzj = bzj + 0
         } else {
-            bzj = bzj + parseInt($(o).val())
+            bzj = bzj + parseInt($(o).val())*30*areaArr[i]
         }
     })
-
+    bzj = bzj.toFixed(2);
     $(".bzj").val(bzj * 2)
 }
 
 function isBzj() {
     var bzj = 0
     var isTrue = true
+    var areaArr = []
+    $(".houseResource option:selected").each(function (n,m) {
+        if ($(m).attr("resourcearea")!==undefined){
+            areaArr.push($(m).attr("resourcearea"))
+        } else {
+            areaArr.push(0)
+        }
+
+    })
     $(".sjj").each(function (i, o) {
         if ($(o).val() == "") {
             bzj = bzj + 0
         } else {
-            bzj = bzj + parseInt($(o).val())
+            bzj = bzj + parseInt($(o).val())*30*areaArr[i]
         }
     })
+    bzj = bzj.toFixed(2);
     if ($(".bzj").val() < bzj * 2) {
         isTrue = false
     }

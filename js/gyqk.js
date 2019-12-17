@@ -24,8 +24,8 @@ layui.use(['table', 'form'], function () {
         }
         , page: true //开启分页
         , cols: [[ //表头
-            { field: 'name', title: '房屋共有情况名称' }
-            , { title: '操作', toolbar: '#barDemo', width: 200 }
+            {field: 'name', title: '房屋共有情况名称'}
+            , {title: '操作', toolbar: '#barDemo', width: 200}
         ]]
     });
     // table.reload;
@@ -103,7 +103,7 @@ layui.use(['table', 'form'], function () {
                         "name": $(".name").val(),
                     }
 
-                    if ($(".name").val().length > 0) {
+                    if ($.trim($(".name").val()).length > 0) {
 
                         $.ajax({
                             url: IPzd + '/dic/house/share',    //请求的url地址
@@ -184,7 +184,7 @@ layui.use(['table', 'form'], function () {
                     "name": $(".name").val(),
                 }
 
-                if ($(".name").val().length > 0) {
+                if ($.trim($(".name").val()).length > 0) {
                     $.ajax({
                         url: IPzd + '/dic/house/share',    //请求的url地址
                         dataType: "json",   //返回格式为json

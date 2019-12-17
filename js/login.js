@@ -56,6 +56,12 @@ $(function () {
             }
         });
     })
+
+    $(document).keypress(function (e){
+         if(e.keyCode == 13){
+             $("#login").click()
+       　}
+    })
 })
 
 $("#img").click(function () {

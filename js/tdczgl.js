@@ -654,9 +654,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label"><span class="inputBtx">*</span>管理单位</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="gldw manageUnit" disabled>\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input gldw" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     // '  <div class="dialogDiv">\n' +
@@ -674,9 +672,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地类</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="tdyt" disabled="disabled">\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input tdyt" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     // '  <div class="dialogDiv">\n' +
@@ -688,9 +684,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">使用权类型</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <select class="tdsylx" disabled="disabled">\n' +
-                    '    <option value="">请选择</option>\n' +
-                    '     </select>\n' +
+                    '      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input tdsylx" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' + '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">终止日期</label>\n' +
@@ -743,8 +737,8 @@ layui.use(['table', 'laydate', 'form'], function () {
                     getgldw()
                     $(".cqmz").val(obj.data.assetsName)
                     $(".symj").val(obj.data.assetsArea)
-                    $(".tdyt").val(obj.data.fkLandUsageId)
-                    $(".tdsylx").val(obj.data.fkLandNatureId)
+                    $(".tdyt").val(obj.data.landUsage)
+                    $(".tdsylx").val(obj.data.landNature)
                     $(".zl").val(obj.data.assetsLocation)
                     $("#date").val(obj.data.endTime)
                     $(".co").val(obj.data.owner)
@@ -757,7 +751,7 @@ layui.use(['table', 'laydate', 'form'], function () {
                     $(".yzmj").val(obj.data.yzArea)
                     $(".wzmj").val(obj.data.wzArea)
                     $(".tdzh").val(obj.data.landNo)
-                    $(".gldw").val(obj.data.fkAgencyId)
+                    $(".gldw").val(obj.data.agencyName)
                 }
             }
             layerLookOpen(openMes);

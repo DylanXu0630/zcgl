@@ -86,7 +86,7 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv", style="width:88%;margin-top:20px">\n' +
-                    '    <label class="layui-form-label">产权单位</label>\n' +
+                    '    <label class="layui-form-label">产权名称</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title"  placeholder="必填项，请输入" autocomplete="off" class="layui-input name">\n' +
                     '    </div>\n' +

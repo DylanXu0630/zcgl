@@ -76,53 +76,55 @@ function getDatas() {
         },
         success: function (req) {
             if (req.status == 200) {
-                $(".month").children().remove()
-                $(".totalResourceArea").children().remove()
-                $(".totalResourceYzArea").children().remove()
-                $(".totalResourceWzArea").children().remove()
-                $(".totalRentedResourceArea").children().remove()
-                $(".totalResourceNum").children().remove()
-                $(".totalRentedResourceNum").children().remove()
 
-                var zgldw = $("<td class='bj'>月份</td>").appendTo(".month")
-                var qfTd = $("<td class='bj'>房源总面积(m²)</td>").appendTo(".totalResourceArea")
-                var zqtmj = $("<td class='bj'>总有证面积(m²)</td>").appendTo(".totalResourceYzArea")
-                var zqtmj = $("<td class='bj'>总无证面积(m²)</td>").appendTo(".totalResourceWzArea")
-                var zfynum = $("<td class='bj'>总出租面积(m²)</td>").appendTo(".totalRentedResourceArea")
-                var zqtmj = $("<td class='bj'>房源总数</td>").appendTo(".totalResourceNum")
-                var zjzmj = $("<td class='bj'>总出租个数</td>").appendTo(".totalRentedResourceNum")
-
-                var mtd = $("<td class='mouthTD' colspan='" + req.data.length + "'>" + req.data[0].totalResourceArea + "</td>").appendTo(".totalResourceArea")
-                var ytd = $("<td class='mouthTD' colspan='" + req.data.length + "'>" + req.data[0].totalResourceYzArea + "</td>").appendTo(".totalResourceYzArea")
-                var std = $("<td class='mouthTD' colspan='" + req.data.length + "'>" + req.data[0].totalResourceWzArea + "</td>").appendTo(".totalResourceWzArea")
-                var qtd = $("<td class='mouthTD' colspan='" + req.data.length + "' >" + req.data[0].totalResourceNum + "</td>").appendTo(".totalResourceNum")
-
-                $(req.data).each(function (i, o) {
-                    var mtd = $("<td class='mouthTD bjTD'>" + o.month + "</td>").appendTo(".month")
-
-                    var qtd = $("<td class='mouthTD'>" + o.totalRentedResourceNum + "</td>").appendTo(".totalRentedResourceNum")
-                    var qtd = $("<td class='mouthTD'>" + o.totalRentedResourceArea + "</td>").appendTo(".totalRentedResourceArea")
-                })
-            } else {
-                $(".month").children().remove()
-                $(".totalRentedResourceArea").children().remove()
-                $(".totalRentedResourceNum").children().remove()
-                $(".totalResourceArea").children().remove()
-                $(".totalResourceNum").children().remove()
-                $(".totalResourceWzArea").children().remove()
-                $(".totalResourceYzArea").children().remove()
-
-
-                var zgldw = $("<td class='bj'>月份</td>").appendTo(".month")
-                var qfTd = $("<td class='bj'>房源总面积(m²)</td>").appendTo(".totalResourceArea")
-                var zqtmj = $("<td class='bj'>总有证面积(m²)</td>").appendTo(".totalResourceYzArea")
-                var zqtmj = $("<td class='bj'>总无证面积(m²)</td>").appendTo(".totalResourceWzArea")
-                var zfynum = $("<td class='bj'>总出租面积</td>").appendTo(".totalRentedResourceArea")
-                var zqtmj = $("<td class='bj'>房源总数</td>").appendTo(".totalResourceNum")
-                var zjzmj = $("<td class='bj'>总出租个数</td>").appendTo(".totalRentedResourceNum")
-
-                var td = $("<td style='text-align: center' rowspan='7'>暂无数据</td>").appendTo(".month")
             }
+            //     $(".month").children().remove()
+            //     $(".totalResourceArea").children().remove()
+            //     $(".totalResourceYzArea").children().remove()
+            //     $(".totalResourceWzArea").children().remove()
+            //     $(".totalRentedResourceArea").children().remove()
+            //     $(".totalResourceNum").children().remove()
+            //     $(".totalRentedResourceNum").children().remove()
+            //
+            //     var zgldw = $("<td class='bj'>月份</td>").appendTo(".month")
+            //     var qfTd = $("<td class='bj'>房源总面积(m²)</td>").appendTo(".totalResourceArea")
+            //     var zqtmj = $("<td class='bj'>总有证面积(m²)</td>").appendTo(".totalResourceYzArea")
+            //     var zqtmj = $("<td class='bj'>总无证面积(m²)</td>").appendTo(".totalResourceWzArea")
+            //     var zfynum = $("<td class='bj'>总出租面积(m²)</td>").appendTo(".totalRentedResourceArea")
+            //     var zqtmj = $("<td class='bj'>房源总数</td>").appendTo(".totalResourceNum")
+            //     var zjzmj = $("<td class='bj'>总出租个数</td>").appendTo(".totalRentedResourceNum")
+            //
+            //     var mtd = $("<td class='mouthTD' colspan='" + req.data.length + "'>" + req.data[0].totalResourceArea + "</td>").appendTo(".totalResourceArea")
+            //     var ytd = $("<td class='mouthTD' colspan='" + req.data.length + "'>" + req.data[0].totalResourceYzArea + "</td>").appendTo(".totalResourceYzArea")
+            //     var std = $("<td class='mouthTD' colspan='" + req.data.length + "'>" + req.data[0].totalResourceWzArea + "</td>").appendTo(".totalResourceWzArea")
+            //     var qtd = $("<td class='mouthTD' colspan='" + req.data.length + "' >" + req.data[0].totalResourceNum + "</td>").appendTo(".totalResourceNum")
+            //
+            //     // $(req.data).each(function (i, o) {
+            //     //     var mtd = $("<td class='mouthTD bjTD'>" + o.month + "</td>").appendTo(".month")
+            //     //
+            //     //     var qtd = $("<td class='mouthTD'>" + o.totalRentedResourceNum + "</td>").appendTo(".totalRentedResourceNum")
+            //     //     var qtd = $("<td class='mouthTD'>" + o.totalRentedResourceArea + "</td>").appendTo(".totalRentedResourceArea")
+            //     // })
+            // } else {
+            //     $(".month").children().remove()
+            //     $(".totalRentedResourceArea").children().remove()
+            //     $(".totalRentedResourceNum").children().remove()
+            //     $(".totalResourceArea").children().remove()
+            //     $(".totalResourceNum").children().remove()
+            //     $(".totalResourceWzArea").children().remove()
+            //     $(".totalResourceYzArea").children().remove()
+            //
+            //
+            //     var zgldw = $("<td class='bj'>月份</td>").appendTo(".month")
+            //     var qfTd = $("<td class='bj'>房源总面积(m²)</td>").appendTo(".totalResourceArea")
+            //     var zqtmj = $("<td class='bj'>总有证面积(m²)</td>").appendTo(".totalResourceYzArea")
+            //     var zqtmj = $("<td class='bj'>总无证面积(m²)</td>").appendTo(".totalResourceWzArea")
+            //     var zfynum = $("<td class='bj'>总出租面积</td>").appendTo(".totalRentedResourceArea")
+            //     var zqtmj = $("<td class='bj'>房源总数</td>").appendTo(".totalResourceNum")
+            //     var zjzmj = $("<td class='bj'>总出租个数</td>").appendTo(".totalRentedResourceNum")
+            //
+            //     var td = $("<td style='text-align: center' rowspan='7'>暂无数据</td>").appendTo(".month")
+            // }
         },
         complete: function () {
             //请求完成的处理

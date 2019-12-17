@@ -18,7 +18,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         , contentType: "application/json"
         , where: {
             "asc": 0,
-            "aid":aid,
+            "aid": aid,
             "agencyId": "",
             "dealExistStatusCode": "",
             "dealName": "",
@@ -70,7 +70,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             /*通过操作*/
             layer.confirm('确定审核通过？', function (index) {
                 $.ajax({
-                    url: IPzd + '/deal/review/' + obj.data.id+'/2',    //请求的url地址
+                    url: IPzd + '/deal/review/' + obj.data.id + '/2',    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "PUT",   //请求方式
@@ -105,7 +105,7 @@ layui.use(['laydate', 'table', 'form'], function () {
             /*不通过操作*/
             layer.confirm('确定审核不通过？', function (index) {
                 $.ajax({
-                    url: IPzd + '/deal/review/' + obj.data.id+'/3',    //请求的url地址
+                    url: IPzd + '/deal/review/' + obj.data.id + '/3',    //请求的url地址
                     dataType: "json",   //返回格式为json
                     async: false,//请求是否异步，默认为异步，这也是ajax重要特性
                     type: "PUT",   //请求方式
@@ -137,6 +137,468 @@ layui.use(['laydate', 'table', 'form'], function () {
             });
 
         } else if (layEvent == 'detail') {
+            if (obj.data.dealTypeCode == 1) {
+                var content = '<div id="htall" style="font-size: 20px !important;">\n' +
+                    '    <div class="firstPage">\n' +
+                    '        <div class="titleBt">蠡园开发区房屋出租审核表（协商出租）</div>\n' +
+                    '        <div class="thbh">合同编号：<span class="pageSpan s-bbh"></span></div>\n' +
+                    '        <table class="pageTable" border="1" cellspacing="0" style="margin-bottom: 300px;height: 1000px">\n' +
+                    '            <tr>\n' +
+                    '                <td style="padding:0 10px;">管理中心（或经营托管单位)</td>\n' +
+                    '                <td colspan="5" style="padding:0 10px;"><span class="glzx"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td style="padding:0 10px;">房屋产权单位</td>\n' +
+                    '                <td colspan="5" style="padding:0 10px;"><span class="jf"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td style="padding:0 10px;">房产坐落</td>\n' +
+                    '                <td colspan="5" style="padding:0 10px;"><span class="fczl"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td style="padding:0 10px;">承租人</td>\n' +
+                    '                <td colspan="5" style="padding:0 10px;"><span class="yf"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td style="padding:0 10px;">租赁期限(月)</td>\n' +
+                    '                <td colspan="6" style="padding:0 10px;"><span class="synx"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td style="padding:0 10px;">合同面积（㎡）</td>\n' +
+                    '                <td style="padding:0 10px;"><span class="mjjz"></span></td>\n' +
+                    '                <td style="padding:0 10px;">合同单价（元/㎡/月）</td>\n' +
+                    '                <td style="padding:0 10px;"><span class="sjzj"></span></td>\n' +
+                    '                <td style="padding:0 10px;">开发区指导价（元/㎡/月）</td>\n' +
+                    '                <td style="padding:0 10px;"><span class="zdj"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td style="padding:0 10px;">租赁期限(月)</td>\n' +
+                    '                <td colspan="3" style="padding:0 10px;"><span class="synx"></span></td>\n' +
+                    '                <td style="padding:0 10px;">新签/续签</td>\n' +
+                    '                <td style="padding:0 10px;"><span class="sfxq"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="1" style="padding:0 10px;">免租期限</td>\n' +
+                    '                <td colspan="2" style="padding:0 10px;"><span class="mzq"></span></td>\n' +
+                    '                <td colspan="1" style="padding:0 10px;">有无优惠条款</td>\n' +
+                    '                <td colspan="2" style="padding:0 10px;"><span class="ywyhtj"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="6" style="padding:0 10px;">经办人签字：<span class="qzDate" style="float: right;margin-right: 20px;"><span\n' +
+                    '                        class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                      style="margin: 0 20px;"></span>日</span>\n' +
+                    '                </td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="6" style="padding:0 10px;">管理中心负责人签字：<span class="qzDate" style="float: right;margin-right: 20px;"><span\n' +
+                    '                        class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                      style="margin: 0 20px;"></span>日</span>\n' +
+                    '                </td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="6" style="padding:0 10px;">资产办审核：<span class="qzDate" style="float: right;margin-right: 20px;"><span\n' +
+                    '                        class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                      style="margin: 0 20px;"></span>日</span>\n' +
+                    '                </td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="6" style="padding:0 10px;">财政审计局审核：<span class="qzDate" style="float: right;margin-right: 20px;"><span\n' +
+                    '                        class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                      style="margin: 0 20px;"></span>日</span>\n' +
+                    '                </td>\n' +
+                    '            </tr>\n' +
+                    '        </table>\n' +
+                    '    </div>\n' +
+                    '    <div class="bbh">版本号：<span class="htSpan s-bbh"></span></div>\n' +
+                    '    <h2>房屋租赁合同</h2>\n' +
+                    '    <div style="line-height: 37px;">出租方（下称甲方）:<span class="htSpan jf"></span></div>\n' +
+                    '    <div style="line-height: 37px;">承租方（下称乙方）:<span class="htSpan yf"></span></div>\n' +
+                    '    <div style="overflow: hidden;font-size: 20px;line-height: 37px;">\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据《中华人民共和国合同法》及其他有关法律、法规规定，在平等、自愿、协商一致的基础上，甲、乙双方就下列房屋的租赁达成如下协议：<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">一、租赁房屋的坐落、面积、租赁期限</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲方将座落于<span class="zlwz"></span>，租赁期限为<span\n' +
+                    '            class="htSpan synx"></span>个月，从<span\n' +
+                    '            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。<span class="freeZq">免租期<span\n' +
+                    '            class="htSpan mzq">1</span>个月</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">二、房屋的租金</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）租赁房屋每月租金为<span class="htSpan htsjzj"></span>元，乙方先支付租金再使用房屋，乙方应当在下一个周期开始前5天支付租金，第一期租金应当在本合同签署之日同时支付，甲方收到房屋租金和履约保证金后再向乙方交付租赁房屋。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方按照以下第<span class="htSpan fkfs"></span>项方式支付租金：<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">三、履约保证金</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一） 为保证乙方全面履行本合同的义务，乙方同意于本合同签订之日向甲方交纳履约保证金<span class="htSpan bzj"></span>元。甲方无须向乙方支付履约保证金的利息。租赁期内，乙方不得以保证金抵付租金等任何应付费用。该保证金将随本合同规定之租金的增加而相应地追加，乙方应于租金增加后3日内追加保证金；否则，视为乙方对甲方违约。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）如乙方违反本合同的任何约定或条款，拖欠支付本合同规定的任何款项包括但不限于租金等费用，甲方有权以保证金抵付任何欠款或甲方因乙方的违约而根据本合同规定及法律规定可以要求其承担的任何款项或甲方的任何损失。甲方根据本合同抵扣保证金后，乙方必须于3日内把甲方扣除部分保证金额补足。否则，视为乙方对甲方违约。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）在不影响上述规定的前提下，在租赁期结束后（或按本合同规定提前终止时）及乙方按合同约定返还该房屋予甲方，该保证金在扣除本合同上条规定之款项后，将由甲方无息退还乙方。但根据本合同约定甲方有权不予退还的除外。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（四）如乙方按期续租，则履约保证金不退给乙方，自动转为下一期合同履约保证金。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">四、房屋交付和装修改造</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）甲方应在<span class="htSpan starTime"></span>前按照合同约定，将出租的房屋全部交给乙方使用。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方未能按期接受房屋的，甲方将通知乙方接受房屋且甲方通知的交房时间即视为乙方接受房屋的时间；同时，乙方接到甲方交房通知后5日内未来交接房屋的，甲方有权解除本合同，甲方已经收取的履约保证金不予返还。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）租赁期间，如果甲方将财产所有权转移给第三方时，租赁合同对受让方继续有效。如甲方在房屋上设置他项权益的，将不影响乙方对房屋的使用。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（四）乙方对租赁房屋进行装修改造前，应当将装修改造方案书面汇报给甲方，经甲方书面同意后，方可对租赁房屋进行装修改造。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">五、物业费、水电费等费用的支付</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）出租房屋的水费、电费、空调使用等费用由乙方支付。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方同意自房屋交付之日起，将房屋纳入甲方委托的物业管理机构进行统一管理，并遵守有关管理规定，由乙方与物业公司另签协议,乙方自行承担相应的物管费用等所有费用。乙方拒绝签订物业管理协议或合同的，视为乙方对甲方的违约行为。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">六、合同的解除和补偿</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙方有下列情形之一的，甲方有权在情形发生后的任何时间，解除本合同，提前收回出租房屋。在此情形下，甲方无需对乙方承担包括但不限于装修费、设备添加费等任何补偿，且甲方已收取的履约保证金不予退还，同时甲方还有权要求乙方再支付相当于6个月租金的违约金；如违约金不足以弥补甲方损失的，乙方还应承担赔偿责任。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）乙方发生无正当理由拖欠租金、水费、电费、物业费、综合服务管理费等违反、不履行本合同及附件规定之任何条款、条件规定的行为，并在甲方发出书面通知后30天内未予纠正的及具有本合同其他条款约定的违约行为的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方未经甲方书面同意擅自改变出租房屋租赁用途的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）乙方未经甲方书面同意擅自转租、分租、抵押、出借、转让出租房屋的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（四）因乙方的原因造成出租房屋结构损坏，影响房屋安全、擅自拆改、损坏房屋且不予修复或不予赔偿的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（五）乙方中途擅自退租的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（六）乙方被宣告破产的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（七）乙方利用出租房屋进行违法犯罪活动的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（八）乙方违反第八条第二款的规定，拒不改正的。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">七、租赁房屋的维护</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;租赁期间，租用房屋和配套设施损坏损毁，由乙方负责修缮恢复原状，并需要赔偿甲方的经济损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">八、双方的权利和义务</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）甲方有权督促乙方按约使用房屋，保障使用的安全；乙方应当爱护房屋并按时交纳租金，乙方逾期交付房屋租金的，每逾期一日乙方应当向甲方支付应付房屋租金千分之一的滞纳金。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方对甲方正常的房屋检查给予协助，乙方不得擅自改变房屋结构和用途，不得贮存任何违禁品、易燃品、爆炸品等物，不得擅自转租、转让、转借房屋，不得以承租房屋设定抵押等他项权利，合同终止时主动将房屋和配套设施完好地交还给甲方。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">九、违约责任：</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(一)乙方的责任<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、由于使用不当或者人为因素造成租赁财产损坏、灭失的，负责修复、赔偿。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、乙方擅自拆改房屋、设备、机具等财产，负责赔偿由此而造成的损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、无正当理由影响房屋修缮工期，乙方应当赔偿甲方因此而造成的损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4、合同终止后，乙方逾期不返还租赁房屋的，按照租金的2倍标准支付房屋占用费。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(二)甲方的责任<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、未按合同规定的面积、标准提供出租房屋及配套设施，负责赔偿由此给乙方造成的损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、房屋倒塌，因甲方的责任发生的，赔偿因此而致使乙方遭受的财产损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本合同其他条款对违约责任另有约定的，将与本第九条的约定同时适用。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十、合同解除或终止后的处理</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无论因任何原因导致本合同解除或终止的，乙方必须在5日内搬出属于乙方所有的全部物件，逾期未搬离的，则视为乙方放弃对余物的所有权且甲方或甲方聘请第三方予以清理且因此发生的损失及费用均由乙方承担，乙方对此保证不提出任何异议，并不主张任何权利。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十一、优先承租权</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合同期满，如甲方的房屋继续出租，在同等条件下，乙方享有优先权，但乙方必须在三个月之前提出书面续租申请，否则，视为乙方不继续承租。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十二、通知条款</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）涉及本合同权利义务变化的或其他必要通知，应以书面形式传递，收到方应签收。如无法向另一方直接送达或另一方不予签收，可邮寄送达，邮件寄至本合同记载之地址时，即视为送达。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）本合同下述的地址、电话为双方通知送达的地址、电话，如果任何一方变更，应在变更后3日内书面通知对方，否则任何一方通知送达前述地址，即视为被送达方收到，由此引发的法律后果由被送达人承担。<br>\n' +
+                    '        甲方：<span class="htSpan jf"></span><br>\n' +
+                    '        联系人<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系电话：<span\n' +
+                    '            class=""></span><br>\n' +
+                    '        联系地址：<span class=""></span><br>\n' +
+                    '        乙方:<span class=""></span><br>\n' +
+                    '        联系人<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系电话：<span\n' +
+                    '            class=""></span><br>\n' +
+                    '        联系地址：<span class=""></span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）本条约定的通知和送达将适用于法院及执法机关的通知和送达即法院和执法机关按照前述联系方式发出通知和送达的即视为有效通知和送达。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十三、争议解决条款</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本合同如发生纠纷，甲、乙双方应通过友好协调解决，不能解决时向租赁房屋所在地人民法院起诉。因此所发生的案件受理费、保全费、保全保险费及差旅费和律师费均由败诉方承担。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十四、合同的签署和生效</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本合同共四页，为一式四份，甲方执三份、乙方执一份，经双方签字或盖章之日起生效。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十五、其它条款:</span><br>\n' +
+                    '        <textarea class="qtbz" readonly></textarea>\n' +
+                    '        出租方（盖章）: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;承租方（盖章）:<br>\n' +
+                    '        法定代表人或授权代表（签字）:<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;法定代表人或授权代表（签字）:<span\n' +
+                    '            class=""></span><br>\n' +
+                    '        <div style="text-align: right;margin-top: 20px">\n' +
+                    '            本合同签订时间<span class="" style="margin: 0 20px;margin-left: 60px"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                                        style="margin: 0 20px;"></span>日\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</div>'
+            } else if (obj.data.dealTypeCode == 2) {
+                var content = '<div id="htall" style="font-size: 20px !important;">\n' +
+                    '    <div class="titleBt">蠡园开发区房屋出租审核表（一事一议）</div>\n' +
+                    '    <div class="thbh">合同编号：<span class="pageSpan s-bbh"></span></div>\n' +
+                    '    <table class="pageTable" border="1" cellspacing="0" style="margin-bottom: 300px;height: 1000px">\n' +
+                    '        <tr>\n' +
+                    '            <td style="padding:0 10px;">管理中心（或经营托管单位)</td>\n' +
+                    '            <td colspan="5" style="padding:0 10px;"><span class="glzx"></span></td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td style="padding:0 10px;">房屋产权单位</td>\n' +
+                    '            <td colspan="5" style="padding:0 10px;"><span class="jf"></span></td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td style="padding:0 10px;">房产坐落</td>\n' +
+                    '            <td colspan="5" style="padding:0 10px;"><span class="fczl"></span></td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td style="padding:0 10px;">承租人</td>\n' +
+                    '            <td colspan="5" style="padding:0 10px;"><span class="yf"></span></td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td style="padding:0 10px;">合同面积（㎡）</td>\n' +
+                    '            <td style="padding:0 10px;"><span class="mjjz"></span></td>\n' +
+                    '            <td style="padding:0 10px;">合同单价（元/㎡/月）</td>\n' +
+                    '            <td style="padding:0 10px;"><span class="sjzj"></span></td>\n' +
+                    '            <td style="padding:0 10px;">开发区指导价（元/㎡/月）</td>\n' +
+                    '            <td style="padding:0 10px;"><span class="zdj"></span></td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td style="padding:0 10px;">租赁期限(月)</td>\n' +
+                    '            <td colspan="3" style="padding:0 10px;"><span class="synx"></span></td>\n' +
+                    '            <td style="padding:0 10px;">新签/续签</td>\n' +
+                    '            <td style="padding:0 10px;"><span class="sfxq"></span></td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td style="padding:0 10px;">免租期限</td>\n' +
+                    '            <td colspan="5" style="padding:0 10px;"><span class="mzq"></span></td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td colspan="6" style="padding:0 10px;">优惠条款简要说明：</td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td colspan="2" style="padding:0 10px;">管理中心经办人签字：</td>\n' +
+                    '            <td colspan="4" style="padding:0 10px;">负责人签字：<span class="qzDate" style="float: right;margin-right: 20px;"><span class=""\n' +
+                    '                                                                                                      style="margin: 0 20px;"></span>年<span\n' +
+                    '                    class="" style="margin: 0 20px;"></span>月<span class="" style="margin: 0 20px;"></span>日</span></td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td colspan="6" style="padding:0 10px;">律师审核：<span class="qzDate" style="float: right;margin-right: 20px;"><span\n' +
+                    '                    class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                              style="margin: 0 20px;"></span>日</span>\n' +
+                    '            </td>\n' +
+                    '        </tr>\n' +
+                    '                \n' +
+                    '        <tr>\n' +
+                    '            <td colspan="6" style="padding:0 10px;">资产办审核：<span class="qzDate" style="float: right;margin-right: 20px;"><span\n' +
+                    '                    class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                              style="margin: 0 20px;"></span>日</span>\n' +
+                    '            </td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td colspan="6" style="padding:0 10px;">财政审计局审核：<span class="qzDate" style="float: right;margin-right: 20px;"><span\n' +
+                    '                    class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                              style="margin: 0 20px;"></span>日</span>\n' +
+                    '            </td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td colspan="6" style="padding:0 10px;">分管领导审核：<span class="qzDate" style="float: right;margin-right: 20px;"><span\n' +
+                    '                    class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                              style="margin: 0 20px;"></span>日</span>\n' +
+                    '            </td>\n' +
+                    '        </tr>\n' +
+                    '        <tr>\n' +
+                    '            <td colspan="6" style="padding:0 10px;">主要领导签批： <span class="qzDate" style="float: right;margin-right: 20px;"><span\n' +
+                    '                    class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                              style="margin: 0 20px;"></span>日</span>\n' +
+                    '            </td>\n' +
+                    '        </tr>\n' +
+                    '    </table>\n' +
+                    '    <div class="bbh">版本号：<span class="htSpan s-bbh"></span></div>\n' +
+                    '    <h2>房屋租赁合同</h2>\n' +
+                    '    <div style="line-height: 37px;">出租方（下称甲方）:<span class="htSpan jf"></span></div>\n' +
+                    '    <div style="line-height: 37px;">承租方（下称乙方）:<span class="htSpan yf"></span></div>\n' +
+                    '    <div style="overflow: hidden;font-size: 20px;line-height: 37px;">\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据《中华人民共和国合同法》及其他有关法律、法规规定，在平等、自愿、协商一致的基础上，甲、乙双方就下列房屋的租赁达成如下协议：<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">一、租赁房屋的坐落、面积、租赁期限</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲方将座落于<span class="zlwz"></span>，租赁期限为<span\n' +
+                    '            class="htSpan synx"></span>个月，从<span\n' +
+                    '            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。免租期<span class="htSpan mzq">1</span>个月<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">二、房屋的租金</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）租赁房屋每月租金为<span class="htSpan htsjzj"></span>元，乙方先支付租金再使用房屋，乙方应当在下一个周期开始前5天支付租金，第一期租金应当在本合同签署之日同时支付，甲方收到房屋租金和履约保证金后再向乙方交付租赁房屋。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方按照以下第<span class="htSpan fkfs"></span>项方式支付租金：<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">三、履约保证金</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一） 为保证乙方全面履行本合同的义务，乙方同意于本合同签订之日向甲方交纳履约保证金<span class="htSpan bzj"></span>元。甲方无须向乙方支付履约保证金的利息。租赁期内，乙方不得以保证金抵付租金等任何应付费用。该保证金将随本合同规定之租金的增加而相应地追加，乙方应于租金增加后3日内追加保证金；否则，视为乙方对甲方违约。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）如乙方违反本合同的任何约定或条款，拖欠支付本合同规定的任何款项包括但不限于租金等费用，甲方有权以保证金抵付任何欠款或甲方因乙方的违约而根据本合同规定及法律规定可以要求其承担的任何款项或甲方的任何损失。甲方根据本合同抵扣保证金后，乙方必须于3日内把甲方扣除部分保证金额补足。否则，视为乙方对甲方违约。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）在不影响上述规定的前提下，在租赁期结束后（或按本合同规定提前终止时）及乙方按合同约定返还该房屋予甲方，该保证金在扣除本合同上条规定之款项后，将由甲方无息退还乙方。但根据本合同约定甲方有权不予退还的除外。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（四）如乙方按期续租，则履约保证金不退给乙方，自动转为下一期合同履约保证金。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">四、房屋交付和装修改造</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）甲方应在<span class="htSpan starTime"></span>前按照合同约定，将出租的房屋全部交给乙方使用。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方未能按期接受房屋的，甲方将通知乙方接受房屋且甲方通知的交房时间即视为乙方接受房屋的时间；同时，乙方接到甲方交房通知后5日内未来交接房屋的，甲方有权解除本合同，甲方已经收取的履约保证金不予返还。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）租赁期间，如果甲方将财产所有权转移给第三方时，租赁合同对受让方继续有效。如甲方在房屋上设置他项权益的，将不影响乙方对房屋的使用。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（四）乙方对租赁房屋进行装修改造前，应当将装修改造方案书面汇报给甲方，经甲方书面同意后，方可对租赁房屋进行装修改造。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">五、物业费、水电费等费用的支付</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）出租房屋的水费、电费、空调使用等费用由乙方支付。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方同意自房屋交付之日起，将房屋纳入甲方委托的物业管理机构进行统一管理，并遵守有关管理规定，由乙方与物业公司另签协议,乙方自行承担相应的物管费用等所有费用。乙方拒绝签订物业管理协议或合同的，视为乙方对甲方的违约行为。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">六、合同的解除和补偿</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙方有下列情形之一的，甲方有权在情形发生后的任何时间，解除本合同，提前收回出租房屋。在此情形下，甲方无需对乙方承担包括但不限于装修费、设备添加费等任何补偿，且甲方已收取的履约保证金不予退还，同时甲方还有权要求乙方再支付相当于6个月租金的违约金；如违约金不足以弥补甲方损失的，乙方还应承担赔偿责任。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）乙方发生无正当理由拖欠租金、水费、电费、物业费、综合服务管理费等违反、不履行本合同及附件规定之任何条款、条件规定的行为，并在甲方发出书面通知后30天内未予纠正的及具有本合同其他条款约定的违约行为的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方未经甲方书面同意擅自改变出租房屋租赁用途的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）乙方未经甲方书面同意擅自转租、分租、抵押、出借、转让出租房屋的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（四）因乙方的原因造成出租房屋结构损坏，影响房屋安全、擅自拆改、损坏房屋且不予修复或不予赔偿的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（五）乙方中途擅自退租的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（六）乙方被宣告破产的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（七）乙方利用出租房屋进行违法犯罪活动的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（八）乙方违反第八条第二款的规定，拒不改正的。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">七、租赁房屋的维护</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;租赁期间，租用房屋和配套设施损坏损毁，由乙方负责修缮恢复原状，并需要赔偿甲方的经济损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">八、双方的权利和义务</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）甲方有权督促乙方按约使用房屋，保障使用的安全；乙方应当爱护房屋并按时交纳租金，乙方逾期交付房屋租金的，每逾期一日乙方应当向甲方支付应付房屋租金千分之一的滞纳金。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方对甲方正常的房屋检查给予协助，乙方不得擅自改变房屋结构和用途，不得贮存任何违禁品、易燃品、爆炸品等物，不得擅自转租、转让、转借房屋，不得以承租房屋设定抵押等他项权利，合同终止时主动将房屋和配套设施完好地交还给甲方。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">九、违约责任：</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(一)乙方的责任<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、由于使用不当或者人为因素造成租赁财产损坏、灭失的，负责修复、赔偿。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、乙方擅自拆改房屋、设备、机具等财产，负责赔偿由此而造成的损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、无正当理由影响房屋修缮工期，乙方应当赔偿甲方因此而造成的损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4、合同终止后，乙方逾期不返还租赁房屋的，按照租金的2倍标准支付房屋占用费。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(二)甲方的责任<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、未按合同规定的面积、标准提供出租房屋及配套设施，负责赔偿由此给乙方造成的损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、房屋倒塌，因甲方的责任发生的，赔偿因此而致使乙方遭受的财产损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本合同其他条款对违约责任另有约定的，将与本第九条的约定同时适用。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十、合同解除或终止后的处理</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无论因任何原因导致本合同解除或终止的，乙方必须在5日内搬出属于乙方所有的全部物件，逾期未搬离的，则视为乙方放弃对余物的所有权且甲方或甲方聘请第三方予以清理且因此发生的损失及费用均由乙方承担，乙方对此保证不提出任何异议，并不主张任何权利。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十一、优先承租权</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合同期满，如甲方的房屋继续出租，在同等条件下，乙方享有优先权，但乙方必须在三个月之前提出书面续租申请，否则，视为乙方不继续承租。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十二、通知条款</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）涉及本合同权利义务变化的或其他必要通知，应以书面形式传递，收到方应签收。如无法向另一方直接送达或另一方不予签收，可邮寄送达，邮件寄至本合同记载之地址时，即视为送达。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）本合同下述的地址、电话为双方通知送达的地址、电话，如果任何一方变更，应在变更后3日内书面通知对方，否则任何一方通知送达前述地址，即视为被送达方收到，由此引发的法律后果由被送达人承担。<br>\n' +
+                    '        甲方：<span class="htSpan jf"></span><br>\n' +
+                    '        联系人<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系电话：<span\n' +
+                    '            class=""></span><br>\n' +
+                    '        联系地址：<span class=""></span><br>\n' +
+                    '        乙方:<span class=""></span><br>\n' +
+                    '        联系人<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系电话：<span\n' +
+                    '            class=""></span><br>\n' +
+                    '        联系地址：<span class=""></span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）本条约定的通知和送达将适用于法院及执法机关的通知和送达即法院和执法机关按照前述联系方式发出通知和送达的即视为有效通知和送达。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十三、争议解决条款</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本合同如发生纠纷，甲、乙双方应通过友好协调解决，不能解决时向租赁房屋所在地人民法院起诉。因此所发生的案件受理费、保全费、保全保险费及差旅费和律师费均由败诉方承担。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十四、合同的签署和生效</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本合同共四页，为一式四份，甲方执三份、乙方执一份，经双方签字或盖章之日起生效。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十五、其它条款:</span><br>\n' +
+                    '        <textarea class="qtbz" readonly></textarea>\n' +
+                    '        出租方（盖章）: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;承租方（盖章）:<br>\n' +
+                    '        法定代表人或授权代表（签字）:<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;法定代表人或授权代表（签字）:<span\n' +
+                    '            class=""></span><br>\n' +
+                    '        <div style="text-align: right;margin-top: 20px">\n' +
+                    '            本合同签订时间<span class="" style="margin: 0 20px;margin-left: 60px"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                                        style="margin: 0 20px;"></span>日\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</div>'
+            } else if (obj.data.dealTypeCode == 3) {
+                var content = '<div id="htall" style="font-size: 20px !important;">\n' +
+                    '    <div class="firstPage">\n' +
+                    '        <div class="titleBt">蠡园开发区房屋出租审核表（挂靠合同）</div>\n' +
+                    '        <div class="thbh">合同编号：<span class="pageSpan bbh"></span></div>\n' +
+                    '        <table class="pageTable" border="1" cellspacing="0" style="margin-bottom: 300px;height: 1000px">\n' +
+                    '            <tr>\n' +
+                    '                <td style="padding:0 10px;">出租方(甲方)</td>\n' +
+                    '                <td colspan="3"><span class="jf"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td style="padding:0 10px;">承租方(乙方)</td>\n' +
+                    '                <td colspan="3" style="padding:0 10px;"><span class="yf"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td  style="padding:0 10px;">挂靠地址</td>\n' +
+                    '                <td colspan="3"  style="padding:0 10px;"><span class="fczl"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td  style="padding:0 10px;">租赁期限(月)</td>\n' +
+                    '                <td colspan="3"  style="padding:0 10px;"><span class="synx"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td  style="padding:0 10px;">合同面积(m²)</td>\n' +
+                    '                <td  style="padding:0 10px;"><span class="mjjz"></span></td>\n' +
+                    '                <td  style="padding:0 10px;">合同单价(元/m²/月)</td>\n' +
+                    '                <td  style="padding:0 10px;"><span class="sjzj"></span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="4"  style="padding:0 10px;">双方申请：甲乙双方签订上述租赁合同（详见合同原文）,合同内容对甲乙双方没有法律约束力</td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="2" style="padding:0 10px;">\n' +
+                    '                    挂靠原因说明：\n' +
+                    '                </td>\n' +
+                    '                <td colspan="2"  style="padding:0 10px;">\n' +
+                    '                    原租户意见\n' +
+                    '                </td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="2"  style="padding:0 10px;">\n' +
+                    '                    甲方：（签章）\n' +
+                    '                </td>\n' +
+                    '                <td colspan="2"  style="padding:0 10px;">\n' +
+                    '                    乙方：（签章）\n' +
+                    '                </td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="4"  style="padding:0 10px;">经办人签字：<span class="qzDate" style="float: right;margin-right: 20px;"><span class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class="" style="margin: 0 20px;"></span>日</span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="4"  style="padding:0 10px;">管理中心负责人签字：<span class="qzDate" style="float: right;margin-right: 20px;"><span class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class="" style="margin: 0 20px;"></span>日</span></td>\n' +
+                    '            </tr>\n' +
+                    '            <tr>\n' +
+                    '                <td colspan="4"  style="padding:0 10px;">财政审计局审核：<span class="qzDate" style="float: right;margin-right: 20px;"><span class="" style="margin: 0 20px;"></span>年<span class="" style="margin: 0 20px;"></span>月<span class="" style="margin: 0 20px;"></span>日</span></td>\n' +
+                    '            </tr>\n' +
+                    '        </table>\n' +
+                    '    </div>\n' +
+                    '    <div class="bbh">版本号：<span class="htSpan s-bbh"></span></div>\n' +
+                    '    <h2>房屋租赁合同</h2>\n' +
+                    '    <div style="line-height: 37px;">出租方（下称甲方）:<span class="htSpan jf"></span></div>\n' +
+                    '    <div style="line-height: 37px;">承租方（下称乙方）:<span class="htSpan yf"></span></div>\n' +
+                    '    <div style="overflow: hidden;font-size: 20px;line-height: 37px;">\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据《中华人民共和国合同法》及其他有关法律、法规规定，在平等、自愿、协商一致的基础上，甲、乙双方就下列房屋的租赁达成如下协议：<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">一、租赁房屋的坐落、面积、租赁期限</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲方将座落于<span class="zlwz"></span>，租赁期限为<span\n' +
+                    '            class="htSpan synx"></span>个月，从<span\n' +
+                    '            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。免租期<span class="htSpan mzq">1</span>个月<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">二、房屋的租金</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）租赁房屋每月租金为<span class="htSpan htsjzj"></span>元，乙方先支付租金再使用房屋，乙方应当在下一个周期开始前5天支付租金，第一期租金应当在本合同签署之日同时支付，甲方收到房屋租金和履约保证金后再向乙方交付租赁房屋。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方按照以下第<span class="htSpan fkfs"></span>项方式支付租金：<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">三、履约保证金</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一） 为保证乙方全面履行本合同的义务，乙方同意于本合同签订之日向甲方交纳履约保证金<span class="htSpan bzj"></span>元。甲方无须向乙方支付履约保证金的利息。租赁期内，乙方不得以保证金抵付租金等任何应付费用。该保证金将随本合同规定之租金的增加而相应地追加，乙方应于租金增加后3日内追加保证金；否则，视为乙方对甲方违约。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）如乙方违反本合同的任何约定或条款，拖欠支付本合同规定的任何款项包括但不限于租金等费用，甲方有权以保证金抵付任何欠款或甲方因乙方的违约而根据本合同规定及法律规定可以要求其承担的任何款项或甲方的任何损失。甲方根据本合同抵扣保证金后，乙方必须于3日内把甲方扣除部分保证金额补足。否则，视为乙方对甲方违约。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）在不影响上述规定的前提下，在租赁期结束后（或按本合同规定提前终止时）及乙方按合同约定返还该房屋予甲方，该保证金在扣除本合同上条规定之款项后，将由甲方无息退还乙方。但根据本合同约定甲方有权不予退还的除外。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（四）如乙方按期续租，则履约保证金不退给乙方，自动转为下一期合同履约保证金。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">四、房屋交付和装修改造</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）甲方应在<span class="htSpan starTime"></span>前按照合同约定，将出租的房屋全部交给乙方使用。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方未能按期接受房屋的，甲方将通知乙方接受房屋且甲方通知的交房时间即视为乙方接受房屋的时间；同时，乙方接到甲方交房通知后5日内未来交接房屋的，甲方有权解除本合同，甲方已经收取的履约保证金不予返还。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）租赁期间，如果甲方将财产所有权转移给第三方时，租赁合同对受让方继续有效。如甲方在房屋上设置他项权益的，将不影响乙方对房屋的使用。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（四）乙方对租赁房屋进行装修改造前，应当将装修改造方案书面汇报给甲方，经甲方书面同意后，方可对租赁房屋进行装修改造。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">五、物业费、水电费等费用的支付</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）出租房屋的水费、电费、空调使用等费用由乙方支付。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方同意自房屋交付之日起，将房屋纳入甲方委托的物业管理机构进行统一管理，并遵守有关管理规定，由乙方与物业公司另签协议,乙方自行承担相应的物管费用等所有费用。乙方拒绝签订物业管理协议或合同的，视为乙方对甲方的违约行为。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">六、合同的解除和补偿</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙方有下列情形之一的，甲方有权在情形发生后的任何时间，解除本合同，提前收回出租房屋。在此情形下，甲方无需对乙方承担包括但不限于装修费、设备添加费等任何补偿，且甲方已收取的履约保证金不予退还，同时甲方还有权要求乙方再支付相当于6个月租金的违约金；如违约金不足以弥补甲方损失的，乙方还应承担赔偿责任。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）乙方发生无正当理由拖欠租金、水费、电费、物业费、综合服务管理费等违反、不履行本合同及附件规定之任何条款、条件规定的行为，并在甲方发出书面通知后30天内未予纠正的及具有本合同其他条款约定的违约行为的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方未经甲方书面同意擅自改变出租房屋租赁用途的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）乙方未经甲方书面同意擅自转租、分租、抵押、出借、转让出租房屋的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（四）因乙方的原因造成出租房屋结构损坏，影响房屋安全、擅自拆改、损坏房屋且不予修复或不予赔偿的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（五）乙方中途擅自退租的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（六）乙方被宣告破产的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（七）乙方利用出租房屋进行违法犯罪活动的；<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（八）乙方违反第八条第二款的规定，拒不改正的。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">七、租赁房屋的维护</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;租赁期间，租用房屋和配套设施损坏损毁，由乙方负责修缮恢复原状，并需要赔偿甲方的经济损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">八、双方的权利和义务</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）甲方有权督促乙方按约使用房屋，保障使用的安全；乙方应当爱护房屋并按时交纳租金，乙方逾期交付房屋租金的，每逾期一日乙方应当向甲方支付应付房屋租金千分之一的滞纳金。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方对甲方正常的房屋检查给予协助，乙方不得擅自改变房屋结构和用途，不得贮存任何违禁品、易燃品、爆炸品等物，不得擅自转租、转让、转借房屋，不得以承租房屋设定抵押等他项权利，合同终止时主动将房屋和配套设施完好地交还给甲方。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">九、违约责任：</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(一)乙方的责任<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、由于使用不当或者人为因素造成租赁财产损坏、灭失的，负责修复、赔偿。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、乙方擅自拆改房屋、设备、机具等财产，负责赔偿由此而造成的损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、无正当理由影响房屋修缮工期，乙方应当赔偿甲方因此而造成的损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4、合同终止后，乙方逾期不返还租赁房屋的，按照租金的2倍标准支付房屋占用费。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(二)甲方的责任<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、未按合同规定的面积、标准提供出租房屋及配套设施，负责赔偿由此给乙方造成的损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、房屋倒塌，因甲方的责任发生的，赔偿因此而致使乙方遭受的财产损失。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本合同其他条款对违约责任另有约定的，将与本第九条的约定同时适用。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十、合同解除或终止后的处理</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无论因任何原因导致本合同解除或终止的，乙方必须在5日内搬出属于乙方所有的全部物件，逾期未搬离的，则视为乙方放弃对余物的所有权且甲方或甲方聘请第三方予以清理且因此发生的损失及费用均由乙方承担，乙方对此保证不提出任何异议，并不主张任何权利。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十一、优先承租权</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合同期满，如甲方的房屋继续出租，在同等条件下，乙方享有优先权，但乙方必须在三个月之前提出书面续租申请，否则，视为乙方不继续承租。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十二、通知条款</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）涉及本合同权利义务变化的或其他必要通知，应以书面形式传递，收到方应签收。如无法向另一方直接送达或另一方不予签收，可邮寄送达，邮件寄至本合同记载之地址时，即视为送达。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）本合同下述的地址、电话为双方通知送达的地址、电话，如果任何一方变更，应在变更后3日内书面通知对方，否则任何一方通知送达前述地址，即视为被送达方收到，由此引发的法律后果由被送达人承担。<br>\n' +
+                    '        甲方：<span class="htSpan jf"></span><br>\n' +
+                    '        联系人<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系电话：<span\n' +
+                    '            class=""></span><br>\n' +
+                    '        联系地址：<span class=""></span><br>\n' +
+                    '        乙方:<span class=""></span><br>\n' +
+                    '        联系人<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系电话：<span\n' +
+                    '            class=""></span><br>\n' +
+                    '        联系地址：<span class=""></span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）本条约定的通知和送达将适用于法院及执法机关的通知和送达即法院和执法机关按照前述联系方式发出通知和送达的即视为有效通知和送达。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十三、争议解决条款</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本合同如发生纠纷，甲、乙双方应通过友好协调解决，不能解决时向租赁房屋所在地人民法院起诉。因此所发生的案件受理费、保全费、保全保险费及差旅费和律师费均由败诉方承担。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十四、合同的签署和生效</span><br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本合同共四页，为一式四份，甲方执三份、乙方执一份，经双方签字或盖章之日起生效。<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">十五、其它条款:</span><br>\n' +
+                    '        <textarea class="qtbz" readonly></textarea>\n' +
+                    '        出租方（盖章）: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;承租方（盖章）:<br>\n' +
+                    '        法定代表人或授权代表（签字）:<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;法定代表人或授权代表（签字）:<span\n' +
+                    '            class=""></span><br>\n' +
+                    '        <div style="text-align: right;margin-top: 20px">\n' +
+                    '            本合同签订时间<span class="" style="margin: 0 20px;margin-left: 60px"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""\n' +
+                    '                                                                                                                                        style="margin: 0 20px;"></span>日\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</div>'
+            }
+
             /*查看操作*/
             var openMes = {
                 title: '查看合同详情',
@@ -144,182 +606,224 @@ layui.use(['laydate', 'table', 'form'], function () {
                 leixing: '查看',
                 maxmin: true,
                 id: obj.data.id,
-                content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
-                    '<div class="addDig">' +
-                    '<div><form class="layui-form" action="">\n' +
-                    '<div class="dialogTitle">合同基础信息</div>' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">合同名称</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dealName" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">合同类型</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htType" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">出租人（甲方）</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jf" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">承租人（乙方）</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input czfyf" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">付款方式</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fkfs" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">开始日期</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">终止日期</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '       <input type="text" name="date" id="date2" autocomplete="off" class="layui-input httime" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">租赁月数(月)</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zlys" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">合同状态</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htzt" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">合同审核状态</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htshzt" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">是否续租</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input rentType" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-
-                    '<div class="dialogTitle">房源基础信息</div>' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label"> 管理单位</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input gldw" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">面积(m²)</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input mj" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-
-
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">地址</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input dz" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">房源用处</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fyyc" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">租赁期限（月）</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zpqxt" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">原价(元/m² *月)</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input yj" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">实际价(元/m² *月)</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input sjj" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    // '  <div class="dialogDiv">\n' +
-                    // '    <label class="layui-form-label">单价</label>\n' +
-                    // '    <div class="layui-input-block">\n' +
-                    // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input unitPrice">\n' +
-                    // '    </div>\n' +
-                    // '  </div>\n' +
-                    '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">指导价(元/m² *月)</label>\n' +
-                    '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zdj" readonly>\n' +
-                    '    </div>\n' +
-                    '  </div>\n' +
-                    // '  </div>\n' +
-                    '</form></div>' +
-                    '</div>' +
-                    '</div>',
+                content: content,
                 look: function () {
-                    $.ajax({
-                        url: IPzd + '/deal/detail/' + obj.data.id,    //请求的url地址
-                        dataType: "json",   //返回格式为json
-                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                        type: "GET",   //请求方式
-                        contentType: "application/json;charset=UTF-8",
-                        // headers: {"token": sessionStorage.token},
-                        beforeSend: function () {
-                            //请求前的处理
-                        },
-                        success: function (req) {
-                            if (req.status == "200") {
-                                $(".dealName").val(req.data.dealName)
-                                $(".jf").val(req.data.lessor)
-                                $(".czfyf").val(req.data.renter)
-                                $(".dz").val(req.data.location)
-                                $(".mj").val(req.data.resourceArea)
-                                $(".fyyc").val(req.data.houseUsage)
-                                $(".gldw").val(req.data.manageUnit)
-                                $(".zpqxt").val(req.data.rentMonth)
-                                $(".yj").val(req.data.originRentCharge)
-                                $(".zdj").val(req.data.guideRentCharge)
-                                $(".sjj").val(req.data.realRentCharge)
-                                $("#date").val(req.data.startTime)
-                                $("#date2").val(req.data.endTime)
-                                $(".htshzt").val(req.data.dealReviewStatus)
-                                $(".htzt").val(req.data.dealExistStatus)
-                                $(".htType").val(req.data.dealType)
-                                $(".fkfs").val(req.data.payType)
-                                $(".zlys").val(req.data.rentMonth)
-                                $(".rentType").val(req.data.rentType)
-                            } else {
-                                layer.msg("获取失败")
-                            }
-
-                        },
-                        complete: function () {
-                            //请求完成的处理
-                        },
-                        error: function () {
-                            //请求出错处理
+                    if (obj.data.dealTypeCode == 1) {
+                        $(".fczl").text(obj.data.location)
+                        $(".s-bbh").text(obj.data.dealSerial)
+                        $(".yf").text(obj.data.renter)
+                        $(".jf").text(obj.data.lessor)
+                        $(".mjjz").text(obj.data.resourceArea)
+                        $(".syyt").text(obj.data.houseUsage)
+                        $(".synx").text(obj.data.rentMonth)
+                        $(".starTime").text(obj.data.startTime)
+                        $(".endTime").text(obj.data.endTime)
+                        // $(".sjzj").text(heObj.realRentCharge)
+                        $(".fkfs").text(obj.data.payType)
+                        if (obj.data.freeRentMonth == 0) {
+                            $(".freeZq").css("display", "none")
+                        } else {
+                            $(".mzq").text(obj.data.freeRentMonth)
                         }
-                    });
+
+                        // $(".bzj").text(heObj.deposit)
+                        $(".sfxq").text(obj.data.isNewRent)
+                        $(".zdj").text(obj.data.guideRentCharge)
+
+                        if (obj.data.freeRentMonth == "0") {
+                            $(".ywyhtj").text("无")
+                        } else {
+                            $(".ywyhtj").text("有")
+                        }
+
+                        $(obj.data.mustMoney).each(function (i, o) {
+                            if (o.moneyType == "保证金") {
+                                $(".bzj").text(o.money)
+                            }
+                        })
+
+                        var zlArr = obj.data.location.split(",")
+                        if (obj.data.houseResourceDetail.length < 2) {
+                            $(".glzx").text(obj.data.houseResourceDetail[0].agency)
+                            $(".mjjz").text(obj.data.houseResourceDetail[0].resourceArea)
+                            $(".sjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                            $(".zdj").text(obj.data.houseResourceDetail[0].guideRentCharge)
+                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + obj.data.houseResourceDetail[0].houseUsage + "</span>使用<span>,</span><span class='htSpan mpfsjzj'>" + obj.data.houseResourceDetail[0].rentMoneyPerArea + "</span><span元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                            $(".htsjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
+                            $(".mpfsjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                        } else {
+                            var glzxArr = []
+                            var heAreaArr = []
+                            var djArr = []
+                            var zdjArr = []
+                            var yzjArr = []
+                            var realArr = []
+                            $(obj.data.houseResourceDetail).each(function (i, o) {
+                                glzxArr.push(o.agency)
+                                heAreaArr.push(o.resourceArea)
+                                djArr.push(o.rentMoneyPerArea)
+                                zdjArr.push(o.guideRentMoneyPerArea)
+                                yzjArr.push(o.realRentCharge)
+
+                                if (i > 0) {
+                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.rentMoneyPerArea + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                } else {
+                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.rentMoneyPerArea + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                }
+                            })
+
+                            var glzx = $.unique(glzxArr).join(";");
+                            $(".glzx").text(glzx)
+                            var heArea = $.unique(heAreaArr).join(";");
+                            $(".mjjz").text(heArea)
+                            var dj = $.unique(djArr).join(";");
+                            $(".mpfsjzj").text(dj)
+                            $(".sjzj").text(dj)
+                            var zdj = $.unique(zdjArr).join(";");
+                            $(".zdj").text(zdj)
+                            var sjzj = $.unique(yzjArr).join(";");
+                            $(".htsjzj").text(sjzj)
+                        }
+                    } else if (obj.data.dealTypeCode == 2) {
+                        $(".fczl").text(obj.data.location)
+                        $(".s-bbh").text(obj.data.dealSerial)
+                        $(".yf").text(obj.data.renter)
+                        $(".jf").text(obj.data.lessor)
+                        $(".mjjz").text(obj.data.resourceArea)
+                        $(".syyt").text(obj.data.houseUsage)
+                        $(".synx").text(obj.data.rentMonth)
+                        $(".starTime").text(obj.data.startTime)
+                        $(".endTime").text(obj.data.endTime)
+                        // $(".sjzj").text(heObj.realRentCharge)
+                        $(".fkfs").text(obj.data.payType)
+                        if (obj.data.freeRentMonth == 0) {
+                            $(".freeZq").css("display", "none")
+                        } else {
+                            $(".mzq").text(obj.data.freeRentMonth)
+                        }
+                        // $(".bzj").text(heObj.deposit)
+                        $(".sfxq").text(obj.data.isNewRent)
+                        $(".zdj").text(obj.data.guideRentCharge)
+
+                        $(obj.data.mustMoney).each(function (i,o) {
+                            if (o.moneyType=="保证金"){
+                                $(".bzj").text(o.money)
+                            }
+                        })
+
+
+                        var zlArr = obj.data.location.split(",")
+                        if (obj.data.houseResourceDetail.length < 2) {
+                            $(".glzx").text(obj.data.houseResourceDetail[0].agency)
+                            $(".mjjz").text(obj.data.houseResourceDetail[0].resourceArea)
+                            $(".sjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                            $(".zdj").text(obj.data.houseResourceDetail[0].guideRentCharge)
+                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ obj.data.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ obj.data.houseResourceDetail[0].rentMoneyPerArea +"</span><span元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                            $(".htsjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
+                            $(".mpfsjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                        } else {
+                            var glzxArr = []
+                            var heAreaArr = []
+                            var djArr = []
+                            var zdjArr = []
+                            var yzjArr = []
+                            var realArr =[]
+                            $(obj.data.houseResourceDetail).each(function (i, o) {
+                                glzxArr.push(o.agency)
+                                heAreaArr.push(o.resourceArea)
+                                djArr.push(o.rentMoneyPerArea)
+                                zdjArr.push(o.guideRentMoneyPerArea)
+                                yzjArr.push(o.realRentCharge)
+
+                                if (i > 0) {
+                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                } else {
+                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                }
+                            })
+
+                            var glzx = $.unique(glzxArr).join(";");
+                            $(".glzx").text(glzx)
+                            var heArea = $.unique(heAreaArr).join(";");
+                            $(".mjjz").text(heArea)
+                            var dj = $.unique(djArr).join(";");
+                            $(".mpfsjzj").text(dj)
+                            $(".sjzj").text(dj)
+                            var zdj = $.unique(zdjArr).join(";");
+                            $(".zdj").text(zdj)
+                            var sjzj = $.unique(yzjArr).join(";");
+                            $(".htsjzj").text(sjzj)
+                        }
+                    } else if (obj.data.dealTypeCode == 3) {
+                        $(".fczl").text(obj.data.location)
+                        $(".s-bbh").text(obj.data.dealSerial)
+                        $(".yf").text(obj.data.renter)
+                        $(".jf").text(obj.data.lessor)
+                        $(".mjjz").text(obj.data.resourceArea)
+                        $(".syyt").text(obj.data.houseUsage)
+                        $(".synx").text(obj.data.rentMonth)
+                        $(".starTime").text(obj.data.startTime)
+                        $(".endTime").text(obj.data.endTime)
+                        // $(".sjzj").text(heObj.realRentCharge)
+                        $(".fkfs").text(obj.data.payType)
+                        if (obj.data.freeRentMonth == 0) {
+                            $(".freeZq").css("display", "none")
+                        } else {
+                            $(".mzq").text(obj.data.freeRentMonth)
+                        }
+                        // $(".bzj").text(heObj.deposit)
+                        $(".sfxq").text(obj.data.isNewRent)
+                        $(".zdj").text(obj.data.guideRentCharge)
+                        watermark({watermark_txt: obj.data.dealSerial})//传入动态水印内容
+                        $(obj.data.mustMoney).each(function (i,o) {
+                            if (o.moneyType=="保证金"){
+                                $(".bzj").text(o.money)
+                            }
+                        })
+
+                        var zlArr = obj.data.location.split(",")
+                        if (obj.data.houseResourceDetail.length < 2) {
+                            $(".glzx").text(obj.data.houseResourceDetail[0].agency)
+                            $(".mjjz").text(obj.data.houseResourceDetail[0].resourceArea)
+                            $(".sjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                            $(".zdj").text(obj.data.houseResourceDetail[0].guideRentCharge)
+                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ obj.data.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ obj.data.houseResourceDetail[0].rentMoneyPerArea +"</span><span元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                            $(".htsjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
+                            $(".mpfsjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                        } else {
+                            var glzxArr = []
+                            var heAreaArr = []
+                            var djArr = []
+                            var zdjArr = []
+                            var yzjArr = []
+                            var realArr =[]
+                            $(obj.data.houseResourceDetail).each(function (i, o) {
+                                glzxArr.push(o.agency)
+                                heAreaArr.push(o.resourceArea)
+                                djArr.push(o.rentMoneyPerArea)
+                                zdjArr.push(o.guideRentMoneyPerArea)
+                                yzjArr.push(o.realRentCharge)
+
+                                if (i > 0) {
+                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                } else {
+                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                }
+                            })
+
+                            var glzx = $.unique(glzxArr).join(";");
+                            $(".glzx").text(glzx)
+                            var heArea = $.unique(heAreaArr).join(";");
+                            $(".mjjz").text(heArea)
+                            var dj = $.unique(djArr).join(";");
+                            $(".mpfsjzj").text(dj)
+                            $(".sjzj").text(dj)
+                            var zdj = $.unique(zdjArr).join(";");
+                            $(".zdj").text(zdj)
+                            var sjzj = $.unique(yzjArr).join(";");
+                            $(".htsjzj").text(sjzj)
+                        }
+                    }
                 }
             }
             layerLookOpen(openMes);
