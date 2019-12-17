@@ -582,14 +582,14 @@ layui.use(['laydate', 'table', 'form'], function () {
                         if (fyArr.length < 2) {
                             if ($(".houseFy").children().length < 2) {
                                 $(".houseFy").children().remove()
-                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].assetsId + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
-                                $(".houseFy").val(obj.data.houseResourceDetail[0].assetsId)
+                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
+                                $(".houseFy").val(obj.data.houseResourceDetail[0].id)
                                 $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
                                 form.render('select')
                             } else {
                                 $(".houseFy").children().remove()
-                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].assetsId + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
-                                $(".houseFy").val(obj.data.houseResourceDetail[0].assetsId)
+                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
+                                $(".houseFy").val(obj.data.houseResourceDetail[0].id)
                                 $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
                                 form.render('select')
                             }
@@ -597,15 +597,15 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(fyArr).each(function (i, o) {
                                 if (i > 0) {
                                     var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select xlh='" + i + "' class='houseResource houseFy" + i + "'></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
-                                    var options2 = $("<option value='" + o.assetsId + "'>" + o.location + "</option>").appendTo(".houseFy" + i)
+                                    var options2 = $("<option value='" + o.id + "'>" + o.location + "</option>").appendTo(".houseFy" + i)
                                     // getaddyf(i)
                                     var sjjDiv = $("<input type='text' onkeyup='bzj()' style='margin-top: 16px;' xlh='" + i + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + i + "'>").appendTo("#addsjjDiv")
-                                    $(".houseFy" + i).val(o.assetsId)
+                                    $(".houseFy" + i).val(o.id)
                                     $(".sjzj" + i).val(o.realRentCharge)
                                     form.render('select')
                                 } else {
-                                    var options2 = $("<option value='" + obj.data.houseResourceDetail[0].assetsId + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
-                                    $(".houseFy").val(obj.data.houseResourceDetail[0].assetsId)
+                                    var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
+                                    $(".houseFy").val(obj.data.houseResourceDetail[0].id)
                                     $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
                                     form.render('select')
                                 }
@@ -620,6 +620,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         $(".mzMouth").val(obj.data.freeRentMonth)
                         $(".isHaveDiscount").val(obj.data.freeRentMonth)
                         $(".rentType").val(obj.data.isNewRentCode)
+                        $(".isHaveDiscount").val(obj.data.isHaveDiscountCode)
 
                         $(obj.data.mustMoney).each(function (n, m) {
                             if (m.moneyType == "保证金") {
@@ -1247,7 +1248,7 @@ function isCffy(arr) {
     var istrue = true
     var nary = arr.sort()
     for (var i = 0; i < arr.length; i++) {
-        if (nary[i] == nary[i + 1]) {
+        if (nary[i].fkHouseResourceId == nary[i + 1].fkHouseResourceId) {
             istrue = false
             break;
         }
@@ -1266,7 +1267,7 @@ function bzj() {
         }
     })
 
-    $(".bzj").val(bzj * 3)
+    $(".bzj").val(bzj * 2)
 }
 
 function isBzj() {
@@ -1279,7 +1280,7 @@ function isBzj() {
             bzj = bzj + parseInt($(o).val())
         }
     })
-    if ($(".bzj").val() < bzj * 3) {
+    if ($(".bzj").val() < bzj * 2) {
         isTrue = false
     }
     return isTrue
