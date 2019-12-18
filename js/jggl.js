@@ -103,9 +103,9 @@ layui.use(['table', 'form'], function () {
                 put: function () {
                     var data = {
                         "id": obj.data.id,
-                        "name": $(".name").val(),
+                        "name": delKg($(".name")),
                     }
-                    if ($(".name").val().length > 0) {
+                    if (delKg($(".name")).length > 0) {
 
                     $.ajax({
                         url: IPzd+'/dic/agency', //数据接口
@@ -185,9 +185,9 @@ layui.use(['table', 'form'], function () {
                 '</div>',
             add: function () {
                 var data = {
-                    "name": $(".name").val(),
+                    "name": delKg($(".name")),
                 }
-                if ($(".name").val().length > 0) {
+                if (delKg($(".name")).length > 0) {
 
                 $.ajax({
                     url: IPzd+'/dic/agency', //数据接口
