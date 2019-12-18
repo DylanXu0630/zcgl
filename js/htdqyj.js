@@ -28,7 +28,6 @@ layui.use(['laydate', 'table', 'form'], function () {
         , page: true //开启分页
         , cols: [[ //表头
             {field: 'dealSerial', title: '合同编号'}
-            , {field: 'dealName', title: '合同名称'}
             , {field: 'resourceName', title: '房源'}
             , {field: 'renter', title: '承租方',}
             , {field: 'startTime', title: '开始时间',}
