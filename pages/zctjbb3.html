@@ -22,19 +22,18 @@
                             <div class="layui-form-item">
                                 <form class="layui-form" action="">
                                     <div class="layui-inline">
-                                        <label class="layui-form-label">管理单位</label>
+                                        <label class="layui-form-label">月份</label>
                                         <div class="layui-input-block">
-                                            <select name="ht" lay-verify="" lay-search>
-                                                <option value="" disabled selected hidden></option>
-                                                <option value="1">单位一</option>
-                                                <option value="2">单位二</option>
-                                                <option value="3">单位三</option>
-                                              </select>        
+                                            <input type="text" name="date" id="s-date" placeholder="请输入" autocomplete="off" class="layui-input minfymj httime"
+                                                   style="float: left;width: 75%">
                                         </div>
                                     </div>
                                     <div class="layui-inline">
-                                        <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="LAY-user-front-search">
-                                            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                        <button class="layui-btn" id="sousuo" lay-filter="search" lay-submit="">
+                                            查询
+                                        </button>
+                                        <button class="layui-btn" id="sx">
+                                            重置
                                         </button>
                                     </div>
                                 </form>
