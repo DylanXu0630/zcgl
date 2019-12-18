@@ -3,17 +3,34 @@ layui.use('element', function () {
     var element = layui.element;
 });
 
+Date.prototype.Format = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "H+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+
 layui.use('table', function () {
     var table = layui.table;
 
     var dataList = []
+
     $.ajax({
         url: IPzd + '/report/rent/area',    //请求的url地址
         dataType: "json",   //返回格式为json
         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
         type: "POST",   //请求方式
         data: JSON.stringify({
-            "date" : "2019-12-17"
+            "date" : new Date().Format("yyyy-MM-dd")
         }), 
         contentType: "application/json;charset=UTF-8",
         // headers: {"token": sessionStorage.token},
@@ -55,35 +72,65 @@ layui.use('table', function () {
             , {field: 'totalSellHasPro', title: '已办理过户面积', sort: true, width: 200}
         ]]
     });
-})
 
-layui.use(['form', 'laydate'], function () {
-    var form = layui.form;
-    var laydate = layui.laydate;
-    getgldwcheck()
-    form.render()
-    lay('.httime').each(function () {
-        laydate.render({
-            elem: this,
-            format: 'yyyy年MM月dd日'
-        });
-    })
-
-    $("#sousuo").on("click", function () {
-        form.on('submit(search)', function (data) {
-            getDatas()
-            return false;//false：阻止表单跳转  true：表单跳转
+    layui.use(['form', 'laydate'], function () {
+        var form = layui.form;
+        var laydate = layui.laydate;
+        getgldwcheck()
+        form.render()
+        lay('.httime').each(function () {
+            laydate.render({
+                elem: this,
+                format: 'yyyy年MM月dd日'
+            });
+        })
+    
+        $("#sousuo").on("click", function () {
+            form.on('submit(search)', function (data) {
+                // getDatas()
+                //执行重载
+                $.ajax({
+                    url: IPzd + '/report/rent/area',    //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    type: "POST",   //请求方式
+                    data: JSON.stringify({
+                        "date" : sjc($('#s-date').val())
+                    }), 
+                    contentType: "application/json;charset=UTF-8",
+                    // headers: {"token": sessionStorage.token},
+                    beforeSend: function () {
+                        //请求前的处理
+                    },
+                    success: function (req) {
+                        dataList = req.data
+                    },
+                    complete: function () {
+                        //请求完成的处理
+                    },
+                    error: function () {
+                        //请求出错处理
+                    }
+                });
+    
+                table.reload('tableList', {
+                    data: dataList
+                });
+                return false;//false：阻止表单跳转  true：表单跳转
+            }) 
+        })
+        $("#sx").on("click", function () {
+            window.reload
         })
     })
-    $("#sx").on("click", function () {
-        window.reload
-    })
 })
 
 
-$(function () {
-    getDatas()
-})
+
+
+// $(function () {
+//     getDatas()
+// })
 
 function getDatas() {
     var agency = []
