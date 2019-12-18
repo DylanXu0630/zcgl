@@ -1284,7 +1284,7 @@ function bzj() {
         if ($(o).val() == "") {
             bzj = bzj + 0
         } else {
-            bzj = bzj + parseInt($(o).val())*30*areaArr[i]
+            bzj = bzj + parseInt($(o).val())*areaArr[i]
         }
     })
     bzj = bzj.toFixed(2);
@@ -1307,7 +1307,7 @@ function isBzj() {
         if ($(o).val() == "") {
             bzj = bzj + 0
         } else {
-            bzj = bzj + parseInt($(o).val())*30*areaArr[i]
+            bzj = bzj + parseInt($(o).val())*areaArr[i]
         }
     })
     bzj = bzj.toFixed(2);
