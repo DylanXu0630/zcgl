@@ -836,22 +836,22 @@ function landSelect(obj) {
         success: function (req) {
 
             if (req.status == 200) {
-                $(".ssyx").css("display","block")
-                if (req.data.length!==0){
+                $(".ssyx").css("display", "block")
+                if (req.data.length !== 0) {
                     $(req.data).each(function (i, o) {
                         var div = $("<div class='sslb'>" + o.name + "</div>").appendTo(".landNo")
                     })
-                } else{
+                } else {
 
                 }
 
-                $("body").on("click",".sslb",function () {
+                $("body").on("click", ".sslb", function () {
                     var no = $(this).text()
                     $(this).parent().parent().find(".s-dh").val(no)
                 })
-                $("body").on("click",function () {
+                $("body").on("click", function () {
                     var no = $(this).text()
-                    $(".landNo").css("display","none")
+                    $(".landNo").css("display", "none")
                 })
             }
         },
@@ -862,4 +862,10 @@ function landSelect(obj) {
             //请求出错处理
         }
     });
+}
+
+/*去除空格*/
+function delKg(obj) {
+    var val = $(obj).val().trim().replace(/\s/g, "")
+    return val
 }

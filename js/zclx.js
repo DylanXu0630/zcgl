@@ -104,9 +104,9 @@ layui.use(['table', 'form'], function () {
                 put: function () {
                     var data = {
                         "id": obj.data.id,
-                        "name": $(".name").val(),
+                        "name": delKg($(".name")),
                     }
-                    if ($(".name").val().length > 0) {
+                    if (delKg($(".name")).length > 0) {
                         $.ajax({
                             url: IPzd + '/dic/resource/type',    //请求的url地址
                             dataType: "json",   //返回格式为json
@@ -141,7 +141,7 @@ layui.use(['table', 'form'], function () {
                             }
                         });
                     } else {
-                        layer.msg("产权名称不能为空！")
+                        layer.msg("资产类型名称不能为空！")
 
                     }
 
@@ -189,9 +189,9 @@ layui.use(['table', 'form'], function () {
             add: function () {
 
                 var data = {
-                    "name": $(".name").val(),
+                    "name": delKg($(".name")),
                 }
-                if ($(".name").val().length > 0) {
+                if (delKg($(".name")).length > 0) {
                     $.ajax({
                         url: IPzd + '/dic/resource/type',    //请求的url地址
                         dataType: "json",   //返回格式为json
@@ -226,7 +226,7 @@ layui.use(['table', 'form'], function () {
                         }
                     });
                 } else {
-                    layer.msg("产权名称不能为空！")
+                    layer.msg("资产类型名称不能为空！")
 
                 }
 

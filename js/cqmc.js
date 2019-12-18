@@ -100,9 +100,9 @@ layui.use(['table', 'form'], function () {
                 put: function () {
                     var data = {
                         "id": obj.data.id,
-                        "name": $(".name").val(),
+                        "name": delKg($(".name")),
                     }
-                    if ($(".name").val().length > 0) {
+                    if (delKg($(".name")).length > 0) {
                         $.ajax({
                             url: IPzd + '/dic/house/name',    //请求的url地址
                             dataType: "json",   //返回格式为json
@@ -185,9 +185,9 @@ layui.use(['table', 'form'], function () {
             add: function () {
 
                 var data = {
-                    "name": $(".name").val(),
+                    "name": delKg($(".name")),
                 }
-                if ($(".name").val().length > 0) {
+                if (delKg($(".name")).length > 0) {
                     $.ajax({
                         url: IPzd + '/dic/house/name',    //请求的url地址
                         dataType: "json",   //返回格式为json
