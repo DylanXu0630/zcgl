@@ -646,9 +646,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                         if (obj.data.houseResourceDetail.length < 2) {
                             $(".glzx").text(obj.data.houseResourceDetail[0].agency)
                             $(".mjjz").text(obj.data.houseResourceDetail[0].resourceArea)
-                            $(".sjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                            $(".sjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
                             $(".zdj").text(obj.data.houseResourceDetail[0].guideRentCharge)
-                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + obj.data.houseResourceDetail[0].houseUsage + "</span>使用<span>,</span><span class='htSpan mpfsjzj'>" + obj.data.houseResourceDetail[0].rentMoneyPerArea + "</span><span元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + obj.data.houseResourceDetail[0].houseUsage + "</span>使用<span>,</span><span class='htSpan mpfsjzj'>" + obj.data.houseResourceDetail[0].realRentCharge + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                             $(".htsjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
                             $(".mpfsjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
                         } else {
@@ -666,9 +666,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 yzjArr.push(o.realRentCharge)
 
                                 if (i > 0) {
-                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.rentMoneyPerArea + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.realRentCharge + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                                 } else {
-                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.rentMoneyPerArea + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.realRentCharge + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                                 }
                             })
 
@@ -718,7 +718,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(".mjjz").text(obj.data.houseResourceDetail[0].resourceArea)
                             $(".sjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
                             $(".zdj").text(obj.data.houseResourceDetail[0].guideRentCharge)
-                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ obj.data.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ obj.data.houseResourceDetail[0].rentMoneyPerArea +"</span><span元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ obj.data.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ obj.data.houseResourceDetail[0].realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                             $(".htsjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
                             $(".mpfsjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
                         } else {
@@ -736,9 +736,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 yzjArr.push(o.realRentCharge)
 
                                 if (i > 0) {
-                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                                 } else {
-                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                                 }
                             })
 
@@ -787,7 +787,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(".mjjz").text(obj.data.houseResourceDetail[0].resourceArea)
                             $(".sjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
                             $(".zdj").text(obj.data.houseResourceDetail[0].guideRentCharge)
-                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ obj.data.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ obj.data.houseResourceDetail[0].rentMoneyPerArea +"</span><span元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ obj.data.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ obj.data.houseResourceDetail[0].realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                             $(".htsjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
                             $(".mpfsjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
                         } else {
@@ -805,9 +805,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 yzjArr.push(o.realRentCharge)
 
                                 if (i > 0) {
-                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                                 } else {
-                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.rentMoneyPerArea +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
                                 }
                             })
 

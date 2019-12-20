@@ -21,7 +21,6 @@ layui.use('element', function () {
 
 layui.use('layer', function () {
     var layer = layui.layer;
-
 })
 
 /*调用弹框*/
