@@ -465,7 +465,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 var content = '<div id="htall" style="font-size: 20px !important;">\n' +
                     '    <div class="firstPage">\n' +
                     '        <div class="titleBt">蠡园开发区房屋出租审核表（挂靠合同）</div>\n' +
-                    '        <div class="thbh">合同编号：<span class="pageSpan bbh"></span></div>\n' +
+                    '        <div class="thbh">合同编号：<span class="pageSpan s-bbh"></span></div>\n' +
                     '        <table class="pageTable" border="1" cellspacing="0" style="margin-bottom: 300px;height: 1000px">\n' +
                     '            <tr>\n' +
                     '                <td style="padding:0 10px;">出租方(甲方)</td>\n' +
@@ -726,7 +726,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                         // $(".bzj").text(heObj.deposit)
                         $(".sfxq").text(heObj.isNewRent)
                         $(".zdj").text(heObj.guideRentCharge)
-                        watermark({watermark_txt: heObj.dealSerial})//传入动态水印内容
 
                         $(heObj.mustMoney).each(function (i,o) {
                             if (o.moneyType=="保证金"){
@@ -806,7 +805,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                         // $(".bzj").text(heObj.deposit)
                         $(".sfxq").text(heObj.isNewRent)
                         $(".zdj").text(heObj.guideRentCharge)
-                        watermark({watermark_txt: heObj.dealSerial})//传入动态水印内容
                         $(heObj.mustMoney).each(function (i,o) {
                             if (o.moneyType=="保证金"){
                                 $(".bzj").text(o.money)
