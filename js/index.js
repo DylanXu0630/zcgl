@@ -62,10 +62,10 @@ $(function () {
             // 用户昵称
             if (req.status == 200) {
                 if (req.data == null) {
-                    if (localStorage.user_name !== "admin") {
-                        alert("请先绑定机构")
-                        window.location.href = "login.html"
-                    }
+                    // if (localStorage.user_name !== "admin") {
+                    //     alert("请先绑定机构")
+                    //     window.location.href = "login.html"
+                    // }
                     localStorage.setItem("aId", "")
                 } else {
                     localStorage.setItem("aId", req.data.agencyId)

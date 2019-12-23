@@ -43,7 +43,8 @@ layui.use(['laydate', 'table', 'form'], function () {
             , {field: 'date', title: '日期'}
             , {field: 'houseLocation', title: '地址'}
             , {field: 'renter', title: '承租方'}
-            , {field: 'money', title: '金额(元)'}
+            , {field: 'money', title: '应收金额(元)'}
+            , {field: 'receivedMoney', title: '实收金额(元)'}
             , {field: 'reason', title: '金额说明'}
             , {fixed: 'right', title: '操作', toolbar: '#barDemo', fixed: 'right', width: 165}
         ]], parseData: function (res) {//将原始数据解析成 table 组件所规定的数据

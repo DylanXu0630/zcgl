@@ -75,7 +75,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                         } else {
                             return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
-                                // '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="zzht">终止合同</a>' +
+                                '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="zzht">终止合同</a>' +
                                 '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                         }
 
