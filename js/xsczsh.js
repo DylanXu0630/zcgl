@@ -17,7 +17,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         , method: "POST"
         , contentType: "application/json"
         , where: {
-            "asc": 0,
+            "asc": 1,
             "aid": aid,
             "agencyId": "",
             "dealExistStatusCode": "",

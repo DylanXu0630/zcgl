@@ -579,39 +579,39 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '</div>' +
                         '</div>',
                     look: function () {
-                        // getfy()
+                        getfy()
                         getgldw()
                         getyf()
                         var fyArr = obj.data.houseResourceDetail
                         if (fyArr.length < 2) {
                             if ($(".houseFy").children().length < 2) {
                                 $(".houseFy").children().remove()
-                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
+                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "' resourcearea='"+obj.data.houseResourceDetail[0].resourceArea+"'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
                                 $(".houseFy").val(obj.data.houseResourceDetail[0].id)
                                 $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
-                                form.render('select')
+
                             } else {
-                                $(".houseFy").children().remove()
-                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
+                                // $(".houseFy").children().remove()
+                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "' resourcearea='"+obj.data.houseResourceDetail[0].resourceArea+"'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
                                 $(".houseFy").val(obj.data.houseResourceDetail[0].id)
                                 $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
-                                form.render('select')
+                                // form.render('select')
                             }
                         } else {
                             $(fyArr).each(function (i, o) {
                                 if (i > 0) {
                                     var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select xlh='" + i + "' class='houseResource houseFy" + i + "'></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
-                                    var options2 = $("<option value='" + o.id + "'>" + o.location + "</option>").appendTo(".houseFy" + i)
-                                    // getaddyf(i)
+                                    var options2 = $("<option value='" + o.id + "' resourcearea='"+o.resourceArea+"'>" + o.location + "</option>").appendTo(".houseFy" + i)
+                                    getaddyf(i)
                                     var sjjDiv = $("<input type='text' onkeyup='bzj()' style='margin-top: 16px;' xlh='" + i + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + i + "'>").appendTo("#addsjjDiv")
                                     $(".houseFy" + i).val(o.id)
                                     $(".sjzj" + i).val(o.realRentCharge)
-                                    form.render('select')
+                                    // form.render('select')
                                 } else {
                                     var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
                                     $(".houseFy").val(obj.data.houseResourceDetail[0].id)
                                     $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
-                                    form.render('select')
+                                    // form.render('select')
                                 }
                             })
                         }
@@ -633,35 +633,35 @@ layui.use(['laydate', 'table', 'form'], function () {
                         })
 
 
-                        $("body").on("click", ".houseResource", function () {
-                            var selectDiv = $(this).parent().parent().parent().find('.houseResource')
-                            $.ajax({
-                                url: IPzd + '/hresource/simple/norent',    //请求的url地址
-                                dataType: "json",   //返回格式为json
-                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                type: "GET",   //请求方式
-                                contentType: "application/json;charset=UTF-8",
-                                // headers: {"token": sessionStorage.token},
-                                beforeSend: function () {
-                                    //请求前的处理
-                                },
-                                success: function (req) {
-                                    if (req.status == "200") {
-                                        $(req.data).each(function (i, o) {
-                                            var option = $("<option value='" + o.id + "' resourceArea='" + o.resourceArea + "'>" + o.resourceName + "</option>").appendTo(selectDiv)
-                                        })
-                                    } else {
-                                        layer.msg(req.msg)
-                                    }
-                                },
-                                complete: function () {
-                                    //请求完成的处理
-                                },
-                                error: function () {
-                                    //请求出错处理
-                                }
-                            });
-                        })
+                        // $("body").on("click", ".layui-select-title", function () {
+                        //     var selectDiv = $(this).parent().parent().parent().find('.houseResource')
+                        //     $.ajax({
+                        //         url: IPzd + '/hresource/simple/norent',    //请求的url地址
+                        //         dataType: "json",   //返回格式为json
+                        //         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        //         type: "GET",   //请求方式
+                        //         contentType: "application/json;charset=UTF-8",
+                        //         // headers: {"token": sessionStorage.token},
+                        //         beforeSend: function () {
+                        //             //请求前的处理
+                        //         },
+                        //         success: function (req) {
+                        //             if (req.status == "200") {
+                        //                 $(req.data).each(function (i, o) {
+                        //                     var option = $("<option value='" + o.id + "' resourceArea='" + o.resourceArea + "'>" + o.resourceName + "</option>").appendTo(selectDiv)
+                        //                 })
+                        //             } else {
+                        //                 layer.msg(req.msg)
+                        //             }
+                        //         },
+                        //         complete: function () {
+                        //             //请求完成的处理
+                        //         },
+                        //         error: function () {
+                        //             //请求出错处理
+                        //         }
+                        //     });
+                        // })
 
                         lay('.httime').each(function () {
                             laydate.render({
@@ -1109,8 +1109,8 @@ function getaddyf(n) {
             //请求前的处理
         },
         success: function (req) {
-            $('.houseFy' + n).children().remove()
-            var options = $("<option value=''>请选择</option>").appendTo('.houseFy' + n)
+            // $('.houseFy' + n).children().remove()
+            // var options = $("<option value=''>请选择</option>").appendTo('.houseFy' + n)
             if (req.status == "200") {
                 $(req.data).each(function (i, o) {
                     var option = $("<option value='" + o.id + "' resourceArea='" + o.resourceArea + "'>" + o.resourceName + "</option>").appendTo('.houseFy' + n)
