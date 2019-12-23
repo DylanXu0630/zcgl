@@ -80,6 +80,30 @@ layui.use('table', function () {
         }
     });
 
+    // 获取所有权限 用户树找出父级绑定
+    var perAll = [];
+    $.ajax({
+        url: IPdz + '/permission/all',    //请求的url地址
+        // url: '/json/ss.json',
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            perAll = req.data
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });    
+
     //监听行工具事件
     table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
         var data = obj.data //获得当前行数据
@@ -130,21 +154,21 @@ layui.use('table', function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">中文名称:</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>中文名称:</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zwmc">\n' +
+                    '      <input type="text" name="title" required onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input zwmc">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">角色描述：</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jsms">\n' +
+                    '      <input type="text" name="title" required  onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jsms">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">英文名称：</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>英文名称：</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ywmc">\n' +
+                    '      <input type="text" name="title" required  onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ywmc">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '</form></div>' +
@@ -156,6 +180,14 @@ layui.use('table', function () {
                     $(".ywmc").val(obj.data.enName)
                 },
                 put: function () {
+                    if ($(".zwmc").val() == '') {
+                        layer.msg("中文名称不能为空！")
+                        return
+                    }
+                    if ($(".ywmc").val() == '') {
+                        layer.msg("英文名称不能为空！")
+                        return
+                    }
                     var data = {
                         "id": obj.data.id,
                         "cnName": $(".zwmc").val(),
@@ -275,6 +307,95 @@ layui.use('table', function () {
                                             success: function (req) {
                                                 layer.msg("绑定成功")
                                                 checkedInfo.push(obj.data.id)
+                                                // 绑定父级
+                                                // 根据选中的权限得到父级ID
+                                                let fpid = perAll[perAll.findIndex(item => item.id === obj.data.id)].pid
+                                                if (fpid == '0') {
+                                                    // PID == 0 表示没有父级 不需要绑定
+                                                } else {
+                                                    // PID != 0 表示有父级 需要绑定
+                                                    // 判断是否父级已经被绑定过
+                                                    if ($.inArray(fpid, checkedInfo) == '-1') {
+                                                        // 绑定父级
+                                                        $.ajax({
+                                                            url: IPdz + '/role/role/' + roleId + '/permission/'+ fpid + '',    //请求的url地址
+                                                            dataType: "json",   //返回格式为json
+                                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                            type: "POST",   //请求方式
+                                                            contentType: "application/json;charset=UTF-8",
+                                                            // headers: {"token": sessionStorage.token},
+                                                            beforeSend: function () {
+                                                                //请求前的处理
+                                                            },
+                                                            success: function (req) {
+                                                                checkedInfo.push(fpid)
+                                                                // 父级的父级是否被绑定
+                                                                let f2pid = perAll[perAll.findIndex(item => item.id === fpid)].pid
+                                                                if (f2pid == '0') {
+                                                                } else {
+                                                                    if ($.inArray(f2pid, checkedInfo) == '-1') {
+                                                                        // 绑定父级的父级
+                                                                        $.ajax({
+                                                                            url: IPdz + '/role/role/' + roleId + '/permission/'+ f2pid + '',    //请求的url地址
+                                                                            dataType: "json",   //返回格式为json
+                                                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                                            type: "POST",   //请求方式
+                                                                            contentType: "application/json;charset=UTF-8",
+                                                                            // headers: {"token": sessionStorage.token},
+                                                                            beforeSend: function () {
+                                                                                //请求前的处理
+                                                                            },
+                                                                            success: function (req) {
+                                                                                checkedInfo.push(f2pid)
+                                                                                // 父级的父级的父级绑定
+                                                                                let f3pid = perAll[perAll.findIndex(item => item.id === f2pid)].pid
+                                                                                if (f3pid == '0') {
+                                                                                } else {
+                                                                                    if ($.inArray(f3pid, checkedInfo) == '-1') {
+                                                                                        $.ajax({
+                                                                                            url: IPdz + '/role/role/' + roleId + '/permission/'+ f3pid + '',    //请求的url地址
+                                                                                            dataType: "json",   //返回格式为json
+                                                                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                                                            type: "POST",   //请求方式
+                                                                                            contentType: "application/json;charset=UTF-8",
+                                                                                            // headers: {"token": sessionStorage.token},
+                                                                                            beforeSend: function () {
+                                                                                                //请求前的处理
+                                                                                            },
+                                                                                            success: function (req) {
+                                                                                                checkedInfo.push(f3pid)
+                                                                                            },
+                                                                                            complete: function () {
+                                                                                                //请求完成的处理
+                                                                                            },
+                                                                                            error: function () {
+                                                                                                //请求出错处理
+                                                                                            }
+                                                                                        });
+                                                                                    } else { }
+                                                                                }
+                                                                            },
+                                                                            complete: function () {
+                                                                                //请求完成的处理
+                                                                            },
+                                                                            error: function () {
+                                                                                //请求出错处理
+                                                                            }
+                                                                        });   
+                                                                    } else { }
+                                                                }
+                                                            },
+                                                            complete: function () {
+                                                                //请求完成的处理
+                                                            },
+                                                            error: function () {
+                                                                //请求出错处理
+                                                            }
+                                                        });
+                                                        
+                                                        
+                                                    } else { }
+                                                }
                                             },
                                             complete: function () {
                                                 //请求完成的处理
@@ -282,7 +403,7 @@ layui.use('table', function () {
                                             error: function () {
                                                 //请求出错处理
                                             }
-                                        });
+                                        });        
                                     } else {
                                         // 忽略加载时的数据
                                     }
@@ -301,6 +422,95 @@ layui.use('table', function () {
                                         success: function (req) {
                                             layer.msg("解绑成功")
                                             checkedInfo.splice(checkedInfo.findIndex((item) => item === obj.data.id), 1);
+                                                // 判断是否要解绑父级
+                                                // 1.得到父级ID
+                                                let fpid = perAll[perAll.findIndex(item => item.id === obj.data.id)].pid
+                                                // 2.该父级ID下的子集有哪些
+                                                let arr1 = perAll.filter(item => item.pid === fpid).map(item => {
+                                                    return item.id   
+                                                })
+                                                // 3.与checkedInfo中的数据进行匹配
+                                                if (getArrEqual(checkedInfo, arr1).length != 0) {
+                                                    // 如果还有其他子集 父级不需要解绑
+                                                } else {
+                                                    // 解绑父级if
+                                                    $.ajax({
+                                                        url: IPdz + '/role/role/' + roleId + '/permission/'+ fpid + '',    //请求的url地址
+                                                        dataType: "json",   //返回格式为json
+                                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                        type: "DELETE",   //请求方式
+                                                        contentType: "application/json;charset=UTF-8",
+                                                        // headers: {"token": sessionStorage.token},
+                                                        beforeSend: function () {
+                                                            //请求前的处理
+                                                        },
+                                                        success: function (req) {
+                                                            checkedInfo.splice(checkedInfo.findIndex((item) => item === fpid), 1);
+                                                            // 解绑父级的父级
+                                                            let f2pid = perAll[perAll.findIndex(item => item.id === fpid)].pid
+                                                            let arr2 = perAll.filter(item => item.pid === f2pid).map(item => {
+                                                                return item.id   
+                                                            })
+                                                            if (getArrEqual(checkedInfo, arr2).length != 0)  {
+                                                            } else {
+                                                                $.ajax({
+                                                                    url: IPdz + '/role/role/' + roleId + '/permission/'+ f2pid + '',    //请求的url地址
+                                                                    dataType: "json",   //返回格式为json
+                                                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                                    type: "DELETE",   //请求方式
+                                                                    contentType: "application/json;charset=UTF-8",
+                                                                    // headers: {"token": sessionStorage.token},
+                                                                    beforeSend: function () {
+                                                                        //请求前的处理
+                                                                    },
+                                                                    success: function (req) {
+                                                                        checkedInfo.splice(checkedInfo.findIndex((item) => item === f2pid), 1);
+                                                                        // 解绑父级的父级的父级
+                                                                        let f3pid = perAll[perAll.findIndex(item => item.id === f2pid)].pid
+                                                                        let arr3 = perAll.filter(item => item.pid === f3pid).map(item => {
+                                                                            return item.id   
+                                                                        })
+                                                                        if (getArrEqual(checkedInfo, arr3).length != 0) {
+                                                                        } else {
+                                                                            $.ajax({
+                                                                                url: IPdz + '/role/role/' + roleId + '/permission/'+ f3pid + '',    //请求的url地址
+                                                                                dataType: "json",   //返回格式为json
+                                                                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                                                type: "DELETE",   //请求方式
+                                                                                contentType: "application/json;charset=UTF-8",
+                                                                                // headers: {"token": sessionStorage.token},
+                                                                                beforeSend: function () {
+                                                                                    //请求前的处理
+                                                                                },
+                                                                                success: function (req) {
+                                                                                  checkedInfo.splice(checkedInfo.findIndex((item) => item === f3pid), 1);
+                                                                                },
+                                                                                complete: function () {
+                                                                                    //请求完成的处理
+                                                                                },
+                                                                                error: function () {
+                                                                                    //请求出错处理
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    },
+                                                                    complete: function () {
+                                                                        //请求完成的处理
+                                                                    },
+                                                                    error: function () {
+                                                                        //请求出错处理
+                                                                    }
+                                                                })
+                                                            }
+                                                        },
+                                                        complete: function () {
+                                                            //请求完成的处理
+                                                        },
+                                                        error: function () {
+                                                            //请求出错处理
+                                                        }
+                                                    })
+                                                }
                                         },
                                         complete: function () {
                                             //请求完成的处理
@@ -308,7 +518,7 @@ layui.use('table', function () {
                                         error: function () {
                                             //请求出错处理
                                         }
-                                    });
+                                    }); 
                                 }
                             }
                         })
@@ -340,27 +550,35 @@ layui.use('table', function () {
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">中文名称:</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>中文名称:</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input zwmc">\n' +
+                '      <input type="text" name="title" required onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;"  lay-verify="required" placeholder="请输入" lay-reqtext="中文名称是必填项，岂能为空？" autocomplete="off" class="layui-input zwmc">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
                 '    <label class="layui-form-label">角色描述：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jsms">\n' +
+                '      <input type="text" name="title" required  onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input jsms">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">英文名称：</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>英文名称：</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ywmc">\n' +
+                '      <input type="text" name="title" required  onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input ywmc">\n' +
                 '    </div>\n' +
                 '</div>\n' +
                 '</form></div>' +
                 '</div>' +
                 '</div>',
             add: function () {
+                if ($(".zwmc").val() == '') {
+                    layer.msg("中文名称不能为空！")
+                    return
+                }
+                if ($(".ywmc").val() == '') {
+                    layer.msg("英文名称不能为空！")
+                    return
+                }
                 var data = {
                     "cnName": $(".zwmc").val(),
                     "description": $(".jsms").val(),
@@ -407,3 +625,14 @@ layui.use('table', function () {
     })
 })
 
+function getArrEqual(arr1, arr2) {
+    let newArr = [];
+    for (let i = 0;i < arr2.length; i++) {
+        for (let j = 0;j < arr1.length; j++) {
+            if (arr1[j] === arr2[i]) {
+                newArr.push(arr1[j])
+            }
+        }
+    }
+    return newArr
+}

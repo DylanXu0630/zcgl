@@ -134,21 +134,21 @@ layui.use(['table', 'form'], function () {
                     '<div class="addDig">' +
                     '<div><form class="layui-form" lay-filter="look" action="">\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">账户名</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>账户名</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
+                    '      <input type="text" name="title" required onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" lay-verify="required" placeholder="请输入" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">姓名：</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>姓名：</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname">\n' +
+                    '      <input type="text" name="title" required onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input nickname">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">手机：</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>手机：</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input phone">\n' +
+                    '      <input type="tel" name="phone" lay-verify="required|phone" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" autocomplete="off" class="layui-input phone">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
@@ -159,15 +159,15 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">邮件：</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>邮件：</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input email">\n' +
+                    '      <input type="tel" name="phone" lay-verify="required|phone" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" autocomplete="off" class="layui-input email">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">地址：</label>\n' +
                     '    <div class="layui-input-block">\n' +
-                    '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input location">\n' +
+                    '      <input type="tel" name="phone" lay-verify="required|phone" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" autocomplete="off" class="layui-input location">\n' +
                     '    </div>\n' +
                     '</div>\n' +
                     '<div class="dialogDiv">\n' +
@@ -180,7 +180,7 @@ layui.use(['table', 'form'], function () {
                     '</div>' +
                     '</div>',
                 look: function () {
-                    $(".status").attr("checked", obj.data.accountEnableCode);
+                    $(".status").attr("checked", obj.data.accountEnableCode == 1);
                     $("input[name=sex][value='1']").attr("checked", obj.data.sex == 1 ? true : false);
                     $("input[name=sex][value='0']").attr("checked", obj.data.sex == 0 ? true : false);
                     $.ajax({
@@ -213,6 +213,22 @@ layui.use(['table', 'form'], function () {
                     });
                 },
                 put: function () {
+                    if ($(".username").val() == '') {
+                        layer.msg("账户名不能为空！")
+                        return
+                    }
+                    if ($(".nickname").val() == '') {
+                        layer.msg("姓名不能为空！")
+                        return
+                    }
+                    if ($(".phone").val() == '') {
+                        layer.msg("手机不能为空！")
+                        return
+                    }
+                    if ($(".email").val() == '') {
+                        layer.msg("邮箱不能为空！")
+                        return
+                    }
                     var data = {
                         "id": obj.data.id,
                         // "createdBy": "1",
@@ -324,7 +340,7 @@ layui.use(['table', 'form'], function () {
                     '</div>' +
                     '</div>',
                 look: function () {
-                    $(".status").attr("checked", obj.data.accountEnableCode);
+                    $(".status").attr("checked", obj.data.accountEnableCode == 1);
                     $("input[name=sex][value='1']").attr("checked", obj.data.sex == 1 ? true : false);
                     $("input[name=sex][value='0']").attr("checked", obj.data.sex == 0 ? true : false);
                     $.ajax({
@@ -493,202 +509,6 @@ layui.use(['table', 'form'], function () {
         }
     });
 
-
-    /*添加点击事件*/
-    $("body").on("click", ".layui-btn.layui-btn-sm", function () {
-        /*生成一个对象
-        * 传入标题和内容
-        * 生成弹窗
-        * */
-        var openMes = {
-            title: '系统用户添加',
-            leixing: '添加',
-            maxmin: true,
-            area: ['650px', '380px'],
-            btn: ['确定', '取消'],
-            content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
-                '<div class="addDig">' +
-                '<div><form class="layui-form" action="">\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>账户名</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>姓名：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input nickname">\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>密码：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="password" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input password">\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>手机：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="tel" name="phone" placeholder="*为必填项"  lay-verify="required|phone" autocomplete="off" class="layui-input phone">\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">性别：</label>\n' +
-                '       <div class = "layui-input-block" >\n' +
-                '       <input type = "radio" name = "sex" value = "1" title = "男" >\n' +
-                '       <input type = "radio" name = "sex" value = "0" title = "女" checked >\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>邮件：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="tel" name="phone" placeholder="*为必填项" lay-verify="required|phone" autocomplete="off" class="layui-input email">\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">地址：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input location">\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">状态：</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="checkbox" name="switch" class="status" lay-text="开启|关闭" checked lay-skin="switch">\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '</form></div>' +
-                '</div>' +
-                '</div>',
-            add: function () {
-                if ($(".username").val() == '') {
-                    layer.msg("账户名不能为空！")
-                    return
-                }
-                if ($(".nickname").val() == '') {
-                    layer.msg("姓名不能为空！")
-                    return
-                }
-                if ($(".password").val() == '') {
-                    layer.msg("密码不能为空！")
-                    return
-                }
-                if ($(".phone").val() == '') {
-                    layer.msg("电话号码不能为空！")
-                    return
-                }
-                if ($(".email").val() == '') {
-                    layer.msg("邮箱不能为空！")
-                    return
-                }
-                var data = {
-                    "accountEnable": $('.status:checked').val() === 'on' ? 1 : 0,
-                    "email": $(".email").val(),
-                    "location": $(".location").val(),
-                    "nickname": $(".nickname").val(),
-                    "password": $(".password").val(),
-                    "phone": $(".phone").val(),
-                    "pic": "string",
-                    "sex": $('input[name="sex"]:checked').val(),
-                    "username": $(".username").val(),
-                    "wxid": ""
-                }
-
-                $.ajax({
-                    url: IPdz + '/user',    //请求的url地址
-                    dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                    data: JSON.stringify(data),    //参数值
-                    type: "POST",   //请求方式
-                    contentType: "application/json;charset=UTF-8",
-                    // headers: {"token": sessionStorage.token},
-                    beforeSend: function () {
-                        //请求前的处理
-                    },
-                    success: function (req) {
-                        if (req.status == "200") {
-                            layer.close(indexDig);
-                            layer.msg("添加成功")
-                            var demoReload = $('#demoReload');
-                            //执行重载
-                            table.reload('tableList', {
-                                page: {
-                                    curr: 1 //重新从第 1 页开始
-                                }
-                            });
-                        } else {
-                            layer.msg("添加失败")
-                        }
-
-                    },
-                    complete: function () {
-                        //请求完成的处理
-                    },
-                    error: function () {
-                        //请求出错处理
-                    }
-                });
-            },
-        }
-        /*调用弹窗方法*/
-        layerOpen(openMes);
-    })
-})
-
-function getSex(sex) {
-    if (sex == '1') return '男';
-    else if (sex == '0') return '女';
-}
-
-function getOneUser() {
-    $.ajax({
-        url: IPdz + '/user',    //请求的url地址
-        dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-        data: JSON.stringify(data),    //参数值
-        type: "POST",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            if (req.status == "200") {
-                layer.close(indexDig);
-                layer.msg("添加成功")
-                var demoReload = $('#demoReload');
-                //执行重载
-                table.reload('tableList', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                });
-            } else {
-                layer.msg("添加失败")
-            }
-
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
-}
-
-$(function () {
-
-    var buttonqx = localStorage.getItem("buttonqx")
-    if (buttonqx.indexOf('delete') !== -1) {
-        // var deleteButton = $('<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>').appendTo("#barDemo")
-    }
-    if (buttonqx.indexOf('add') !== -1) {
-        // var add = $('<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>').prependTo("#addButton")
-    }
-
-
     $("body").on("click", ".hello", function () {
         var userId = $(this).attr("userId");
         var arr2 = []
@@ -823,4 +643,197 @@ $(function () {
             });
         }
     })
+
+    /*添加点击事件*/
+    $("body").on("click", ".layui-btn.layui-btn-sm", function () {
+        /*生成一个对象
+        * 传入标题和内容
+        * 生成弹窗
+        * */
+        var openMes = {
+            title: '系统用户添加',
+            leixing: '添加',
+            maxmin: true,
+            area: ['650px', '380px'],
+            btn: ['确定', '取消'],
+            content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
+                '<div class="addDig">' +
+                '<div><form class="layui-form" action="">\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>账户名</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" required lay-verify="required" placeholder="*为必填项" lay-reqtext="用户名是必填项，岂能为空？" autocomplete="off" class="layui-input username">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>姓名：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input nickname">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>密码：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="password" name="title" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input password">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>手机：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="tel" name="phone" placeholder="*为必填项" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" lay-verify="required|phone" autocomplete="off" class="layui-input phone">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">性别：</label>\n' +
+                '       <div class = "layui-input-block" >\n' +
+                '       <input type = "radio" name = "sex" value = "1" title = "男" >\n' +
+                '       <input type = "radio" name = "sex" value = "0" title = "女" checked >\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>邮件：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="tel" name="phone" placeholder="*为必填项" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" lay-verify="required|phone" autocomplete="off" class="layui-input email">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">地址：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="tel" name="phone" lay-verify="required|phone" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" autocomplete="off" class="layui-input location">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '<div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">状态：</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="checkbox" name="switch" class="status" lay-text="开启|关闭" checked lay-skin="switch">\n' +
+                '    </div>\n' +
+                '</div>\n' +
+                '</form></div>' +
+                '</div>' +
+                '</div>',
+            add: function () {
+                if ($(".username").val() == '') {
+                    layer.msg("账户名不能为空！")
+                    return
+                }
+                if ($(".nickname").val() == '') {
+                    layer.msg("姓名不能为空！")
+                    return
+                }
+                if ($(".password").val() == '') {
+                    layer.msg("密码不能为空！")
+                    return
+                }
+                if ($(".phone").val() == '') {
+                    layer.msg("手机不能为空！")
+                    return
+                }
+                if ($(".email").val() == '') {
+                    layer.msg("邮箱不能为空！")
+                    return
+                }
+                var data = {
+                    "accountEnable": $('.status:checked').val() === 'on' ? 1 : 0,
+                    "email": $(".email").val(),
+                    "location": $(".location").val(),
+                    "nickname": $(".nickname").val(),
+                    "password": $(".password").val(),
+                    "phone": $(".phone").val(),
+                    "pic": "string",
+                    "sex": $('input[name="sex"]:checked').val(),
+                    "username": $(".username").val(),
+                    "wxid": ""
+                }
+
+                $.ajax({
+                    url: IPdz + '/user',    //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    data: JSON.stringify(data),    //参数值
+                    type: "POST",   //请求方式
+                    contentType: "application/json;charset=UTF-8",
+                    // headers: {"token": sessionStorage.token},
+                    beforeSend: function () {
+                        //请求前的处理
+                    },
+                    success: function (req) {
+                        if (req.status == "200") {
+                            layer.close(indexDig);
+                            layer.msg("添加成功")
+                            var demoReload = $('#demoReload');
+                            //执行重载
+                            table.reload('tableList', {
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                            });
+                        } else {
+                            layer.msg("添加失败")
+                        }
+
+                    },
+                    complete: function () {
+                        //请求完成的处理
+                    },
+                    error: function () {
+                        //请求出错处理
+                    }
+                });
+            },
+        }
+        /*调用弹窗方法*/
+        layerOpen(openMes);
+    })
+})
+
+function getSex(sex) {
+    if (sex == '1') return '男';
+    else if (sex == '0') return '女';
+}
+
+function getOneUser() {
+    $.ajax({
+        url: IPdz + '/user',    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        data: JSON.stringify(data),    //参数值
+        type: "POST",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (req) {
+            if (req.status == "200") {
+                layer.close(indexDig);
+                layer.msg("添加成功")
+                var demoReload = $('#demoReload');
+                //执行重载
+                table.reload('tableList', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+            } else {
+                layer.msg("添加失败")
+            }
+
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
+
+$(function () {
+    // var buttonqx = localStorage.getItem("buttonqx")
+    // if (buttonqx.indexOf('delete') !== -1) {
+    //     var deleteButton = $('<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>').appendTo("#barDemo")
+    // }
+    // if (buttonqx.indexOf('add') !== -1) {
+    //     var add = $('<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>').prependTo("#addButton")
+    // }
 })

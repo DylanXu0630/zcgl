@@ -65,7 +65,6 @@ $(function () {
 })
 
 $("#img").click(function () {
-    localStorage.setItem("uuId", uuid());
     $("#img").attr('src', login + '/code/image?deviceId=' + localStorage.getItem("uuId"));
 })
 
