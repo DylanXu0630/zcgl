@@ -474,7 +474,7 @@ layui.use(['table', 'form'], function () {
                     //     "uid": user
                     // }
                     $.ajax({
-                        url: IPzd + '/user/depart/'+user+'/'+$(".manageUnit").val(),    //请求的url地址
+                        url: IPzd + '/user/depart/' + obj.data.id + '/' + $(".manageUnit").val(),    //请求的url地址
                         dataType: "json",   //返回格式为json
                         async: true,//请求是否异步，默认为异步，这也是ajax重要特性
                         type: "POST",   //请求方式

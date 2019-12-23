@@ -223,6 +223,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">二、房屋的租金</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）租赁房屋每月租金为<span class="htSpan htsjzj"></span>元，乙方先支付租金再使用房屋，乙方应当在下一个周期开始前5天支付租金，第一期租金应当在本合同签署之日同时支付，甲方收到房屋租金和履约保证金后再向乙方交付租赁房屋。<br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方按照以下第<span class="htSpan fkfs"></span>项方式支付租金：<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (1) 以十二个月为一周期支付;(3) 以三个月为一周期支付<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (2) 以六个月为一周期支付;(4) 以一个月为周期支付<br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">三、履约保证金</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一） 为保证乙方全面履行本合同的义务，乙方同意于本合同签订之日向甲方交纳履约保证金<span class="htSpan bzj"></span>元。甲方无须向乙方支付履约保证金的利息。租赁期内，乙方不得以保证金抵付租金等任何应付费用。该保证金将随本合同规定之租金的增加而相应地追加，乙方应于租金增加后3日内追加保证金；否则，视为乙方对甲方违约。<br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）如乙方违反本合同的任何约定或条款，拖欠支付本合同规定的任何款项包括但不限于租金等费用，甲方有权以保证金抵付任何欠款或甲方因乙方的违约而根据本合同规定及法律规定可以要求其承担的任何款项或甲方的任何损失。甲方根据本合同抵扣保证金后，乙方必须于3日内把甲方扣除部分保证金额补足。否则，视为乙方对甲方违约。<br>\n' +
@@ -303,15 +305,15 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '            <td colspan="5" style="padding:0 10px;"><span class="glzx"></span></td>\n' +
                     '        </tr>\n' +
                     '        <tr>\n' +
-                    '            <td style="padding:0 10px;">房屋产权单位</td>\n' +
+                    '            <td>房屋产权单位</td>\n' +
                     '            <td colspan="5" style="padding:0 10px;"><span class="jf"></span></td>\n' +
                     '        </tr>\n' +
                     '        <tr>\n' +
-                    '            <td style="padding:0 10px;">房产坐落</td>\n' +
+                    '            <td>房产坐落</td>\n' +
                     '            <td colspan="5" style="padding:0 10px;"><span class="fczl"></span></td>\n' +
                     '        </tr>\n' +
                     '        <tr>\n' +
-                    '            <td style="padding:0 10px;">承租人</td>\n' +
+                    '            <td>承租人</td>\n' +
                     '            <td colspan="5" style="padding:0 10px;"><span class="yf"></span></td>\n' +
                     '        </tr>\n' +
                     '        <tr>\n' +
@@ -382,10 +384,13 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">一、租赁房屋的坐落、面积、租赁期限</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲方将座落于<span class="zlwz"></span>，租赁期限为<span\n' +
                     '            class="htSpan synx"></span>个月，从<span\n' +
-                    '            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。免租期<span class="htSpan mzq">1</span>个月<br>\n' +
+                    '            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。<span class="freeZq">免租期<span\n' +
+                    '            class="htSpan mzq">1</span>个月</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">二、房屋的租金</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）租赁房屋每月租金为<span class="htSpan htsjzj"></span>元，乙方先支付租金再使用房屋，乙方应当在下一个周期开始前5天支付租金，第一期租金应当在本合同签署之日同时支付，甲方收到房屋租金和履约保证金后再向乙方交付租赁房屋。<br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方按照以下第<span class="htSpan fkfs"></span>项方式支付租金：<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (1) 以十二个月为一周期支付;(3) 以三个月为一周期支付<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (2) 以六个月为一周期支付;(4) 以一个月为周期支付<br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">三、履约保证金</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一） 为保证乙方全面履行本合同的义务，乙方同意于本合同签订之日向甲方交纳履约保证金<span class="htSpan bzj"></span>元。甲方无须向乙方支付履约保证金的利息。租赁期内，乙方不得以保证金抵付租金等任何应付费用。该保证金将随本合同规定之租金的增加而相应地追加，乙方应于租金增加后3日内追加保证金；否则，视为乙方对甲方违约。<br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）如乙方违反本合同的任何约定或条款，拖欠支付本合同规定的任何款项包括但不限于租金等费用，甲方有权以保证金抵付任何欠款或甲方因乙方的违约而根据本合同规定及法律规定可以要求其承担的任何款项或甲方的任何损失。甲方根据本合同抵扣保证金后，乙方必须于3日内把甲方扣除部分保证金额补足。否则，视为乙方对甲方违约。<br>\n' +
@@ -523,10 +528,13 @@ layui.use(['laydate', 'table', 'form'], function () {
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">一、租赁房屋的坐落、面积、租赁期限</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲方将座落于<span class="zlwz"></span>，租赁期限为<span\n' +
                     '            class="htSpan synx"></span>个月，从<span\n' +
-                    '            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。免租期<span class="htSpan mzq">1</span>个月<br>\n' +
+                    '            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。<span class="freeZq">免租期<span\n' +
+                    '            class="htSpan mzq">1</span>个月</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">二、房屋的租金</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）租赁房屋每月租金为<span class="htSpan htsjzj"></span>元，乙方先支付租金再使用房屋，乙方应当在下一个周期开始前5天支付租金，第一期租金应当在本合同签署之日同时支付，甲方收到房屋租金和履约保证金后再向乙方交付租赁房屋。<br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）乙方按照以下第<span class="htSpan fkfs"></span>项方式支付租金：<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (1) 以十二个月为一周期支付;(3) 以三个月为一周期支付<br>\n' +
+                    '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (2) 以六个月为一周期支付;(4) 以一个月为周期支付<br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="title">三、履约保证金</span><br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一） 为保证乙方全面履行本合同的义务，乙方同意于本合同签订之日向甲方交纳履约保证金<span class="htSpan bzj"></span>元。甲方无须向乙方支付履约保证金的利息。租赁期内，乙方不得以保证金抵付租金等任何应付费用。该保证金将随本合同规定之租金的增加而相应地追加，乙方应于租金增加后3日内追加保证金；否则，视为乙方对甲方违约。<br>\n' +
                     '        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）如乙方违反本合同的任何约定或条款，拖欠支付本合同规定的任何款项包括但不限于租金等费用，甲方有权以保证金抵付任何欠款或甲方因乙方的违约而根据本合同规定及法律规定可以要求其承担的任何款项或甲方的任何损失。甲方根据本合同抵扣保证金后，乙方必须于3日内把甲方扣除部分保证金额补足。否则，视为乙方对甲方违约。<br>\n' +
@@ -608,49 +616,54 @@ layui.use(['laydate', 'table', 'form'], function () {
                 id: obj.data.id,
                 content: content,
                 look: function () {
+                    var heObj = obj.data
                     if (obj.data.dealTypeCode == 1) {
-                        $(".fczl").text(obj.data.location)
-                        $(".s-bbh").text(obj.data.dealSerial)
-                        $(".yf").text(obj.data.renter)
-                        $(".jf").text(obj.data.lessor)
-                        $(".mjjz").text(obj.data.resourceArea)
-                        $(".syyt").text(obj.data.houseUsage)
-                        $(".synx").text(obj.data.rentMonth)
-                        $(".starTime").text(obj.data.startTime)
-                        $(".endTime").text(obj.data.endTime)
+                        $(".fczl").text(heObj.location)
+                        $(".s-bbh").text(heObj.dealSerial)
+                        $(".yf").text(heObj.renter)
+                        $(".jf").text(heObj.lessor)
+                        $(".mjjz").text(heObj.resourceArea)
+                        $(".syyt").text(heObj.houseUsage)
+                        $(".synx").text(heObj.rentMonth)
+                        $(".starTime").text(heObj.startTime)
+                        $(".endTime").text(heObj.endTime)
                         // $(".sjzj").text(heObj.realRentCharge)
-                        $(".fkfs").text(obj.data.payType)
-                        if (obj.data.freeRentMonth == 0) {
+                        if (heObj.payType == "一季度一付") {
+                            $(".fkfs").text("3")
+                        } else if (heObj.payType == "一年一付") {
+                            $(".fkfs").text("1")
+                        } else if (heObj.payType == "半年一付") {
+                            $(".fkfs").text("2")
+                        } else if (heObj.payType == "一月一付") {
+                            $(".fkfs").text("4")
+                        }
+                        if (heObj.freeRentMonth == 0) {
                             $(".freeZq").css("display", "none")
                         } else {
-                            $(".mzq").text(obj.data.freeRentMonth)
+                            $(".mzq").text(heObj.freeRentMonth)
                         }
 
                         // $(".bzj").text(heObj.deposit)
-                        $(".sfxq").text(obj.data.isNewRent)
-                        $(".zdj").text(obj.data.guideRentCharge)
+                        $(".sfxq").text(heObj.isNewRent)
+                        $(".zdj").text(heObj.guideRentCharge)
 
-                        if (obj.data.freeRentMonth == "0") {
-                            $(".ywyhtj").text("无")
-                        } else {
-                            $(".ywyhtj").text("有")
-                        }
+                        $(".ywyhtj").text(heObj.isHaveDiscount)
 
-                        $(obj.data.mustMoney).each(function (i, o) {
+                        $(heObj.mustMoney).each(function (i, o) {
                             if (o.moneyType == "保证金") {
                                 $(".bzj").text(o.money)
                             }
                         })
 
-                        var zlArr = obj.data.location.split(",")
-                        if (obj.data.houseResourceDetail.length < 2) {
-                            $(".glzx").text(obj.data.houseResourceDetail[0].agency)
-                            $(".mjjz").text(obj.data.houseResourceDetail[0].resourceArea)
-                            $(".sjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
-                            $(".zdj").text(obj.data.houseResourceDetail[0].guideRentCharge)
-                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + obj.data.houseResourceDetail[0].houseUsage + "</span>使用<span>,</span><span class='htSpan mpfsjzj'>" + obj.data.houseResourceDetail[0].realRentCharge + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
-                            $(".htsjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
-                            $(".mpfsjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                        var zlArr = heObj.location.split(",")
+                        if (heObj.houseResourceDetail.length < 2) {
+                            $(".glzx").text(heObj.houseResourceDetail[0].agency)
+                            $(".mjjz").text(heObj.houseResourceDetail[0].resourceArea)
+                            $(".sjzj").text(heObj.houseResourceDetail[0].realRentCharge)
+                            $(".zdj").text(heObj.houseResourceDetail[0].guideRentCharge)
+                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + heObj.houseResourceDetail[0].houseUsage + "</span>使用<span>,</span><span class='htSpan mpfsjzj'>" + heObj.houseResourceDetail[0].realRentCharge + "</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
+                            $(".htsjzj").text(heObj.houseResourceDetail[0].realRentCharge)
+                            $(".mpfsjzj").text(heObj.houseResourceDetail[0].rentMoneyPerArea)
                         } else {
                             var glzxArr = []
                             var heAreaArr = []
@@ -658,7 +671,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             var zdjArr = []
                             var yzjArr = []
                             var realArr = []
-                            $(obj.data.houseResourceDetail).each(function (i, o) {
+                            $(heObj.houseResourceDetail).each(function (i, o) {
                                 glzxArr.push(o.agency)
                                 heAreaArr.push(o.resourceArea)
                                 djArr.push(o.rentMoneyPerArea)
@@ -666,9 +679,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 yzjArr.push(o.realRentCharge)
 
                                 if (i > 0) {
-                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.realRentCharge + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.realRentCharge + "</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
                                 } else {
-                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.realRentCharge + "</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.realRentCharge + "</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
                                 }
                             })
 
@@ -685,42 +698,52 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(".htsjzj").text(sjzj)
                         }
                     } else if (obj.data.dealTypeCode == 2) {
-                        $(".fczl").text(obj.data.location)
-                        $(".s-bbh").text(obj.data.dealSerial)
-                        $(".yf").text(obj.data.renter)
-                        $(".jf").text(obj.data.lessor)
-                        $(".mjjz").text(obj.data.resourceArea)
-                        $(".syyt").text(obj.data.houseUsage)
-                        $(".synx").text(obj.data.rentMonth)
-                        $(".starTime").text(obj.data.startTime)
-                        $(".endTime").text(obj.data.endTime)
+                        $(".fczl").text(heObj.location)
+                        $(".s-bbh").text(heObj.dealSerial)
+                        $(".yf").text(heObj.renter)
+                        $(".jf").text(heObj.lessor)
+                        $(".mjjz").text(heObj.resourceArea)
+                        $(".syyt").text(heObj.houseUsage)
+                        $(".synx").text(heObj.rentMonth)
+                        $(".starTime").text(heObj.startTime)
+                        $(".endTime").text(heObj.endTime)
                         // $(".sjzj").text(heObj.realRentCharge)
-                        $(".fkfs").text(obj.data.payType)
-                        if (obj.data.freeRentMonth == 0) {
+                        // $(".fkfs").text(heObj.payType)
+                        if (heObj.payType == "一季度一付") {
+                            $(".fkfs").text("3")
+                        } else if (heObj.payType == "一年一付") {
+                            $(".fkfs").text("1")
+                        } else if (heObj.payType == "半年一付") {
+                            $(".fkfs").text("2")
+                        } else if (heObj.payType == "一月一付") {
+                            $(".fkfs").text("4")
+                        }
+                        if (heObj.freeRentMonth == 0) {
                             $(".freeZq").css("display", "none")
                         } else {
-                            $(".mzq").text(obj.data.freeRentMonth)
+                            $(".mzq").text(heObj.freeRentMonth)
                         }
                         // $(".bzj").text(heObj.deposit)
-                        $(".sfxq").text(obj.data.isNewRent)
-                        $(".zdj").text(obj.data.guideRentCharge)
+                        $(".sfxq").text(heObj.isNewRent)
+                        $(".zdj").text(heObj.guideRentCharge)
+                        watermark({watermark_txt: heObj.dealSerial})//传入动态水印内容
 
-                        $(obj.data.mustMoney).each(function (i,o) {
+                        $(heObj.mustMoney).each(function (i,o) {
                             if (o.moneyType=="保证金"){
                                 $(".bzj").text(o.money)
                             }
                         })
 
 
-                        var zlArr = obj.data.location.split(",")
-                        if (obj.data.houseResourceDetail.length < 2) {
-                            $(".glzx").text(obj.data.houseResourceDetail[0].agency)
-                            $(".mjjz").text(obj.data.houseResourceDetail[0].resourceArea)
-                            $(".sjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
-                            $(".zdj").text(obj.data.houseResourceDetail[0].guideRentCharge)
-                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ obj.data.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ obj.data.houseResourceDetail[0].realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
-                            $(".htsjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
-                            $(".mpfsjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                        var zlArr = heObj.location.split(",")
+                        if (heObj.houseResourceDetail.length < 2) {
+                            $(".glzx").text(heObj.houseResourceDetail[0].agency)
+                            $(".mjjz").text(heObj.houseResourceDetail[0].resourceArea)
+                            $(".sjzj").text(heObj.houseResourceDetail[0].realRentCharge)
+                            $(".zdj").text(heObj.houseResourceDetail[0].guideRentCharge)
+                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ heObj.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ heObj.houseResourceDetail[0].realRentCharge +"</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
+                            $(".htsjzj").text(heObj.houseResourceDetail[0].realRentCharge)
+                            $(".mpfsjzj").text(heObj.houseResourceDetail[0].rentMoneyPerArea)
                         } else {
                             var glzxArr = []
                             var heAreaArr = []
@@ -728,7 +751,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             var zdjArr = []
                             var yzjArr = []
                             var realArr =[]
-                            $(obj.data.houseResourceDetail).each(function (i, o) {
+                            $(heObj.houseResourceDetail).each(function (i, o) {
                                 glzxArr.push(o.agency)
                                 heAreaArr.push(o.resourceArea)
                                 djArr.push(o.rentMoneyPerArea)
@@ -736,9 +759,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 yzjArr.push(o.realRentCharge)
 
                                 if (i > 0) {
-                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
                                 } else {
-                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
                                 }
                             })
 
@@ -755,41 +778,50 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(".htsjzj").text(sjzj)
                         }
                     } else if (obj.data.dealTypeCode == 3) {
-                        $(".fczl").text(obj.data.location)
-                        $(".s-bbh").text(obj.data.dealSerial)
-                        $(".yf").text(obj.data.renter)
-                        $(".jf").text(obj.data.lessor)
-                        $(".mjjz").text(obj.data.resourceArea)
-                        $(".syyt").text(obj.data.houseUsage)
-                        $(".synx").text(obj.data.rentMonth)
-                        $(".starTime").text(obj.data.startTime)
-                        $(".endTime").text(obj.data.endTime)
+                        $(".fczl").text(heObj.location)
+                        $(".s-bbh").text(heObj.dealSerial)
+                        $(".yf").text(heObj.renter)
+                        $(".jf").text(heObj.lessor)
+                        $(".mjjz").text(heObj.resourceArea)
+                        $(".syyt").text(heObj.houseUsage)
+                        $(".synx").text(heObj.rentMonth)
+                        $(".starTime").text(heObj.startTime)
+                        $(".endTime").text(heObj.endTime)
                         // $(".sjzj").text(heObj.realRentCharge)
-                        $(".fkfs").text(obj.data.payType)
-                        if (obj.data.freeRentMonth == 0) {
+                        // $(".fkfs").text(heObj.payType)
+                        if (heObj.payType == "一季度一付") {
+                            $(".fkfs").text("3")
+                        } else if (heObj.payType == "一年一付") {
+                            $(".fkfs").text("1")
+                        } else if (heObj.payType == "半年一付") {
+                            $(".fkfs").text("2")
+                        } else if (heObj.payType == "一月一付") {
+                            $(".fkfs").text("4")
+                        }
+                        if (heObj.freeRentMonth == 0) {
                             $(".freeZq").css("display", "none")
                         } else {
-                            $(".mzq").text(obj.data.freeRentMonth)
+                            $(".mzq").text(heObj.freeRentMonth)
                         }
                         // $(".bzj").text(heObj.deposit)
-                        $(".sfxq").text(obj.data.isNewRent)
-                        $(".zdj").text(obj.data.guideRentCharge)
-                        watermark({watermark_txt: obj.data.dealSerial})//传入动态水印内容
-                        $(obj.data.mustMoney).each(function (i,o) {
+                        $(".sfxq").text(heObj.isNewRent)
+                        $(".zdj").text(heObj.guideRentCharge)
+                        watermark({watermark_txt: heObj.dealSerial})//传入动态水印内容
+                        $(heObj.mustMoney).each(function (i,o) {
                             if (o.moneyType=="保证金"){
                                 $(".bzj").text(o.money)
                             }
                         })
 
-                        var zlArr = obj.data.location.split(",")
-                        if (obj.data.houseResourceDetail.length < 2) {
-                            $(".glzx").text(obj.data.houseResourceDetail[0].agency)
-                            $(".mjjz").text(obj.data.houseResourceDetail[0].resourceArea)
-                            $(".sjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
-                            $(".zdj").text(obj.data.houseResourceDetail[0].guideRentCharge)
-                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ obj.data.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ obj.data.houseResourceDetail[0].realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
-                            $(".htsjzj").text(obj.data.houseResourceDetail[0].realRentCharge)
-                            $(".mpfsjzj").text(obj.data.houseResourceDetail[0].rentMoneyPerArea)
+                        var zlArr = heObj.location.split(",")
+                        if (heObj.houseResourceDetail.length < 2) {
+                            $(".glzx").text(heObj.houseResourceDetail[0].agency)
+                            $(".mjjz").text(heObj.houseResourceDetail[0].resourceArea)
+                            $(".sjzj").text(heObj.houseResourceDetail[0].realRentCharge)
+                            $(".zdj").text(heObj.houseResourceDetail[0].guideRentCharge)
+                            $("<span class='htSpan zl'>" + zlArr[0] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.houseResourceDetail[0].resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ heObj.houseResourceDetail[0].houseUsage +"</span>使用<span>,</span><span class='htSpan mpfsjzj'>"+ heObj.houseResourceDetail[0].realRentCharge +"</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
+                            $(".htsjzj").text(heObj.houseResourceDetail[0].realRentCharge)
+                            $(".mpfsjzj").text(heObj.houseResourceDetail[0].rentMoneyPerArea)
                         } else {
                             var glzxArr = []
                             var heAreaArr = []
@@ -797,7 +829,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             var zdjArr = []
                             var yzjArr = []
                             var realArr =[]
-                            $(obj.data.houseResourceDetail).each(function (i, o) {
+                            $(heObj.houseResourceDetail).each(function (i, o) {
                                 glzxArr.push(o.agency)
                                 heAreaArr.push(o.resourceArea)
                                 djArr.push(o.rentMoneyPerArea)
@@ -805,9 +837,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 yzjArr.push(o.realRentCharge)
 
                                 if (i > 0) {
-                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
                                 } else {
-                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>(</span>房屋建筑面积<span class='htSpan mjjz'>" + obj.data.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>)</span>").appendTo(".zlwz")
+                                    $("<span class='htSpan zl'>" + zlArr[i] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>"+ o.houseUsage +"</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>"+ o.realRentCharge +"</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
                                 }
                             })
 
@@ -823,6 +855,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             var sjzj = $.unique(yzjArr).join(";");
                             $(".htsjzj").text(sjzj)
                         }
+
                     }
                 }
             }
