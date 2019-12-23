@@ -853,6 +853,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '    </div>\n' +
                         '  </div>\n' +
                         '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label">免租期(月)</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input mzq" readonly>\n' +
+                        '    </div>\n' +
+                        '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
                         '    <label class="layui-form-label">合同状态</label>\n' +
                         '    <div class="layui-input-block">\n' +
                         '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input htzt" readonly>\n' +
@@ -891,6 +897,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         $(".fkfs").val(obj.data.payType)
                         $(".zlys").val(obj.data.rentMonth)
                         $(".rentType").val(obj.data.isNewRent)
+                        $(".mzq").val(obj.data.freeRentMonth)
                         var dzArr = obj.data.location.split(",")
                         $("#fyjcxx").children().remove()
 
