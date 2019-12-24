@@ -157,20 +157,31 @@ layui.use(['laydate', 'table', 'form'], function () {
             content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                 '<div class="addDig">' +
                 '<div><form class="layui-form" action="">\n' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label"><span class="inputBtx">*</span>合同名称</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <input type="text" name="title" required  lay-verify="required" placeholder="*为选填项" autocomplete="off" class="layui-input dealName">\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
-                // '  <div class="dialogDiv">\n' +
-                // '    <label class="layui-form-label"> 管理单位（甲方）</label>\n' +
-                // '    <div class="layui-input-block">\n' +
-                // '      <select class="gldw">\n' +
-                // '    <option value="">请选择</option>\n' +
-                // '     </select>\n' +
-                // '    </div>\n' +
-                // '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="houseResource houseFy">\n' +
+                '    <option value="">请选择</option>\n' +
+                '     </select>\n' +
+                '    </div>\n' +
+                '<div id="addFyDiv">' +
+                '</div>' +
+                '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
+                '<div id="addsjjDiv">' +
+                '</div>' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>承租人（乙方）</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -188,18 +199,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '        <option value="6">以六个月为一周期支付</option>\n' +
                 '        <option value="3">以三个月为一周期支付</option>\n' +
                 '        <option value="1">以一个月为一周期支付</option>\n' +
-                '     </select>\n' +
-                '    </div>\n' +
-                '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>合同类型</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <select class="htType">\n' +
-                '        <option value="">请选择</option>\n' +
-                '        <option value="1">协商出租</option>\n' +
-                '        <option value="2">一事一议</option>\n' +
-                '        <option value="3">挂靠合同</option>\n' +
-                // '        <option value="4">资产出售</option>\n' +
                 '     </select>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
@@ -243,28 +242,27 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '<div>' +
                 '</div>' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                '    <label class="layui-form-label">优惠条款简要说明</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="houseResource houseFy">\n' +
-                '    <option value="">请选择</option>\n' +
+                '      <textarea placeholder="请输入内容" class="layui-textarea yhtk"></textarea>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label">其他条款</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <textarea placeholder="请输入内容" class="layui-textarea qttk"></textarea>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="dialogDiv">\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>合同类型</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <select class="htType">\n' +
+                '        <option value="">请选择</option>\n' +
+                '        <option value="1">协商出租</option>\n' +
+                '        <option value="2">一事一议</option>\n' +
+                '        <option value="3">挂靠合同</option>\n' +
+                // '        <option value="4">资产出售</option>\n' +
                 '     </select>\n' +
-                '    </div>\n' +
-                '<div id="addFyDiv">' +
-                '</div>' +
-                '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
-                '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
-                '<div id="addsjjDiv">' +
-                '</div>' +
-                '    </div>\n' +
-                '  </div>\n' +
-                '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
-                '    <div class="layui-input-block">\n' +
-                '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '</form></div>' +
@@ -316,7 +314,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                                 "freeRentMonth": $.trim($(".mzMouth").val()),
                                                                 "dealType": $.trim($(".htType").val()),
                                                                 "isNewRent": $.trim($(".rentType").val()),
-                                                                "isHaveDiscount": $(".isHaveDiscount").val()
+                                                                "isHaveDiscount": $(".isHaveDiscount").val(),
+                                                                "extraInfo": $.trim($(".qttk").val()),
+                                                                "discount": $.trim($(".yhtk").val())
                                                             }
 
                                                             $.ajax({
@@ -460,20 +460,31 @@ layui.use(['laydate', 'table', 'form'], function () {
                     content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                         '<div class="addDig">' +
                         '<div><form class="layui-form" action="">\n' +
-                        // '  <div class="dialogDiv">\n' +
-                        // '    <label class="layui-form-label"><span class="inputBtx">*</span>合同名称</label>\n' +
-                        // '    <div class="layui-input-block">\n' +
-                        // '      <input type="text" name="title" required  lay-verify="required" placeholder="*为选填项" autocomplete="off" class="layui-input dealName">\n' +
-                        // '    </div>\n' +
-                        // '  </div>\n' +
-                        // '  <div class="dialogDiv">\n' +
-                        // '    <label class="layui-form-label"> 管理单位（甲方）</label>\n' +
-                        // '    <div class="layui-input-block">\n' +
-                        // '      <select class="gldw">\n' +
-                        // '    <option value="">请选择</option>\n' +
-                        // '     </select>\n' +
-                        // '    </div>\n' +
-                        // '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <select class="houseResource houseFy">\n' +
+                        '    <option value="">请选择</option>\n' +
+                        '     </select>\n' +
+                        '    </div>\n' +
+                        '<div id="addFyDiv">' +
+                        '</div>' +
+                        '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
+                        '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
+                        '<div id="addsjjDiv">' +
+                        '</div>' +
+                        '    </div>\n' +
+                        '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
+                        '    </div>\n' +
+                        '  </div>\n' +
                         '  <div class="dialogDiv">\n' +
                         '    <label class="layui-form-label"><span class="inputBtx">*</span>承租人（乙方）</label>\n' +
                         '    <div class="layui-input-block">\n' +
@@ -495,27 +506,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '    </div>\n' +
                         '  </div>\n' +
                         '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label"><span class="inputBtx">*</span>合同类型</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <select class="htType">\n' +
-                        '        <option value="">请选择</option>\n' +
-                        '        <option value="1">协商出租</option>\n' +
-                        '        <option value="2">一事一议</option>\n' +
-                        '        <option value="3">挂靠合同</option>\n' +
-                        // '        <option value="4">资产出售</option>\n' +
-                        '     </select>\n' +
-                        '    </div>\n' +
-                        '  </div>\n' +
-                        // '  <div class="dialogDiv">\n' +
-                        // '    <label class="layui-form-label">指导价</label>\n' +
-                        // '    <div class="layui-input-block">\n' +
-                        // '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input guidePrice">\n' +
-                        // '    </div>\n' +
-                        // '  </div>\n' +
-                        '  <div class="dialogDiv">\n' +
                         '    <label class="layui-form-label"><span class="inputBtx">*</span>合同开始日期</label>\n' +
                         '    <div class="layui-input-block">\n' +
-                        '       <input type="text" name="date" id="date" autocomplete="off" class="layui-input httime">\n' +
+                        '       <input type="text" name="date" id="date" placeholder="请选择时间" autocomplete="off" class="layui-input httime">\n' +
                         '    </div>\n' +
                         '  </div>\n' +
                         '  <div class="dialogDiv">\n' +
@@ -549,30 +542,30 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '     </select>\n' +
                         '    </div>\n' +
                         '  </div>\n' +
+                        '<div>' +
+                        '</div>' +
                         '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                        '    <label class="layui-form-label">优惠条款简要说明</label>\n' +
                         '    <div class="layui-input-block">\n' +
-                        '      <select class="houseResource houseFy">\n' +
-                        '    <option value="">请选择</option>\n' +
+                        '      <textarea placeholder="请输入内容" class="layui-textarea yhtk"></textarea>\n' +
+                        '    </div>\n' +
+                        '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label">其他条款</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <textarea placeholder="请输入内容" class="layui-textarea qttk"></textarea>\n' +
+                        '    </div>\n' +
+                        '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label"><span class="inputBtx">*</span>合同类型</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <select class="htType">\n' +
+                        '        <option value="">请选择</option>\n' +
+                        '        <option value="1">协商出租</option>\n' +
+                        '        <option value="2">一事一议</option>\n' +
+                        '        <option value="3">挂靠合同</option>\n' +
+                        // '        <option value="4">资产出售</option>\n' +
                         '     </select>\n' +
-                        '    </div>\n' +
-                        '<div id="addFyDiv">' +
-                        '</div>' +
-
-                        '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
-                        '  </div>\n' +
-                        '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <input type="text" name="title" required  lay-verify="required" onkeyup="bzj()" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj">\n' +
-                        '<div id="addsjjDiv">' +
-                        '</div>' +
-                        '    </div>\n' +
-                        '  </div>\n' +
-                        '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
                         '    </div>\n' +
                         '  </div>\n' +
                         '</form></div>' +
@@ -586,13 +579,13 @@ layui.use(['laydate', 'table', 'form'], function () {
                         if (fyArr.length < 2) {
                             if ($(".houseFy").children().length < 2) {
                                 $(".houseFy").children().remove()
-                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "' resourcearea='"+obj.data.houseResourceDetail[0].resourceArea+"'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
+                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "' resourcearea='" + obj.data.houseResourceDetail[0].resourceArea + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
                                 $(".houseFy").val(obj.data.houseResourceDetail[0].id)
                                 $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
 
                             } else {
                                 // $(".houseFy").children().remove()
-                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "' resourcearea='"+obj.data.houseResourceDetail[0].resourceArea+"'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
+                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "' resourcearea='" + obj.data.houseResourceDetail[0].resourceArea + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
                                 $(".houseFy").val(obj.data.houseResourceDetail[0].id)
                                 $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
                                 // form.render('select')
@@ -601,7 +594,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(fyArr).each(function (i, o) {
                                 if (i > 0) {
                                     var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select xlh='" + i + "' class='houseResource houseFy" + i + "'></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
-                                    var options2 = $("<option value='" + o.id + "' resourcearea='"+o.resourceArea+"'>" + o.location + "</option>").appendTo(".houseFy" + i)
+                                    var options2 = $("<option value='" + o.id + "' resourcearea='" + o.resourceArea + "'>" + o.location + "</option>").appendTo(".houseFy" + i)
                                     getaddyf(i)
                                     var sjjDiv = $("<input type='text' onkeyup='bzj()' style='margin-top: 16px;' xlh='" + i + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + i + "'>").appendTo("#addsjjDiv")
                                     $(".houseFy" + i).val(o.id)
@@ -625,6 +618,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                         $(".isHaveDiscount").val(obj.data.freeRentMonth)
                         $(".rentType").val(obj.data.isNewRentCode)
                         $(".isHaveDiscount").val(obj.data.isHaveDiscountCode)
+                        $(".isHaveDiscount").val(obj.data.isHaveDiscountCode)
+                        $(".yhtk").val(obj.data.discount)
+                        $(".qttk").val(obj.data.extraInfo)
 
                         $(obj.data.mustMoney).each(function (n, m) {
                             if (m.moneyType == "保证金") {
@@ -724,7 +720,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                                         "freeRentMonth": $.trim($(".mzMouth").val()),
                                                                         "dealType": $.trim($(".htType").val()),
                                                                         "isNewRent": $.trim($(".rentType").val()),
-                                                                        "isHaveDiscount": $(".isHaveDiscount").val()
+                                                                        "isHaveDiscount": $(".isHaveDiscount").val(),
+                                                                        "extraInfo": $.trim($(".qttk").val()),
+                                                                        "discount": $.trim($(".yhtk").val())
                                                                     }
 
                                                                     $.ajax({
@@ -1279,8 +1277,8 @@ function isCffy(arr) {
 function bzj() {
     var bzj = 0
     var areaArr = []
-    $(".houseResource option:selected").each(function (n,m) {
-        if ($(m).attr("resourcearea")!==undefined){
+    $(".houseResource option:selected").each(function (n, m) {
+        if ($(m).attr("resourcearea") !== undefined) {
             areaArr.push($(m).attr("resourcearea"))
         } else {
             areaArr.push(0)
@@ -1291,7 +1289,7 @@ function bzj() {
         if ($(o).val() == "") {
             bzj = bzj + 0
         } else {
-            bzj = bzj + parseInt($(o).val())*areaArr[i]
+            bzj = bzj + parseInt($(o).val()) * areaArr[i]
         }
     })
     bzj = bzj.toFixed(2);
@@ -1302,8 +1300,8 @@ function isBzj() {
     var bzj = 0
     var isTrue = true
     var areaArr = []
-    $(".houseResource option:selected").each(function (n,m) {
-        if ($(m).attr("resourcearea")!==undefined){
+    $(".houseResource option:selected").each(function (n, m) {
+        if ($(m).attr("resourcearea") !== undefined) {
             areaArr.push($(m).attr("resourcearea"))
         } else {
             areaArr.push(0)
@@ -1314,7 +1312,7 @@ function isBzj() {
         if ($(o).val() == "") {
             bzj = bzj + 0
         } else {
-            bzj = bzj + parseInt($(o).val())*areaArr[i]
+            bzj = bzj + parseInt($(o).val()) * areaArr[i]
         }
     })
     bzj = bzj.toFixed(2);

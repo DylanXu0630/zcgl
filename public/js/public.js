@@ -8,8 +8,8 @@ var login = "http://221.131.112.189:18001/auth"
 
 var IPdz = "http://221.131.112.189:18000/uum"
 var IPzd = "http://221.131.112.189:14000/estate"
-// var IPdz = "http://172.1.1.151:18000/uum"
-// var IPzd = "http://172.1.1.151:14000/estate"
+// var IPdz = "http://192.168.2.7:18000/uum"
+// var IPzd = "http://192.168.2.7:14000/estate"
 // var IPdz = "http://192.168.100.101:18000/uum"
 // var IPzd = "http://192.168.100.101:14000/estate"
 var indexDig, lookDig
