@@ -232,6 +232,7 @@ layui.use(['table', 'form'], function () {
                     var data = {
                         "id": obj.data.id,
                         // "createdBy": "1",
+                        "accountEnable": $('.status:checked').val() === 'on' ? 1 : 0,
                         "email": $(".email").val(),
                         "location": $(".location").val(),
                         "nickname": $(".nickname").val(),

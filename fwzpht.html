@@ -247,9 +247,9 @@
             $(heObj.houseResourceDetail).each(function (i, o) {
                 glzxArr.push(o.agency)
                 heAreaArr.push(o.resourceArea)
-                djArr.push(o.rentMoneyPerArea)
-                zdjArr.push(o.guideRentMoneyPerArea)
-                yzjArr.push(o.realRentCharge)
+                djArr.push(o.realRentCharge)
+                zdjArr.push(o.guideRentCharge)
+                yzjArr.push(o.originRentCharge)
 
                 if (i > 0) {
                     $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.realRentCharge + "</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
