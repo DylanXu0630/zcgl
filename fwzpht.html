@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>房屋租赁合同</title>
+    <link rel="stylesheet" href="css/ht.css" meta="print">
     <style>
         html {
             -webkit-text-size-adjust: none;
@@ -16,9 +17,10 @@
             width: 750px;
         }
     </style>
+
 </head>
 <body>
-<link rel="stylesheet" href="css/ht.css" meta="print">
+
 <div id="htall" style="font-size: 18px !important;">
     <div class="firstPage">
         <div class="titleBt">蠡园开发区房屋出租审核表（协商出租）</div>
@@ -49,16 +51,16 @@
                 <td style="padding:0 10px;"><span class="zdj"></span></td>
             </tr>
             <tr>
-                <td style="padding:0 10px;">租赁期限(月)</td>
-                <td style="padding:0 10px;"><span class="synx"></span></td>
-                <td colspan="2" style="padding:0 10px;">新签<img src="images/choose01.svg" class="choose" id="new"></td>
-                <td colspan="2" style="padding:0 10px;">续签<img src="images/choose01.svg" class="choose" id="old"></td>
+                <td style="padding:0 10px;">租赁期限</td>
+                <td style="padding:0 10px;" colspan="3"><span class="synx"></span></td>
+                <td style="padding:0 10px;min-width: 80px;">新签<img src="images/choose01.svg" class="choose" id="new"></td>
+                <td style="padding:0 10px;min-width: 80px;">续签<img src="images/choose01.svg" class="choose" id="old"></td>
             </tr>
             <tr>
                 <td colspan="1" style="padding:0 10px;">免租期限</td>
-                <td colspan="2" style="padding:0 10px;"><span class="mzq"></span></td>
+                <td colspan="3" style="padding:0 10px;"><span class="mzq"></span></td>
                 <td colspan="1" style="padding:0 10px;">有无优惠条款</td>
-                <td colspan="2" style="padding:0 10px;"><span class="ywyhtj"></span></td>
+                <td colspan="1" style="padding:0 10px;width: 112px;"><span class="ywyhtj"></span></td>
             </tr>
             <tr>
                 <td colspan="6" style="padding:0 10px;">经办人签字：<span class="qzDate" style="float: right;margin-right: 20px;"><span
@@ -86,7 +88,7 @@
             </tr>
         </table>
     </div>
-    <div class="bbh">版本号：<span class="htSpan s-bbh"></span></div>
+    <div class="bbh">版本号：<span class="htSpan bt-bbh"></span></div>
     <h2>房屋租赁合同</h2>
     <div style="line-height: 37px;">出租方（下称甲方）:<span class="htSpan jf"></span></div>
     <div style="line-height: 37px;">承租方（下称乙方）:<span class="htSpan yf"></span></div>
@@ -95,8 +97,8 @@
         &nbsp;&nbsp;<span class="title">一、租赁房屋的坐落、面积、租赁期限</span><br>
         &nbsp;&nbsp;&nbsp;甲方将座落于<span class="zlwz"></span>租赁期限为<span
             class="htSpan zlqx"></span>年，从<span
-            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。<span class="freeZq">免租期<span
-            class="htSpan mzq">1</span>个月</span><br>
+            class="htSpan starTime"></span>起至<span class="htSpan endTime"></span>止。<span class="freeZq">其中<span
+            class="htSpan mzq"></span>为房屋装修期,免收房租。</span><br>
         &nbsp;&nbsp;<span class="title">二、房屋的租金</span><br>
         &nbsp;&nbsp;（一）租赁房屋每月租金为<span
             class="htSpan htsjzj"></span>元，乙方先支付租金再使用房屋，乙方应当在下一个周期开始前5天支付租金，第一期租金应当在本合同签署之日同时支付，甲方收到房屋租金和履约保证金后再向乙方交付租赁房屋。<br>
@@ -152,7 +154,7 @@
         联系人<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系电话：<span
             class=""></span><br>
         联系地址：<span class=""></span><br>
-        乙方:<span class=""></span><br>
+        乙方:<span class="htSpan yf"></span><br>
         联系人<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系电话：<span
             class=""></span><br>
         联系地址：<span class=""></span><br>
@@ -163,9 +165,19 @@
         &nbsp;&nbsp;本合同共四页，为一式四份，甲方执三份、乙方执一份，经双方签字或盖章之日起生效。<br>
         &nbsp;&nbsp;<span class="title">十五、其它条款:</span><br>
         <xmp class="qtbz"></xmp>
-        出租方（盖章）: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;承租方（盖章）:<br>
-        法定代表人或授权代表（签字）:<span class=""></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定代表人或授权代表（签字）:<span
-            class=""></span><br><br><br><br>
+        <table style="width: 100%">
+            <tr>
+                <td>出租方（盖章）:</td>
+                <td>承租方（盖章）:</td>
+            </tr>
+            <tr>
+                <td>法定代表人或授权代表（签字）:</td>
+                <td>法定代表人或授权代表（签字）:</td>
+            </tr>
+        </table>
+        <!--出租方（盖章）: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;承租方（盖章）:<br>-->
+        <!--法定代表人或授权代表（签字）:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;法定代表人或授权代表（签字）:-->
+        <br><br><br><br>
         <div style="text-align: right;margin-top: 20px">
             本合同签订时间<span class="" style="margin: 0 20px;margin-left: 60px"></span>年<span class="" style="margin: 0 20px;"></span>月<span class=""
                                                                                                                                         style="margin: 0 20px;"></span>日
@@ -196,32 +208,34 @@
         $(".s-bbh").text(heObj.dealSerial)
         $(".yf").text(heObj.renter)
         $(".jf").text(heObj.lessor)
+        $(".yf").text(heObj.renter)
         // $(".mjjz").text(heObj.resourceArea)
         // $(".syyt").text(heObj.houseUsage)
-        $(".synx").text(heObj.rentMonth)
+        $(".synx").text(heObj.startTime + "至" + heObj.endTime)
         $(".zlqx").text(heObj.rentMonth / 12)
         $(".starTime").text(heObj.startTime)
         $(".endTime").text(heObj.endTime)
-        if (heObj.extraInfo == ""){
+        $(".bt-bbh").text(getYear()+" v1.1")
+        if (heObj.extraInfo == "") {
             $(".qtbz").text("无")
         } else {
             $(".qtbz").text(heObj.extraInfo)
         }
 
         // $(".sjzj").text(heObj.realRentCharge)
-        if (heObj.payType == "一季度一付") {
+        if (heObj.payType == "以三个月为一周期支付") {
             $(".fkfs").text("3")
-        } else if (heObj.payType == "一年一付") {
+        } else if (heObj.payType == "以十二个月为一周期支付") {
             $(".fkfs").text("1")
-        } else if (heObj.payType == "半年一付") {
+        } else if (heObj.payType == "以六个月为一周期支付") {
             $(".fkfs").text("2")
-        } else if (heObj.payType == "一月一付") {
+        } else if (heObj.payType == "以一个月为周期支付") {
             $(".fkfs").text("4")
         }
         if (heObj.freeRentMonth == 0) {
             $(".freeZq").css("display", "none")
         } else {
-            $(".mzq").text(heObj.freeRentMonth)
+            $(".mzq").text(heObj.startTime+"至"+heObj.freeEndTime)
         }
 
         // $(".bzj").text(heObj.deposit)
@@ -411,6 +425,11 @@
         }
         ;
         $(oTemp).appendTo("#htall")
+    }
+
+    function getYear() {
+        var date = new Date()
+        return date.getFullYear()
     }
 </script>
 </body>
