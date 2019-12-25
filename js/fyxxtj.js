@@ -192,11 +192,13 @@ layui.use(['table', 'form'], function () {
                 '  </div>\n' +
                 '<div class="dialogTitle">房产证信息</div>' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label"><span class="inputBtx">*</span>产权名称</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>房产证号</label>\n' +
                 '    <div class="layui-input-block">\n' +
-                '      <select class="houseZh"  lay-filter="fcxx" >\n' +
-                '         <option value="">请选择</option>\n' +
-                '     </select>\n' +
+                // '      <select class="houseZh"  lay-filter="fcxx" >\n' +
+                // '         <option value="">请选择</option>\n' +
+                // '     </select>\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*号为必填项" tid="" autocomplete="off" onkeyup="fwcz(this)" class="layui-input fkLandAssetsId">\n' +
+                '      <div class="ssyx fwcz"></div>' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
@@ -206,7 +208,7 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">房产证号</label>\n' +
+                '    <label class="layui-form-label">产权名称</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input fwfczh" readonly>\n' +
                 '    </div>\n' +
@@ -412,26 +414,12 @@ layui.use(['table', 'form'], function () {
         getzclx()
 
 
-        form.on('select(fcxx)', function(data){
-            if (data.value==""){
+        form.on('select(fcxx)', function (data) {
+            if (data.value == "") {
                 $(".fwgldw").val("")
                 $(".fwfczh").val("")
             } else {
-                $.ajax({
-                    url: IPzd + "/assets/house/"+data.value,
-                    type: 'get',
-                    async: false,
-                    // 告诉jQuery不要去处理发送的数据
-                    processData: false,
-                    // 告诉jQuery不要去设置Content-Type请求头
-                    contentType: false,
-                    beforeSend: function () {
-                    },
-                    success: function (req) {
-                        $(".fwgldw").val(req.data.owner)
-                        $(".fwfczh").val(req.data.houseId)
-                    }
-                });
+
             }
         });
         form.render('select')
@@ -468,7 +456,7 @@ layui.use(['table', 'form'], function () {
                                 $(responseStr.data.errorRows).each(function (i, o) {
                                     sbts = sbts + '<div style="margin: 5px 0;color: red">' + o + '条</div>'
                                 })
-                            }else {
+                            } else {
                                 sbts = sbts + '<div style="margin: 5px 0;color: red">无</div>'
                             }
 
@@ -669,13 +657,13 @@ layui.use(['table', 'form'], function () {
                     getgldw()
                     getzclx()
                     getfczh()
-                    form.on('select(fcxx)', function(data){
-                        if (data.value==""){
+                    form.on('select(fcxx)', function (data) {
+                        if (data.value == "") {
                             $(".fwgldw").val("")
                             $(".fwfczh").val("")
                         } else {
                             $.ajax({
-                                url: IPzd + "/assets/house/"+data.value,
+                                url: IPzd + "/assets/house/" + data.value,
                                 type: 'get',
                                 async: false,
                                 // 告诉jQuery不要去处理发送的数据
@@ -712,12 +700,12 @@ layui.use(['table', 'form'], function () {
                     $(".yzmj").val(obj.data.yzArea)
                     $(".wzmj").val(obj.data.wzArea)
                     $(".gldw").val(obj.data.fkAgencyId)
-                    if (obj.data.assetsId==""){
+                    if (obj.data.assetsId == "") {
                         $(".fwgldw").val("")
                         $(".fwfczh").val("")
                     } else {
                         $.ajax({
-                            url: IPzd + "/assets/house/"+obj.data.assetsId,
+                            url: IPzd + "/assets/house/" + obj.data.assetsId,
                             type: 'get',
                             async: false,
                             // 告诉jQuery不要去处理发送的数据
@@ -1029,7 +1017,6 @@ layui.use(['table', 'form'], function () {
                     '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input houseZh" readonly>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
-
                     '  <div class="dialogDiv">\n' +
                     '    <label class="layui-form-label">房屋所有权人</label>\n' +
                     '    <div class="layui-input-block">\n' +
@@ -1221,3 +1208,101 @@ function areaISOk() {
     return isTrue
 }
 
+function fwcz(obj) {
+    var houseNO = obj.value
+
+    $.ajax({
+        url: IPzd + '/search/house?houseNO=' + houseNO,    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+        type: "GET",   //请求方式
+        contentType: "application/json;charset=UTF-8",
+        // headers: {"token": sessionStorage.token},
+        beforeSend: function () {
+            //请求前的处理
+            $(".fwcz").children().remove()
+            $(".fkLandAssetsId").attr("tid", "")
+            $(".fwcz").css("left", "2px")
+            $(".fwcz").css("width", "86%")
+        },
+        success: function (req) {
+
+            if (req.status == 200) {
+                $(".ssyx").css("display", "block")
+                if (req.data.length !== 0) {
+                    $(req.data).each(function (i, o) {
+                        var div = $("<div class='sslb' tid='" + o.id + "'>" + o.name + "</div>").appendTo(".fwcz")
+                    })
+                } else {
+                    var div = $("<div class='sslb' tid=''>没有此房产证</div>").appendTo(".fwcz")
+                }
+            } else {
+                $(".ssyx").css("display", "block")
+                var div = $("<div class='sslb' tid=''>没有此房产证</div>").appendTo(".fwcz")
+                $("body").on("click", function () {
+                    var no = $(this).text()
+                    $(".fwcz").css("display", "none")
+                })
+            }
+
+            $("body").on("click", ".sslb", function () {
+                var no = $(this).text()
+                var tid = $(this).attr("tid")
+                $(this).parent().parent().find(".fkLandAssetsId").val(no)
+                $(this).parent().parent().find(".fkLandAssetsId").attr("tid", tid)
+                if (tid !== "") {
+                    $.ajax({
+                        url: IPzd + "/assets/house/" + tid,
+                        type: 'get',
+                        async: false,
+                        // 告诉jQuery不要去处理发送的数据
+                        processData: false,
+                        // 告诉jQuery不要去设置Content-Type请求头
+                        contentType: false,
+                        beforeSend: function () {
+                        },
+                        success: function (req) {
+                            $(".fwgldw").val(req.data.owner)
+                            $(".fwfczh").val(req.data.houseName)
+                        }
+                    });
+                    $(".fwcz").css("display", "none")
+                } else {
+                    $(".fwgldw").val("")
+                    $(".fwfczh").val("")
+                }
+            })
+            $("body").on("click", function () {
+                $(".fwcz").css("display", "none")
+                var tid = $(".fkLandAssetsId").attr("tid")
+                if (tid !== "") {
+                    $.ajax({
+                        url: IPzd + "/assets/house/" + tid,
+                        type: 'get',
+                        async: false,
+                        // 告诉jQuery不要去处理发送的数据
+                        processData: false,
+                        // 告诉jQuery不要去设置Content-Type请求头
+                        contentType: false,
+                        beforeSend: function () {
+                        },
+                        success: function (req) {
+                            $(".fwgldw").val(req.data.owner)
+                            $(".fwfczh").val(req.data.houseName)
+                        }
+                    });
+                    $(".fwcz").css("display", "none")
+                } else {
+                    $(".fwgldw").val("")
+                    $(".fwfczh").val("")
+                }
+            })
+        },
+        complete: function () {
+            //请求完成的处理
+        },
+        error: function () {
+            //请求出错处理
+        }
+    });
+}
