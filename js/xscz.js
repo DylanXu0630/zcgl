@@ -242,10 +242,10 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '    </div>\n' +
                 '  </div>\n' +
                 '<div class="dialogTitle">房源信息</div>' +
-                '<div>'+
-                
+                '<div>' +
+
                 '<div class="layui-form-item">\n' +
-                '   <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n'+
+                '   <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
                 // 管理单位    
                 '   <div class="layui-input-inline">\n' +
                 '       <select name="managementUnit" class="managementUnit" lay-filter="search_type_one">' +
@@ -253,25 +253,25 @@ layui.use(['laydate', 'table', 'form'], function () {
                 '   </div>' +
                 // 楼宇
                 '<div class="layui-input-inline">' +
-                '   <select name="building" class="building" lay-filter="search_type_two">'+
-                '   </select>'+
-               ' </div>'+
+                '   <select name="building" class="building" lay-filter="search_type_two">' +
+                '   </select>' +
+                ' </div>' +
                 // 楼号   
-                '<div class="layui-input-inline">'+
-                '   <select name="buildNum" class="buildNum" lay-filter="search_type_three">'+
-                '       <option value="">请选择楼号</option>'+
-                '   </select>'+
-                '</div>'+
+                '<div class="layui-input-inline">' +
+                '   <select name="buildNum" class="buildNum" lay-filter="search_type_three">' +
+                '       <option value="">请选择楼号</option>' +
+                '   </select>' +
+                '</div>' +
                 // 房号
-                '<div class="layui-input-inline">'+
-                '   <select name="roomNum" class="roomNum">'+
-                '       <option value="">请选择房号</option>'+
-                '   </select>'+
-                '</div>'+
-                '<div class="layui-input-inline">'+
+                '<div class="layui-input-inline">' +
+                '   <select name="roomNum" class="roomNum">' +
+                '       <option value="">请选择房号</option>' +
+                '   </select>' +
+                '</div>' +
+                '<div class="layui-input-inline">' +
                 '   <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
-                '</div>'+
-                '</div>'+
+                '</div>' +
+                '</div>' +
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
                 '    <div class="layui-input-block">\n' +
@@ -280,10 +280,10 @@ layui.use(['laydate', 'table', 'form'], function () {
                 // '   </div>' +
                 '</div>\n' +
                 '  </div>\n' +
-                '</div>'+
+                '</div>' +
                 // 新增的房源信息
-                '<div id="addFyDiv">'+
-                '</div>'+
+                '<div id="addFyDiv">' +
+                '</div>' +
 
                 '  <div class="dialogDiv">\n' +
                 '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
@@ -306,10 +306,10 @@ layui.use(['laydate', 'table', 'form'], function () {
                 })
                 $(".roomNum option:selected").each(function (i, o) {
                     if ($(o).val() !== "") {
-                        if($(o).attr("guiderentcharge")>zjArr[i]){
+                        if ($(o).attr("guiderentcharge") > zjArr[i]) {
                             layer.msg("实际租金不能小于指导价")
 
-                        }else {
+                        } else {
                             var obj = {
                                 "fkHouseResourceId": $(o).val(),
                                 "realMoney": zjArr[i]
@@ -318,8 +318,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                         }
                     }
                 })
-                
-                if(isguid()){
+
+                if (isguid()) {
                     if ($(".roomNum").length !== $(".sjj").length) {
                         layer.msg("房源和实际价格对应！")
                     } else {
@@ -351,7 +351,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                                     "extraInfo": $.trim($(".qttk").val()),
                                                                     "discount": $.trim($(".yhtk").val())
                                                                 }
-    
+
                                                                 $.ajax({
                                                                     url: IPzd + '/deal',    //请求的url地址
                                                                     dataType: "json",   //返回格式为json
@@ -381,19 +381,19 @@ layui.use(['laydate', 'table', 'form'], function () {
                                                                     }
                                                                 });
                                                             }
-    
+
                                                         } else {
                                                             layer.msg("房源不能选择相同的！")
                                                         }
-    
+
                                                     } else {
                                                         layer.msg("合同类型不能为空！")
                                                     }
-    
+
                                                 } else {
                                                     layer.msg("租赁月份不能为空！")
                                                 }
-    
+
                                             } else {
                                                 layer.msg("租金支付方式与租赁月份为倍数关系且不能小于租金支付的月份！")
                                             }
@@ -413,7 +413,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             layer.msg("房源不能为空！")
                         }
                     }
-                }else {
+                } else {
                     layer.msg("实际价不能低于指导价！")
                 }
             },
@@ -439,44 +439,44 @@ layui.use(['laydate', 'table', 'form'], function () {
             // getaddyf(n)
             // form.render('select')
             $(
-        '<div>'+
-        '   <div class="layui-form-item">\n' +
-        '   <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n'+
-        // 管理单位    
-        '   <div class="layui-input-inline">\n' +
-        '       <select name="managementUnit" class="managementUnit" lay-filter="search_type_one">' +
-        '       </select>' +
-        '   </div>' +
-        // 楼宇
-        '<div class="layui-input-inline">' +
-        '   <select name="building" class="building" lay-filter="search_type_two">'+
-        '       <option value="">请选择楼宇</option>'+
-        '   </select>'+
-        ' </div>'+
-        // 楼号   
-        '<div class="layui-input-inline">'+
-        '   <select name="buildNum" class="buildNum" lay-filter="search_type_three">'+
-        '       <option value="">请选择楼号</option>'+
-        '   </select>'+
-        '</div>'+
-        // 房号
-        '<div class="layui-input-inline">'+
-        '   <select name="roomNum" class="roomNum">'+
-        '       <option value="">请选择房号</option>'+
-        '   </select>'+
-        '</div>'+
-        '<div class="layui-input-inline">'+
-        '   <button type="button" class="layui-btn layui-btn-sm layui-btn-primary sc"><i class="layui-icon">&#xe640;</i></button>' +
-        '</div>'+
-        '</div>' +
-        // 实际租金
-        '  <div class="dialogDiv realzj">\n' +
-        '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
-        '    <div class="layui-input-block">\n' +
-        '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
-        '    </div>\n' +
-        '  </div>\n'+
-        '</div>'
+                '<div>' +
+                '   <div class="layui-form-item">\n' +
+                '   <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                // 管理单位
+                '   <div class="layui-input-inline">\n' +
+                '       <select name="managementUnit" class="managementUnit" lay-filter="search_type_one">' +
+                '       </select>' +
+                '   </div>' +
+                // 楼宇
+                '<div class="layui-input-inline">' +
+                '   <select name="building" class="building" lay-filter="search_type_two">' +
+                '       <option value="">请选择楼宇</option>' +
+                '   </select>' +
+                ' </div>' +
+                // 楼号
+                '<div class="layui-input-inline">' +
+                '   <select name="buildNum" class="buildNum" lay-filter="search_type_three">' +
+                '       <option value="">请选择楼号</option>' +
+                '   </select>' +
+                '</div>' +
+                // 房号
+                '<div class="layui-input-inline">' +
+                '   <select name="roomNum" class="roomNum">' +
+                '       <option value="">请选择房号</option>' +
+                '   </select>' +
+                '</div>' +
+                '<div class="layui-input-inline">' +
+                '   <button type="button" class="layui-btn layui-btn-sm layui-btn-primary sc"><i class="layui-icon">&#xe640;</i></button>' +
+                '</div>' +
+                '</div>' +
+                // 实际租金
+                '  <div class="dialogDiv realzj">\n' +
+                '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '</div>'
             ).appendTo("#addFyDiv");
             getManagementUnit();
             form.render('select');
@@ -485,13 +485,13 @@ layui.use(['laydate', 'table', 'form'], function () {
         $("#addFyDiv").on("click", ".sc", function () {
             $(this).parent().parent().parent().find(".realzj").remove()
             $(this).parent().parent().remove()
-            
+
             form.render()
             return false;//false：阻止表单跳转  true：表单跳转
         })
     })
 
-    form.on('select(search_type_one)', function(data){
+    form.on('select(search_type_one)', function (data) {
         var building = $(this).parent().parent().parent().parent().find(".building");
         building.children().remove();
         $.ajax({
@@ -505,11 +505,11 @@ layui.use(['laydate', 'table', 'form'], function () {
                 //请求前的处理
             },
             success: function (req) {
-              $('<option value="">请选择楼宇</option>').appendTo(building)
-              req.data.forEach(element => {
-                var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(building)
-              });
-              form.render('select')
+                $('<option value="">请选择楼宇</option>').appendTo(building)
+                req.data.forEach(element => {
+                    var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(building)
+                });
+                form.render('select')
             },
             complete: function () {
                 //请求完成的处理
@@ -520,7 +520,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         });
     });
 
-    form.on('select(search_type_two)', function(data) {
+    form.on('select(search_type_two)', function (data) {
         var buildNum = $(this).parent().parent().parent().parent().find(".buildNum");
         buildNum.children().remove();
         $.ajax({
@@ -535,10 +535,10 @@ layui.use(['laydate', 'table', 'form'], function () {
             },
             success: function (req) {
                 $('<option value="">请选择楼号</option>').appendTo(buildNum)
-              req.data.forEach(element => {
-                var option = $("<option value='" + element + "'>" + element + "</option>").appendTo(buildNum)
-              });
-              form.render('select')
+                req.data.forEach(element => {
+                    var option = $("<option value='" + element + "'>" + element + "</option>").appendTo(buildNum)
+                });
+                form.render('select')
             },
             complete: function () {
                 //请求完成的处理
@@ -549,11 +549,11 @@ layui.use(['laydate', 'table', 'form'], function () {
         });
     });
 
-    form.on('select(search_type_three)', function(data) {
+    form.on('select(search_type_three)', function (data) {
         var roomNum = $(this).parent().parent().parent().parent().find(".roomNum");
         roomNum.children().remove();
         $.ajax({
-            url: IPzd + '/hresource/room?bno=' + data.value + '&pid='+ $('.building').val(),    //请求的url地址
+            url: IPzd + '/hresource/room?bno=' + data.value + '&pid=' + $('.building').val(),    //请求的url地址
             dataType: "json",   //返回格式为json
             async: false,//请求是否异步，默认为异步，这也是ajax重要特性
             type: "GET",   //请求方式
@@ -563,11 +563,11 @@ layui.use(['laydate', 'table', 'form'], function () {
                 //请求前的处理
             },
             success: function (req) {
-              $('<option value="">请选择房号</option>').appendTo(roomNum)
-              req.data.forEach(element => {
-                var option = $("<option value='" + element.id + "' resourcearea='"+element.resourceArea+"' guideRentCharge='"+element.guideRentCharge+"' >" + element.resourceName + "</option>").appendTo(roomNum)
-              });
-              form.render('select')
+                $('<option value="">请选择房号</option>').appendTo(roomNum)
+                req.data.forEach(element => {
+                    var option = $("<option value='" + element.id + "' resourcearea='" + element.resourceArea + "' guideRentCharge='" + element.guideRentCharge + "' >" + element.resourceName + "</option>").appendTo(roomNum)
+                });
+                form.render('select')
             },
             complete: function () {
                 //请求完成的处理
@@ -628,31 +628,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                     content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
                         '<div class="addDig">' +
                         '<div><form class="layui-form" action="">\n' +
-                        '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <select class="houseResource houseFy">\n' +
-                        '    <option value="">请选择</option>\n' +
-                        '     </select>\n' +
-                        '    </div>\n' +
-                        '<div id="addFyDiv">' +
-                        '</div>' +
-                        '  <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;margin: 15px 0 15px 45%;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
-                        '  </div>\n' +
-                        '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
-                        '<div id="addsjjDiv">' +
-                        '</div>' +
-                        '    </div>\n' +
-                        '  </div>\n' +
-                        '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
-                        '    </div>\n' +
-                        '  </div>\n' +
+                        '<div class="dialogTitle">合同信息</div>' +
                         '  <div class="dialogDiv">\n' +
                         '    <label class="layui-form-label"><span class="inputBtx">*</span>承租人（乙方）</label>\n' +
                         '    <div class="layui-input-block">\n' +
@@ -713,18 +689,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '<div>' +
                         '</div>' +
                         '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label">优惠条款简要说明</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <textarea placeholder="请输入内容" class="layui-textarea yhtk"></textarea>\n' +
-                        '    </div>\n' +
-                        '  </div>\n' +
-                        '  <div class="dialogDiv">\n' +
-                        '    <label class="layui-form-label">其他条款</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <textarea placeholder="请输入内容" class="layui-textarea qttk"></textarea>\n' +
-                        '    </div>\n' +
-                        '  </div>\n' +
-                        '  <div class="dialogDiv">\n' +
                         '    <label class="layui-form-label"><span class="inputBtx">*</span>合同类型</label>\n' +
                         '    <div class="layui-input-block">\n' +
                         '      <select class="htType">\n' +
@@ -736,6 +700,68 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '     </select>\n' +
                         '    </div>\n' +
                         '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label">优惠条款简要说明</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <textarea placeholder="请输入内容" class="layui-textarea yhtk"></textarea>\n' +
+                        '    </div>\n' +
+                        '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label">其他条款</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <textarea placeholder="请输入内容" class="layui-textarea qttk"></textarea>\n' +
+                        '    </div>\n' +
+                        '  </div>\n' +
+                        '<div class="dialogTitle">房源信息</div>' +
+                        '<div class="newFy">' +
+
+                        '<div class="layui-form-item">\n' +
+                        '   <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                        // 管理单位
+                        '   <div class="layui-input-inline">\n' +
+                        '       <select name="managementUnit" class="managementUnit" lay-filter="search_type_one">' +
+                        '       </select>' +
+                        '   </div>' +
+                        // 楼宇
+                        '<div class="layui-input-inline">' +
+                        '   <select name="building" class="building" lay-filter="search_type_two">' +
+                        '   </select>' +
+                        ' </div>' +
+                        // 楼号
+                        '<div class="layui-input-inline">' +
+                        '   <select name="buildNum" class="buildNum" lay-filter="search_type_three">' +
+                        '       <option value="">请选择楼号</option>' +
+                        '   </select>' +
+                        '</div>' +
+                        // 房号
+                        '<div class="layui-input-inline">' +
+                        '   <select name="roomNum" class="roomNum">' +
+                        '       <option value="">请选择房号</option>' +
+                        '   </select>' +
+                        '</div>' +
+                        '<div class="layui-input-inline">' +
+                        '   <button type="button" class="layui-btn" id="addFy" style="margin: 0 auto;"><i class="layui-icon">&#xe608;</i> 添加</button>' +
+                        '</div>' +
+                        '</div>' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
+                        // '   <div id="addsjjDiv">' +
+                        // '   </div>' +
+                        '</div>\n' +
+                        '  </div>\n' +
+                        '</div>' +
+                        // 新增的房源信息
+                        '<div id="addFyDiv">' +
+                        '</div>' +
+
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label"><span class="inputBtx">*</span>保证金(元)</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <input type="text" name="title" required onkeyup="clearNoNum(this)" lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input bzj">\n' +
+                        '    </div>\n' +
+                        '  </div>\n' +
                         '</form></div>' +
                         '</div>' +
                         '</div>',
@@ -743,36 +769,493 @@ layui.use(['laydate', 'table', 'form'], function () {
                         getfy()
                         getgldw()
                         getyf()
+
                         var fyArr = obj.data.houseResourceDetail
                         if (fyArr.length < 2) {
-                            if ($(".houseFy").children().length < 2) {
-                                $(".houseFy").children().remove()
-                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "' resourcearea='" + obj.data.houseResourceDetail[0].resourceArea + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
-                                $(".houseFy").val(obj.data.houseResourceDetail[0].id)
-                                $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
+                            $(fyArr).each(function (i, o) {
+                                var managementUnit = $(".newFy").find(".managementUnit")
+                                managementUnit.children().remove()
+                                $.ajax({
+                                    url: IPzd + '/hresource/agency?aid=' + (aid == '' ? 0 : aid),    //请求的url地址
+                                    dataType: "json",   //返回格式为json
+                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                    type: "GET",   //请求方式
+                                    contentType: "application/json;charset=UTF-8",
+                                    // headers: {"token": sessionStorage.token},
+                                    beforeSend: function () {
+                                        //请求前的处理
+                                    },
+                                    success: function (req) {
+                                        if (aid == '') {
+                                            // 没有绑定机构
+                                            var options = $("<option value=''>请选择管理单位</option>").appendTo(managementUnit)
+                                            req.data.forEach(element => {
+                                                var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(managementUnit)
+                                            });
+                                        } else {
+                                            req.data.forEach(element => {
+                                                var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(managementUnit)
+                                                $.ajax({
+                                                    url: IPzd + '/hresource/park?aid=' + element.id,    //请求的url地址
+                                                    dataType: "json",   //返回格式为json
+                                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                    type: "GET",   //请求方式
+                                                    contentType: "application/json;charset=UTF-8",
+                                                    // headers: {"token": sessionStorage.token},
+                                                    beforeSend: function () {
+                                                        //请求前的处理
+                                                    },
+                                                    success: function (req) {
+                                                        $('<option value="">请选择楼宇</option>').appendTo(".building")
+                                                        req.data.forEach(element => {
+                                                            var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(".building")
+                                                        });
+                                                        form.render('select')
+                                                    },
+                                                    complete: function () {
+                                                        //请求完成的处理
+                                                    },
+                                                    error: function () {
+                                                        //请求出错处理
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    },
+                                    complete: function () {
+                                        //请求完成的处理
+                                    },
+                                    error: function () {
+                                        //请求出错处理
+                                    }
+                                });
+                                $(".newFy").find(".managementUnit").val(o.agencyId)
 
-                            } else {
-                                // $(".houseFy").children().remove()
-                                var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "' resourcearea='" + obj.data.houseResourceDetail[0].resourceArea + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
-                                $(".houseFy").val(obj.data.houseResourceDetail[0].id)
-                                $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
-                                // form.render('select')
-                            }
+
+                                var ly = $(".newFy").find(".building")
+                                ly.children().remove()
+                                $.ajax({
+                                    url: IPzd + '/hresource/park?aid=' + o.agencyId,    //请求的url地址
+                                    dataType: "json",   //返回格式为json
+                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                    type: "GET",   //请求方式
+                                    contentType: "application/json;charset=UTF-8",
+                                    // headers: {"token": sessionStorage.token},
+                                    beforeSend: function () {
+                                        //请求前的处理
+                                    },
+                                    success: function (req) {
+                                        $('<option value="">请选择楼宇</option>').appendTo(ly)
+                                        req.data.forEach(element => {
+                                            var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(ly)
+                                        });
+                                        form.render('select')
+                                    },
+                                    complete: function () {
+                                        //请求完成的处理
+                                    },
+                                    error: function () {
+                                        //请求出错处理
+                                    }
+                                });
+                                $(".newFy").find(".building").val(o.parkId)
+
+
+                                var lh = $(".newFy").find(".buildNum")
+                                lh.children().remove()
+                                $.ajax({
+                                    url: IPzd + '/hresource/ld?pid=' + o.parkId,    //请求的url地址
+                                    dataType: "json",   //返回格式为json
+                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                    type: "GET",   //请求方式
+                                    contentType: "application/json;charset=UTF-8",
+                                    // headers: {"token": sessionStorage.token},
+                                    beforeSend: function () {
+                                        //请求前的处理
+                                    },
+                                    success: function (req) {
+                                        $('<option value="">请选择楼号</option>').appendTo(lh)
+                                        req.data.forEach(element => {
+                                            var option = $("<option value='" + element + "'>" + element + "</option>").appendTo(lh)
+                                        });
+                                        form.render('select')
+                                    },
+                                    complete: function () {
+                                        //请求完成的处理
+                                    },
+                                    error: function () {
+                                        //请求出错处理
+                                    }
+                                });
+                                $(".newFy").find(".buildNum").val(o.buildNo)
+
+                                var room = $(".newFy").find(".roomNum")
+                                room.children().remove()
+                                $.ajax({
+                                    url: IPzd + '/hresource/room?bno=' + o.buildNo + '&pid=' + o.parkId,    //请求的url地址
+                                    dataType: "json",   //返回格式为json
+                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                    type: "GET",   //请求方式
+                                    contentType: "application/json;charset=UTF-8",
+                                    // headers: {"token": sessionStorage.token},
+                                    beforeSend: function () {
+                                        //请求前的处理
+                                    },
+                                    success: function (req) {
+                                        $('<option value="">请选择房号</option>').appendTo(room)
+                                        req.data.forEach(element => {
+                                            var option = $("<option value='" + element.id + "' resourcearea='" + element.resourceArea + "' guideRentCharge='" + element.guideRentCharge + "' >" + element.resourceName + "</option>").appendTo(room)
+                                        });
+                                        form.render('select')
+                                    },
+                                    complete: function () {
+                                        //请求完成的处理
+                                    },
+                                    error: function () {
+                                        //请求出错处理
+                                    }
+                                });
+                                $(".newFy").find(".roomNum").val(o.id)
+
+                                $(".newFy").find(".sjj").val(o.realRentCharge)
+
+
+                            })
                         } else {
                             $(fyArr).each(function (i, o) {
                                 if (i > 0) {
-                                    var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select xlh='" + i + "' class='houseResource houseFy" + i + "'></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
-                                    var options2 = $("<option value='" + o.id + "' resourcearea='" + o.resourceArea + "'>" + o.location + "</option>").appendTo(".houseFy" + i)
-                                    getaddyf(i)
-                                    var sjjDiv = $("<input type='text' onkeyup='bzj()' style='margin-top: 16px;' xlh='" + i + "' name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + i + "'>").appendTo("#addsjjDiv")
-                                    $(".houseFy" + i).val(o.id)
-                                    $(".sjzj" + i).val(o.realRentCharge)
-                                    // form.render('select')
+                                    $(
+                                        '<div class="newFy' + i + '">' +
+                                        '   <div class="layui-form-item">\n' +
+                                        '   <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                                        // 管理单位
+                                        '   <div class="layui-input-inline">\n' +
+                                        '       <select name="managementUnit" class="managementUnit" lay-filter="search_type_one">' +
+                                        '       </select>' +
+                                        '   </div>' +
+                                        // 楼宇
+                                        '<div class="layui-input-inline">' +
+                                        '   <select name="building" class="building" lay-filter="search_type_two">' +
+                                        '   </select>' +
+                                        ' </div>' +
+                                        // 楼号
+                                        '<div class="layui-input-inline">' +
+                                        '   <select name="buildNum" class="buildNum" lay-filter="search_type_three">' +
+                                        '   </select>' +
+                                        '</div>' +
+                                        // 房号
+                                        '<div class="layui-input-inline">' +
+                                        '   <select name="roomNum" class="roomNum">' +
+                                        '   </select>' +
+                                        '</div>' +
+                                        '<div class="layui-input-inline">' +
+                                        '   <button type="button" class="layui-btn layui-btn-sm layui-btn-primary sc"><i class="layui-icon">&#xe640;</i></button>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        // 实际租金
+                                        '  <div class="dialogDiv realzj">\n' +
+                                        '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
+                                        '    <div class="layui-input-block">\n' +
+                                        '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
+                                        '    </div>\n' +
+                                        '  </div>\n' +
+                                        '</div>'
+                                    ).appendTo("#addFyDiv");
+
+                                    var managementUnit = $(".newFy" + i).find(".managementUnit")
+                                    managementUnit.children().remove()
+                                    $.ajax({
+                                        url: IPzd + '/hresource/agency?aid=' + (aid == '' ? 0 : aid),    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "GET",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            if (aid == '') {
+                                                // 没有绑定机构
+                                                var options = $("<option value=''>请选择管理单位</option>").appendTo(managementUnit)
+                                                req.data.forEach(element => {
+                                                    var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(managementUnit)
+                                                });
+                                            } else {
+                                                req.data.forEach(element => {
+                                                    var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(managementUnit)
+                                                    $.ajax({
+                                                        url: IPzd + '/hresource/park?aid=' + element.id,    //请求的url地址
+                                                        dataType: "json",   //返回格式为json
+                                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                        type: "GET",   //请求方式
+                                                        contentType: "application/json;charset=UTF-8",
+                                                        // headers: {"token": sessionStorage.token},
+                                                        beforeSend: function () {
+                                                            //请求前的处理
+                                                        },
+                                                        success: function (req) {
+                                                            $('<option value="">请选择楼宇</option>').appendTo(".building")
+                                                            req.data.forEach(element => {
+                                                                var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(".building")
+                                                            });
+                                                            form.render('select')
+                                                        },
+                                                        complete: function () {
+                                                            //请求完成的处理
+                                                        },
+                                                        error: function () {
+                                                            //请求出错处理
+                                                        }
+                                                    });
+                                                });
+                                            }
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                    $(".newFy" + i).find(".managementUnit").val(o.agencyId)
+
+
+                                    var ly = $(".newFy" + i).find(".building")
+                                    ly.children().remove()
+                                    $.ajax({
+                                        url: IPzd + '/hresource/park?aid=' + o.agencyId,    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "GET",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            $('<option value="">请选择楼宇</option>').appendTo(ly)
+                                            req.data.forEach(element => {
+                                                var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(ly)
+                                            });
+                                            form.render('select')
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                    $(".newFy" + i).find(".building").val(o.parkId)
+
+
+                                    var lh = $(".newFy" + i).find(".buildNum")
+                                    lh.children().remove()
+                                    $.ajax({
+                                        url: IPzd + '/hresource/ld?pid=' + o.parkId,    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "GET",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            $('<option value="">请选择楼号</option>').appendTo(lh)
+                                            req.data.forEach(element => {
+                                                var option = $("<option value='" + element + "'>" + element + "</option>").appendTo(lh)
+                                            });
+                                            form.render('select')
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                    $(".newFy" + i).find(".buildNum").val(o.buildNo)
+
+                                    var room = $(".newFy" + i).find(".roomNum")
+                                    room.children().remove()
+                                    $.ajax({
+                                        url: IPzd + '/hresource/room?bno=' + o.buildNo + '&pid=' + o.parkId,    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "GET",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            $('<option value="">请选择房号</option>').appendTo(room)
+                                            req.data.forEach(element => {
+                                                var option = $("<option value='" + element.id + "' resourcearea='" + element.resourceArea + "' guideRentCharge='" + element.guideRentCharge + "' >" + element.resourceName + "</option>").appendTo(room)
+                                            });
+                                            form.render('select')
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                    $(".newFy" + i).find(".roomNum").val(o.id)
+
+                                    $(".newFy" + i).find(".sjj").val(o.realRentCharge)
+
                                 } else {
-                                    var options2 = $("<option value='" + obj.data.houseResourceDetail[0].id + "'>" + obj.data.houseResourceDetail[0].location + "</option>").appendTo(".houseFy")
-                                    $(".houseFy").val(obj.data.houseResourceDetail[0].id)
-                                    $(".sjzj").val(obj.data.houseResourceDetail[0].realRentCharge)
-                                    // form.render('select')
+                                    var managementUnit = $(".newFy").find(".managementUnit")
+                                    managementUnit.children().remove()
+                                    $.ajax({
+                                        url: IPzd + '/hresource/agency?aid=' + (aid == '' ? 0 : aid),    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "GET",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            if (aid == '') {
+                                                // 没有绑定机构
+                                                var options = $("<option value=''>请选择管理单位</option>").appendTo(managementUnit)
+                                                req.data.forEach(element => {
+                                                    var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(managementUnit)
+                                                });
+                                            } else {
+                                                req.data.forEach(element => {
+                                                    var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(managementUnit)
+                                                    $.ajax({
+                                                        url: IPzd + '/hresource/park?aid=' + element.id,    //请求的url地址
+                                                        dataType: "json",   //返回格式为json
+                                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                        type: "GET",   //请求方式
+                                                        contentType: "application/json;charset=UTF-8",
+                                                        // headers: {"token": sessionStorage.token},
+                                                        beforeSend: function () {
+                                                            //请求前的处理
+                                                        },
+                                                        success: function (req) {
+                                                            $('<option value="">请选择楼宇</option>').appendTo(".building")
+                                                            req.data.forEach(element => {
+                                                                var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(".building")
+                                                            });
+                                                            form.render('select')
+                                                        },
+                                                        complete: function () {
+                                                            //请求完成的处理
+                                                        },
+                                                        error: function () {
+                                                            //请求出错处理
+                                                        }
+                                                    });
+                                                });
+                                            }
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                    $(".newFy").find(".managementUnit").val(o.agencyId)
+
+
+                                    var ly = $(".newFy").find(".building")
+                                    ly.children().remove()
+                                    $.ajax({
+                                        url: IPzd + '/hresource/park?aid=' + o.agencyId,    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "GET",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            $('<option value="">请选择楼宇</option>').appendTo(ly)
+                                            req.data.forEach(element => {
+                                                var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(ly)
+                                            });
+                                            form.render('select')
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                    $(".newFy").find(".building").val(o.parkId)
+
+
+                                    var lh = $(".newFy").find(".buildNum")
+                                    lh.children().remove()
+                                    $.ajax({
+                                        url: IPzd + '/hresource/ld?pid=' + o.parkId,    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "GET",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            $('<option value="">请选择楼号</option>').appendTo(lh)
+                                            req.data.forEach(element => {
+                                                var option = $("<option value='" + element + "'>" + element + "</option>").appendTo(lh)
+                                            });
+                                            form.render('select')
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                    $(".newFy").find(".buildNum").val(o.buildNo)
+
+                                    var room = $(".newFy").find(".roomNum")
+                                    room.children().remove()
+                                    $.ajax({
+                                        url: IPzd + '/hresource/room?bno=' + o.buildNo + '&pid=' + o.parkId,    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "GET",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            $('<option value="">请选择房号</option>').appendTo(room)
+                                            req.data.forEach(element => {
+                                                var option = $("<option value='" + element.id + "' resourcearea='" + element.resourceArea + "' guideRentCharge='" + element.guideRentCharge + "' >" + element.resourceName + "</option>").appendTo(room)
+                                            });
+                                            form.render('select')
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                    $(".newFy").find(".roomNum").val(o.id)
+
+                                    $(".newFy").find(".sjj").val(o.realRentCharge)
+
+
                                 }
                             })
                         }
@@ -833,126 +1316,274 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 format: 'yyyy年MM月dd日'
                             });
                         })
+
                         $("#addFy").on("click", function () {
-                            var n = $(".houseResource").length + 1
-                            var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + n + "' xlh='" + n + "'><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
-                            var sjjDiv = $("<input type='text' style='margin-top: 16px;' onkeyup='bzj()'  name='title' required  lay-verify='required' placeholder='*为必填项' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
-                            getaddyf(n)
-                            form.render('select')
+                            // n = n + 1
+                            // var selectDiv = $("<div class='layui-input-block' style='margin-top: 15px;margin-bottom: 15px;'><select class='houseResource houseFy" + n + "' xlh='" + n + "' ><option value='houseF'>请选择</option></select><button type='button' class='layui-btn layui-btn-sm layui-btn-primary clearAddFy'  style='position: absolute;right: 29px;top: 5px;'><i class='layui-icon'>&#xe640;</i></button></div>").appendTo("#addFyDiv")
+                            // var sjjDiv = $("<input type='text' style='margin-top: 16px;' onkeyup='bzj()' xlh='" + n + "' name='title' required  lay-verify='required' placeholder='请输入' autocomplete='off' class='layui-input sjj sjzj" + n + "'>").appendTo("#addsjjDiv")
+                            // getaddyf(n)
+                            // form.render('select')
+                            $(
+                                '<div>' +
+                                '   <div class="layui-form-item">\n' +
+                                '   <label class="layui-form-label"><span class="inputBtx">*</span>房源</label>\n' +
+                                // 管理单位
+                                '   <div class="layui-input-inline">\n' +
+                                '       <select name="managementUnit" class="managementUnit" lay-filter="search_type_one">' +
+                                '       </select>' +
+                                '   </div>' +
+                                // 楼宇
+                                '<div class="layui-input-inline">' +
+                                '   <select name="building" class="building" lay-filter="search_type_two">' +
+                                '       <option value="">请选择楼宇</option>' +
+                                '   </select>' +
+                                ' </div>' +
+                                // 楼号
+                                '<div class="layui-input-inline">' +
+                                '   <select name="buildNum" class="buildNum" lay-filter="search_type_three">' +
+                                '       <option value="">请选择楼号</option>' +
+                                '   </select>' +
+                                '</div>' +
+                                // 房号
+                                '<div class="layui-input-inline">' +
+                                '   <select name="roomNum" class="roomNum">' +
+                                '       <option value="">请选择房号</option>' +
+                                '   </select>' +
+                                '</div>' +
+                                '<div class="layui-input-inline">' +
+                                '   <button type="button" class="layui-btn layui-btn-sm layui-btn-primary sc"><i class="layui-icon">&#xe640;</i></button>' +
+                                '</div>' +
+                                '</div>' +
+                                // 实际租金
+                                '  <div class="dialogDiv realzj">\n' +
+                                '    <label class="layui-form-label" style="width: 125px;"><span class="inputBtx">*</span>实际租金(元/m²/月)</label>\n' +
+                                '    <div class="layui-input-block">\n' +
+                                '      <input type="text" name="title" required  lay-verify="required" placeholder="*为必填项" autocomplete="off" class="layui-input sjj sjzj" onkeyup="bzj()">\n' +
+                                '    </div>\n' +
+                                '  </div>\n' +
+                                '</div>'
+                            ).appendTo("#addFyDiv");
+                            form.render('select');
                         })
 
-                        $("#addFyDiv").on("click", ".clearAddFy", function () {
-                            $(this).parent().remove()
-                            $(".sjzj" + $(this).parent().find("select").attr("xlh")).remove()
+                        $("#addFyDiv").on("click", ".sc", function () {
+                            $(this).parent().parent().parent().find(".realzj").remove()
+                            $(this).parent().parent().remove()
+
+                            form.render()
+                            return false;//false：阻止表单跳转  true：表单跳转
                         })
+
+                        form.on('select(search_type_one)', function (data) {
+                            var building = $(this).parent().parent().parent().parent().find(".building");
+                            building.children().remove();
+                            $.ajax({
+                                url: IPzd + '/hresource/park?aid=' + data.value,    //请求的url地址
+                                dataType: "json",   //返回格式为json
+                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                type: "GET",   //请求方式
+                                contentType: "application/json;charset=UTF-8",
+                                // headers: {"token": sessionStorage.token},
+                                beforeSend: function () {
+                                    //请求前的处理
+                                },
+                                success: function (req) {
+                                    $('<option value="">请选择楼宇</option>').appendTo(building)
+                                    req.data.forEach(element => {
+                                        var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(building)
+                                    });
+                                    form.render('select')
+                                },
+                                complete: function () {
+                                    //请求完成的处理
+                                },
+                                error: function () {
+                                    //请求出错处理
+                                }
+                            });
+                        });
+
+                        form.on('select(search_type_two)', function (data) {
+                            var buildNum = $(this).parent().parent().parent().parent().find(".buildNum");
+                            buildNum.children().remove();
+                            $.ajax({
+                                url: IPzd + '/hresource/ld?pid=' + data.value,    //请求的url地址
+                                dataType: "json",   //返回格式为json
+                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                type: "GET",   //请求方式
+                                contentType: "application/json;charset=UTF-8",
+                                // headers: {"token": sessionStorage.token},
+                                beforeSend: function () {
+                                    //请求前的处理
+                                },
+                                success: function (req) {
+                                    $('<option value="">请选择楼号</option>').appendTo(buildNum)
+                                    req.data.forEach(element => {
+                                        var option = $("<option value='" + element + "'>" + element + "</option>").appendTo(buildNum)
+                                    });
+                                    form.render('select')
+                                },
+                                complete: function () {
+                                    //请求完成的处理
+                                },
+                                error: function () {
+                                    //请求出错处理
+                                }
+                            });
+                        });
+
+                        form.on('select(search_type_three)', function (data) {
+                            var roomNum = $(this).parent().parent().parent().parent().find(".roomNum");
+                            roomNum.children().remove();
+                            $.ajax({
+                                url: IPzd + '/hresource/room?bno=' + data.value + '&pid=' + $('.building').val(),    //请求的url地址
+                                dataType: "json",   //返回格式为json
+                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                type: "GET",   //请求方式
+                                contentType: "application/json;charset=UTF-8",
+                                // headers: {"token": sessionStorage.token},
+                                beforeSend: function () {
+                                    //请求前的处理
+                                },
+                                success: function (req) {
+                                    $('<option value="">请选择房号</option>').appendTo(roomNum)
+                                    req.data.forEach(element => {
+                                        var option = $("<option value='" + element.id + "' resourcearea='" + element.resourceArea + "' guideRentCharge='" + element.guideRentCharge + "' >" + element.resourceName + "</option>").appendTo(roomNum)
+                                    });
+                                    form.render('select')
+                                },
+                                complete: function () {
+                                    //请求完成的处理
+                                },
+                                error: function () {
+                                    //请求出错处理
+                                }
+                            });
+                        });
+
                     },
                     put: function () {
                         var fyArr = []
                         var zjArr = []
                         $(".sjj").each(function (n, m) {
-                            zjArr.push($(m).val())
-                        })
-                        $(".houseResource").each(function (i, o) {
-                            if ($(o).val() !== "") {
-                                var obj = {
-                                    "fkHouseResourceId": $(o).val(),
-                                    "realMoney": zjArr[i]
-                                }
-                                fyArr.push(obj)
+                            if ($(m).val() == "") {
+                                zjArr.push(0)
+                            } else {
+                                zjArr.push($(m).val())
                             }
                         })
-                        if ($(".houseResource").length !== $(".sjj").length) {
-                            layer.msg("房源和实际价格对应！")
-                        } else {
-                            if (fyArr.length !== 0) {
-                                if ($.trim($(".yf").val()) !== "") {
-                                    if ($.trim($(".bzj").val()) !== "") {
-                                        if ($.trim($("#date").val()) !== "") {
-                                            if ($.trim($(".zsMouth").val()) !== "") {
-                                                if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
-                                                    if ($.trim($(".zsMouth").val()) !== "") {
-                                                        if ($(".htType").val() !== "") {
-                                                            if (isCffy(fyArr)) {
-                                                                if (!isBzj()) {
-                                                                    layer.msg("保证金不能少于三个月的实际租金！")
-                                                                } else {
-                                                                    var data = {
-                                                                        "id": obj.data.id,
-                                                                        "createdBy": user,
-                                                                        "rentMonth": $.trim($(".zsMouth").val()),
-                                                                        "dealAndHouses": fyArr,
-                                                                        "fkRenterId": $.trim($(".yf").val()),
-                                                                        "startTime": sjc($("#date").val() + " 00:00:00"),
-                                                                        "payType": $.trim($(".zjzfType").val()),
-                                                                        "deposit": $.trim($(".bzj").val()),
-                                                                        "freeRentMonth": $.trim($(".mzMouth").val()),
-                                                                        "dealType": $.trim($(".htType").val()),
-                                                                        "isNewRent": $.trim($(".rentType").val()),
-                                                                        "isHaveDiscount": $(".isHaveDiscount").val(),
-                                                                        "extraInfo": $.trim($(".qttk").val()),
-                                                                        "discount": $.trim($(".yhtk").val())
+                        $(".roomNum option:selected").each(function (i, o) {
+                            if ($(o).val() !== "") {
+                                if ($(o).attr("guiderentcharge") > zjArr[i]) {
+                                    layer.msg("实际租金不能小于指导价")
+
+                                } else {
+                                    var obj = {
+                                        "fkHouseResourceId": $(o).val(),
+                                        "realMoney": zjArr[i]
+                                    }
+                                    fyArr.push(obj)
+                                }
+                            }
+                        })
+
+                        if (isguid()) {
+                            if ($(".roomNum").length !== $(".sjj").length) {
+                                layer.msg("房源和实际价格对应！")
+                            } else {
+                                if (fyArr.length !== 0) {
+                                    if ($.trim($(".yf").val()) !== "") {
+                                        if ($.trim($(".bzj").val()) !== "") {
+                                            if ($.trim($("#date").val()) !== "") {
+                                                if ($.trim($(".zsMouth").val()) !== "") {
+                                                    if (checkMouth($(".zsMouth").val(), $(".zjzfType").val())) {
+                                                        if ($.trim($(".zsMouth").val()) !== "") {
+                                                            if ($(".htType").val() !== "") {
+                                                                if (isCffy(fyArr)) {
+                                                                    if (!isBzj()) {
+                                                                        layer.msg("保证金不能少于两个月的实际租金！")
+                                                                    } else {
+                                                                        var data = {
+                                                                            "id": obj.data.id,
+                                                                            "createdBy": user,
+                                                                            // "dealName": $.trim($(".dealName").val()),
+                                                                            "rentMonth": $.trim($(".zsMouth").val()),
+                                                                            "dealAndHouses": fyArr,
+                                                                            "fkRenterId": $.trim($(".yf").val()),
+                                                                            "startTime": sjc($("#date").val() + " 00:00:00"),
+                                                                            "payType": $.trim($(".zjzfType").val()),
+                                                                            "deposit": $.trim($(".bzj").val()),
+                                                                            "freeRentMonth": $.trim($(".mzMouth").val()),
+                                                                            "dealType": $.trim($(".htType").val()),
+                                                                            "isNewRent": $.trim($(".rentType").val()),
+                                                                            "isHaveDiscount": $(".isHaveDiscount").val(),
+                                                                            "extraInfo": $.trim($(".qttk").val()),
+                                                                            "discount": $.trim($(".yhtk").val())
+                                                                        }
+
+                                                                        $.ajax({
+                                                                            url: IPzd + '/deal',    //请求的url地址
+                                                                            dataType: "json",   //返回格式为json
+                                                                            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                                                            data: JSON.stringify(data),    //参数值
+                                                                            type: "PUT",   //请求方式
+                                                                            contentType: "application/json;charset=UTF-8",
+                                                                            // headers: {"token": sessionStorage.token},
+                                                                            beforeSend: function () {
+                                                                                //请求前的处理
+                                                                            },
+                                                                            success: function (req) {
+                                                                                if (req.status == "200") {
+                                                                                    layer.close(indexDig);
+                                                                                    layer.msg("修改成功")
+                                                                                    //执行重载
+                                                                                    table.reload('tableList');
+                                                                                } else {
+                                                                                    layer.msg(req.msg)
+                                                                                }
+                                                                            },
+                                                                            complete: function () {
+                                                                                //请求完成的处理
+                                                                            },
+                                                                            error: function () {
+                                                                                //请求出错处理
+                                                                            }
+                                                                        });
                                                                     }
 
-                                                                    $.ajax({
-                                                                        url: IPzd + '/deal',    //请求的url地址
-                                                                        dataType: "json",   //返回格式为json
-                                                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                                                        data: JSON.stringify(data),    //参数值
-                                                                        type: "PUT",   //请求方式
-                                                                        contentType: "application/json;charset=UTF-8",
-                                                                        // headers: {"token": sessionStorage.token},
-                                                                        beforeSend: function () {
-                                                                            //请求前的处理
-                                                                        },
-                                                                        success: function (req) {
-                                                                            if (req.status == "200") {
-                                                                                layer.close(indexDig);
-                                                                                layer.msg("修改成功")
-                                                                                //执行重载
-                                                                                table.reload('tableList');
-                                                                            } else {
-                                                                                layer.msg(req.msg)
-                                                                            }
-                                                                        },
-                                                                        complete: function () {
-                                                                            //请求完成的处理
-                                                                        },
-                                                                        error: function () {
-                                                                            //请求出错处理
-                                                                        }
-                                                                    });
+                                                                } else {
+                                                                    layer.msg("房源不能选择相同的！")
                                                                 }
 
                                                             } else {
-                                                                layer.msg("房源不能选择相同的！")
+                                                                layer.msg("合同类型不能为空！")
                                                             }
 
                                                         } else {
-                                                            layer.msg("合同类型不能为空！")
+                                                            layer.msg("租赁月份不能为空！")
                                                         }
 
                                                     } else {
-                                                        layer.msg("租赁月份不能为空！")
+                                                        layer.msg("租金支付方式与租赁月份为倍数关系且不能小于租金支付的月份！")
                                                     }
-
                                                 } else {
-                                                    layer.msg("租金支付方式与租赁月份为倍数关系且不能小于租金支付的月份！")
+                                                    layer.msg("租赁月份不能为空！")
                                                 }
                                             } else {
-                                                layer.msg("租赁月份不能为空！")
+                                                layer.msg("合同开始日期不能为空！")
                                             }
                                         } else {
-                                            layer.msg("合同开始日期不能为空！")
+                                            layer.msg("保证金不能为空！")
                                         }
                                     } else {
-                                        layer.msg("保证金不能为空！")
+                                        layer.msg("承租人不能为空！")
                                     }
                                 } else {
-                                    layer.msg("承租人不能为空！")
+                                    layer.msg("房源不能为空！")
                                 }
-                            } else {
-                                layer.msg("房源不能为空！")
                             }
+                        } else {
+                            layer.msg("实际价不能低于指导价！")
                         }
                     },
                 }
@@ -1436,41 +2067,41 @@ function getManagementUnit() {
             //请求前的处理
         },
         success: function (req) {
-          if (aid == '' ) {
-            // 没有绑定机构
-            var options = $("<option value=''>请选择管理单位</option>").appendTo(".managementUnit")
-            req.data.forEach(element => {
-                var option = $("<option value='" + element.id + "'>"+element.name+"</option>").appendTo(".managementUnit")
-            });
-          } else {
-            req.data.forEach(element => {
-                var option = $("<option value='" + element.id + "'>"+element.name+"</option>").appendTo(".managementUnit")
-                $.ajax({
-                    url: IPzd + '/hresource/park?aid=' + element.id,    //请求的url地址
-                    dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                    type: "GET",   //请求方式
-                    contentType: "application/json;charset=UTF-8",
-                    // headers: {"token": sessionStorage.token},
-                    beforeSend: function () {
-                        //请求前的处理
-                    },
-                    success: function (req) {
-                      $('<option value="">请选择楼宇</option>').appendTo(".building")
-                      req.data.forEach(element => {
-                        var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(".building")
-                      });
-                      form.render('select')
-                    },
-                    complete: function () {
-                        //请求完成的处理
-                    },
-                    error: function () {
-                        //请求出错处理
-                    }
+            if (aid == '') {
+                // 没有绑定机构
+                var options = $("<option value=''>请选择管理单位</option>").appendTo(".managementUnit")
+                req.data.forEach(element => {
+                    var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(".managementUnit")
                 });
-            });
-          }
+            } else {
+                req.data.forEach(element => {
+                    var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(".managementUnit")
+                    $.ajax({
+                        url: IPzd + '/hresource/park?aid=' + element.id,    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        type: "GET",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            $('<option value="">请选择楼宇</option>').appendTo(".building")
+                            req.data.forEach(element => {
+                                var option = $("<option value='" + element.id + "'>" + element.name + "</option>").appendTo(".building")
+                            });
+                            form.render('select')
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
+                        }
+                    });
+                });
+            }
         },
         complete: function () {
             //请求完成的处理
@@ -1514,7 +2145,7 @@ function bzj() {
         if ($(o).val() == "") {
             bzj = bzj + 0
         } else {
-            bzj = bzj + parseInt($(o).val()) * areaArr[i]  
+            bzj = bzj + parseInt($(o).val()) * areaArr[i]
         }
     })
     bzj = bzj.toFixed(2);
@@ -1547,21 +2178,21 @@ function isBzj() {
     return isTrue
 }
 
-function isguid(){
+function isguid() {
     var guidArr = []
     var sjzjArr = []
     var isTrue = true
     $(".sjj").each(function (i, o) {
-         sjzjArr.push($(o).val)
-        
+        sjzjArr.push($(o).val())
+
     })
-    $(".houseResource option:selected").each(function (n, m) {
+    $(".roomNum option:selected").each(function (n, m) {
         guidArr.push($(m).attr("guiderentcharge"))
     })
 
-    $(sjzjArr).each(function(v,b){
-        if(b<guidArr[v]){
-            isTrue = false 
+    $(sjzjArr).each(function (v, b) {
+        if (b < guidArr[v]) {
+            isTrue = false
         }
     })
 
