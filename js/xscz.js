@@ -1280,35 +1280,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         })
 
 
-                        // $("body").on("click", ".layui-select-title", function () {
-                        //     var selectDiv = $(this).parent().parent().parent().find('.houseResource')
-                        //     $.ajax({
-                        //         url: IPzd + '/hresource/simple/norent',    //请求的url地址
-                        //         dataType: "json",   //返回格式为json
-                        //         async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                        //         type: "GET",   //请求方式
-                        //         contentType: "application/json;charset=UTF-8",
-                        //         // headers: {"token": sessionStorage.token},
-                        //         beforeSend: function () {
-                        //             //请求前的处理
-                        //         },
-                        //         success: function (req) {
-                        //             if (req.status == "200") {
-                        //                 $(req.data).each(function (i, o) {
-                        //                     var option = $("<option value='" + o.id + "' resourceArea='" + o.resourceArea + "'>" + o.resourceName + "</option>").appendTo(selectDiv)
-                        //                 })
-                        //             } else {
-                        //                 layer.msg(req.msg)
-                        //             }
-                        //         },
-                        //         complete: function () {
-                        //             //请求完成的处理
-                        //         },
-                        //         error: function () {
-                        //             //请求出错处理
-                        //         }
-                        //     });
-                        // })
+
 
                         lay('.httime').each(function () {
                             laydate.render({
@@ -1363,6 +1335,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 '  </div>\n' +
                                 '</div>'
                             ).appendTo("#addFyDiv");
+                            getManagementUnit();
                             form.render('select');
                         })
 
