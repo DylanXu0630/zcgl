@@ -1674,6 +1674,12 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input rentType" readonly>\n' +
                         '    </div>\n' +
                         '  </div>\n' +
+                        '  <div class="dialogDiv">\n' +
+                        '    <label class="layui-form-label">使用用途</label>\n' +
+                        '    <div class="layui-input-block">\n' +
+                        '      <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input syType" readonly>\n' +
+                        '    </div>\n' +
+                        '  </div>\n' +
 
                         '<div class="dialogTitle">房源基础信息</div>' +
                         '<div id="fyjcxx"></div>' +
@@ -1696,6 +1702,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         $(".zlys").val(obj.data.rentMonth)
                         $(".rentType").val(obj.data.isNewRent)
                         $(".mzq").val(obj.data.freeRentMonth)
+                        $(".syType").val(obj.data.houseResourceDetail[0].resourceUsage)
                         var dzArr = obj.data.location.split(",")
                         $("#fyjcxx").children().remove()
 
