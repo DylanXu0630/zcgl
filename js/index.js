@@ -112,6 +112,7 @@ $(function () {
                     else if (gen.name == "预警管理") imgs = '<img class="iconImg" src="./icon/yjgl.svg"></img>'
                     else if (gen.name == "系统管理") imgs = '<img class="iconImg" src="./icon/xtgl.svg"></img>'
                     else if (gen.name == "信息管理") imgs = '<img class="iconImg" src="./icon/xxgl.svg"></img>'
+                    else if (gen.name == "资产统计") imgs = '<img class="iconImg" src="./icon/zctj.svg"></img>'
                     if (gen.children.length != 0) {
                         var yiji = $(' <li class="layui-nav-item"><a class="" href="javascript:;">' + imgs + gen.name + '</a><dl class="layui-nav-child erji' + gen.id + '"></dl></li>').appendTo("#menuT")
                         gen.children.forEach(erjiT => {
