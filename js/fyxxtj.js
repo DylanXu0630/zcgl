@@ -32,8 +32,8 @@ layui.use(['table', 'form'], function () {
         }
         , cols: [[ //表头
             // {field: 'resourceName', title: '房源名称'},
-            {field: 'location', title: '房源地址'},
             {field: 'agency', title: '管理单位'},
+            {field: 'location', title: '房源地址'},
             {field: 'guideRentCharge', title: '指导价(月/元)'},
             {field: 'originRentCharge', title: '历史租金(月/元)'},
             {field: 'resourceType', title: '资产类型'},
@@ -742,11 +742,11 @@ layui.use(['table', 'form'], function () {
                                                     success: function (req) {
                                                         if (req.status == "200") {
                                                             layer.close(indexDig);
-                                                            layer.msg("添加成功")
+                                                            layer.msg("修改成功")
                                                             //执行重载
                                                             table.reload('tableList');
                                                         } else {
-                                                            layer.msg("添加失败")
+                                                            layer.msg("修改失败")
                                                         }
 
                                                     },
@@ -800,11 +800,11 @@ layui.use(['table', 'form'], function () {
                                                     success: function (req) {
                                                         if (req.status == "200") {
                                                             layer.close(indexDig);
-                                                            layer.msg("添加成功")
+                                                            layer.msg("修改成功")
                                                             //执行重载
                                                             table.reload('tableList');
                                                         } else {
-                                                            layer.msg("添加失败")
+                                                            layer.msg("修改失败")
                                                         }
 
                                                     },

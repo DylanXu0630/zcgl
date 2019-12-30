@@ -269,7 +269,7 @@
             $(".sjzj").text(heObj.houseResourceDetail[0].realRentCharge)
             $(".zdj").text(heObj.houseResourceDetail[0].guideRentCharge)
             $(".htsjzj").text(heObj.houseResourceDetail[0].realRentCharge * heObj.houseResourceDetail[0].resourceArea)
-            $(".syyt").text(heObj.houseResourceDetail[0].houseUsage)
+            $(".syyt").text(heObj.houseResourceDetail[0].resourceUsage)
             // $(".mpfsjzj").text(heObj.houseResourceDetail[0].rentMoneyPerArea)
         } else {
             var glzxArr = []
@@ -287,7 +287,7 @@
                 djArr.push(o.realRentCharge)
                 zdjArr.push(o.guideRentCharge)
                 yzjArr.push(o.originRentCharge)
-                yt.push(o.houseUsage)
+                yt.push(o.resourceUsage)
                 heAreaArr = heAreaArr + o.resourceArea
                 yzj = yzj + o.realRentCharge * o.resourceArea
                 // if (i > 0) {
