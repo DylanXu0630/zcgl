@@ -3,7 +3,35 @@ layui.use('element', function () {
 
     //…
 });
+// 根据用户名称获取用户信息
+$.ajax({
+    url: IPdz + '/user/' + localStorage.getItem("user_name"),    //请求的url地址
+    dataType: "json",   //返回格式为json
+    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+    type: "GET",   //请求方式
+    contentType: "application/json;charset=UTF-8",
+    // headers: {"token": sessionStorage.token},
+    beforeSend: function () {
+        //请求前的处理
+    },
+    success: function (req) {
+        // 用户昵称
+        if (req.status == 200) {
+            $("#nickName").text(req.data.nickname)
+            localStorage.setItem("userId", req.data.id)
+        } else {
+            alert(req.msg)
+            window.location.href = "login.html"
+        }
 
+    },
+    complete: function () {
+        //请求完成的处理
+    },
+    error: function () {
+        //请求出错处理
+    }
+});
 $(function () {
     /*shwo 的 height*/
     $("#show").css("height", window.innerHeight - 60)
@@ -18,35 +46,7 @@ $(function () {
     });
 
 
-    // 根据用户名称获取用户信息
-    $.ajax({
-        url: IPdz + '/user/' + localStorage.getItem("user_name"),    //请求的url地址
-        dataType: "json",   //返回格式为json
-        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-        type: "GET",   //请求方式
-        contentType: "application/json;charset=UTF-8",
-        // headers: {"token": sessionStorage.token},
-        beforeSend: function () {
-            //请求前的处理
-        },
-        success: function (req) {
-            // 用户昵称
-            if (req.status == 200) {
-                $("#nickName").text(req.data.nickname)
-                localStorage.setItem("userId", req.data.id)
-            } else {
-                alert(req.msg)
-                window.location.href = "login.html"
-            }
 
-        },
-        complete: function () {
-            //请求完成的处理
-        },
-        error: function () {
-            //请求出错处理
-        }
-    });
 
     $.ajax({
         url: IPzd + '/user/' + localStorage.userId,    //请求的url地址
