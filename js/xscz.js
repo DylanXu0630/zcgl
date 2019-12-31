@@ -434,7 +434,7 @@ layui.use(['laydate', 'table', 'form'], function () {
         /*调用弹窗方法*/
         layerOpen(openMes);
         getManagementUnit();
-        getfy()
+        // getfy()
         getgldw()
         getyf()
         lay('.httime').each(function () {
@@ -791,7 +791,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         '</div>' +
                         '</div>',
                     look: function () {
-                        getfy()
+                        // getfy()
                         getgldw()
                         getyf()
 

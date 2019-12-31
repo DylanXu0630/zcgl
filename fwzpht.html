@@ -21,11 +21,11 @@
 </head>
 <body>
 
-<div id="htall" style="font-size: 18px !important;">
+<div id="htall" style="font-size: 20px !important;">
     <div class="firstPage">
         <div class="titleBt">蠡园开发区房屋出租审核表（协商出租）</div>
         <div class="thbh">合同编号：<span class="pageSpan s-bbh"></span></div>
-        <table class="pageTable" border="1" cellspacing="0" style="margin-bottom: 300px;height: 1000px">
+        <table class="pageTable" border="1" cellspacing="0" style="margin-bottom: 300px;height: 1000px;font-size: 20px;">
             <tr>
                 <td style="padding:0 10px;">管理中心（或经营托管单位)</td>
                 <td colspan="5" style="padding:0 10px;"><span class="glzx"></span></td>
@@ -130,7 +130,7 @@
         &nbsp;&nbsp;（八）乙方违反第八条第二款的规定，拒不改正的。<br>
         &nbsp;&nbsp;<span class="title">七、租赁房屋的维护</span><br>
         &nbsp;&nbsp;租赁期间，租用房屋和配套设施损坏损毁，由乙方负责修缮恢复原状，并需要赔偿甲方的经济损失。<br>
-        &nbsp;&nbsp;&nbsp;<span class="title">八、双方的权利和义务</span><br>
+        &nbsp;&nbsp;<span class="title">八、双方的权利和义务</span><br>
         &nbsp;&nbsp;（一）甲方有权督促乙方按约使用房屋，保障使用的安全；乙方应当爱护房屋并按时交纳租金，乙方逾期交付房屋租金的，每逾期一日乙方应当向甲方支付应付房屋租金千分之一的滞纳金。<br>
         &nbsp;&nbsp;（二）乙方对甲方正常的房屋检查给予协助，乙方不得擅自改变房屋结构和用途，不得贮存任何违禁品、易燃品、爆炸品等物，不得擅自转租、转让、转借房屋，不得以承租房屋设定抵押等他项权利，合同终止时主动将房屋和配套设施完好地交还给甲方。<br>
         &nbsp;&nbsp;<span class="title">九、违约责任：</span><br>
@@ -162,17 +162,17 @@
         &nbsp;&nbsp;<span class="title">十三、争议解决条款</span><br>
         &nbsp;&nbsp;本合同如发生纠纷，甲、乙双方应通过友好协调解决，不能解决时向租赁房屋所在地人民法院起诉。因此所发生的案件受理费、保全费、保全保险费及差旅费和律师费均由败诉方承担。<br>
         &nbsp;&nbsp;<span class="title">十四、合同的签署和生效</span><br>
-        &nbsp;&nbsp;本合同共四页，为一式四份，甲方执三份、乙方执一份，经双方签字或盖章之日起生效。<br>
+        &nbsp;&nbsp;本合同共三页，为一式四份，甲方执三份、乙方执一份，经双方签字或盖章之日起生效。<br>
         &nbsp;&nbsp;<span class="title">十五、其它条款:</span><br>
         <xmp class="qtbz"></xmp>
-        <table style="width: 100%">
+        <table style="width: 100%;font-size: 20px;">
             <tr>
-                <td>出租方（盖章）:</td>
-                <td>承租方（盖章）:</td>
+                <td style="font-size: 20px;">出租方（盖章）:</td>
+                <td style="font-size: 20px;">承租方（盖章）:</td>
             </tr>
             <tr>
-                <td>法定代表人或授权代表（签字）:</td>
-                <td>法定代表人或授权代表（签字）:</td>
+                <td style="font-size: 20px;">法定代表人或授权代表（签字）:</td>
+                <td style="font-size: 20px;">法定代表人或授权代表（签字）:</td>
             </tr>
         </table>
         <!--出租方（盖章）: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;承租方（盖章）:<br>-->
@@ -196,10 +196,7 @@
     $(function () {
         $("#btnPrintFull").click(function () {
             $("#htall").css("width", "100%")
-            $("#htall").jqprint({
-                importCSS: true,
-                printContainer: true
-            });
+            $("#htall").jqprint();
         });
 
         var heObj = JSON.parse(localStorage.getItem("heObj"));
@@ -299,13 +296,13 @@
 
             var glzx = $.unique(glzxArr).join(";");
             $(".glzx").text(glzx)
-            var tbArea = tbAreaArr.join(",");
+            var tbArea = tbAreaArr.join(";");
             $(".tbmjjz").text(tbArea)
             $(".mjjz").text(heAreaArr)
-            var dj = djArr.join(",");
+            var dj = djArr.join(";");
             // $(".mpfsjzj").text(dj)
             $(".sjzj").text(dj)
-            var zdj = zdjArr.join(",");
+            var zdj = zdjArr.join(";");
             $(".zdj").text(zdj)
             var sjzj = $.unique(yzjArr).join(";");
             $(".htsjzj").text(yzj)
