@@ -70,12 +70,15 @@ layui.use(['laydate', 'table', 'form'], function () {
                             '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n' +
                             '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                     } else if (d.dealReviewStatusCode == "2") {
-                        if (d.dealExistStatus == "提前结束") {
+                        if (d.dealExistStatusCode == "4") {
+                            return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
+                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                        } else if (d.dealExistStatusCode == "5") {
                             return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                                 '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                         } else {
                             return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
-                                '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="zzht">终止合同</a>' +
+                                '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="zzht">申请终止合同</a>' +
                                 '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
                         }
 
@@ -1821,41 +1824,50 @@ layui.use(['laydate', 'table', 'form'], function () {
                         })
                     },
                     put: function () {
+
                         if ($.trim($("#date").val()) !== "") {
-                            var data = {
-                                "id": obj.data.id,
-                                "date": sjc($("#date").val())
-                            }
-                            $.ajax({
-                                url: IPzd + '/deal/stop',    //请求的url地址
-                                dataType: "json",   //返回格式为json
-                                async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                type: "PUT",   //请求方式
-                                data: JSON.stringify(data),
-                                contentType: "application/json;charset=UTF-8",
-                                // headers: {"token": sessionStorage.token},
-                                beforeSend: function () {
-                                    //请求前的处理
-                                },
-                                success: function (req) {
-                                    if (req.status == "200") {
-                                        layer.close(indexDig);
-                                        layer.msg(req.msg)
-                                        //执行重载
-                                        table.reload('tableList');
-                                    } else {
-                                        layer.msg(req.msg)
+                            if (sjc($("#date").val()) < sjc(obj.data.startTime)) {
+                                layer.msg("提前结束时间不能小于合同开始时间!")
+                            } else {
+                                if (sjc($("#date").val()) > sjc(obj.data.endTime)) {
+                                    layer.msg("提前结束时间不能大于合同结束时间!")
+                                } else {
+                                    var data = {
+                                        "id": obj.data.id,
+                                        "date": sjc($("#date").val())
                                     }
+                                    $.ajax({
+                                        url: IPzd + '/deal/stop/apply',    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        type: "PUT",   //请求方式
+                                        data: JSON.stringify(data),
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            if (req.status == "200") {
+                                                layer.close(indexDig);
+                                                layer.msg("提前结束申请成功!")
+                                                //执行重载
+                                                table.reload('tableList');
+                                            } else {
+                                                layer.msg(req.msg)
+                                            }
 
-                                },
+                                        },
 
-                                complete: function () {
-                                    //请求完成的处理
-                                },
-                                error: function () {
-                                    //请求出错处理
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
                                 }
-                            });
+                            }
                         } else {
                             layer.msg("合同名称不能为空！")
                         }
@@ -2207,17 +2219,18 @@ function isguid() {
     return isTrue
 
 }
+
 /*保留两位小数,位数不够补零*/
-function returnFloat(value){
-    var value=Math.round(parseFloat(value)*100)/100;
-    var xsd=value.toString().split(".");
-    if(xsd.length==1){
-        value=value.toString()+".00";
+function returnFloat(value) {
+    var value = Math.round(parseFloat(value) * 100) / 100;
+    var xsd = value.toString().split(".");
+    if (xsd.length == 1) {
+        value = value.toString() + ".00";
         return value;
     }
-    if(xsd.length>1){
-        if(xsd[1].length<2){
-            value=value.toString()+"0";
+    if (xsd.length > 1) {
+        if (xsd[1].length < 2) {
+            value = value.toString() + "0";
         }
         return value;
     }
