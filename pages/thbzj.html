@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>保证金退还</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <style>
+        .layui-inline {
+            min-width: 400px;
+        }
+
+        .addDig .layui-form-label {
+            width: 120px;
+            text-align: right;
+        }
+
+        .addDig .layui-input, .layui-anim.layui-anim-upbit {
+            width: 88%;
+        }
+
+        .tjsx .layui-form-label {
+            width: 112px;
+            text-align: right;
+        }
+
+        .layui-input-block {
+            margin-left: 142px;
+        }
+
+        .tjsx .httime {
+            width: 30% !important;
+        }
+
+        #zjlb {
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        #zjlb tr:first-child {
+            width: 90px;
+            background-color: #f2f2f2;
+        }
+
+        .mouthTD {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            text-align: left;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #e6e6e6;
+            padding: 5px 10px;
+        }
+
+        #skjl {
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        #skjl tr:first-child {
+            width: 90px;
+            background-color: #f2f2f2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="pageDiv">
+    <div class="title">
+
+        <div class="site-title">
+            <fieldset>
+                <legend><a name="use"><h2>保证金退还</h2></a></legend>
+            </fieldset>
+        </div>
+    </div>
+    <!--<div class="layui-fluid tjsx">-->
+        <!--<div class="layui-card">-->
+            <!--<div class="layui-card-header">条件筛选</div>-->
+            <!--<div class="layui-card-body-tj" style="padding: 15px;">-->
+                <!--<div class="layui-form-item">-->
+                    <!--<form class="layui-form" action="">-->
+                        <!--<div class="layui-inline sgInput">-->
+                            <!--<label class="layui-form-label">合同名称</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input s-htmc">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline xlkInput" style="display: none">-->
+                            <!--<label class="layui-form-label">出租人</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<select name="ht" lay-verify="" class="s-czr">-->
+                                    <!--<option value="">请选择</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline xlkInput">-->
+                            <!--<label class="layui-form-label">承租人</label>-->
+                            <!--<div class="layui-input-block ts">-->
+                                <!--<select name="ht" lay-verify="" class="s-czzr">-->
+                                    <!--<option value="">请选择</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline sgInput">-->
+                            <!--<label class="layui-form-label">合同状态</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<select name="ht" lay-verify="" class="s-hezt">-->
+                                    <!--<option value="">请选择</option>-->
+                                    <!--<option value="1">进行中</option>-->
+                                    <!--<option value="2">已删除</option>-->
+                                    <!--<option value="3">正常终止</option>-->
+                                    <!--<option value="4">提前终止</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline sgInput">-->
+                            <!--<label class="layui-form-label">合同审核状态</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<select name="ht" lay-verify="" class="s-heshzt">-->
+                                    <!--<option value="">请选择</option>-->
+                                    <!--<option value="1">未审核</option>-->
+                                    <!--<option value="2">通过审核</option>-->
+                                    <!--<option value="3">未通过审核</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline sgInput">-->
+                            <!--<label class="layui-form-label">合同类型</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<select name="ht" lay-verify="" class="s-httype">-->
+                                    <!--<option value="">请选择</option>-->
+                                    <!--<option value="1">协商出租</option>-->
+                                    <!--<option value="2">一事一议</option>-->
+                                    <!--<option value="3">挂靠合同</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline sgInput">-->
+                            <!--<label class="layui-form-label">房源用处</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<select name="ht" lay-verify="" class="fwghyt">-->
+                                    <!--<option value="">请选择</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline sgInput">-->
+                            <!--<label class="layui-form-label">管理单位</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<select name="ht" lay-verify="" class="s-gldw">-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline sgInput">-->
+                            <!--<label class="layui-form-label">合同支付方式</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<select name="ht" lay-verify="" class="s-htzftype">-->
+                                    <!--<option value="">请选择</option>-->
+                                    <!--<option value="12">以十二个月为一周期支付</option>-->
+                                    <!--<option value="6">以六个月为一周期支付</option>-->
+                                    <!--<option value="3">以三个月为一周期支付</option>-->
+                                    <!--<option value="1">以一个月为一周期支付</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline" style="display: none">-->
+                            <!--<label class="layui-form-label">面积(m²)</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input minfymj"-->
+                                       <!--style="float: left;width: 36%">-->
+                                <!--<span style="float: left;margin: 0 10px;line-height: 38px;">至</span>-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input maxfymj"-->
+                                       <!--style="float: left;width: 36%">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline">-->
+                            <!--<label class="layui-form-label">合同开始结束时间</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="text" name="date" id="s-date" placeholder="请输入" autocomplete="off" class="layui-input minfymj httime"-->
+                                       <!--style="float: left;width: 36%">-->
+                                <!--<span style="float: left;margin: 0 10px;line-height: 38px;">至</span>-->
+                                <!--<input type="text" name="date" id="s-date2" placeholder="请输入" autocomplete="off" class="layui-input minfymj httime"-->
+                                       <!--style="float: left;width: 36%">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline">-->
+                            <!--<label class="layui-form-label">租赁期限(月)</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input minzly"-->
+                                       <!--style="float: left;width: 36%">-->
+                                <!--<span style="float: left;margin: 0 10px;line-height: 38px;">至</span>-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input maxzly"-->
+                                       <!--style="float: left;width: 36%">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline" style="display: none">-->
+                            <!--<label class="layui-form-label">原价(元/m²/月)</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input minyj"-->
+                                       <!--style="float: left;width: 36%">-->
+                                <!--<span style="float: left;margin: 0 10px;line-height: 38px;">至</span>-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input maxyj"-->
+                                       <!--style="float: left;width: 36%">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline" style="display: none">-->
+                            <!--<label class="layui-form-label">指导价(元/m²/月)</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input minzdj"-->
+                                       <!--style="float: left;width: 36%">-->
+                                <!--<span style="float: left;margin: 0 10px;line-height: 38px;">至</span>-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input maxzdj"-->
+                                       <!--style="float: left;width: 36%">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline" style="display: none">-->
+                            <!--<label class="layui-form-label">实际价(元/m²/月)</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input minsjj"-->
+                                       <!--style="float: left;width: 36%">-->
+                                <!--<span style="float: left;margin: 0 10px;line-height: 38px;">至</span>-->
+                                <!--<input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input maxsjj"-->
+                                       <!--style="float: left;width: 36%">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-inline">-->
+                            <!--<button class="layui-btn" id="sousuo" lay-filter="search" lay-submit="">-->
+                                <!--查询-->
+                            <!--</button>-->
+                            <!--<button class="layui-btn" id="sx">-->
+                                <!--重置-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</form>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="layui-fluid lbTable">
+        <div class="layui-card">
+            <div class="layui-card-header">合同列表</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <!--<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>-->
+                <table class="layui-hide" id="tableList" lay-filter="test"></table>
+            </div>
+        </div>
+
+    </div>
+    <div class="jszc">技术支持：蓝深远望科技股份有限公司</div>
+</div>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>
+</script>
+<script src="../public/js/jquery.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../public/js/public.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/thbzj.js"></script>
+</body>
+</html>

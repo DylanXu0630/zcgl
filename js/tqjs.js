@@ -68,74 +68,81 @@ layui.use(['laydate', 'table', 'form'], function () {
             , layEvent = obj.event; //获得 lay-event 对应的值
         if (layEvent === 'yes') {
             /*通过操作*/
-            layer.confirm('确定提前结束？', function (index) {
-                $.ajax({
-                    url: IPzd + '/deal/stop/ok/' + obj.data.id,    //请求的url地址
-                    dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                    type: "PUT",   //请求方式
-                    contentType: "application/json;charset=UTF-8",
-                    // headers: {"token": sessionStorage.token},
-                    beforeSend: function () {
-                        //请求前的处理
-                    },
-                    success: function (req) {
-                        if (req.status == "200") {
-                            layer.close(indexDig);
-                            layer.msg("操作成功！")
-                            //执行重载
-                            table.reload('tableList');
-                        } else {
-                            layer.msg(req.msg)
-                        }
+            var openMes = {
+                title: '确认提前结束',
+                leixing: '编辑',
+                maxmin: true,
+                btn: ['确定', '取消'],
+                area: ['500px', '250px'],
 
-                    },
+                id: obj.data.id,
+                content: '<div style="width: 100%;height: 100%;overflow: hidden;background: #a9a9a9;">' +
+                    '<div class="addDig">' +
+                    '<div><form class="layui-form" lay-filter="look" action="">\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">收款时间</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '       <input type="text" name="date" id="date" placeholder="请选择时间" autocomplete="off" class="layui-input httime">\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
+                    '  <div class="dialogDiv">\n' +
+                    '    <label class="layui-form-label">违约金</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" required onkeyup="clearNoNum(this)"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input moneyTh">\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '</form></div>' +
+                    '</div>' +
+                    '</div>',
+                look: function () {
+                    lay('.httime').each(function () {
+                        laydate.render({
+                            elem: this,
+                            format: 'yyyy年MM月dd日'
+                        });
+                    })
+                },
 
-                    complete: function () {
-                        //请求完成的处理
-                    },
-                    error: function () {
-                        //请求出错处理
+                put: function () {
+                    var data = {
+                        "money": $(".moneyTh").val(),
+                        "mustDate": sjc(delKg($(".httime"))),
+                        "id": obj.data.id
                     }
-                });
-                layer.close(index);
-            });
 
-        } else if (layEvent === 'no') {
-            /*不通过操作*/
-            layer.confirm('确定审核不通过？', function (index) {
-                $.ajax({
-                    url: IPzd + '/deal/review/' + obj.data.id + '/3',    //请求的url地址
-                    dataType: "json",   //返回格式为json
-                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                    type: "PUT",   //请求方式
-                    contentType: "application/json;charset=UTF-8",
-                    // headers: {"token": sessionStorage.token},
-                    beforeSend: function () {
-                        //请求前的处理
-                    },
-                    success: function (req) {
-                        if (req.status == "200") {
-                            layer.close(indexDig);
-                            layer.msg("操作成功！")
-                            //执行重载
-                            table.reload('tableList');
-                        } else {
-                            layer.msg(req.msg)
+                    $.ajax({
+                        url: IPzd + '/deal/stop/ok', //数据接口
+                        dataType: "json",   //返回格式为json
+                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                        data: JSON.stringify(data),    //参数值
+                        type: "PUT",   //请求方式
+                        contentType: "application/json;charset=UTF-8",
+                        // headers: {"token": sessionStorage.token},
+                        beforeSend: function () {
+                            //请求前的处理
+                        },
+                        success: function (req) {
+                            if (req.status == "200") {
+                                layer.close(indexDig);
+                                layer.msg("操作成功")
+                                //执行重载
+                                table.reload('tableList');
+                            } else {
+                                layer.msg("操作失败")
+                            }
+
+                        },
+                        complete: function () {
+                            //请求完成的处理
+                        },
+                        error: function () {
+                            //请求出错处理
                         }
+                    });
+                },
+            }
 
-                    },
-
-                    complete: function () {
-                        //请求完成的处理
-                    },
-                    error: function () {
-                        //请求出错处理
-                    }
-                });
-                layer.close(index);
-            });
-
+            layerOpen(openMes);
         } else if (layEvent == 'detail') {
             if (obj.data.dealTypeCode == 1) {
                 var content = '<div id="htall" style="font-size: 20px !important;">\n' +
