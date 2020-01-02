@@ -146,13 +146,13 @@ layui.use(['table', 'form'], function () {
                 '    </div>\n' +
                 '    </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">有证面积(m²)</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>有证面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="请输入" autocomplete="off" class="layui-input yzmj">\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '  <div class="dialogDiv">\n' +
-                '    <label class="layui-form-label">无证面积(m²)</label>\n' +
+                '    <label class="layui-form-label"><span class="inputBtx">*</span>无证面积(m²)</label>\n' +
                 '    <div class="layui-input-block">\n' +
                 '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="请输入" autocomplete="off" class="layui-input wzmj">\n' +
                 '    </div>\n' +
@@ -589,13 +589,13 @@ layui.use(['table', 'form'], function () {
                     '    </div>\n' +
                     '    </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">有证面积(m²)</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>有证面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="请输入" autocomplete="off" class="layui-input yzmj">\n' +
                     '    </div>\n' +
                     '  </div>\n' +
                     '  <div class="dialogDiv">\n' +
-                    '    <label class="layui-form-label">无证面积(m²)</label>\n' +
+                    '    <label class="layui-form-label"><span class="inputBtx">*</span>无证面积(m²)</label>\n' +
                     '    <div class="layui-input-block">\n' +
                     '      <input type="text" name="title" required  lay-verify="required" onkeyup="clearNoNum(this)" placeholder="请输入" autocomplete="off" class="layui-input wzmj">\n' +
                     '    </div>\n' +

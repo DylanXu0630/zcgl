@@ -685,7 +685,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(".mjjz").text(heObj.houseResourceDetail[0].resourceArea)
                             $(".sjzj").text(heObj.houseResourceDetail[0].realRentCharge)
                             $(".zdj").text(heObj.houseResourceDetail[0].guideRentCharge)
-                            $(".htsjzj").text(heObj.houseResourceDetail[0].realRentCharge * heObj.houseResourceDetail[0].resourceArea)
+                            $(".htsjzj").text(returnFloat(heObj.houseResourceDetail[0].realRentCharge * heObj.houseResourceDetail[0].resourceArea))
                             $(".syyt").text(heObj.houseResourceDetail[0].resourceUsage)
                             $(".fczl").text(heObj.houseResourceDetail[0].realLocation)
                             $(".zl").text(heObj.houseResourceDetail[0].realLocation)
@@ -729,7 +729,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             var zdj = zdjArr.join(";");
                             $(".zdj").text(zdj)
                             var sjzj = $.unique(yzjArr).join(";");
-                            $(".htsjzj").text(yzj)
+                            $(".htsjzj").text(returnFloat(yzj))
                             var oyt = $.unique(yt).join(";");
                             $(".syyt").text(oyt)
                             var dz = $.unique(dzArr).join(";");
@@ -971,5 +971,19 @@ function getyf() {
 function getYear() {
     var date = new Date()
     return date.getFullYear()
+}
+function returnFloat(value) {
+    var value = Math.round(parseFloat(value) * 100) / 100;
+    var xsd = value.toString().split(".");
+    if (xsd.length == 1) {
+        value = value.toString() + ".00";
+        return value;
+    }
+    if (xsd.length > 1) {
+        if (xsd[1].length < 2) {
+            value = value.toString() + "0";
+        }
+        return value;
+    }
 }
 

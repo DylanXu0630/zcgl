@@ -55,11 +55,22 @@ layui.use(['laydate', 'table', 'form'], function () {
         , cols: [[ //表头
             {field: 'dealSerial', title: '合同编号'}
             // , {field: 'dealName', title: '合同名称'}
-            , {field: 'dealType', title: '合同类型'}
+            // , {field: 'dealType', title: '合同类型'}
             , {field: 'location', title: '座落'}
             , {field: 'renter', title: '承租方',}
             , {field: 'startTime', title: '开始时间',}
             , {field: 'endTime', title: '结束时间',}
+            , {
+                title: '应退款(保证金)', templet: function (d) {
+                    var sjhk = 0
+                    $(d.mustMoney).each(function (i, o) {
+                        if (o.moneyType=="保证金"){
+                            sjhk = o.money
+                        }
+                    })
+                    return returnFloat(sjhk)
+                }
+            }
             , {
                 title: '实际退款(保证金)', templet: function (d) {
                     var sjhk = 0
@@ -127,50 +138,67 @@ layui.use(['laydate', 'table', 'form'], function () {
                         })
                     },
                     put: function () {
-                        if ($(".httime").val() == "") {
-                            layer.msg("退还时间不能为空!")
-                        } else {
-                            if (delKg($(".moneyTh")).length>0){
-                                var data = {
-                                    "createdBy": user,
-                                    "fkDealId": obj.data.id,
-                                    "money": $(".moneyTh").val(),
-                                    "returnDate": sjc($(".httime").val())
+                        var isTrue = true
+                        var yjMoney = 0
+                        var yjMoeny = 0
+                        $(obj.data.mustMoney).each(function (i, o) {
+                            if (o.moneyType=="保证金"){
+                                yjMoney = o.money
+                            }
+                        })
+                        $(obj.data.depositReturns).each(function (n, m) {
+                            yjMoeny = yjMoeny + Number(m.money)
+                        })
+                        var syMoeny = yjMoney - yjMoeny
+                        if (Number($(".moneyTh").val()>syMoeny)){
+                            layer.msg("退还保证金不能大于实际保证金")
+                        }else{
+                            if ($(".httime").val() == "") {
+                                layer.msg("退还时间不能为空!")
+                            } else {
+                                if (delKg($(".moneyTh")).length>0){
+                                    var data = {
+                                        "createdBy": user,
+                                        "fkDealId": obj.data.id,
+                                        "money": $(".moneyTh").val(),
+                                        "returnDate": sjc($(".httime").val())
+                                    }
+
+                                    $.ajax({
+                                        url: IPzd + '/deposit/return',    //请求的url地址
+                                        dataType: "json",   //返回格式为json
+                                        async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                                        data: JSON.stringify(data),    //参数值
+                                        type: "POST",   //请求方式
+                                        contentType: "application/json;charset=UTF-8",
+                                        // headers: {"token": sessionStorage.token},
+                                        beforeSend: function () {
+                                            //请求前的处理
+                                        },
+                                        success: function (req) {
+                                            if (req.status == "200") {
+                                                layer.close(indexDig);
+                                                layer.msg("操作成功")
+                                                //执行重载
+                                                table.reload('tableList');
+                                            } else {
+                                                layer.msg(req.msg)
+                                            }
+                                        },
+                                        complete: function () {
+                                            //请求完成的处理
+                                        },
+                                        error: function () {
+                                            //请求出错处理
+                                        }
+                                    });
+                                }else {
+                                    layer.msg("退还金额不能为空!")
                                 }
 
-                                $.ajax({
-                                    url: IPzd + '/deposit/return',    //请求的url地址
-                                    dataType: "json",   //返回格式为json
-                                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
-                                    data: JSON.stringify(data),    //参数值
-                                    type: "POST",   //请求方式
-                                    contentType: "application/json;charset=UTF-8",
-                                    // headers: {"token": sessionStorage.token},
-                                    beforeSend: function () {
-                                        //请求前的处理
-                                    },
-                                    success: function (req) {
-                                        if (req.status == "200") {
-                                            layer.close(indexDig);
-                                            layer.msg("操作成功")
-                                            //执行重载
-                                            table.reload('tableList');
-                                        } else {
-                                            layer.msg(req.msg)
-                                        }
-                                    },
-                                    complete: function () {
-                                        //请求完成的处理
-                                    },
-                                    error: function () {
-                                        //请求出错处理
-                                    }
-                                });
-                            }else {
-                                layer.msg("退还金额不能为空!")
                             }
-
                         }
+
                     },
                 }
                 layerOpen(openMes);
