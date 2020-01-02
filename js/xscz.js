@@ -1706,7 +1706,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                         $(".rentType").val(obj.data.isNewRent)
                         $(".mzq").val(obj.data.freeRentMonth)
                         $(".syType").val(obj.data.houseResourceDetail[0].resourceUsage)
-                        var dzArr = obj.data.location.split(",")
                         $("#fyjcxx").children().remove()
 
                         $(obj.data.houseResourceDetail).each(function (i, o) {
@@ -1718,7 +1717,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             var mj = $(" <div class='dialogDiv'><label class='layui-form-label'> 面积(m²)</label><div class='layui-input-block'><input type='text' name='title' required  lay-verify='required' placeholder='请输入' autocomplete='off' class='layui-input mj" + i + "' readonly></div></div>").appendTo(fjDiv)
                             $(".mj" + i).val(o.resourceArea)
                             var dz = $(" <div class='dialogDiv'><label class='layui-form-label'>地址</label><div class='layui-input-block'><input type='text' name='title' required  lay-verify='required' placeholder='请输入' autocomplete='off' class='layui-input dz" + i + "' readonly></div></div>").appendTo(fjDiv)
-                            $(".dz" + i).val(dzArr[i])
+                            $(".dz" + i).val(o.realLocation)
                             var yj = $(" <div class='dialogDiv'><label class='layui-form-label'>原价(元/m² *月)</label><div class='layui-input-block'><input type='text' name='title' required  lay-verify='required' placeholder='请输入' autocomplete='off' class='layui-input yj" + i + "' readonly></div></div>").appendTo(fjDiv)
                             $(".yj" + i).val(o.originRentCharge)
                             var sjj = $(" <div class='dialogDiv'><label class='layui-form-label'>实际价(元/m² *月)</label><div class='layui-input-block'><input type='text' name='title' required  lay-verify='required' placeholder='请输入' autocomplete='off' class='layui-input sjj" + i + "' readonly></div></div>").appendTo(fjDiv)

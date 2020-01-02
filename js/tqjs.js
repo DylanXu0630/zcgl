@@ -687,7 +687,6 @@ layui.use(['laydate', 'table', 'form'], function () {
                         var zlArr = heObj.location.split(",")
                         $("<span class='htSpan zl'></span><span>房屋(</span>建筑面积<span class='htSpan mjjz'></span>平方米)<span>,</span>租给乙方作<span class='htSpan syyt'></span>使用<span><span>,该房屋性质为非住宅。</span>").appendTo(".zlwz")
 
-                        $(".zl").text(heObj.location)
                         if (heObj.houseResourceDetail.length < 2) {
                             $(".tbmjjz").text(heObj.houseResourceDetail[0].resourceArea)
                             $(".glzx").text(heObj.houseResourceDetail[0].agency)
@@ -696,6 +695,8 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(".zdj").text(heObj.houseResourceDetail[0].guideRentCharge)
                             $(".htsjzj").text(heObj.houseResourceDetail[0].realRentCharge * heObj.houseResourceDetail[0].resourceArea)
                             $(".syyt").text(heObj.houseResourceDetail[0].resourceUsage)
+                            $(".fczl").text(heObj.houseResourceDetail[0].realLocation)
+                            $(".zl").text(heObj.houseResourceDetail[0].realLocation)
                             // $(".mpfsjzj").text(heObj.houseResourceDetail[0].rentMoneyPerArea)
                         } else {
                             var glzxArr = []
@@ -707,6 +708,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                             var realArr = []
                             var yt = []
                             var yzj = 0
+                            var dzArr = []
                             $(heObj.houseResourceDetail).each(function (i, o) {
                                 glzxArr.push(o.agency)
                                 tbAreaArr.push(o.resourceArea)
@@ -716,6 +718,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                                 yt.push(o.resourceUsage)
                                 heAreaArr = heAreaArr + o.resourceArea
                                 yzj = yzj + o.realRentCharge * o.resourceArea
+                                dzArr.push(o.realLocation)
                                 // if (i > 0) {
                                 //     $("<span>;</span><span class='htSpan zl'>" + zlArr[i] + "</span><span>房屋(</span>建筑面积<span class='htSpan mjjz'>" + heObj.resourceArea + "</span>平方米<span>,</span>租给乙方作<span class='htSpan syyt'>" + o.houseUsage + "</span><span>使用</span><span>,</span><span class='htSpan mpfsjzj'>" + o.realRentCharge + "</span><span>元/m²/月</span><span>,该房屋性质为非住宅)</span>").appendTo(".zlwz")
                                 // } else {
@@ -737,6 +740,9 @@ layui.use(['laydate', 'table', 'form'], function () {
                             $(".htsjzj").text(yzj)
                             var oyt = $.unique(yt).join(";");
                             $(".syyt").text(oyt)
+                            var dz = $.unique(dzArr).join(";");
+                            $(".fczl").text(dz)
+                            $(".zl").text(dz)
                         }
                     } else if (obj.data.dealTypeCode == 2) {
                         $(".fczl").text(heObj.location)
