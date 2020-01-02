@@ -643,7 +643,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                         $(".starTime").text(heObj.startTime)
                         $(".endTime").text(heObj.endTime)
                         $(".bt-bbh").text(getYear() + " v1.1")
-                        if (heObj.extraInfo == "") {
+                        if (heObj.extraInfo == null) {
                             $(".qtbz").text("无")
                         } else {
                             $(".qtbz").text(heObj.extraInfo)
