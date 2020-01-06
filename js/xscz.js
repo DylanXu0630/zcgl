@@ -63,29 +63,34 @@ layui.use(['laydate', 'table', 'form'], function () {
             , {field: 'dealReviewStatus', title: '审核状态',}
             , {field: 'dealExistStatus', title: '合同状态',}
             , {
-                fixed: 'right', title: '操作', fixed: 'right', width: 220, templet: function (d) {
+                fixed: 'right', title: '操作', fixed: 'right', width: 300, templet: function (d) {
                     if (d.dealReviewStatusCode == "1") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
                             '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>\n' +
-                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>' +
+                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dc">导出合同</a>'
                     } else if (d.dealReviewStatusCode == "2") {
                         if (d.dealExistStatusCode == "4") {
                             return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
-                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>' +
+                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dc">导出合同</a>'
                         } else if (d.dealExistStatusCode == "5") {
                             return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
-                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>' +
+                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dc">导出合同</a>'
                         } else {
                             return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                                 '    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="zzht">申请终止合同</a>' +
-                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>' +
+                                '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dc">导出合同</a>'
                         }
 
                     } else if (d.dealReviewStatusCode == "3") {
                         return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>\n' +
                             '    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>\n' +
-                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>'
+                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dy">打印</a>' +
+                            '    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="dc">导出合同</a>'
                     }
                 }
             }
@@ -1874,6 +1879,28 @@ layui.use(['laydate', 'table', 'form'], function () {
                     },
                 }
                 layerOpen(openMes);
+            } else if (layEvent == 'dc') {
+                $.ajax({
+                    url: IPzd + '/deal/word/' + obj.data.id,    //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+                    type: "GET",   //请求方式
+                    contentType: "application/json;charset=UTF-8",
+                    // headers: {"token": sessionStorage.token},
+                    beforeSend: function () {
+                        //请求前的处理
+                    },
+                    success: function (req) {
+
+                    },
+
+                    complete: function () {
+                        //请求完成的处理
+                    },
+                    error: function () {
+                        //请求出错处理
+                    }
+                });
             }
         }
     );
