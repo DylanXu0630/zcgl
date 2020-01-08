@@ -1880,7 +1880,7 @@ layui.use(['laydate', 'table', 'form'], function () {
                 }
                 layerOpen(openMes);
             } else if (layEvent == 'dc') {
-                window.location.href = IPzd + '/deal/word/' + obj.data.id
+                window.location.href = IPzd + '/deal/pdf/' + obj.data.id
             }
         }
     );
