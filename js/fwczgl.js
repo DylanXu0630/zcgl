@@ -861,7 +861,6 @@ layui.use(['table', 'laydate', 'form'], function () {
                                                         } else {
                                                             layer.msg(req.msg)
                                                         }
-
                                                     },
                                                     complete: function () {
                                                         //请求完成的处理
